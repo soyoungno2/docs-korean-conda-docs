@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Create &mdash; Conda   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Conda   documentation" href="../index.html"/>
+        <link rel="up" title="Basic Package Management" href="basic.html"/>
+        <link rel="next" title="Install" href="install.html"/>
+        <link rel="prev" title="Basic Package Management" href="basic.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Conda</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="information.html">Informational Commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="basic.html">Basic Package Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html">Advanced Package Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Conda FAQ</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html#tab-completion">Tab Completion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build.html"><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></tt> Recipe Reference</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../build_tutorials.html">Build tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../build_tutorials/pkgs.html">Tutorial: Basic tutorial for building a Conda package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_tutorials/postgis.html">Tutorial: Building the postgis package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../admin.html">Administrative channel management for a centralized conda installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom-channels.html">Custom Channels</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">Command Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../commands/build.html">build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/config.html">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/create.html">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/index.html">index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/info.html">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/install.html">install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/list.html">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/package.html">package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/remove.html">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/search_.html">search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/skeleton.html">skeleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/update.html">update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Conda package specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#package-metadata">Package metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#link-and-unlink-scripts">Link and unlink scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#repository-structure-and-index">Repository structure and index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#package-match-specifications">Package Match Specifications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../travis.html">Using Conda with Travis CI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#the-travis-yml">The .travis.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#additional-steps">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#building-a-conda-recipe">Building a Conda Recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#appveyor">AppVeyor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bdist_conda.html">setup.py bdist_conda</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../bdist_conda.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bdist_conda.html#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Conda</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../examples.html">Examples</a> &raquo;</li>
+      
+          <li><a href="basic.html">Basic Package Management</a> &raquo;</li>
+      
+    <li>Create</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/conda/conda-docs/edit/master/docs/source/examples/create.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="create">
+<span id="create-example"></span><h1>Create<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h1>
+<p>In this example, we use <tt class="docutils literal"><span class="pre">conda</span> <span class="pre">create</span></tt> to make an environment in
+a directory (specified with <tt class="docutils literal"><span class="pre">-p/--prefix</span></tt>), for one or more packages.  We have also chosen to display
+a progress bar, displayed as it creates the environment.</p>
+<p>Conda will also gather and link all necessary package dependencies.
+Those that are not locally available will also be downloaded.</p>
+<p>If the package version is not specified, conda will choose the latest version by
+default.</p>
+<p>We&#8217;ll start with an environment created in a specific path (<cite>~/anaconda/envs/test2</cite>) using the &#8211;prefix option (<tt class="docutils literal"><span class="pre">-p</span></tt>).</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create -p ~/anaconda/envs/test2 <span class="nv">anaconda</span><span class="o">=</span>1.4.0 <span class="nv">python</span><span class="o">=</span>2.7 <span class="nv">numpy</span><span class="o">=</span>1.6
+
+
+Package plan <span class="k">for </span>creating environment at /Users/test/anaconda/envs/test2:
+
+The following packages will be downloaded:
+
+    redis-py-2.7.2-py27_0.tar.bz2 <span class="o">[</span>http://repo.continuum.io/pkgs/free/osx-64/<span class="o">]</span>
+    scikit-image-0.8.2-np16py27_0.tar.bz2 <span class="o">[</span>http://repo.continuum.io/pkgs/free/osx-64/<span class="o">]</span>
+
+
+The following packages will be linked:
+
+    package                    |  build
+    -------------------------  |  ---------------
+    _license-1.1               |           py27_0
+    anaconda-1.4.0             |       np16py27_0
+    astropy-0.2                |       np16py27_0
+    biopython-1.60             |       np16py27_0
+
+    ...
+
+    xlwt-0.7.4                 |           py27_0
+    yaml-0.1.4                 |                0
+    zeromq-2.2.0               |                0
+    zlib-1.2.7                 |                0
+
+
+Proceed <span class="o">(</span>y/n<span class="o">)</span>? y
+
+Fetching packages...
+
+redis-py-2.7.2-py27_0.tar.bz2 100% |##################################################################################| Time: 0:00:00 689.67 kB/s
+scikit-image-0.8.2-np16py27_0.tar.bz2 100% |##########################################################################| Time: 0:00:02   1.46 MB/s
+
+Linking packages...
+
+<span class="o">[</span>      COMPLETE      <span class="o">]</span> |###################################################################################################################| 100%
+
+To activate this environment, <span class="nb">type</span> <span class="s1">&#39;source activate test2&#39;</span>
+
+To deactivate this environment, <span class="nb">type</span> <span class="s1">&#39;source deactivate&#39;</span>
+</pre></div>
+</div>
+<p>In this next example, rather than selecting an environment directory with a prefix, we will use the name option (<tt class="docutils literal"><span class="pre">-n/--name</span></tt>).
+This will create an environment in the default <cite>Anaconda/envs</cite> <strong>ROOT_DIR</strong>
+(which can be displayed by using <tt class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span></tt>),
+where it will be discoverable by using conda&#8217;s
+<a class="reference internal" href="info.html#envs-example"><em>info &#8211;envs</em></a> option.</p>
+<p>It is possible to disable a progress bar (<tt class="docutils literal"><span class="pre">--quiet</span></tt>) if you don&#8217;t wish to show the status of any
+packages conda has to download.  You can also skip the <tt class="docutils literal"><span class="pre">Proceed(y/n)?</span></tt> check with <tt class="docutils literal"><span class="pre">--yes</span></tt></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create --quiet --yes -n foo python
+
+Package plan <span class="k">for </span>creating environment at /Users/test/anaconda/envs/foo:
+
+The following packages will be downloaded:
+
+    sqlite-3.7.13-1.tar.bz2 <span class="o">[</span>http://repo.continuum.io/pkgs/free/osx-64/<span class="o">]</span>
+    tk-8.5.13-1.tar.bz2 <span class="o">[</span>http://repo.continuum.io/pkgs/free/osx-64/<span class="o">]</span>
+    zlib-1.2.7-1.tar.bz2 <span class="o">[</span>http://repo.continuum.io/pkgs/free/osx-64/<span class="o">]</span>
+
+
+The following packages will be linked:
+
+    package                    |  build
+    -------------------------  |  ---------------
+    python-2.7.4               |                0
+    readline-6.2               |                1
+    sqlite-3.7.13              |                1
+    tk-8.5.13                  |                1
+    zlib-1.2.7                 |                1
+
+
+To activate this environment, <span class="nb">type</span> <span class="s1">&#39;source activate foo&#39;</span>
+
+To deactivate this environment, <span class="nb">type</span> <span class="s1">&#39;source deactivate&#39;</span>
+</pre></div>
+</div>
+<p>To see what packages will be downloaded and/or used in an environment before creating it, you can use the <tt class="docutils literal"><span class="pre">--dry-run</span></tt> option.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create --dry-run -n foo2 python
+
+Package plan <span class="k">for </span>creating environment at /Users/maggie/anaconda/envs/foo2:
+
+The following packages will be linked:
+
+    package                    |  build
+    -------------------------  |  ---------------
+    python-2.7.4               |                0
+    readline-6.2               |                1
+    sqlite-3.7.13              |                1
+    tk-8.5.13                  |                1
+    zlib-1.2.7                 |                1
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="Install">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="basic.html" class="btn btn-neutral" title="Basic Package Management"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Continuum Analytics.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Troubleshooting &mdash; Conda   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Conda   documentation" href="index.html"/>
+        <link rel="next" title="Configuration" href="config.html"/>
+        <link rel="prev" title="Conda FAQ" href="faq.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> Conda</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/information.html">Informational Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/basic.html">Basic Package Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/advanced.html">Advanced Package Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Conda FAQ</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Troubleshooting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html#tab-completion">Tab Completion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build.html"><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></tt> Recipe Reference</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build_tutorials.html">Build tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build_tutorials/pkgs.html">Tutorial: Basic tutorial for building a Conda package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build_tutorials/postgis.html">Tutorial: Building the postgis package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="admin.html">Administrative channel management for a centralized conda installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-channels.html">Custom Channels</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Command Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commands/build.html">build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/config.html">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/create.html">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/index.html">index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/info.html">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/install.html">install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/list.html">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/package.html">package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/remove.html">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/search_.html">search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/skeleton.html">skeleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/update.html">update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spec.html">Conda package specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#package-metadata">Package metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#link-and-unlink-scripts">Link and unlink scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#repository-structure-and-index">Repository structure and index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#package-match-specifications">Package Match Specifications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="travis.html">Using Conda with Travis CI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#the-travis-yml">The .travis.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#additional-steps">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#building-a-conda-recipe">Building a Conda Recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#appveyor">AppVeyor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bdist_conda.html">setup.py bdist_conda</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bdist_conda.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdist_conda.html#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Conda</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Troubleshooting</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/conda/conda-docs/edit/master/docs/source/troubleshooting.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="issue-conda-claims-that-a-package-is-installed-but-it-appears-not-to-be">
+<h2>Issue: Conda claims that a package is installed, but it appears not to be.<a class="headerlink" href="#issue-conda-claims-that-a-package-is-installed-but-it-appears-not-to-be" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes conda will claim that a package is already installed, but it will
+not appear to be, e.g., a Python package that gives ImportError.</p>
+<p>There are a few possible causes of this issue:</p>
+<div class="section" id="make-sure-you-are-in-the-right-conda-environment">
+<h3>Make sure you are in the right conda environment.<a class="headerlink" href="#make-sure-you-are-in-the-right-conda-environment" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span></tt> will tell you what environment is currently active (under
+&#8220;default environment&#8221;). You can verify that you are using the Python from the
+correct environment by running</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="for-python-packages-make-sure-you-do-not-have-pythonpath-or-pythonhome-set">
+<h3>For Python packages, make sure you do not have <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> or <tt class="docutils literal"><span class="pre">PYTHONHOME</span></tt> set.<a class="headerlink" href="#for-python-packages-make-sure-you-do-not-have-pythonpath-or-pythonhome-set" title="Permalink to this headline">¶</a></h3>
+<p>The command <tt class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span> <span class="pre">-a</span></tt> will show you the values of these environment
+variables.</p>
+<p>These environment variables cause Python to load files from locations other
+than the standard ones. Conda works best when these environment variables are
+not set, as their typical use-cases are obviated by Conda environments, and a
+common issue is that they will cause Python to pick up the wrong versions or
+broken versions of a library.</p>
+<p>To unset them temporarily for the current terminal session, run <tt class="docutils literal"><span class="pre">unset</span>
+<span class="pre">PYTHONPATH</span></tt>. To unset them permanently, check for lines in the files
+<tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>, <tt class="docutils literal"><span class="pre">~/.bash_profile</span></tt>, <tt class="docutils literal"><span class="pre">~/.profile</span></tt> if you use bash,
+<tt class="docutils literal"><span class="pre">~/.zshrc</span></tt> if you use zsh, or the file output by <tt class="docutils literal"><span class="pre">$PROFILE</span></tt> if you use
+PowerShell on Windows.</p>
+</div>
+<div class="section" id="for-python-packages-remove-any-site-specific-directories">
+<h3>For Python packages, remove any site-specific directories.<a class="headerlink" href="#for-python-packages-remove-any-site-specific-directories" title="Permalink to this headline">¶</a></h3>
+<p>Another possibility for Python are so-called site-specific files. These
+typically live in <tt class="docutils literal"><span class="pre">~/.local</span></tt> on Unix. The full description of where
+site-specific packages can be found is in <a class="reference external" href="http://legacy.python.org/dev/peps/pep-0370/">PEP 370</a>. As with <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt>,
+Python may try importing packages from this directory, which can cause
+issues. The recommended fix is to remove the site-specific directory.</p>
+</div>
+<div class="section" id="for-c-libraries-unset-the-environment-variables-ld-library-path-on-linux-and-dyld-library-path-on-mac-os-x">
+<h3>For C libraries, unset the environment variables <tt class="docutils literal"><span class="pre">LD_LIBRARY_PATH</span></tt> on Linux and <tt class="docutils literal"><span class="pre">DYLD_LIBRARY_PATH</span></tt> on Mac OS X.<a class="headerlink" href="#for-c-libraries-unset-the-environment-variables-ld-library-path-on-linux-and-dyld-library-path-on-mac-os-x" title="Permalink to this headline">¶</a></h3>
+<p>These act similarly to <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> for Python. If they are set, they can
+cause libraries to be loaded from locations other than the Conda
+environment. Again, Conda environments obviate most use-cases for these
+variables, so it is recommended to unset them if they are set, unless you know
+what you are doing. <tt class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span> <span class="pre">-a</span></tt> will show what these are set to (on the
+relevant operating system).</p>
+</div>
+<div class="section" id="occasionally-an-installed-package-will-become-corrupted">
+<h3>Occasionally, an installed package will become corrupted.<a class="headerlink" href="#occasionally-an-installed-package-will-become-corrupted" title="Permalink to this headline">¶</a></h3>
+<p>Conda works by unpacking the packages in the pkgs directory and then hard
+linking them to the environment. Sometimes these get corrupted somehow,
+breaking all environments that use them, and also any additional environments,
+since the same files are hard linked each time.</p>
+<p><strong>conda install -f will unarchive the package again and re-link it.</strong> It also
+does a md5 verification on the package (usually if this is different, it&#8217;s
+because your channels have changed and there is a different package with the
+same name, version, and build number). Note that this breaks the links to any
+other environments that already had this package installed, so you&#8217;ll have to
+reinstall it there too. It also means that running <tt class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-f</span></tt> a lot
+can use up a lot of disk space if you have a lot of environments.  Note that
+the <tt class="docutils literal"><span class="pre">-f</span></tt> flag to <tt class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span></tt> (<tt class="docutils literal"><span class="pre">--force</span></tt>) implies <tt class="docutils literal"><span class="pre">--no-deps</span></tt>, so
+<tt class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-f</span> <span class="pre">package</span></tt> will not reinstall any of the dependencies of
+<tt class="docutils literal"><span class="pre">package</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="issue-pkg-resources-distributionnotfound-conda-3-6-1-6-gb31b0d4-dirty">
+<h2>Issue: pkg_resources.DistributionNotFound: conda==3.6.1-6-gb31b0d4-dirty<a class="headerlink" href="#issue-pkg-resources-distributionnotfound-conda-3-6-1-6-gb31b0d4-dirty" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="force-reinstall-conda">
+<h3>Force reinstall conda<a class="headerlink" href="#force-reinstall-conda" title="Permalink to this headline">¶</a></h3>
+<p>A useful way to work off the development version of conda is to run <tt class="docutils literal"><span class="pre">python</span>
+<span class="pre">setup.py</span> <span class="pre">develop</span></tt> on a checkout of the <a class="reference external" href="https://github.com/conda/conda">conda git repository</a>.  However, if you are not regularly
+running <tt class="docutils literal"><span class="pre">git</span> <span class="pre">pull</span></tt>, it is a good idea to un-develop, as you will otherwise
+not get any regular updates to conda.  The normal way to do this is to run
+<tt class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">develop</span> <span class="pre">-u</span></tt>.</p>
+<p>However, this command does not replace the <tt class="docutils literal"><span class="pre">conda</span></tt> script itself. With other
+packages, this is not an issue, as you can just reinstall them with <tt class="docutils literal"><span class="pre">conda</span></tt>,
+but conda cannot be used if conda is installed.</p>
+<p>The fix is to use the <tt class="docutils literal"><span class="pre">./bin/conda</span></tt> executable in the conda git repository
+to force reinstall conda, i.e., run <tt class="docutils literal"><span class="pre">./bin/conda</span> <span class="pre">install</span> <span class="pre">-f</span> <span class="pre">conda</span></tt>.  You can
+then verify with <tt class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span></tt> that you have the latest version of conda, and
+not a git checkout (the version should not include any hashes).</p>
+</div>
+</div>
+<div class="section" id="issue-valueerror-unknown-locale-utf-8-on-mac-os-x">
+<h2>Issue: <tt class="docutils literal"><span class="pre">ValueError</span> <span class="pre">unknown</span> <span class="pre">locale:</span> <span class="pre">UTF-8</span></tt> on Mac OS X<a class="headerlink" href="#issue-valueerror-unknown-locale-utf-8-on-mac-os-x" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="uncheck-set-locale-environment-variables-on-startup-setting-in-terminal-settings">
+<h3>Uncheck &#8220;set locale environment variables on startup&#8221; setting in Terminal settings<a class="headerlink" href="#uncheck-set-locale-environment-variables-on-startup-setting-in-terminal-settings" title="Permalink to this headline">¶</a></h3>
+<p>This is a bug in the OS X Terminal app that only shows up in certain locales
+(country/language combinations). Open Terminal in /Applications/Utilities and
+uncheck the box &#8220;Set locale environment variables on startup&#8221;.</p>
+<img alt="_images/locale.jpg" src="_images/locale.jpg" />
+<p>This will set your <tt class="docutils literal"><span class="pre">LANG</span></tt> environment variable to be empty. This may cause
+terminal to incorrect settings for your locale. The <tt class="docutils literal"><span class="pre">locale</span></tt> command in the
+Terminal will tell you what settings are used.  To use the correct language,
+add a line to your bash profile (typically <tt class="docutils literal"><span class="pre">~/.profile</span></tt>)</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export </span><span class="nv">LANG</span><span class="o">=</span>your-lang
+</pre></div>
+</div>
+<p>Replace <tt class="docutils literal"><span class="pre">your-lang</span></tt> with the correct locale specifier for your language. The
+command <tt class="docutils literal"><span class="pre">locale</span> <span class="pre">-a</span></tt> will show you all the specifiers. For example, the
+language code for US English is <tt class="docutils literal"><span class="pre">en_US.UTF-8</span></tt>. The locale affects what
+translations are used when they are available, and also how dates,
+currencies, and decimals are formatted.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="config.html" class="btn btn-neutral float-right" title="Configuration">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="faq.html" class="btn btn-neutral" title="Conda FAQ"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Continuum Analytics.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

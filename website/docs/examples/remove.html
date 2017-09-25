@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Remove &mdash; Conda   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Conda   documentation" href="../index.html"/>
+        <link rel="up" title="Basic Package Management" href="basic.html"/>
+        <link rel="next" title="Advanced Package Management" href="advanced.html"/>
+        <link rel="prev" title="Update" href="update.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Conda</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="information.html">Informational Commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="basic.html">Basic Package Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html">Advanced Package Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Conda FAQ</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html#tab-completion">Tab Completion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build.html"><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></tt> Recipe Reference</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../build_tutorials.html">Build tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../build_tutorials/pkgs.html">Tutorial: Basic tutorial for building a Conda package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_tutorials/postgis.html">Tutorial: Building the postgis package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../admin.html">Administrative channel management for a centralized conda installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom-channels.html">Custom Channels</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">Command Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../commands/build.html">build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/config.html">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/create.html">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/index.html">index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/info.html">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/install.html">install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/list.html">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/package.html">package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/remove.html">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/search_.html">search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/skeleton.html">skeleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/update.html">update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Conda package specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#package-metadata">Package metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#link-and-unlink-scripts">Link and unlink scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#repository-structure-and-index">Repository structure and index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#package-match-specifications">Package Match Specifications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../travis.html">Using Conda with Travis CI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#the-travis-yml">The .travis.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#additional-steps">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#building-a-conda-recipe">Building a Conda Recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#appveyor">AppVeyor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bdist_conda.html">setup.py bdist_conda</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../bdist_conda.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bdist_conda.html#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Conda</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../examples.html">Examples</a> &raquo;</li>
+      
+          <li><a href="basic.html">Basic Package Management</a> &raquo;</li>
+      
+    <li>Remove</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/conda/conda-docs/edit/master/docs/source/examples/remove.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="remove">
+<span id="remove-example"></span><h1>Remove<a class="headerlink" href="#remove" title="Permalink to this headline">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">remove</span></tt> is used to remove package(s) from a specified Anaconda environment.
+<strong>Note:</strong> Because the package removed is the one specified, those packages which depend on it will not be removed.
+To be sure that the action taken is the one desired, <tt class="docutils literal"><span class="pre">remove</span></tt> has a <tt class="docutils literal"><span class="pre">--dry-run</span></tt> option to show what would be done if
+the command is executed.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda remove --dry-run -n foo numpy
+
+Package plan <span class="k">for </span>package removal in environment /Users/test/anaconda/envs/foo:
+
+The following packages will be UN-linked:
+
+    package                    |            build
+    ---------------------------|-----------------
+    numpy-1.7.1                |           py27_0
+</pre></div>
+</div>
+<p>Actually running the command is much the same</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda remove -n foo numpy
+
+Package plan <span class="k">for </span>package removal in environment /Users/test/anaconda/envs/foo:
+
+The following packages will be UN-linked:
+
+    package                    |            build
+    ---------------------------|-----------------
+    numpy-1.7.1                |           py27_0
+
+Proceed <span class="o">([</span>y<span class="o">]</span>/n<span class="o">)</span>? : y
+
+Unlinking packages ...
+<span class="o">[</span>      COMPLETE      <span class="o">]</span> |###############| 100%
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">--all</span></tt> option can be used to remove all packages from a given environment</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda remove --all -n foo
+
+Package plan <span class="k">for </span>package removal in environment /Users/test/anaconda/envs/foo:
+
+The following packages will be UN-linked:
+
+    package                    |            build
+    ---------------------------|-----------------
+    python-2.7.5               |                1
+    readline-6.2               |                1
+    sqlite-3.7.13              |                1
+    tk-8.5.13                  |                1
+    zlib-1.2.7                 |                1
+
+Proceed <span class="o">([</span>y<span class="o">]</span>/n<span class="o">)</span>? : y
+
+Unlinking packages ...
+<span class="o">[</span>      COMPLETE      <span class="o">]</span> |###############| 100%
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">--features</span></tt> option can be used to remove a feature, such as MKL.
+For example, if we have MKL installed, which we can see with <tt class="docutils literal"><span class="pre">conda</span>
+<span class="pre">search</span></tt></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search scipy
+scipy                        0.11.0               np17py33_1
+                             0.11.0               np15py26_1
+                             0.11.0               np16py27_1
+                             0.11.0               np17py27_1
+                             0.11.0               np16py26_1
+                             0.11.0               np17py26_1
+                             0.11.0               np15py27_1
+                             0.12.0b1             np17py27_0
+                             0.12.0b1             np17py26_0
+                             0.12.0              np15py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np15py27_0
+                             0.12.0               np16py26_0
+                             0.12.0              np15py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0              np17py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0              np16py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np16py27_0
+                             0.12.0               np17py27_0
+                          *  0.12.0              np17py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np17py26_0
+                             0.12.0               np17py33_0
+                             0.12.0              np16py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np15py26_0
+</pre></div>
+</div>
+<p>We can see that SciPy 0.12.0 for NumPy 1.7 and Python 2.7 is installed with
+the MKL feature.  To remove MKL, we would do</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda remove --features mkl
+
+Package plan <span class="k">for </span>package removal in environment /Users/test/Documents/Continuum/conda-recipes/vtk/testdir/test:
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    numexpr-2.1                |       np17py27_0
+
+The following packages will be UN-linked:
+
+    package                    |            build
+    ---------------------------|-----------------
+    mkl-11.0                   |      np17py27_p0
+    mkl-rt-11.0                |               p0
+    numexpr-2.1                |      np17py27_p0
+    numpy-1.7.1                |          py27_p0
+    scikit-learn-0.13.1        |      np17py27_p0
+    scipy-0.12.0               |      np17py27_p0
+
+The following packages will be linked:
+
+    package                    |            build
+    ---------------------------|-----------------
+    numexpr-2.1                |       np17py27_0
+    numpy-1.7.1                |           py27_0
+    scikit-learn-0.13.1        |       np17py27_0
+    scipy-0.12.0               |       np17py27_0
+
+Proceed <span class="o">([</span>y<span class="o">]</span>/n<span class="o">)</span>?
+</pre></div>
+</div>
+<p>And now we see that the same version of SciPy is installed, but without MKL
+support.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$conda</span> search scipy
+scipy                        0.11.0               np17py33_1
+                             0.11.0               np15py26_1
+                             0.11.0               np16py27_1
+                             0.11.0               np17py27_1
+                             0.11.0               np16py26_1
+                             0.11.0               np17py26_1
+                             0.11.0               np15py27_1
+                             0.12.0b1             np17py27_0
+                             0.12.0b1             np17py26_0
+                             0.12.0              np15py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np15py27_0
+                             0.12.0               np16py26_0
+                             0.12.0              np15py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0              np17py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0              np16py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np16py27_0
+                          *  0.12.0               np17py27_0
+                             0.12.0              np17py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np17py26_0
+                             0.12.0               np17py33_0
+                             0.12.0              np16py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np15py26_0
+</pre></div>
+</div>
+<p>If we had just removed MKL without the <tt class="docutils literal"><span class="pre">--features</span></tt> option, it would
+only remove MKL, but would not change the features of any of the installed
+packages.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda remove mkl
+
+Package plan <span class="k">for </span>package removal in environment /Users/test/Documents/Continuum/conda-recipes/vtk/testdir/test:
+
+The following packages will be UN-linked:
+
+    package                    |            build
+    ---------------------------|-----------------
+    mkl-11.0                   |      np17py27_p0
+
+Proceed <span class="o">([</span>y<span class="o">]</span>/n<span class="o">)</span>?
+
+Unlinking packages ...
+<span class="o">[</span>      COMPLETE      <span class="o">]</span> |###############| 100%
+<span class="nv">$ </span>conda search scipy
+scipy                        0.11.0               np17py33_1
+                             0.11.0               np15py26_1
+                             0.11.0               np16py27_1
+                             0.11.0               np17py27_1
+                             0.11.0               np16py26_1
+                             0.11.0               np17py26_1
+                             0.11.0               np15py27_1
+                             0.12.0b1             np17py27_0
+                             0.12.0b1             np17py26_0
+                             0.12.0              np15py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np15py27_0
+                             0.12.0               np16py26_0
+                             0.12.0              np15py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0              np17py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0              np16py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np16py27_0
+                             0.12.0               np17py27_0
+                          *  0.12.0              np17py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np17py26_0
+                             0.12.0               np17py33_0
+                             0.12.0              np16py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np15py26_0
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="advanced.html" class="btn btn-neutral float-right" title="Advanced Package Management">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="update.html" class="btn btn-neutral" title="Update"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Continuum Analytics.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

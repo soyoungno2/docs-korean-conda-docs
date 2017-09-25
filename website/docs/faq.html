@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Conda FAQ &mdash; Conda   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Conda   documentation" href="index.html"/>
+        <link rel="next" title="Troubleshooting" href="troubleshooting.html"/>
+        <link rel="prev" title="Advanced Package Management" href="examples/advanced.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> Conda</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/information.html">Informational Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/basic.html">Basic Package Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/advanced.html">Advanced Package Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Conda FAQ</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html#tab-completion">Tab Completion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build.html"><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></tt> Recipe Reference</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build_tutorials.html">Build tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build_tutorials/pkgs.html">Tutorial: Basic tutorial for building a Conda package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build_tutorials/postgis.html">Tutorial: Building the postgis package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="admin.html">Administrative channel management for a centralized conda installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-channels.html">Custom Channels</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Command Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commands/build.html">build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/config.html">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/create.html">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/index.html">index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/info.html">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/install.html">install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/list.html">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/package.html">package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/remove.html">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/search_.html">search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/skeleton.html">skeleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/update.html">update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spec.html">Conda package specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#package-metadata">Package metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#link-and-unlink-scripts">Link and unlink scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#repository-structure-and-index">Repository structure and index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#package-match-specifications">Package Match Specifications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="travis.html">Using Conda with Travis CI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#the-travis-yml">The .travis.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#additional-steps">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#building-a-conda-recipe">Building a Conda Recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#appveyor">AppVeyor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bdist_conda.html">setup.py bdist_conda</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bdist_conda.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdist_conda.html#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Conda</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Conda FAQ</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/conda/conda-docs/edit/master/docs/source/faq.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="conda-faq">
+<h1>Conda FAQ<a class="headerlink" href="#conda-faq" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="table-of-contents">
+<h2>Table of contents:<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first"><a class="reference internal" href="#general-questions"><em>General questions</em></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#getting-help"><em>Getting help</em></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#searching-and-info"><em>Searching &amp; info</em></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#customization"><em>Customization (.condarc file)</em></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#pkg-installation"><em>Package installation (in the root environment)</em></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#pkg-updating"><em>Updating packages (in the root environment)</em></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#pkg-removing"><em>Removing packages (from the root environment)</em></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#env"><em>Environments</em></a></p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#env-info"><em>Getting info about environments</em></a></li>
+<li><a class="reference internal" href="#env-creating"><em>Creating new environments</em></a></li>
+<li><a class="reference internal" href="#env-onoff"><em>Activating and deactivating</em></a></li>
+<li><a class="reference internal" href="#env-installation"><em>Installation</em></a></li>
+<li><a class="reference internal" href="#env-removing"><em>Removing</em></a></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><a class="reference internal" href="#recipes"><em>Recipes</em></a></p>
+</li>
+</ol>
+</div>
+<div class="section" id="general-questions">
+<span id="id1"></span><h2>General questions<a class="headerlink" href="#general-questions" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">What is anaconda?</p>
+<p><em>Anaconda</em> is a meta package for <em>conda</em>. This meta package contains all standard
+packages (like <em>scipy</em>, <em>numpy</em>, <em>zlib</em> etc.) provided by developers from <tt class="docutils literal"><span class="pre">Continuum</span> <span class="pre">Analytics</span></tt>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="getting-help">
+<span id="id2"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">How can I see what conda commands are supported?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda -h
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I get help for X command (e.g. <strong>create</strong>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create -h
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="searching-info">
+<span id="searching-and-info"></span><h2>Searching &amp; info<a class="headerlink" href="#searching-info" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">How can I find out what version of <em>conda</em> I have installed?</p>
+<p>By typing:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda info
+</pre></div>
+</div>
+<p>or by typing:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda -V
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I check if package X (e.g. <em>scipy</em>) is available for installation?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search scipy
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I check if package X (e.g. <em>scipy</em>) is available for installation
+from the Continuum repos (i.e., from Anaconda)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search --override-channels --channel defaults scipy
+</pre></div>
+</div>
+</li>
+<li><p class="first">How do I check if package X (e.g. <em>iminuit</em>) exists in channel Y (e.g. <a class="reference external" href="http://conda.binstar.org/mutirri">http://conda.binstar.org/mutirri</a>) and is available for installation?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search --override-channels --channel http://conda.binstar.org/mutirri iminuit
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="customization-condarc-file">
+<span id="customization"></span><h2>Customization (.condarc file)<a class="headerlink" href="#customization-condarc-file" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Sometimes to perform the below commands it is necessary to add the <strong>-f</strong> option
+(aka <strong>&#8211;force</strong>).</p>
+</div>
+<ol class="arabic">
+<li><p class="first">How can I get all keys and their values from my .condarc file?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda config --get
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I get the value of key X (e.g. channels) from my .condarc file?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda config --get channels
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I add a new value Y (e.g. <a class="reference external" href="http://conda.binstar.org/mutirri">http://conda.binstar.org/mutirri</a>) to key X (e.g. channels)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda config --add channels http://conda.binstar.org/mutirri
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I remove existing value Y (e.g. <a class="reference external" href="http://conda.binstar.org/mutirri">http://conda.binstar.org/mutirri</a>) from key X?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda config --remove channels http://conda.binstar.org/mutirri
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I remove the key X (e.g. channels) and all of its values?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda config --remove-key channels
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="package-installation-in-the-root-environment">
+<span id="pkg-installation"></span><h2>Package installation (in the root environment)<a class="headerlink" href="#package-installation-in-the-root-environment" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">How can I install package X (e.g. <em>scipy</em>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda install scipy
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I install package X (e.g. <em>scipy</em>) in specific Z.Z.Z version (0.12.0)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda install <span class="nv">scipy</span><span class="o">=</span>0.12.0
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I install many packages at once, like X1 (e.g. <em>scipy</em>) and X2 (e.g. <em>curl</em>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda install scipy curl
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I install many packages at once, like X1 (e.g. <em>scipy</em>) in version Z.Z.Z (e.g. 0.12.0) and X2 (e.g. <em>curl</em>) in version A.A.A (e.g. 7.26.0)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda install <span class="nv">scipy</span><span class="o">=</span>0.12.0 <span class="nv">curl</span><span class="o">=</span>7.26.0
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="updating-packages-in-the-root-environment">
+<span id="pkg-updating"></span><h2>Updating packages (in the root environment)<a class="headerlink" href="#updating-packages-in-the-root-environment" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">How can I update <em>conda</em> itself?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda update conda
+</pre></div>
+</div>
+</li>
+<li><p class="first">How do I update the <em>anaconda</em> meta package?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda update conda
+<span class="nv">$ </span>conda update anaconda
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I update package X (e.g. <em>scipy</em>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda update scipy
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I keep a package from being updated?</p>
+<p>You can pin a package specification in an environment, which will prevent
+it from being changed, unless the <tt class="docutils literal"><span class="pre">--no-pin</span></tt> flag is passed to conda. To
+do so, add a file called <tt class="docutils literal"><span class="pre">pinned</span></tt> to the environment&#8217;s <tt class="docutils literal"><span class="pre">conda-meta</span></tt>
+directory with a list of specs. For example</p>
+<div class="highlight-python"><div class="highlight"><pre>numpy 1.7.*
+scipy ==0.13.2
+</pre></div>
+</div>
+<p>will force numpy to stay on the 1.7 series (any version that starts with
+&#8220;1.7.&#8221;), and scipy to stay at exactly version 0.13.2.</p>
+<p>With this pinned file, <tt class="docutils literal"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">numpy</span></tt> will keep numpy at 0.7.1, and
+<tt class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">scipy=0.14.0</span></tt> will lead to an error. To force either of
+these, use the <tt class="docutils literal"><span class="pre">-no-pin</span></tt> flag, like <tt class="docutils literal"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">numpy</span> <span class="pre">--no-pin</span></tt>. The
+way pinning works is that the pined specs are included with each conda
+install, so subsequent commands without <tt class="docutils literal"><span class="pre">--no-pin</span></tt> will revert numpy back
+to the 1.7 series.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="removing-packages-from-the-root-environment">
+<span id="pkg-removing"></span><h2>Removing packages (from the root environment)<a class="headerlink" href="#removing-packages-from-the-root-environment" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">How can I remove package X (e.g. <em>scipy</em>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda remove scipy
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I remove multiple packages at once, like X1 (e.g. <em>scipy</em>) and X2 (e.g. <em>curl</em>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda remove scipy curl
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="environments">
+<span id="env"></span><h2>Environments<a class="headerlink" href="#environments" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getting-info-about-environments">
+<span id="env-info"></span><h3>Getting info about environments<a class="headerlink" href="#getting-info-about-environments" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">How can I get a list of all of my environments?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda info -e
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I list all installed packages in environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<p>If <tt class="docutils literal"><span class="pre">myenv</span></tt> is not activated:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda list -n myenv
+</pre></div>
+</div>
+</div></blockquote>
+<p>If <tt class="docutils literal"><span class="pre">myenv</span></tt> is activated:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda list
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">How can I check if package Y (e.g. <em>scipy</em>) is already installed in existing environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<ul>
+<li><p class="first">the first method:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda list -n myenv scipy
+</pre></div>
+</div>
+</li>
+<li><p class="first">the second method:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">source </span>activate myenv
+<span class="nv">$ </span>conda list scipy
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="creating-new-environments">
+<span id="env-creating"></span><h3>Creating new environments<a class="headerlink" href="#creating-new-environments" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">How can I create a new and clean environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create -n myenv python
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I create a new environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>) with <em>python</em> Y.Y.Y
+(e.g. 3.4) as the default interpreter inside it?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create -n myenv <span class="nv">python</span><span class="o">=</span>3.4
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I create a new environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>) with package Y inside it (e.g. <em>scipy</em>)?</p>
+<ul>
+<li><p class="first">in a single command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create -n myenv scipy
+</pre></div>
+</div>
+</li>
+<li><p class="first">with more typing:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create -n myenv python
+<span class="nv">$ </span>conda install -n myenv scipy
+</pre></div>
+</div>
+</li>
+<li><p class="first">the longest version (also activates the newly created environment):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create -n myenv python
+<span class="nv">$ </span><span class="nb">source </span>activate myenv
+<span class="nv">$ </span>conda install scipy
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">How can I create a new environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>) with package Y (e.g. <em>scipy</em>) in version Z.Z.Z (e.g. 0.12.0) inside it?</p>
+<ul>
+<li><p class="first">in a single command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create -n myenv <span class="nv">scipy</span><span class="o">=</span>0.12.0
+</pre></div>
+</div>
+</li>
+<li><p class="first">with more typing:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create -n myenv python
+<span class="nv">$ </span>conda install -n myenv <span class="nv">scipy</span><span class="o">=</span>0.12.0
+</pre></div>
+</div>
+</li>
+<li><p class="first">the longest version (activating newly created environment also):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create -n myenv python
+<span class="nv">$ </span><span class="nb">source </span>activate myenv
+<span class="nv">$ </span>conda install <span class="nv">scipy</span><span class="o">=</span>0.12.0
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="activating-and-deactivating">
+<span id="env-onoff"></span><h3>Activating and deactivating<a class="headerlink" href="#activating-and-deactivating" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">How can I activate the existing environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">source </span>activate myenv
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I deactivate the active environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">source </span>deactivate
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="installation">
+<span id="env-installation"></span><h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">How can I install package Y (e.g. <em>scipy</em>) in existing environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<ul>
+<li><p class="first">first possibility:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda install -n myenv scipy
+</pre></div>
+</div>
+</li>
+<li><p class="first">the alternate way:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">source </span>activate myenv
+<span class="nv">$ </span>conda install scipy
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">How can I install Z.Z.Z (e.g. 0.12.0) version of package Y (e.g. <em>scipy</em>) in existing environment (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<p>If <tt class="docutils literal"><span class="pre">myenv</span></tt> not activated:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda install -n myenv <span class="nv">scipy</span><span class="o">=</span>0.12.0
+</pre></div>
+</div>
+</div></blockquote>
+<p>If <tt class="docutils literal"><span class="pre">myenv</span></tt> is activated:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda install <span class="nv">scipy</span><span class="o">=</span>0.12.0
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">How can I use pip in my environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda install -n myenv pip
+<span class="nv">$ </span><span class="nb">source </span>activate myenv
+<span class="nv">$ </span>pip &lt;pip_subcommand&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">How can I automatically install pip during creation of any of new environment?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda config --add create_default_packages pip
+</pre></div>
+</div>
+<p>After performing the above command you can create a new environment in the standard way (pip will be installed in all of them).</p>
+</li>
+<li><p class="first">How can I automatically install Y package (e.g. <em>scipy</em>) during creation of any of new environment?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda config --add create_default_packages scipy
+</pre></div>
+</div>
+<p>After performing the above command you can create a new environments in the
+standard way (the <em>scipy</em> will be installed in all of them).</p>
+</li>
+<li><p class="first">How can I automatically install version Z.Z.Z (e.g. 0.12.0) of package Y (e.g. <em>scipy</em>) during creation of any of new environment?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda config --add create_default_packages <span class="nv">scipy</span><span class="o">=</span>0.12.0
+</pre></div>
+</div>
+<p>After performing the above command you can create a new environments in the
+standard way (the <em>scipy</em> in 0.12.0 version will be installed in all of
+them).</p>
+</li>
+<li><p class="first">How can I ignore packages from automatic installation during creation of new and clean environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda create --no-default-packages -n myenv python
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="removing">
+<span id="env-removing"></span><h3>Removing<a class="headerlink" href="#removing" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">How can I remove package Y (e.g. <em>scipy</em>) in existing environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<p>If <tt class="docutils literal"><span class="pre">myenv</span></tt> is not activated:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda remove -n myenv scipy
+</pre></div>
+</div>
+</div></blockquote>
+<p>If <tt class="docutils literal"><span class="pre">myenv</span></tt> is activated:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda remove scipy
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">How can I remove existing environment X (e.g. <tt class="docutils literal"><span class="pre">myenv</span></tt>)?</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda remove -n myenv --all
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="recipes">
+<span id="id3"></span><h2>Recipes<a class="headerlink" href="#recipes" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">How can I create a skeleton conda recipe for package X (e.g. <em>bottle</em>) if I
+know that this package is on PyPI?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda skeleton pypi bottle
+</pre></div>
+</div>
+<p>You can then build it with</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda build bottle
+</pre></div>
+</div>
+<p>It is recommended to upload the package to binstar when you are done. Then
+if you add your binstar channel to your .condarc (see <a class="reference internal" href="#customization"><em>Customization (.condarc file)</em></a>
+above), you will be able to install the package with</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda install bottle
+</pre></div>
+</div>
+<ul>
+<li><p class="first">If you did not upload the package to binstar, to install this package in
+the root environment, you need to find out where the built package is:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda info
+</pre></div>
+</div>
+</li>
+<li><p class="first">get the <tt class="docutils literal"><span class="pre">root</span> <span class="pre">environment</span></tt> path and perform the installation:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda install &lt;path_from_root_environment_variable&gt;/conda-bld/&lt;your_platform&gt;/bottle.tar.bz2
+</pre></div>
+</div>
+</li>
+</ul>
+<p>This information is also shown at the end of the build process.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="examples/advanced.html" class="btn btn-neutral" title="Advanced Package Management"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Continuum Analytics.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

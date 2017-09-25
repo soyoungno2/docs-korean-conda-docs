@@ -1,0 +1,115 @@
+
+.. _config_ref:
+
+conda config
+=======================
+
+.. raw:: html
+
+   <PRE>
+   <!-- Manpage converted by man2html 3.0.1 -->
+   <B>CONDA(1)</B>                         User Commands                        <B>CONDA(1)</B>
+   
+   
+   
+   NAME
+          conda - conda config
+   
+   DESCRIPTION
+          usage: conda config [-h] [--json] [--debug] [--verbose]
+   
+          [--system | --env | --file FILE]
+                 (--show  | --show-sources | --validate | --describe | --get [KEY
+                 [KEY ...]] | --append KEY VALUE | --prepend KEY  VALUE  |  --set
+                 KEY VALUE | --remove KEY VALUE | --remove-key KEY)
+   
+          Modify configuration values in .condarc.  This is modeled after the git
+          config command.  Writes to the user .condarc file (user .condarc  path)
+          by default.
+   
+   OPTIONS
+      optional arguments:
+          -h, --help
+                 Show this help message and exit.
+   
+          --json Report all output as json. Suitable for using conda programmati‐
+                 cally.
+   
+          --debug
+                 Show debug output.
+   
+          --verbose, -v
+                 Use once for info, twice for debug, three times for trace.
+   
+          --system
+                 Write to the system .condarc file (system .condarc path). Other‐
+                 wise writes to the user config file (user .condarc path).
+   
+          --env  Write  to  the active conda environment .condarc file (root pre‐
+                 fix/envs/build-environment). If no environment is active,  write
+                 to the user config file (user .condarc path).
+   
+          --file FILE
+                 Write  to  the  given  file. Otherwise writes to the user config
+                 file (user .condarc path) or the file path given  by  the  'CON‐
+                 DARC' environment variable, if it is set (default: user .condarc
+                 path).
+   
+          --show Display all configuration values as calculated and compiled.
+   
+          --show-sources
+                 Display all identified configuration sources.
+   
+          --validate
+                 Validate all configuration sources.
+   
+          --describe
+                 Describe available configuration parameters.
+   
+          --get [KEY [KEY ...]]
+                 Get a configuration value.
+   
+          --append KEY VALUE
+                 Add one configuration value to the end of a list key.
+   
+          --prepend KEY VALUE, --add KEY VALUE
+                 Add one configuration value to the beginning of a list key.
+   
+          --set KEY VALUE
+                 Set a boolean or string key
+   
+          --remove KEY VALUE
+                 Remove a configuration value from a list key. This  removes  all
+                 instances of the value.
+   
+          --remove-key KEY
+                 Remove a configuration key (and all its values).
+   
+          See  `conda config --describe` or https://conda.io/docs/config.html for
+          details on all the options that can go in .condarc.
+   
+   EXAMPLES
+          Display all configuration values as calculated and compiled:
+   
+                 conda config --show
+   
+          Display all identified configuration sources:
+   
+                 conda config --show-sources
+   
+          Describe all available configuration options:
+   
+                 conda config --describe
+   
+          Add the conda-canary channel:
+   
+                 conda config --add channels conda-canary
+   
+          Set the output verbosity to level 3 (highest):
+   
+                 conda config --set verbosity 3
+   
+   
+   
+   Continuum Analytics               August 2017                         <B>CONDA(1)</B>
+   </PRE>

@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>config &mdash; Conda   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Conda   documentation" href="../index.html"/>
+        <link rel="up" title="Command Reference" href="../commands.html"/>
+        <link rel="next" title="create" href="create.html"/>
+        <link rel="prev" title="build" href="build.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Conda</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/information.html">Informational Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/basic.html">Basic Package Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/advanced.html">Advanced Package Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Conda FAQ</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html#tab-completion">Tab Completion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build.html"><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></tt> Recipe Reference</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../build_tutorials.html">Build tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../build_tutorials/pkgs.html">Tutorial: Basic tutorial for building a Conda package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_tutorials/postgis.html">Tutorial: Building the postgis package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../admin.html">Administrative channel management for a centralized conda installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom-channels.html">Custom Channels</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../commands.html">Command Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="build.html">build</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create.html">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info.html">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="list.html">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package.html">package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove.html">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search_.html">search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="skeleton.html">skeleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="update.html">update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Conda package specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#package-metadata">Package metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#link-and-unlink-scripts">Link and unlink scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#repository-structure-and-index">Repository structure and index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#package-match-specifications">Package Match Specifications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../travis.html">Using Conda with Travis CI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#the-travis-yml">The .travis.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#additional-steps">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#building-a-conda-recipe">Building a Conda Recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#appveyor">AppVeyor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bdist_conda.html">setup.py bdist_conda</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../bdist_conda.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bdist_conda.html#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Conda</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../commands.html">Command Reference</a> &raquo;</li>
+      
+    <li>config</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/conda/conda-docs/edit/master/docs/source/commands/config.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="config">
+<h1>config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h1>
+<div class="code highlight-python"><div class="highlight"><pre>Modify configuration values in .condarc.  This is modeled after the git
+config command.  Writes to the user .condarc file (/Users/aaronmeurer/.condarc) by default.
+
+**usage**: ``conda config [-h] [--system | --file FILE] (--get [KEY [KEY ...]] | --add KEY VALUE | --set KEY BOOL_VALUE | --remove KEY VALUE | --remove-key KEY) [-f]
+
+Modify configuration values in .condarc.  This is modeled after the git
+config command.  Writes to the user .condarc file (/Users/aaronmeurer/.condarc) by default.``
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --system              write to the system .condarc file (/Users/aaronmeurer/anaconda/.condarc). Otherwise writes to the user config file (/Users/aaronmeurer/.condarc).
+  --file FILE           write to the given file. Otherwise writes to the user config file (/Users/aaronmeurer/.condarc).
+  --get [KEY [KEY ...]]
+                        get the configuration value
+  --add KEY VALUE       add one configuration value to a list key. The default behavior is to prepend.
+  --set KEY BOOL_VALUE  set a boolean key. BOOL_VALUE should be &#39;yes&#39; or &#39;no&#39;
+  --remove KEY VALUE    remove a configuration value from a list key. This removes all instances of the value
+  --remove-key KEY      remove a configuration key (and all its values)
+  -f, --force           Write to the config file using the yaml parser. This will remove any comments or structure from the file.
+
+examples:
+    conda config --get channels --system
+    conda config --add channels http://conda.binstar.org/foo
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="create.html" class="btn btn-neutral float-right" title="create">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="build.html" class="btn btn-neutral" title="build"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Continuum Analytics.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

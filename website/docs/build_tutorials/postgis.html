@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial: Building the postgis package &mdash; Conda   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Conda   documentation" href="../index.html"/>
+        <link rel="up" title="Build tutorials" href="../build_tutorials.html"/>
+        <link rel="next" title="Administrative channel management for a centralized conda installation" href="../admin.html"/>
+        <link rel="prev" title="Tutorial: Basic tutorial for building a Conda package" href="pkgs.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Conda</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/information.html">Informational Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/basic.html">Basic Package Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/advanced.html">Advanced Package Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Conda FAQ</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html#tab-completion">Tab Completion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build.html"><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></tt> Recipe Reference</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../build_tutorials.html">Build tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pkgs.html">Tutorial: Basic tutorial for building a Conda package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Tutorial: Building the postgis package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../admin.html">Administrative channel management for a centralized conda installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom-channels.html">Custom Channels</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">Command Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../commands/build.html">build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/config.html">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/create.html">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/index.html">index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/info.html">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/install.html">install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/list.html">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/package.html">package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/remove.html">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/search_.html">search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/skeleton.html">skeleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/update.html">update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Conda package specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#package-metadata">Package metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#link-and-unlink-scripts">Link and unlink scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#repository-structure-and-index">Repository structure and index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#package-match-specifications">Package Match Specifications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../travis.html">Using Conda with Travis CI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#the-travis-yml">The .travis.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#additional-steps">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#building-a-conda-recipe">Building a Conda Recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#appveyor">AppVeyor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bdist_conda.html">setup.py bdist_conda</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../bdist_conda.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bdist_conda.html#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Conda</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../build_tutorials.html">Build tutorials</a> &raquo;</li>
+      
+    <li>Tutorial: Building the postgis package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/conda/conda-docs/edit/master/docs/source/build_tutorials/postgis.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="tutorial-building-the-postgis-package">
+<h1>Tutorial: Building the postgis package<a class="headerlink" href="#tutorial-building-the-postgis-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s set out to build <tt class="docutils literal"><span class="pre">postgis</span></tt>. This package is installable with conda if you
+have access to an appropriate channel, so we are not flying blind. But we&#8217;ll
+start out naively and try to learn some things along the way.</p>
+<p>We will build <tt class="docutils literal"><span class="pre">postgis</span></tt> 2.1.3 (the current version as of 14th of July 2014).</p>
+<p>The step-by-step sequence is fairly repetitive in the sense that there are only
+a few sequences of actions you must take to build conda packages, although you
+may have to repeat them multiple times to build a package with many
+dependencies. You&#8217;ll see once we get into the steps. First, let&#8217;s lay out the
+abstract game plan. Understanding what we have to accomplish will demystify the
+process considerably.</p>
+<p>We will build this package for 64-bit Linux, but the steps generalize to other
+platforms.</p>
+<div class="section" id="abstract-description-of-conda-build">
+<h3>Abstract Description of conda build<a class="headerlink" href="#abstract-description-of-conda-build" title="Permalink to this headline">¶</a></h3>
+<p>We begin building a package by pointing conda to a directory with a <tt class="docutils literal"><span class="pre">build.sh</span></tt>
+(for Linux and MacOSX, Windows uses <tt class="docutils literal"><span class="pre">bld.bat</span></tt> file) and <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> file.
+Respectively, these files specify the command line instructions to build a
+particular package from source, and information about where to download the
+source files and dependencies that the package requires. If these files are
+configured correctly,</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda build postgis/
+</pre></div>
+</div>
+<p>obtains the source files from the location specified in <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> and,
+following the commands in <tt class="docutils literal"><span class="pre">build.sh</span></tt>, builds the package locally. Once
+complete, the package and all its metadata bundled. We will upload it to
+<a class="reference external" href="http://binstar.org/">binstar.org</a>, where it can be accessed via:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search
+<span class="nv">$ </span>conda install
+</pre></div>
+</div>
+<p>Here, we&#8217;ll start out naively and make adjustments to the <tt class="docutils literal"><span class="pre">build.sh</span></tt> and
+<tt class="docutils literal"><span class="pre">meta.yaml</span></tt> files as we go, until the package is successfully built.</p>
+</div>
+</div>
+<div class="section" id="build-steps">
+<h2>Build Steps<a class="headerlink" href="#build-steps" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="initial-setup">
+<h3>Initial Setup<a class="headerlink" href="#initial-setup" title="Permalink to this headline">¶</a></h3>
+<p>Locate source files for the package you want to build. In this case, I found a
+<tt class="docutils literal"><span class="pre">postgis</span></tt>
+<a class="reference external" href="http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz">tarball</a> here.
+Reading the documentation, I can already see there are dependencies, but for
+the purposes of illustrating the steps, we will start at zero and see how far
+we get.</p>
+<p>Create a directory where conda build will find the <tt class="docutils literal"><span class="pre">build.sh</span></tt> and <tt class="docutils literal"><span class="pre">meta.yaml</span></tt>
+files. Create files with the following bare-bones contents (appropriate to the
+package you are tyring to build):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>mkdir postgis
+<span class="nv">$ </span>touch postgis/build.sh postgis/meta.yaml
+<span class="nv">$ </span>ls
+build.sh  meta.yaml
+</pre></div>
+</div>
+<p>Now setup <tt class="docutils literal"><span class="pre">postgis/build.sh</span></tt> like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre>./configure --prefix<span class="o">=</span><span class="nv">$PREFIX</span>
+make
+make install
+</pre></div>
+</div>
+<p>This is the minimal set of commands that might build a package from source
+that was created with autotools (autoconf, automake, etc), the standard format
+you&#8217;ll encounter for packaging C source code distributions. Including
+<tt class="docutils literal"><span class="pre">--prefix=$PREFIX</span></tt> here tells <tt class="docutils literal"><span class="pre">configure</span></tt> to set the installation path to
+<tt class="docutils literal"><span class="pre">$PREFIX</span></tt>, an environment variable set by conda during runtime. This is a
+key instruction to have conda configure and install in its custom build
+environment, rather than try to access root-level directories such as
+<tt class="docutils literal"><span class="pre">/usr</span></tt>, which is the default installation path in normal circumstances in
+Linux and Mac OS X. If you want to follow more details of what conda is doing
+to configure the environment, add to your <tt class="docutils literal"><span class="pre">build.sh</span></tt> file:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">echo</span> <span class="nv">$PREFIX</span>
+</pre></div>
+</div>
+<p>The basic <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> file looks like this:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">package</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgis</span>
+
+<span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">fn</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgis-2.1.3.tar.gz</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz</span>
+
+<span class="c1"># requirements:</span>
+  <span class="c1"># build:</span>
+
+  <span class="c1"># run:</span>
+
+<span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">number</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">0</span>
+
+<span class="l-Scalar-Plain">about</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">home</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://postgis.net</span>
+  <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">GPL2</span>
+  <span class="l-Scalar-Plain">summary</span><span class="p-Indicator">:</span> <span class="s">&quot;PostGIS</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">spatial</span><span class="nv"> </span><span class="s">database</span><span class="nv"> </span><span class="s">extender</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">PostgreSQL</span><span class="nv"> </span><span class="s">object-relational</span><span class="nv"> </span><span class="s">database.</span><span class="nv"> </span><span class="s">It</span><span class="nv"> </span><span class="s">adds</span><span class="nv"> </span><span class="s">support</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">geographic</span><span class="nv"> </span><span class="s">objects</span><span class="nv"> </span><span class="s">allowing</span><span class="nv"> </span><span class="s">location</span><span class="nv"> </span><span class="s">queries</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">run</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">SQL.&quot;</span>
+</pre></div>
+</div>
+<p>The dependencies will be listed under the requirements key, but that is
+commented out for now as we are assuming no dependencies at first.</p>
+</div>
+<div class="section" id="first-build-attempt">
+<h3>First Build Attempt<a class="headerlink" href="#first-build-attempt" title="Permalink to this headline">¶</a></h3>
+<p>Run</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda build postgis
+</pre></div>
+</div>
+<p>If you are familiar building packages from source, you will recognize the log
+generated by the configure script. The first error message I encounter is:</p>
+<div class="highlight-bash"><div class="highlight"><pre>configure: error: could not find pg_config within the current path.
+You may need to try re-running configure with a --with-pg_config parameter.
+</pre></div>
+</div>
+<p>I&#8217;m being asked to specify a path to the utility <tt class="docutils literal"><span class="pre">pg_config</span></tt>. I do <tt class="docutils literal"><span class="pre">$</span> <span class="pre">which</span>
+<span class="pre">pg_config</span></tt> and find that it&#8217;s not installed. The philosophy of conda packaging
+is that you bundle what you need, so this utility has to be included in the
+package. I do:</p>
+<p>Some searching indicates pg_config is distributed with postgresql, so let me
+check that out. A search on <a class="reference external" href="https://binstar.org/">binstar.org</a> for conda
+packages with the name <tt class="docutils literal"><span class="pre">postgresql</span></tt> yields some results for 64-bit
+Linux. I&#8217;ll try to install from one of the Binstar channels. First the channel
+must be added with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda config --add channels https://conda.binstar.org/trent
+</pre></div>
+</div>
+<p>which I can verify by inspecting:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda info
+
+             platform : linux-64
+        conda version : 3.5.2
+       python version : 2.7.7.final.0
+     root environment : /home/irritum/miniconda  <span class="o">(</span>writable<span class="o">)</span>
+  default environment : /home/irritum/miniconda
+     envs directories : /home/irritum/miniconda/envs
+        package cache : /home/irritum/miniconda/pkgs
+         channel URLs : https://conda.binstar.org/trent/linux-64
+                        http://repo.continuum.io/pkgs/free/linux-64/
+                        http://repo.continuum.io/pkgs/pro/linux-64/
+                        http://repo.continuum.io/pkgs/gpl/linux-64/
+                        https://conda.binstar.org/mutirri/linux-64/
+          config file : /home/irritum/.condarc
+    is foreign system : False
+</pre></div>
+</div>
+<p>Now I can return to the build of <tt class="docutils literal"><span class="pre">postgis</span></tt>. I know that <tt class="docutils literal"><span class="pre">postgresql</span></tt> (and
+specifically the need for <tt class="docutils literal"><span class="pre">pg_config</span></tt>) is a dependency, so I should include that
+in the <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> file and add the flag <tt class="docutils literal"><span class="pre">--with-pgconfig</span></tt> to the configure
+command, as the script requested.  It will be needed both to build the
+package, and to run the package after it is built, so we need to add it as
+both a build and run dependency.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">package</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgis</span>
+
+<span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">fn</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgis-2.1.3.tar.gz</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz</span>
+
+<span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">number</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">0</span>
+
+<span class="l-Scalar-Plain">requirements</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql</span>
+  <span class="l-Scalar-Plain">run</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql</span>
+
+<span class="l-Scalar-Plain">about</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">home</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://postgis.net</span>
+  <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">GPL2</span>
+</pre></div>
+</div>
+<p>My build.sh now looks like</p>
+<div class="highlight-bash"><div class="highlight"><pre>./configure --prefix<span class="o">=</span><span class="nv">$PREFIX</span> --with-pgconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/pg_config
+make
+make install
+</pre></div>
+</div>
+<p>I have added the flag <tt class="docutils literal"><span class="pre">--with-pgconfig=${PREFIX}/bin/pg_config</span></tt> to the
+configure command in <tt class="docutils literal"><span class="pre">build.sh</span></tt>.</p>
+</div>
+<div class="section" id="error-geos-config">
+<h3>ERROR - geos-config<a class="headerlink" href="#error-geos-config" title="Permalink to this headline">¶</a></h3>
+<p>The next error encountered is:</p>
+<div class="highlight-none"><div class="highlight"><pre>checking for geos-config... no
+
+configure: error: could not find geos-config within the current path. You may need to try re-running configure with a --with-geosconfig parameter.
+</pre></div>
+</div>
+<p>On the other hand:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search geos
+</pre></div>
+</div>
+<p>does not turn up an available package at this moment, so I will build
+this from source, following the same routine we&#8217;ve done a couple times now:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>mkdir geos
+<span class="nv">$ </span><span class="nb">cd </span>geos
+<span class="nv">$ </span>cp postgis/meta.yaml geos/
+
+<span class="nv">$ </span>cp postgis/build.sh geos/
+</pre></div>
+</div>
+<p>I edit the <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> and <tt class="docutils literal"><span class="pre">build.sh</span></tt> files to reflect the details of this package (no dependencies or special flags set):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda build geos
+<span class="nv">$ </span>binstar upload /home/irritum/code/miniconda/conda-bld/linux-64/geos-3.4.2-0.tar.bz2
+</pre></div>
+</div>
+<p>after the package is successfully built.</p>
+<p>I can continue, after adding the dependencies in <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> of
+<tt class="docutils literal"><span class="pre">postgis</span></tt>. At this point the conda recipe files look like this:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">package</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgis</span>
+
+<span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">fn</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgis-2.1.3.tar.gz</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz</span>
+
+<span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">number</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">0</span>
+
+<span class="l-Scalar-Plain">requirements</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">geos</span>
+  <span class="l-Scalar-Plain">run</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">geos</span>
+
+<span class="l-Scalar-Plain">about</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">home</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://postgis.net</span>
+  <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">GPL2</span>
+</pre></div>
+</div>
+<p>And <tt class="docutils literal"><span class="pre">build.sh</span></tt> file:</p>
+<div class="highlight-bash"><div class="highlight"><pre>./configure <span class="se">\</span>
+    --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+    --with-pgconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/pg_config <span class="se">\</span>
+    --with-geosconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/geos-config <span class="se">\</span>
+
+make
+make install
+</pre></div>
+</div>
+<div class="section" id="a-reminder">
+<h4>A Reminder<a class="headerlink" href="#a-reminder" title="Permalink to this headline">¶</a></h4>
+<p>As you go through this cycle of steps, remember to update the conda build
+recipes to reflect the dependencies that you are installing. Conda build
+builds the package in an isolated environment, which is created from the
+packages specified as build dependencies.  Installing the packages into your
+own working environment does not affect conda-build at all. For example, if
+you have installed a geos package but not specified the requirement in
+<tt class="docutils literal"><span class="pre">meta.yaml</span></tt> or the path flag in <tt class="docutils literal"><span class="pre">build.sh</span></tt>, you will see an error like
+this:</p>
+<div class="highlight-bash"><div class="highlight"><pre>configure: error: could not find libgeos_c - you may need to specify the directory of a geos-config file using --with-geosconfig
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="error-proj">
+<h3>ERROR - proj<a class="headerlink" href="#error-proj" title="Permalink to this headline">¶</a></h3>
+<p>The next error I hit is</p>
+<div class="highlight-bash"><div class="highlight"><pre>configure: error: could not find proj_api.h - you may need to specify the directory of a PROJ.4 installation using --with-projdir
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-proj">
+<h3>Build proj<a class="headerlink" href="#build-proj" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">proj</span></tt> 4.8.0 can be built from source in the same way. It should not have
+non-standard dependencies. I uploaded my package as <tt class="docutils literal"><span class="pre">proj</span></tt>. I include <tt class="docutils literal"><span class="pre">-</span>
+<span class="pre">proj</span></tt> under the build and run requirements in <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> and add the flag
+<tt class="docutils literal"><span class="pre">--with-projdir=$PREFIX</span></tt> in <tt class="docutils literal"><span class="pre">build.sh</span></tt> file.</p>
+<p>At this point the series of dependencies I have assembled is reflected by the conda build script&#8217;s output:</p>
+<div class="highlight-bash"><div class="highlight"><pre>package                    |            build
+---------------------------|-----------------
+geos-3.4.2                 |                0   hard-link
+postgresql-9.3.4           |                0   hard-link
+proj-4.8.0                 |                0   hard-link
+zlib-1.2.7                 |                0   hard-link
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-gdal">
+<h3>ERROR - gdal<a class="headerlink" href="#error-gdal" title="Permalink to this headline">¶</a></h3>
+<p>Next I encountered:</p>
+<div class="highlight-bash"><div class="highlight"><pre>checking <span class="k">for </span>gdal-config... no
+
+checking GDAL version... not found
+
+configure: error: gdal-config not found. Use --without-raster or try --with-gdalconfig<span class="o">=</span>&lt;path to gdal-config&gt;
+</pre></div>
+</div>
+<p>Is this package available?</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search gdal
+Fetching package metadata: ......
+
+gdal                         1.10.1                   py33_0  defaults
+                             1.10.1                   py27_0  defaults
+                             1.10.1                   py26_0  defaults
+                             1.10.1               np18py34_2  defaults
+                             1.10.1               np18py33_2  defaults
+                          .  1.10.1               np18py27_2  defaults
+                             1.10.1               np18py26_2  defaults
+</pre></div>
+</div>
+<p>Yes, so I include <tt class="docutils literal"><span class="pre">-</span> <span class="pre">gdal</span></tt> as a build and run requirement in <tt class="docutils literal"><span class="pre">meta.yaml</span></tt>, as
+well as add the flag <tt class="docutils literal"><span class="pre">--with-gdalconfig=$PREFIX/bin</span></tt> in <tt class="docutils literal"><span class="pre">build.sh</span></tt> file.</p>
+</div>
+<div class="section" id="error-json-c">
+<h3>ERROR - json-c<a class="headerlink" href="#error-json-c" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre>configure: error: Cannot find json dev files in <span class="s2">&quot;/home/irritum/miniconda/envs/_build&quot;</span>
+</pre></div>
+</div>
+<p>After doing some research (mostly documentation of <tt class="docutils literal"><span class="pre">postgis</span></tt>), I have found
+that I need a <tt class="docutils literal"><span class="pre">json-c</span></tt> package. So, once again:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search json-c
+Fetching package metadata: ...............
+
+json-c                       0.11.20130402                 0  trent
+</pre></div>
+</div>
+<p>Notice that in my <tt class="docutils literal"><span class="pre">.condarc</span></tt> file I have trent channel, where <tt class="docutils literal"><span class="pre">json-c</span></tt> is available.
+I&#8217;m going to use it, so I add:</p>
+<div class="highlight-bash"><div class="highlight"><pre>--with-jsondir<span class="o">=</span><span class="nv">$PREFIX</span>
+</pre></div>
+</div>
+<p>to <tt class="docutils literal"><span class="pre">build.sh</span></tt> and</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">json-c</span>
+</pre></div>
+</div>
+<p>to the build and run dependencies.</p>
+<p>Now, my <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> file looks:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">package</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgis</span>
+
+<span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">fn</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgis-2.1.3.tar.gz</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz</span>
+
+<span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">number</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">0</span>
+
+<span class="l-Scalar-Plain">requirements</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">geos</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">proj4</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gdal</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">json-c</span>
+  <span class="l-Scalar-Plain">run</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">geos</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">proj4</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gdal</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">json-c</span>
+
+<span class="l-Scalar-Plain">about</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">home</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://postgis.net</span>
+  <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">GPL2</span>
+</pre></div>
+</div>
+<p>And <tt class="docutils literal"><span class="pre">build.sh</span></tt>:</p>
+<div class="highlight-bash"><div class="highlight"><pre>./configure <span class="se">\</span>
+    --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+    --with-pgconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/pg_config <span class="se">\</span>
+    --with-geosconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/geos-config <span class="se">\</span>
+    --with-projdir<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+    --with-jsondir<span class="o">=</span><span class="nv">$PREFIX</span>
+
+make
+make install
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-libxml2">
+<h3>ERROR - libxml2<a class="headerlink" href="#error-libxml2" title="Permalink to this headline">¶</a></h3>
+<p>Try again:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda build postgis
+</pre></div>
+</div>
+<p>The next error message from <tt class="docutils literal"><span class="pre">configure</span></tt> is:</p>
+<div class="highlight-bash"><div class="highlight"><pre>checking <span class="k">for </span>xml2-config... no
+
+configure: error: could not find xml2-config from libxml2 within the current path. You may need to try re-running configure with a --with-xml2config parameter.
+</pre></div>
+</div>
+<p>I need to include the <tt class="docutils literal"><span class="pre">libxml2</span></tt> package. See if it&#8217;s available:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search libxml2
+Fetching package metadata: ......
+</pre></div>
+</div>
+<p>I accordingly update the <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> file to include <tt class="docutils literal"><span class="pre">-</span> <span class="pre">libxml2</span></tt> and add
+<tt class="docutils literal"><span class="pre">--with-xml2config=$PREFIX/bin/xml2-config</span></tt> to the <tt class="docutils literal"><span class="pre">build.sh</span></tt> file and re-run whole process one more time:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda build postgis
+</pre></div>
+</div>
+</div>
+<div class="section" id="final-step">
+<h3>Final step<a class="headerlink" href="#final-step" title="Permalink to this headline">¶</a></h3>
+<p>Finally I&#8217;m adding some interesting options (from my point of view) to the <tt class="docutils literal"><span class="pre">build.sh</span></tt> file:</p>
+<div class="highlight-bash"><div class="highlight"><pre>--with-libiconv<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+--with-raster <span class="se">\</span>
+--with-topology
+</pre></div>
+</div>
+<p>My final <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> is</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">package</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgis</span>
+  <span class="l-Scalar-Plain">version</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2.1.1</span>
+
+<span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">fn</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgis-2.1.1.tar.gz</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://download.osgeo.org/postgis/source/postgis-2.1.1.tar.gz</span>
+
+<span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">number</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">0</span>
+
+<span class="l-Scalar-Plain">requirements</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gdal</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">geos</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">proj4</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">json-c</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">libxml2</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql</span>
+  <span class="l-Scalar-Plain">run</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gdal</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">geos</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">proj4</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">json-c</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">libxml2</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">postgresql</span>
+
+<span class="l-Scalar-Plain">about</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">home</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://postgis.net</span>
+  <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">GPL2</span>
+</pre></div>
+</div>
+<p>And my <tt class="docutils literal"><span class="pre">build.sh</span></tt> is</p>
+<div class="highlight-bash"><div class="highlight"><pre>chmod 755 configure
+./configure <span class="se">\</span>
+    --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+    --with-pgconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/pg_config <span class="se">\</span>
+    --with-gdalconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/gdal-config <span class="se">\</span>
+    --with-xml2config<span class="o">=</span><span class="nv">$PREFIX</span>/bin/xml2-config <span class="se">\</span>
+    --with-projdir<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+    --with-libiconv<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+    --with-jsondir<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+    --with-raster <span class="se">\</span>
+    --with-topology
+
+make
+make install
+</pre></div>
+</div>
+<p>And that&#8217;s all.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda build postgis/
+...
+
+patchelf: file: /home/gergely/code/miniconda/envs/_build/bin/pgsql2shp
+    setting rpath to: <span class="nv">$ORIGIN</span>/../lib
+
+patchelf: file: /home/gergely/code/miniconda/envs/_build/bin/raster2pgsql
+    setting rpath to: <span class="nv">$ORIGIN</span>/../lib
+
+patchelf: file: /home/gergely/code/miniconda/envs/_build/bin/shp2pgsql
+    setting rpath to: <span class="nv">$ORIGIN</span>/../lib
+
+patchelf: file: /home/gergely/code/miniconda/envs/_build/lib/liblwgeom-2.1.3.so
+    setting rpath to: <span class="nv">$ORIGIN</span>/.
+patchelf: file: /home/gergely/code/miniconda/envs/_build/lib/postgresql/postgis-2.1.so
+    setting rpath to: <span class="nv">$ORIGIN</span>/..
+
+patchelf: file: /home/gergely/code/miniconda/envs/_build/lib/postgresql/rtpostgis-2.1.so
+    setting rpath to: <span class="nv">$ORIGIN</span>/..
+
+BUILD END: postgis-2.1.3-0
+Nothing to <span class="nb">test </span><span class="k">for</span>: postgis-2.1.3-0
+<span class="c"># If you want to upload this package to binstar.org later, type:</span>
+<span class="c">#</span>
+<span class="c"># $ binstar upload /home/mutirri/code/miniconda/conda-bld/linux-32/postgis-2.1.3-0.tar.bz2</span>
+<span class="c">#</span>
+<span class="c"># To have conda build upload to binstar automatically, use</span>
+<span class="c"># $ conda config --set binstar_upload yes</span>
+</pre></div>
+</div>
+<p>If you&#8217;d methodically followed along, you now have a <tt class="docutils literal"><span class="pre">postgis</span></tt> package you
+can upload using the command shown at the end of the build and install. Along
+the way, you&#8217;ve created several other conda packages that may be useful in
+their own right.</p>
+<p>Please consider sending pull requests for your own conda recipes to the
+<a class="reference external" href="https://github.com/conda/conda-recipes">conda-recipes repository</a>
+repository.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../admin.html" class="btn btn-neutral float-right" title="Administrative channel management for a centralized conda installation">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pkgs.html" class="btn btn-neutral" title="Tutorial: Basic tutorial for building a Conda package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Continuum Analytics.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

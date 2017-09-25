@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Search &mdash; Conda   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Conda   documentation" href="../index.html"/>
+        <link rel="up" title="Informational Commands" href="information.html"/>
+        <link rel="next" title="Basic Package Management" href="basic.html"/>
+        <link rel="prev" title="List" href="list.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Conda</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="information.html">Informational Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic.html">Basic Package Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html">Advanced Package Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Conda FAQ</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html#tab-completion">Tab Completion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build.html"><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></tt> Recipe Reference</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../build_tutorials.html">Build tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../build_tutorials/pkgs.html">Tutorial: Basic tutorial for building a Conda package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_tutorials/postgis.html">Tutorial: Building the postgis package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../admin.html">Administrative channel management for a centralized conda installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom-channels.html">Custom Channels</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">Command Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../commands/build.html">build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/config.html">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/create.html">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/index.html">index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/info.html">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/install.html">install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/list.html">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/package.html">package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/remove.html">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/search_.html">search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/skeleton.html">skeleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/update.html">update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spec.html">Conda package specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#package-metadata">Package metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#link-and-unlink-scripts">Link and unlink scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#repository-structure-and-index">Repository structure and index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spec.html#package-match-specifications">Package Match Specifications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../travis.html">Using Conda with Travis CI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#the-travis-yml">The .travis.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#additional-steps">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#building-a-conda-recipe">Building a Conda Recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../travis.html#appveyor">AppVeyor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bdist_conda.html">setup.py bdist_conda</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../bdist_conda.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bdist_conda.html#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Conda</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../examples.html">Examples</a> &raquo;</li>
+      
+          <li><a href="information.html">Informational Commands</a> &raquo;</li>
+      
+    <li>Search</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/conda/conda-docs/edit/master/docs/source/examples/search.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="search">
+<span id="search-example"></span><h1>Search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">search</span></tt> is a versatile option that can be used to explore packages available from known repositories or installed locally.</p>
+<p>In the first example, we want to simply search for SciPy and see if it is in
+conda&#8217;s list of packages.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search scipy
+scipy                        0.11.0               np17py33_1
+                             0.11.0               np15py26_1
+                             0.11.0               np16py27_1
+                             0.11.0               np17py27_1
+                             0.11.0               np16py26_1
+                             0.11.0               np17py26_1
+                             0.11.0               np15py27_1
+                             0.12.0b1             np17py27_0
+                             0.12.0b1             np17py26_0
+                             0.12.0              np15py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np15py27_0
+                             0.12.0               np16py26_0
+                             0.12.0              np15py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0              np17py26_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0              np16py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             0.12.0               np16py27_0
+                             0.12.0               np17py27_0
+                          *  0.12.0              np17py27_p0  <span class="o">[</span>mkl<span class="o">]</span>
+                             ...
+</pre></div>
+</div>
+<p>Notice the asterisk in the above example; this indicates the currently installed version of the package.</p>
+<p>In this next example, we will refine our search a bit.  With <tt class="docutils literal"><span class="pre">^l.*py$</span></tt>, we want to find any packages
+that begin with <tt class="docutils literal"><span class="pre">l</span></tt> followed by any number of characters, and ending with <tt class="docutils literal"><span class="pre">py</span></tt>.</p>
+<div class="highlight-bash"><div class="highlight"><pre>$ conda search ^l.*py$
+  llvmpy                       0.8.3.dev                py26_0
+                               0.8.3.dev                py27_0
+                               0.8.3                    py27_0
+                               0.8.3                    py26_0
+                               0.8.4.dev                py27_0
+                               0.8.4.dev                py26_0
+                               0.9                      py26_0
+                               0.9                      py27_0
+                               0.10.0                   py27_0
+                               ...
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The previous example (and any others that involve regular expressions) may not work correctly on a Windows system unless the regular expression pattern is enclosed in quotation marks.  For this reason,
+all regular expressions on the command line should be enclosed in quotes.</p>
+<p>For example:</p>
+<div class="last highlight-powershell"><div class="highlight"><pre>D:\Test&gt;conda search &quot;^l.*py$&quot;
+</pre></div>
+</div>
+</div>
+<p>While the previous examples have illustrated conda&#8217;s basic usefulness, they have only scratched
+the surface of what this option can do.</p>
+<p>For this example, we will use an environment containing <em>scipy=0.11.0</em>, <em>numpy=1.7</em>, <em>python=2.7</em> and their dependencies.
+Using the prefix option (<tt class="docutils literal"><span class="pre">-p</span></tt>), we can select an environment, and search for all packages that are compatible with it.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>conda search -p ~/anaconda/envs/onlyScipy/
+
+  _license                     1.0                     py27_p0
+                               1.1                      py27_0
+  accelerate                   1.0.0               np17py26_p0
+                               1.0.0               np15py26_p0
+                               1.0.0               np16py27_p0
+                               1.0.0               np16py26_p0
+                               1.0.0               np15py27_p0
+                               1.0.0               np17py33_p0
+                               1.0.0               np17py27_p0
+                               1.0.1               np15py27_p0
+
+                               ...
+
+  xlwt                         0.7.4                    py26_0
+                               0.7.4                    py27_0
+                               0.7.5                    py27_0
+                               0.7.5                    py26_0
+  yaml                         0.1.4                         0
+                               0.1.4                         1
+  zeromq                       2.2.0                         0
+                               2.2.0                         1
+  zlib                         1.2.7                         0
+                            *  1.2.7                         1
+  zope.interface               4.0.5                    py27_0
+                               4.0.5                    py26_0
+                               4.0.5                    py33_0
+</pre></div>
+</div>
+<p>It is also possible to get the same output as the above example by using the name option (<tt class="docutils literal"><span class="pre">-n</span></tt>) with the name of an Anaconda environment.</p>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="basic.html" class="btn btn-neutral float-right" title="Basic Package Management">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="list.html" class="btn btn-neutral" title="List"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Continuum Analytics.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

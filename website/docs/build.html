@@ -1,0 +1,857 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>conda build Recipe Reference &mdash; Conda   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Conda   documentation" href="index.html"/>
+        <link rel="next" title="Build tutorials" href="build_tutorials.html"/>
+        <link rel="prev" title="Configuration" href="config.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> Conda</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/information.html">Informational Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/basic.html">Basic Package Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/advanced.html">Advanced Package Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Conda FAQ</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html#tab-completion">Tab Completion</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href=""><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></tt> Recipe Reference</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build_tutorials.html">Build tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build_tutorials/pkgs.html">Tutorial: Basic tutorial for building a Conda package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build_tutorials/postgis.html">Tutorial: Building the postgis package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="admin.html">Administrative channel management for a centralized conda installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-channels.html">Custom Channels</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Command Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commands/build.html">build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/config.html">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/create.html">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/index.html">index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/info.html">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/install.html">install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/list.html">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/package.html">package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/remove.html">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/search_.html">search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/skeleton.html">skeleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands/update.html">update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spec.html">Conda package specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#package-metadata">Package metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#link-and-unlink-scripts">Link and unlink scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#repository-structure-and-index">Repository structure and index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spec.html#package-match-specifications">Package Match Specifications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="travis.html">Using Conda with Travis CI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#the-travis-yml">The .travis.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#additional-steps">Additional Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#building-a-conda-recipe">Building a Conda Recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="travis.html#appveyor">AppVeyor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bdist_conda.html">setup.py bdist_conda</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bdist_conda.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdist_conda.html#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Conda</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></tt> Recipe Reference</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/conda/conda-docs/edit/master/docs/source/build.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="conda-build-recipe-reference">
+<span id="build"></span><h1><tt class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></tt> Recipe Reference<a class="headerlink" href="#conda-build-recipe-reference" title="Permalink to this headline">¶</a></h1>
+<p>Building a package requires a recipe.  A recipe is flat directory which
+contains the following files:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">meta.yaml</span></tt> (metadata file)</li>
+<li><tt class="docutils literal"><span class="pre">build.sh</span></tt> (Unix build script which is executed using bash)</li>
+<li><tt class="docutils literal"><span class="pre">bld.bat</span></tt>  (Windows build script which is executed using cmd)</li>
+<li><tt class="docutils literal"><span class="pre">run_test.py</span></tt> (optional Python test file)</li>
+<li>patches to the source (optional, see below)</li>
+<li>other resources, which are not included in the source and cannot be
+generated by the build scripts.</li>
+</ul>
+</div></blockquote>
+<p>The same recipe should be used to build a package on all platforms.</p>
+<p>When building a package, the following steps are invoked:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>read the metadata</li>
+<li>download the source (into a cache)</li>
+<li>extract the source in a <em>source directory</em></li>
+<li>apply the patches</li>
+<li>create a <em>build environment</em> (build dependencies are installed here)</li>
+<li>run the actual build script. The current working directory is the source
+directory with environment variables set. The build script installs into
+the build environment</li>
+<li>do some necessary post processing steps: shebang, rpath, etc.</li>
+<li>add conda metadata to the build environment</li>
+<li>package up the new files in the build environment into a conda package</li>
+<li>test the new conda package:
+- create a <em>test environment</em> with the package (and its dependencies)
+- run the test scripts</li>
+</ol>
+</div></blockquote>
+<p>There are example recipes for many conda packages in the <a class="reference external" href="https://github.com/continuumio/conda-recipes">conda-recipes</a> repo.</p>
+<p>The <a class="reference internal" href="commands/skeleton.html#skeleton-ref"><em>conda skeleton</em></a> command can help to make skeleton recipes for common
+repositories, such as <a class="reference external" href="https://pypi.python.org/pypi">PyPI</a>.</p>
+<div class="section" id="the-meta-yaml-file">
+<h2>The meta.yaml file<a class="headerlink" href="#the-meta-yaml-file" title="Permalink to this headline">¶</a></h2>
+<p>All the metadata in the recipe is specified in the <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> file. All sections are optional except for package/name and package/version.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">package</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">bsdiff4</span>       <span class="c1"># lower case name of package, may contain &#39;-&#39; but no spaces</span>
+  <span class="l-Scalar-Plain">version</span><span class="p-Indicator">:</span> <span class="s">&quot;1.1.4&quot;</span>    <span class="c1"># version of package. Should use the PEP-386 verlib</span>
+                      <span class="c1"># conventions. Note that YAML will interpret</span>
+                      <span class="c1"># versions like 1.0 as floats, meaning that 1.0 will</span>
+                      <span class="c1"># be the same as 1. To avoid this, always put the</span>
+                      <span class="c1"># version in quotes, so that it will be interpreted</span>
+                      <span class="c1"># as a string.</span>
+
+                      <span class="c1"># The version cannot contain a dash &#39;-&#39; character.</span>
+
+<span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>
+  <span class="c1"># The source section specifies where the source code of the package is coming</span>
+  <span class="c1"># from, it may be coming from a source tarball like:</span>
+  <span class="l-Scalar-Plain">fn</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">bsdiff-1.1.14.tar.gz</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://pypi.python.org/packages/source/b/bsdiff4/bsdiff4-1.1.4.tar.gz</span>
+  <span class="l-Scalar-Plain">md5</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">29f6089290505fc1a852e176bd276c43</span>
+  <span class="l-Scalar-Plain">sha1</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">f0a2c9a30073449cfb7d171c57552f3109d93894</span>
+  <span class="l-Scalar-Plain">sha256</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5a022ff4c1d1de87232b1c70bde50afbb98212fd246be4a867d8737173cf1f8f</span>
+  <span class="c1"># or from git:</span>
+  <span class="l-Scalar-Plain">git_url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">git@github.com:ilanschnell/bsdiff4.git</span>
+  <span class="l-Scalar-Plain">git_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1.1.4</span>
+  <span class="c1"># or from hg:</span>
+  <span class="l-Scalar-Plain">hg_url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ssh://hg@bitbucket.org/ilanschnell/bsdiff4</span>
+  <span class="l-Scalar-Plain">hg_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1.1.4</span>
+  <span class="c1"># or from svn:</span>
+  <span class="l-Scalar-Plain">svn_url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://github.com/ilanschnell/bsdiff</span>
+  <span class="l-Scalar-Plain">svn_rev</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1.1.4</span>
+  <span class="l-Scalar-Plain">svn_ignore_externals</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">yes</span> <span class="c1"># (defaults to no)</span>
+
+  <span class="c1"># Patches may optionally be applied to the source</span>
+  <span class="l-Scalar-Plain">patches</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">my.patch</span>    <span class="c1"># the patch file is expected to be found in the recipe</span>
+
+<span class="c1"># Note, the source section is optional. If you want to specify a source</span>
+<span class="c1"># location locally, the easiest way is to not specify the source here, but</span>
+<span class="c1"># to just add something like</span>
+<span class="c1">#</span>
+<span class="c1"># cp -r $RECIPE_DIR/../src .</span>
+<span class="c1"># cd src</span>
+<span class="c1"># ...</span>
+<span class="c1">#</span>
+<span class="c1"># in build.sh (and similarly in bld.bat). This assumes the source is</span>
+<span class="c1"># shipped alongside the recipe in src.</span>
+
+<span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+  <span class="c1"># The build number should be incremented for new builds of the same version</span>
+  <span class="l-Scalar-Plain">number</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>       <span class="c1"># (defaults to 0)</span>
+  <span class="l-Scalar-Plain">string</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">abc</span>     <span class="c1"># (defaults to default conda build string plus the build number)</span>
+                  <span class="c1"># The build string cannot contain a dash &#39;-&#39; character</span>
+
+  <span class="c1"># Optional Python entry points</span>
+  <span class="l-Scalar-Plain">entry_points</span><span class="p-Indicator">:</span>
+    <span class="c1"># This creates an entry point named bsdiff4 that calls bsdiff4.cli.main_bsdiff4()</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">bsdiff4 = bsdiff4.cli:main_bsdiff4</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">bspatch4 = bsdiff4.cli:main_bspatch4</span>
+
+  <span class="c1"># If osx_is_app is set, entry points will use python.app instead of python in Mac OS X</span>
+  <span class="l-Scalar-Plain">osx_is_app</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">yes</span> <span class="c1"># (defaults to no)</span>
+
+  <span class="c1"># Whether binary files should be made relocatable (using</span>
+  <span class="c1"># install_name_tool on OS X or patchelf on Linux). See the &quot;making</span>
+  <span class="c1"># packages relocatable&quot; section below for more information on this.</span>
+  <span class="l-Scalar-Plain">binary_relocation</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span> <span class="c1"># (defaults to true)</span>
+
+  <span class="c1"># See the Features section below for more information on features</span>
+
+  <span class="c1"># Defines what features a package has</span>
+  <span class="l-Scalar-Plain">features</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">feature1</span>
+
+  <span class="c1"># Indicates that installing this package should enable (track) the given</span>
+  <span class="c1"># features. It is generally a good idea to use a separate metapackage to</span>
+  <span class="c1"># track a feature, which does not have the feature. See the Features</span>
+  <span class="c1"># section below for more information about features.</span>
+  <span class="l-Scalar-Plain">track_features</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">feature2</span>
+
+  <span class="c1"># Preserve the Python egg directory. This is needed for some packages</span>
+  <span class="c1"># that use setuptools specific features.</span>
+  <span class="l-Scalar-Plain">preserve_egg_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">yes</span> <span class="c1"># (default no)</span>
+
+  <span class="c1"># A regular expression describing files to not install using soft</span>
+  <span class="c1"># links. If hard links are not possible and this is set, the package</span>
+  <span class="c1"># will be installed via copying. By default all files are considered</span>
+  <span class="c1"># safe for soft linking.</span>
+  <span class="l-Scalar-Plain">no_softlink</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">(bin/path1\.py|bin/path2)</span> <span class="c1"># Don&#39;t softlink bin/path1.py or bin/path2</span>
+
+  <span class="c1"># Used instead of build.sh or bld.bat. For short build scripts, this can</span>
+  <span class="c1"># be more convenient. You may need to use selectors (see below) to use</span>
+  <span class="c1"># different scripts for different platforms.</span>
+  <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">python setup.py install</span>
+
+  <span class="c1"># Files that should have the placeholder prefix</span>
+  <span class="c1"># (/opt/anaconda1anaconda2anaconda3) replaced with the install prefix at</span>
+  <span class="c1"># installation.  Note that conda build does this automatically for the</span>
+  <span class="c1"># build prefix. See also the Relocatable section below.</span>
+  <span class="l-Scalar-Plain">has_prefix_files</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">bin/file1</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">lib/file2</span>
+
+  <span class="c1"># Binary files that should have their build prefix replaced with the</span>
+  <span class="c1"># install prefix at installation time.  Due to the way this works, the</span>
+  <span class="c1"># install prefix cannot be longer than the build prefix.  It is</span>
+  <span class="c1"># recommended to build against a very long prefix. The easiest way to do</span>
+  <span class="c1"># this is to install miniconda into a very long path.  Future versions</span>
+  <span class="c1"># of conda build may do this automatically. See also the Relocatable</span>
+  <span class="c1"># section below.</span>
+  <span class="l-Scalar-Plain">binary_has_prefix_files</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">bin/binaryfile1</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">lib/binaryfile2</span>
+
+<span class="c1"># the build and runtime requirements. Dependencies of these requirements</span>
+<span class="c1"># are included automatically.</span>
+<span class="l-Scalar-Plain">requirements</span><span class="p-Indicator">:</span>
+  <span class="c1"># Packages required to build the package. python and numpy must be</span>
+  <span class="c1"># listed explicitly if they are required.</span>
+  <span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python</span>
+  <span class="c1"># Packages required to run the package. These are the dependencies that</span>
+  <span class="c1"># will be installed automatically whenever the package is installed.</span>
+  <span class="l-Scalar-Plain">run</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">argparse</span> <span class="c1"># [py26]</span>
+
+<span class="l-Scalar-Plain">test</span><span class="p-Indicator">:</span>
+  <span class="c1"># files which are copied from the recipe into the (temporary) test</span>
+  <span class="c1"># directory which are needed during testing</span>
+  <span class="l-Scalar-Plain">files</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">test-data.txt</span>
+  <span class="c1"># in addition to the run-time requirements, you can specify requirements</span>
+  <span class="c1"># needed during testing. The run time requirements specified above are</span>
+  <span class="c1"># included automatically.</span>
+  <span class="l-Scalar-Plain">requires</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">nose</span>
+  <span class="c1"># commands we want to make sure they work, which are expected to get</span>
+  <span class="c1"># installed by the package</span>
+  <span class="l-Scalar-Plain">commands</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">bsdiff4 -h</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">bspatch4 -h</span>
+  <span class="c1"># Python imports</span>
+  <span class="l-Scalar-Plain">imports</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">bsdiff4</span>
+
+  <span class="c1"># The script run_test.py will be run automatically if it is part of the</span>
+  <span class="c1"># recipe</span>
+
+<span class="l-Scalar-Plain">about</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">home</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://github.com/ilanschnell/bsdiff4</span>
+  <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">BSD</span>
+  <span class="l-Scalar-Plain">summary</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">binary diff and patch using the BSDIFF4-format</span>
+
+<span class="c1"># If the app key is present, the package will be an app, meaning it will</span>
+<span class="c1"># appear in the Anaconda launcher.</span>
+<span class="l-Scalar-Plain">app</span><span class="p-Indicator">:</span>
+  <span class="c1"># The command that is called to launch the app</span>
+  <span class="l-Scalar-Plain">entry</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ipython notebook</span>
+  <span class="c1"># Icon file contained in the recipe</span>
+  <span class="l-Scalar-Plain">icon</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">icon_64x64.png</span>
+  <span class="l-Scalar-Plain">summary</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Summary of the package</span>
+  <span class="c1"># If own_environment is true, installing the app through the launcher</span>
+  <span class="c1"># will install into its own environment. The default is false.</span>
+  <span class="l-Scalar-Plain">own_environment</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<div class="section" id="specifying-versions-in-requirements">
+<h3>Specifying versions in requirements<a class="headerlink" href="#specifying-versions-in-requirements" title="Permalink to this headline">¶</a></h3>
+<p>The requirements versions should follow the Conda match specification. See
+<a class="reference internal" href="spec.html#build-version-spec"><em>Package Match Specifications</em></a>.</p>
+</div>
+<div class="section" id="preprocessing-selectors">
+<h3>Preprocessing selectors<a class="headerlink" href="#preprocessing-selectors" title="Permalink to this headline">¶</a></h3>
+<p>In addition, you can add selectors to any line, which are used as part of a
+preprocessing stage. Before the yaml file is read, each selector is evaluated,
+and if it is False, the line that it is on is removed.  A selector is of the
+form <tt class="docutils literal"><span class="pre">#</span> <span class="pre">[&lt;selector&gt;]</span></tt> at the end of a line.</p>
+<p>For example</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://path/to/unix/source</span>    <span class="c1"># [not win]</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://path/to/windows/source</span> <span class="c1"># [win]</span>
+</pre></div>
+</div>
+<p>A selector is just a valid Python statement, that is executed.  The following
+variables are defined. Unless otherwise stated, the variables are booleans.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">linux</span></tt></td>
+<td>True if the platform is Linux</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">linux32</span></tt></td>
+<td>True if the platform is Linux and the Python architecture is 32-bit</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">linux64</span></tt></td>
+<td>True if the platform is Linux and the Python architecture is 64-bit</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">armv6</span></tt></td>
+<td>True if the platform is Linux and the Python architecture is armv6l</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">osx</span></tt></td>
+<td>True if the platform is OS X</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">unix</span></tt></td>
+<td>True if the platform is Unix (OS X or Linux)</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">win</span></tt></td>
+<td>True if the platform is Windows</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">win32</span></tt></td>
+<td>True if the platform is Windows and the Python architecture is 32-bit</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">win64</span></tt></td>
+<td>True if the platform is Windows and the Python architecture is 64-bit</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">py</span></tt></td>
+<td>The Python version as a two digit string (like <tt class="docutils literal"><span class="pre">'27'</span></tt>). See also the
+<tt class="docutils literal"><span class="pre">CONDA_PY</span></tt> environment variable <a class="reference internal" href="#build-envs"><em>below</em></a>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">py3k</span></tt></td>
+<td>True if the Python major version is 3</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">py2k</span></tt></td>
+<td>True if the Python major version is 2</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">py26</span></tt></td>
+<td>True if the Python version is 2.6</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">py27</span></tt></td>
+<td>True if the Python version is 2.7</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">py33</span></tt></td>
+<td>True if the Python version is 3.3</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">py34</span></tt></td>
+<td>True if the Python version is 3.4</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">np</span></tt></td>
+<td>The NumPy version as a two digit string (like <tt class="docutils literal"><span class="pre">'17'</span></tt>).  See also the
+<tt class="docutils literal"><span class="pre">CONDA_NPY</span></tt> environment variable <a class="reference internal" href="#build-envs"><em>below</em></a>.</td>
+</tr>
+</tbody>
+</table>
+<p>Because the selector is any valid Python expression, complicated logic is
+possible.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://path/to/windows/source</span>      <span class="c1"># [win]</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://path/to/python2/unix/source</span> <span class="c1"># [unix and py2k]</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://path/to/python3/unix/source</span> <span class="c1"># [unix and py3k]</span>
+</pre></div>
+</div>
+<p>Note that the selectors delete only they line that they are on, so you may
+need to put the same selector on multiple lines.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://path/to/windows/source</span>     <span class="c1"># [win]</span>
+  <span class="l-Scalar-Plain">md5</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">30fbf531409a18a48b1be249052e242a</span>  <span class="c1"># [win]</span>
+  <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://path/to/unix/source</span>        <span class="c1"># [unix]</span>
+  <span class="l-Scalar-Plain">md5</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">88510902197cba0d1ab4791e0f41a66e</span>  <span class="c1"># [unix]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="environment-variables-set-during-the-build-process">
+<h2>Environment variables set during the build process<a class="headerlink" href="#environment-variables-set-during-the-build-process" title="Permalink to this headline">¶</a></h2>
+<p>The following environment variables are set, both on Unix (<tt class="docutils literal"><span class="pre">build.sh</span></tt>) and on
+Windows (<tt class="docutils literal"><span class="pre">bld.bat</span></tt>) during the build process:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">ARCH</span></tt></td>
+<td>Either <tt class="docutils literal"><span class="pre">32</span></tt> or <tt class="docutils literal"><span class="pre">64</span></tt>, to specify whether the build is 32-bit or
+64-bit.  The value depends on the <tt class="docutils literal"><span class="pre">ARCH</span></tt> environment variable, and
+defaults to the architecture the interpreter running conda was
+compiled with.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">CONDA_BUILD=1</span></tt></td>
+<td>Always set.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">SRC_DIR</span></tt></td>
+<td>Path to where source is unpacked (or cloned). If the source file is not
+a recognized file type (right now, <tt class="docutils literal"><span class="pre">.zip</span></tt>, <tt class="docutils literal"><span class="pre">.tar</span></tt>, <tt class="docutils literal"><span class="pre">.tar.bz2</span></tt>,
+<tt class="docutils literal"><span class="pre">.tar.xz</span></tt>, and <tt class="docutils literal"><span class="pre">.tar</span></tt>), this is a directory containing a copy of the
+source file.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">PREFIX</span></tt></td>
+<td>Build prefix where build script should install to.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">RECIPE_DIR</span></tt></td>
+<td>Directory of recipe.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">PKG_NAME</span></tt></td>
+<td>Name of the package being built.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">PKG_VERSION</span></tt></td>
+<td>Version of the package being built.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">PKG_BUILDNUM</span></tt></td>
+<td>Build number of the package being built.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">PATH</span></tt></td>
+<td>Prepended by the build prefix bin directory.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">PYTHON</span></tt></td>
+<td>Path to python executable in build prefix (note that python is only
+installed in the build prefix when it is listed as a build requirement).</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">PY3K</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">1</span></tt> when Python 3 is installed in build prefix, else <tt class="docutils literal"><span class="pre">0</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">STDLIB_DIR</span></tt></td>
+<td>Python standard library location</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">SP_DIR</span></tt></td>
+<td>Python&#8217;s site-packages location</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">PY_VER</span></tt></td>
+<td>Python version building against</td>
+</tr>
+</tbody>
+</table>
+<p>When building &#8220;unix-style&#8221; packages on Windows, which are then usually
+statically linked to executables, we do this in a special <em>Library</em> directory
+under the build prefix.  The following environment variables are only
+defined in Windows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">LIBRARY_PREFIX</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;\Library</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">LIBRARY_BIN</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;\Library\bin</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">LIBRARY_INC</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;\Library\include</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">LIBRARY_LIB</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;\Library\lib</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">SCRIPTS</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;\Scripts</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>On non-Windows (Linux and Mac OS X), we have:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">PKG_CONFIG_PATH</span></tt></td>
+<td>Path to <tt class="docutils literal"><span class="pre">pkgconfig</span></tt> directory.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">HOME</span></tt></td>
+<td>Standard <tt class="docutils literal"><span class="pre">$HOME</span></tt> environment variable.</td>
+</tr>
+</tbody>
+</table>
+<p>On Mac OS X, we have:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">OSX_ARCH</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">i386</span></tt> or <tt class="docutils literal"><span class="pre">x86_64</span></tt>, depending on Python build</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">CFLAGS</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">-arch</span></tt> flag.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">CXXFLAGS</span></tt></td>
+<td>Same as <tt class="docutils literal"><span class="pre">CFLAGS</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">LDFLAGS</span></tt></td>
+<td>Same as <tt class="docutils literal"><span class="pre">CFLAGS</span></tt>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">MACOSX_DEPLOYMENT_TARGET</span></tt></td>
+<td>Same as the Anaconda Python. Currently <tt class="docutils literal"><span class="pre">10.5</span></tt>.</td>
+</tr>
+</tbody>
+</table>
+<p>On Linux, we have:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">LD_RUN_PATH</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;/lib</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>When the source is a git repository, the following variables are defined:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">GIT_DESCRIBE_TAG</span></tt></td>
+<td>string denoting the most recent tag from the current commit (based on
+the output of <tt class="docutils literal"><span class="pre">git</span> <span class="pre">describe</span> <span class="pre">--tags</span></tt>)</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">GIT_DESCRIBE_NUMBER</span></tt></td>
+<td>string denoting the number of commits since the most recent tag</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">GIT_DESCRIBE_HASH</span></tt></td>
+<td>the current commit short-hash as displayed from <tt class="docutils literal"><span class="pre">git</span> <span class="pre">describe</span> <span class="pre">--tags</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">GIT_BUILD_STR</span></tt></td>
+<td>a string that joins <tt class="docutils literal"><span class="pre">GIT_DESCRIBE_NUMBER</span></tt> and <tt class="docutils literal"><span class="pre">GIT_DESCRIBE_HASH</span></tt>
+by an underscore.</td>
+</tr>
+</tbody>
+</table>
+<p>These can be used in conjunction with templated meta.yaml files to set things
+like the build string based on the state of the git repository.</p>
+<p>For example, here&#8217;s a meta.yaml that would work with these values. In this
+example, the recipe is included at the base directory of the git repository,
+so the <tt class="docutils literal"><span class="pre">git_url</span></tt> is <tt class="docutils literal"><span class="pre">../</span></tt>:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">package</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">mypkg</span>
+  <span class="l-Scalar-Plain">version</span><span class="p-Indicator">:</span> <span class="p-Indicator">{{</span> <span class="nv">environ</span><span class="p-Indicator">[</span><span class="s">&#39;GIT_DESCRIBE_TAG&#39;</span><span class="p-Indicator">]</span> <span class="p-Indicator">}}</span>
+
+<span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">number</span><span class="p-Indicator">:</span> <span class="p-Indicator">{{</span> <span class="nv">environ.get(&#39;GIT_DESCRIBE_NUMBER&#39;</span><span class="p-Indicator">,</span> <span class="nv">0)</span> <span class="p-Indicator">}}</span>
+
+  <span class="c1"># Note that this will override the default build string with the Python</span>
+  <span class="c1"># and NumPy versions</span>
+  <span class="l-Scalar-Plain">string</span><span class="p-Indicator">:</span> <span class="p-Indicator">{{</span> <span class="nv">environ.get(&#39;GIT_BUILD_STR&#39;</span><span class="p-Indicator">,</span> <span class="s">&#39;&#39;</span><span class="nv">)</span> <span class="p-Indicator">}}</span>
+
+<span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">git_url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">../</span>
+</pre></div>
+</div>
+<p>All of the above environment variables are also set during the test process,
+except with the test prefix instead of the build prefix everywhere.</p>
+<p>Note that build.sh is run with <tt class="docutils literal"><span class="pre">bash</span> <span class="pre">-x</span> <span class="pre">-e</span></tt> (the <tt class="docutils literal"><span class="pre">-x</span></tt> makes it echos each
+command that is run, and the <tt class="docutils literal"><span class="pre">-e</span></tt> makes it exit whenever a command in the
+script returns nonzero exit status).  You can revert this in the script if you
+need to by using the <tt class="docutils literal"><span class="pre">set</span></tt> command.</p>
+</div>
+<div class="section" id="environment-variables-that-affect-the-build-process">
+<span id="build-envs"></span><h2>Environment variables that affect the build process<a class="headerlink" href="#environment-variables-that-affect-the-build-process" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">CONDA_PY</span></tt></td>
+<td>Should be <tt class="docutils literal"><span class="pre">26</span></tt>, <tt class="docutils literal"><span class="pre">27</span></tt>, <tt class="docutils literal"><span class="pre">33</span></tt>, or <tt class="docutils literal"><span class="pre">34</span></tt>.  This is the Python version
+used to build the package.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">CONDA_NPY</span></tt></td>
+<td>Should be either <tt class="docutils literal"><span class="pre">16</span></tt> or <tt class="docutils literal"><span class="pre">17</span></tt>.  This is the NumPy version used to
+build the package.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pre-post-link-unlink-scripts">
+<h2>Pre/Post link/unlink scripts<a class="headerlink" href="#pre-post-link-unlink-scripts" title="Permalink to this headline">¶</a></h2>
+<p>You can add scripts <cite>pre-link.sh</cite>, <cite>post-link.sh</cite>, or <cite>pre-unlink.sh</cite> (or
+<cite>.bat</cite> for Windows) to the recipe, which will be run before the package is
+installed, after it is installed, and before it is removed, respectively. If
+these scripts exit nonzero the installation/removal will fail.</p>
+<p>Environment variables are set in these scripts:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">PREFIX</span></tt></td>
+<td>The install prefix.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">PKG_NAME</span></tt></td>
+<td>The name of the package.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">PKG_VERSION</span></tt></td>
+<td>The version of the package.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">PKG_BUILDNUM</span></tt></td>
+<td>The build number of the package.</td>
+</tr>
+</tbody>
+</table>
+<p>No output is shown from the build script, but it may write to
+<tt class="docutils literal"><span class="pre">$PREFIX/.messages.txt</span></tt>, which is shown after conda completes all actions.</p>
+</div>
+<div class="section" id="post-build-version">
+<h2>Post-build version<a class="headerlink" href="#post-build-version" title="Permalink to this headline">¶</a></h2>
+<p>In some cases, you may not know the version, build number, or build string of
+the package until after it is built. In this case, you can write files named
+<tt class="docutils literal"><span class="pre">__conda_version__.txt</span></tt>, <tt class="docutils literal"><span class="pre">__conda_buildnum__.txt</span></tt>, or
+<tt class="docutils literal"><span class="pre">__conda_buildstr__.txt</span></tt> to the source directory, and the contents of the
+file will be used as the version, build number, or build string, respectively
+(and the respective metadata from the <tt class="docutils literal"><span class="pre">meta.yaml</span></tt> will be ignored).</p>
+</div>
+<div class="section" id="features">
+<span id="id1"></span><h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<p>Features are a way to track differences in two packages that have the same
+name and version.  For example, a feature might indicate a specialized
+compiler or runtime, or a fork of a package. The canonical example of a
+feature is the <tt class="docutils literal"><span class="pre">mkl</span></tt> feature in Anaconda Accelerate. Packages that are
+compiled against MKL, such as NumPy, have the <tt class="docutils literal"><span class="pre">mkl</span></tt> feature set.  The
+<tt class="docutils literal"><span class="pre">mkl</span></tt> metapackage has the <tt class="docutils literal"><span class="pre">mkl</span></tt> feature set in <tt class="docutils literal"><span class="pre">track_features</span></tt>, so that
+installing it installs the <tt class="docutils literal"><span class="pre">mkl</span></tt> feature (the fact that the name of this
+metapackage matches the name of the feature is a coincidence).</p>
+<p>Features should be thought of as features of the environment the package is
+installed into, not the package itself. The reason is that when a feature is
+installed, conda will automatically change to a package with that feature if
+it exists, for instance, when the <tt class="docutils literal"><span class="pre">mkl</span></tt> feature is installed, regular
+<tt class="docutils literal"><span class="pre">numpy</span></tt> is removed and the <tt class="docutils literal"><span class="pre">numpy</span></tt> package with the <tt class="docutils literal"><span class="pre">mkl</span></tt> feature is
+installed.  Enabling a feature does not install any packages that are not
+already installed, but it all future packages with that feature that are
+installed into that environment will be preferred.</p>
+<p>Feature names are independent of package names&#8212;it is a coincidence that
+<tt class="docutils literal"><span class="pre">mkl</span></tt> is both the name of a package and the feature that it tracks.</p>
+<p>To install a feature, install a package that tracks it. To remove a feature,
+use <tt class="docutils literal"><span class="pre">conda</span> <span class="pre">remove</span> <span class="pre">--features</span></tt>.</p>
+<p>It&#8217;s a good idea to create a metapackage for <tt class="docutils literal"><span class="pre">track_features</span></tt>.  If you add
+<tt class="docutils literal"><span class="pre">track_features</span></tt> to a package that also has versions without that feature,
+then the versions without that feature will never be selected, because conda
+will always add the feature when it is installed from the <tt class="docutils literal"><span class="pre">track_features</span></tt>
+specification if your package with the feature.</p>
+<p>Instead, it is a good idea to create a separate metapackage. For instance, if
+you want to create some packages with the feature <tt class="docutils literal"><span class="pre">debug</span></tt>, you would create
+several packages with</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">features</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">debug</span>
+</pre></div>
+</div>
+<p>and then create a special metapackage</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">package</span><span class="p-Indicator">:</span>
+  <span class="c1"># This name doesn&#39;t have to be the same as the feature, but can avoid confusion if it is</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">debug</span>
+  <span class="c1"># This need not relate to the version of any of the packages with the</span>
+  <span class="c1"># feature. It is just a version for this metapackage.</span>
+  <span class="l-Scalar-Plain">version</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1.0</span>
+
+<span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">track_features</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">debug</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-packages-relocatable">
+<span id="relocatable"></span><h2>Making Packages Relocatable<a class="headerlink" href="#making-packages-relocatable" title="Permalink to this headline">¶</a></h2>
+<p>Often, the most difficult thing about building a conda package is making it
+relocatable.  Relocatable means that the package can be installed into any
+prefix.  Otherwise, the package would only be usable in the same environment
+in which it was built.</p>
+<p>Conda build does the following things automatically to make packages relocatable:</p>
+<ul class="simple">
+<li>Binary object files are converted to use relative paths using
+<tt class="docutils literal"><span class="pre">install_name_tool</span></tt> on Mac OS X and <tt class="docutils literal"><span class="pre">patchelf</span></tt> on Linux.</li>
+<li>The build prefix is replaced in any text (non-binary) file with the prefix
+placeholder, <tt class="docutils literal"><span class="pre">/opt/anaconda1anaconda2anaconda3</span></tt>, and the file is added to
+the <tt class="docutils literal"><span class="pre">has_prefix</span></tt> file in the package metadata.  When conda installs the
+package, the placeholder prefix is replaced with the install prefix in all
+files in <tt class="docutils literal"><span class="pre">info/has_prefix</span></tt>.  See <a class="reference internal" href="spec.html#package-metadata"><em>Package metadata</em></a> for more
+information.</li>
+<li>You can manually add text files to <tt class="docutils literal"><span class="pre">has_prefix</span></tt> by listing them in
+<tt class="docutils literal"><span class="pre">build/has_prefix_files</span></tt> in the meta.yaml (see above).  The files listed
+here should have the placeholder prefix
+(<tt class="docutils literal"><span class="pre">/opt/anaconda1anaconda2anaconda3</span></tt>).</li>
+<li>You can manually add binary files to <tt class="docutils literal"><span class="pre">has_prefix</span></tt> by listing them in
+<tt class="docutils literal"><span class="pre">build/binary_has_prefix_files</span></tt> in the meta.yaml (see above).  The files
+listed here will have their build prefix replaced with the install prefix at
+install time.  This works by padding the build prefix with null terminators,
+so that the length of the binary file remains the same.  Due to this, the
+install prefix must be shorter than the build prefix.  When
+<tt class="docutils literal"><span class="pre">binary_has_prefix_files</span></tt> is used, conda will automatically build against
+a prefix that 100 characters long (by adding <tt class="docutils literal"><span class="pre">_</span></tt>&#8216;s to the end of the build
+directory name).</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build_tutorials.html" class="btn btn-neutral float-right" title="Build tutorials">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="config.html" class="btn btn-neutral" title="Configuration"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Continuum Analytics.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
