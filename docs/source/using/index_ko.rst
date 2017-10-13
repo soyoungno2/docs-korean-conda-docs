@@ -3,7 +3,7 @@
 
 .. toctree::
 
-   using
+   using_ko
    envs_ko
    /py2or3_ko
    pkgs_ko
