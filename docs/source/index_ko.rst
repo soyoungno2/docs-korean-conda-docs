@@ -32,7 +32,6 @@ conda install 커맨드를 사용해 720 여개의 과학 연구용 패키지와
 .. toctree::
    :hidden:
 
-   announcements_ko
    get-started_ko
    using/index_ko
    building/build_ko
