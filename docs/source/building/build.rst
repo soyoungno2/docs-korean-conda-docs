@@ -1,13 +1,6 @@
-Building packages
-=================
+Conda build recipe reference
+============================
 
-.. toctree::
-   :maxdepth: 1
+.. raw:: html
 
-   /build_tutorials
-   bpp
-   shared-libraries
-   /custom-channels
-   /signed-packages
-   /bdist_conda
-   sample-recipes
+        <html><head><meta http-equiv="refresh" content="0; URL='building/recipe.html'" /></head><body></body></html>
