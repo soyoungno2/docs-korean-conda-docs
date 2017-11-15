@@ -111,9 +111,9 @@ modindex_common_prefix = ['conda.']
 html_theme = "sphinx_rtd_theme"
 
 html_context = {
-    'github_user': 'conda',
-    'github_repo': 'conda-docs',
-    'github_version': 'master/',
+    'github_user': 'VeranosTech',
+    'github_repo': 'docs-korean-conda',
+    'github_version': 'docs-korean/',
     'display_github': True,
     'conf_py_path': 'docs/source/',
     'source_suffix': '.rst',
