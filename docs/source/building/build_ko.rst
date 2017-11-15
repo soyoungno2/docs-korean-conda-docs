@@ -1,6 +1,6 @@
-콘다 빌드 래시피 레퍼런스
-============================
+빌드
+=======
 
 .. raw:: html
 
-        <html><head><meta http-equiv="refresh" content="0; URL='building/recipe.html'" /></head><body></body></html>
+        <html><head><meta http-equiv="refresh" content="0; URL='user-guide/tasks/build-packages/recipe.html'" /></head><body></body></html>
