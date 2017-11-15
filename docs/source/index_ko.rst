@@ -25,7 +25,7 @@
 
 디폴트 설정에서는 콘다를 사용하여 아나콘다\ |reg|\ 사에서 관리하는 repo.continuum.io 로부터 이미 빌드된 수천개의 패키지를 설치하거나 관리할 수 있다.
 
-콘다는 트래비스 CI나 AppVeyor같은 연속통합(CI) 시스템과 결합하여 코드 테스팅을 자동화할 수 있다.
+콘다는 트래비스 CI(Travis CI)나 앱베이어(AppVeyor)와 같은 지속적 통합(CI) 시스템과 결합하여 빈번한 코드 테스팅을 자동화할 수 있다.
 
 콘다 패키지/환경 관리자는 모든 버전의 :ref:`아나콘다 <anaconda-glossary>`\ |reg|,
 :ref:`미니콘다 <miniconda-glossary>`, 그리고 `아나콘다 레포지토리 <https://docs.continuum.io/anaconda-repository/>`_\ 에 포함되어 있다.
