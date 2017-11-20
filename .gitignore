@@ -1,8 +1,8 @@
 *~
+build/
 docs/source/commands/
 *.swp
 __pycache__
 .idea  # Pycharm
 env
 *.pyc
-.DS_Store
