@@ -37,7 +37,7 @@
    :hidden:
    :maxdepth: 1
 
-   user-guide/index
+   user-guide/index_ko
    help-support
    release-notes
    commands
