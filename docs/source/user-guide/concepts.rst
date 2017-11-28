@@ -1,5 +1,5 @@
 =========
-개념
+Concepts
 =========
 
 .. contents::
@@ -7,16 +7,16 @@
    :depth: 1
 
 
-콘다 디렉토리 구조
+Conda directory structure
 =========================
 
-이 절은 콘다 시스템의 디렉토리 구조에 대해 설명한다.
+This section describes the conda system directory structure.
 
 **ROOT_DIR**
 
-아나콘다(Anaconda)나 미니콘다(Miniconda)가 설치되는 디렉토리다.
+The directory that Anaconda or Miniconda was installed into.
 
-예:
+EXAMPLES:
 
 .. code-block:: none
 
@@ -25,15 +25,18 @@
 
 */pkgs*
 
-PKGS_DIR\ 라고도 한다. 
-이 디렉토리에는 콘다 환경에 연결할 수 있는 패키지가 압축되어 있다.
-각 패키지는 패키지의 표준 이름(canonical name)과 같은 이름의 하위 디렉토리에 있다.
+Also referred to as PKGS_DIR. This directory contains
+decompressed packages, ready to be linked in conda environments.
+Each package resides in a subdirectory corresponding to its
+canonical name.
 
 */envs*
 
-추가로 생성한 콘다 환경이 만들어지는 시스템 디렉토리다.
+The system location for additional conda environments to be
+created.
 
-아나콘다 환경은 기본적으로 다음과 같은 하위 디렉토리로 구성된다. 
+The following subdirectories comprise the default Anaconda
+environment:
 
 | ``/bin``
 | ``/include``
@@ -41,49 +44,63 @@ PKGS_DIR\ 라고도 한다.
 | ``/share``
 |
 
-다른 콘다 환경도 보통 이와 같은 하위 디렉토리를 가진다.
-
+Other conda environments usually contain the same subdirectories
+as the default environment.
 
 .. _concept-conda-env:
 
-
-콘다 환경
+Conda environments
 ==================
 
-콘다 환경(conda environment)은 사용자가 지정한 특정 패키지 모음을 가지는 디렉토리다.
-예를 들어, Numpy 1.7과 그 의존 요소를 포함하는 환경과 레거시 테스트를 위해 Numpy1.6을 포함하는 환경이 있다고 하자. 
-하나의 환경을 수정해도 다른 환경은 영향을 받지 않는다.
-환경을 활성화(activate)하거나 비활성화(deactivate)함으로써 쉽게 환경을 바꿀 수 있다.
-``environment.yaml`` 파일의 복사본을 사용하여 다른 사용자와 환경을 쉽게 공유할 수도 있다.
-보다 자세한 정보는 :doc:`tasks/manage-environments_ko`\ 에 있다.
+A conda environment is a directory that contains a specific
+collection of conda packages that you have installed. For
+example, you may have one environment with NumPy 1.7 and its
+dependencies, and another environment with NumPy 1.6 for legacy
+testing. If you change one environment, your other environments
+are not affected. You can easily activate or deactivate
+environments, which is how you switch between them. You can also
+share your environment with someone by giving them a copy of your
+``environment.yaml`` file. For more information, see
+:doc:`tasks/manage-environments`.
 
 
 .. _concept-conda-package:
 
-콘다 패키지
+Conda packages
 ==============
 
-콘다 패키지는 시스템 레벨 라이브러리, 파이썬이나 그 외 모듈, 실행 가능한 프로그램과 기타 구성 요소가 포함된 타르볼(tarball) 압축파일이다.
-콘다는 패키지와 플랫폼 간의 의존 요소를 추적한다.
+A conda package is a compressed tarball file that contains
+system-level libraries, Python or other modules, executable
+programs and other components. Conda keeps track of the
+dependencies between packages and platforms.
 
-콘다 패키지는 해당 패키지를 포함하는 디렉토리 URL인 원격 채널(remote channel)에서 내려받는다.
-``conda`` 명령어는 디폴트 채널 집합을 검색한다. 
-패키지는 http://repo.continuum.io/pkgs/ 로부터 자동으로 내려닫거나 업데이트한다.
-패키지를 검색할 원격 채널을 변경할 수도 있다. 
-이런 방식으로 개인(private) 채널이나 내부(internal) 채널을 관리하는 것도 가능하다.
-자세한 정보는 :ref:`config-channels`\ 과 :doc:`tasks/manage-pkgs_ko`\ 를 참고한다.
+Conda packages are downloaded from remote channels, which are
+URLs to directories containing conda packages. The ``conda``
+command searches a default set of channels, and packages are
+automatically downloaded and updated from
+http://repo.continuum.io/pkgs/. You can modify what remote
+channels are automatically searched. You might want to do this to
+maintain a private or internal channel. For details, see
+:ref:`config-channels`. See also :doc:`tasks/manage-pkgs`.
 
-콘다 패키지의 형식은 모든 플랫폼과 운영체제에서 동일하다.
+The conda package format is identical across platforms and
+operating systems.
 
-터미널이나 아나콘다 프롬프트에서 다음을 실행해 콘다 패키지를 설치한다. ::
+To install conda packages, in the Terminal or an Anaconda Prompt, run:: 
 
   conda install [packagename]
 
-주의: (위 명령에서) ``[packagename]``\ 를 설치하고자 하는 패키지 이름으로 바꾼다.
+NOTE: Replace ``[packagename]`` with the desired package name.
 
-콘다 패키지에는 ".tar.bz2" 확장자로 가지는 bzip 압축 타르(tar) 저장소(archive) 파일에 대한 링크가 포함된다.
-저장소 파일에는 ``info/`` 디렉토리에 복사되는 메타데이터와 ``install`` 접두어로 지정한 디렉토리에 설치될 파일들을 포함한다.
+A conda package includes a link to a tarball or bzipped tar
+archive, with the extension ".tar.bz2", which contains metadata
+under the ``info/`` directory and a collection of files that are
+installed directly into an ``install`` prefix.
 
-설치 과정에서 압축해제된 파일들은 ``info/`` 디렉토리로 복사되거나 ``install`` 접두어로 지정한 디렉토리에 복사된다.
-콘다 패키지 파일을 콘다 환경에 설치하는 것은 해당 환경에 대한 디렉토리로 이동해 zip 파일과 의존 요소를 다운로드하고 압축을 푸는 것으로 생각할 수 있다. 
-이 과정이 ``conda install [packagename]`` 명령어 하나로 실행된다.
+During the install process, files are extracted into the
+``install`` prefix, except for files in the ``info/``
+directory. Installing the files of a conda package into an
+environment can be thought of as changing the directory to an
+environment, and then downloading and extracting the .zip file
+and its dependencies---all with the single
+``conda install [packagename]`` command.
