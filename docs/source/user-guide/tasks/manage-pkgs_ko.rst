@@ -1,64 +1,57 @@
 =================
-Managing packages
+패키지 관리
 =================
 
 .. contents::
    :local:
    :depth: 1
 
-NOTE: There are many options available for the commands described
-on this page. For details, see :doc:`../../commands`.
+주의: 이 문서에서 다루는 명령에 사용 가능한 많은 옵션들이 있다. 보다 자세한 정보는 :doc:`../../commands_ko`\ 에 있다.
 
 
-Searching for packages
+패키지 검색하기
 =======================
 
-Use the Terminal or an Anaconda Prompt for the following steps.
+터미널이나 아나콘다 프롬프트에서 다음 단계를 따라 진행한다.
 
-To see if a specific package such as SciPy is available for
-installation:
+사이파이(Scipy)와 같은 특정한 패키지가 설치 가능한지 확인하기 위해 다음을 실행한다.
 
 .. code-block:: bash
 
    conda search scipy
 
-To see if a specific package such as SciPy is available for
-installation from Anaconda.org:
+사이파이가 Anaconda.org 를 통해 설치 가능한지 확인하기 위해 다음을 실행한다.
 
 .. code-block:: bash
 
    conda search --override-channels --channel defaults scipy
 
-To see if a specific package, such as iminuit, exists in a
-specific channel, such as http://conda.anaconda.org/mutirri,
-and is available for installation:
+이미뉴잇(iminuit)과 같은 특정한 패키지가 http://conda.anaconda.org/mutirri 와 같은 특정 채널에 있고
+이 채널을 통해 설치 가능한지 확인하기 위해 다음을 실행한다.
 
 .. code-block:: bash
 
    conda search --override-channels --channel http://conda.anaconda.org/mutirri iminuit
 
 
-Installing packages
+패키지 설치하기
 ===================
 
-Use the Terminal or an Anaconda Prompt for the following steps.
+터미널이나 아나콘다 프롬프트에서 다음 단계를 따라 진행한다.
 
-To install a specific package such as SciPy into an existing
-environment "myenv":
+다음 명령으로 사이파이(Scipy)와 같은 특정한 패키지를 기존 콘다 환경 "myenv"에 설치한다.
 
 .. code-block:: bash
 
    conda install --name myenv scipy
 
-If you do not specify the environment name, which in this
-example is done by ``--name myenv``, the package installs
-into the current environment:
+이번 예시의 ``--name myenv`` 옵션과 같이 환경 이름을 지정하지 않으면 패키지는 현재 환경에 설치된다.
 
 .. code-block:: bash
 
    conda install scipy
 
-To install a specific version of a package such as SciPy:
+다음 명령으로 특정한 버전의 사이파이를 설치한다.
 
 .. code-block:: bash
 
@@ -66,193 +59,166 @@ To install a specific version of a package such as SciPy:
 
 .. _`installing multiple packages`:
 
-To install multiple packages at once, such as SciPy and cURL:
+다음 명령으로 사이파이와 씨유알엘(cURL)과 같은 복수의 패키지를 한번에 설치한다.
 
 .. code-block:: bash
 
    conda install scipy curl
 
-NOTE: It is best to install all packages at once, so that all of
-the dependencies are installed at the same time.
+주의: 모든 패키지를 한번에 설치하여 모든 의존 요소가 동시에 설치되게 하는 것이 가장 좋다.
 
-To install multiple packages at once and specify the version of
-the package:
+다음 명령으로 특정 버전으로 지정된 복수의 패키지를 한번에 설치한다.
 
 .. code-block:: bash
 
    conda install scipy=0.15.0 curl=7.26.0
 
-To install a package for a specific Python version:
+다음 명령으로 특정 버전의 파이썬 환경을 위한 패키지를 설치한다.
 
 .. code-block:: bash
 
    conda install scipy=0.15.0 curl=7.26.0 -n py34_env
 
-If you want to use a specific Python version, it is best to use
-an environment with that version. For more information,
-see :doc:`../troubleshooting`.
+특정한 버전의 파이썬을 사용하는 가장 좋은 방법은 그 버전을 포함하는 환경을 사용하는 것이다.
+더 자세한 정보는 :doc:`../troubleshooting_ko`\ 에 있다.
 
 
-Installing packages from Anaconda.org
-=======================================
+Anaconda.org에서 패키지를 받아서 설치하기
+===============================================
 
-Packages that are not available using conda install can be
-obtained from Anaconda.org. Formerly Binstar.org, Anaconda.org,
-is a package management service for both public and private
-package repositories. Anaconda.org is an Anaconda
-product, just like Anaconda and Miniconda.
+콘다를 사용해 설치할 수 없는 패키지를 Anaconda.org에서 받을 수 있다.
+이전에는 Binstar.org였던 Anaconda.org는 개인/공공 패키지 레포지토리를 위한 패키지 관리 서비스다.
+아나콘다(Anaconda)나 미니콘다(Miniconda)와 같이 Anaconda.org는 아나콘다사의 제품이다.
 
-To install a package from Anaconda.org:
+Anaconda.org에서 패키지를 받아서 설치하기 위해 다음을 진행한다.
 
-#. In a browser, go to http://anaconda.org.
+#. 브라우저에서 http://anaconda.org\ 로 들어간다.
 
-#. To find the package named bottleneck, type ``bottleneck``
-   in the top-left box named Search Packages.
+#. bottleneck이라는 이름의 패키지를 찾기 위해 페이지 상단에 Search Packages 박스에 ``bottleneck``\ 을 입력한다.
 
-#. Find the package that you want and click it to go to the
-   detail page.
+#. 원하는 패키지를 찾아 클릭하여 세부사항 페이지로 들어간다.
 
-   The detail page displays the name of the channel. In this
-   example it is the "pandas" channel.
+   세부사항 페이지에 채널의 이름이 나타난다. 이번 예시의 채널 이름은 "pandas"다.
 
-#. Now that you know the channel name, use the ``conda install``
-   command to install the package. In your Terminal window or an Anaconda Prompt,
-   run:
+#. 채널 이름을 알게 되면 터미널이나 아나콘다 프롬프트에서 ``conda install`` 명령을 사용해 패키지를 설치한다.
 
    .. code::
 
       conda install -c pandas bottleneck
 
-   This command tells conda to install the bottleneck package
-   from the pandas channel on Anaconda.org.
+   이 명령으로 콘다는 Anaconda.org의 pandas 채널로부터 bottleneck 패키지를 설치한다.
 
-#. To check that the package is installed, in your Terminal window or an Anaconda Prompt,
-   run:
+#. 터미널이나 아나콘다 프롬프트에서 다음을 실행해 패키지가 설치되었는지 확인한다.
 
    .. code::
 
       conda list
 
-   A list of packages appears, including bottleneck.
+   bottleneck을 포함한 패키지 목록이 나타난다.
 
-NOTE: For information on installing packages from multiple
-channels, see :doc:`manage-channels`.
+주의: 복수의 채널로부터 패키지를 설치하는 방법은 :doc:`manage-channels_ko`\ 를 보자.
 
 
-Installing non-conda packages
-=============================
+콘다 패키지가 아닌 패키지 설치하기
+====================================================
 
-If a package is not available from conda or Anaconda.org,
-you may be able to find and install the package with another
-package manager like pip.
+콘다나 Anaconda.org로부터 설치할 수 없는 패키지는 pip와 같은 다른 패키지 관리자로
+패키지를 찾고 설치할 수 있다.
 
-NOTE: Both pip and conda are included in Anaconda and Miniconda,
-so you do not need to install them separately.
+주의: pip와 콘다 모두 아나콘다와 미니콘다에 포함되어 있기 때문에 별도로 설치하지 않아도 된다.
 
-NOTE: Conda environments replace virtualenv, so there is no need
-to activate a virtualenv before using pip.
+주의: 콘다 환경은 virtualenv를 대체하므로 pip를 사용하기 전에 virtualenv를 활성화하지 않아도 된다.
 
-To install a non-conda package:
+다음 단계를 따라 콘다 패키지가 아닌 패키지를 설치한다.
 
-#. Activate the environment where you want to put the program:
+#. 프로그램을 설치할 환경을 활성화한다.
 
-   * On Windows, in your Anaconda Prompt, run ``activate myenv``.
-   * On macOS and Linux,in your Terminal window, run ``source activate myenv``.
+   * 윈도우: 아나콘다 프롬프트에서 ``activate myenv``\ 를 실행한다.
+   * 리눅스, 맥OS: 터미널에서 ``source activate myenv``\ 를 실행한다.
 
-#. To use pip to install a program such as See, in your Terminal window or an Anaconda Prompt,
-   run::
+#. pip를 사용해 see와 같은 프로그램을 설치하기 위해 터미널이나 아나콘다 프롬프트에서 다음을 실행한다. ::
 
      pip install see
 
-#. To verify the package was installed, in your Terminal window or an Anaconda Prompt,
-   run:
+#. 패키지가 설치되었는지 확인하기 위해 터미널이나 아나콘다 프롬프트에서 다음을 실행한다.
 
    .. code::
 
       conda list
 
 
-Installing commercial packages
+상용 패키지 설치하기
 ==============================
 
-Installing a commercial package such as IOPro is the same as
-installing any other package. In your Terminal window or an Anaconda Prompt,
-run:
+IOPro와 같은 상용 패키지도 다른 패키지와 같은 방법으로 설치한다.
 
 .. code-block:: bash
 
    conda install --name myenv iopro
 
-This command installs a free trial of one of Anaconda's
-commercial packages called `IOPro
-<https://docs.continuum.io/iopro/>`_, which can speed up your
-Python processing. Except for academic use, this free trial
-expires after 30 days.
+이 커맨드는 아나콘다의 상용패키지 `IOPro <https://docs.continuum.io/iopro/>`_\ 의 체험판을 설치한다.
+IOPro는 파이썬 처리 속도를 향상시킨다. 학술적 목적이 아닌 경우, 이 체험판은 30일 이후에 만료된다.
 
 
-Viewing a list of installed packages
+설치된 패키지 목록 보기
 ====================================
 
-Use the Terminal or an Anaconda Prompt for the following steps.
+터미널이나 아나콘다 프롬프트에서 다음 단계를 따라 진행한다.
 
-To list all of the packages in the active environment:
+다음을 실행해 현재 활성화된 환경에 설치된 패키지를 나열한다.
 
 .. code::
 
    conda list
 
-To list all of the packages in a deactivated environment:
+다음을 실행해 비활성화된 환경에 설치된 패키지 목록을 나열한다. 여기에서는 myenv 환경에 설치된 패키지들이 나열된다.
 
 .. code::
 
    conda list -n myenv
 
 
-Updating packages
-=================
+패키지 업데이트하기
+====================
 
-Use ``conda update`` command to check to see if a new update is
-available. If conda tells you an update is available, you can
-then choose whether or not to install it.
+``conda update`` 명령으로 새로운 업데이트가 가능한지 확인한다.
+업데이트가 있다고 나타나면 이를 설치할지 결정할 수 있다.
 
-Use the Terminal or an Anaconda Prompt for the following steps.
+터미널이나 아나콘다 프롬프트에서 다음 단계를 따라 진행한다.
 
-To update a specific package:
+다음을 실행해 특정한 패키지를 업데이트한다. 여기에서는 biopython을 업데이트한다.
 
 .. code::
 
    conda update biopython
 
-To update Python:
+다음을 실행해 파이썬을 업데이트한다.
 
 .. code::
 
    conda update python
 
-To update conda itself:
+다음을 실행해 콘다를 업데이트한다.
 
 .. code::
 
    conda update conda
 
-NOTE: Conda updates to the highest version in its series, so
-Python 2.7 updates to the highest available in the 2.x series and
-3.6 updates to the highest available in the 3.x series.
+주의: 콘다는 패키지의 시리즈 중 가장 최신 버전으로 업데이트한다.
+따라서 파이썬 2.7은 파이썬2 중 가능한 최신 버전으로 업데이트되고
+파이썬 3.6은 파이썬 3 중 가능한 최신 버전으로 업데이트된다.
 
-To update the Anaconda metapackage:
+다음을 실행해 아나콘다 메타패키지를 업데이트한다.
 
 .. code-block:: bash
 
    conda update conda
    conda update anaconda
 
-Regardless of what package you are updating, conda compares
-versions and then reports what is available to install. If no
-updates are available, conda reports "All requested packages are
-already installed."
+업데이트하는 패키지에 관계없이 콘다는 패키지의 버전을 비교하고 설치 가능한 버전을 보고한다.
+가능한 업데이트가 없다면 "All requested packages are already installed." 라고 나타날 것이다.
 
-If a newer version of your package is available and you wish to
-update it, type ``y`` to update:
+패키지의 새로운 버전이 설치 가능하고 업데이트를 진행하고 싶다면 ``y``\ 를 입력한다.
 
 .. code::
 
@@ -261,63 +227,57 @@ update it, type ``y`` to update:
 
 .. _pinning-packages:
 
-Preventing packages from updating (pinning)
+패키지 업데이트 막기 (pinning)
 ===========================================
 
-Pinning a package specification in an environment prevents
-packages listed in the ``pinned`` file from being updated.
+환경의 패키지 사양을 피닝(pinning)하면 ``pinned`` 파일에 나열된 패키지는 업데이트되지 않는다.
 
-In the environment's ``conda-meta`` directory, add a file
-named ``pinned`` that includes a list of the packages that you
-do not want updated.
+환경의 ``conda-meta`` 디렉토리에 ``pinned``\ 라는 이름의 파일을 추가한다.
+이 파일은 업데이트를 막고 싶은 패키지의 목록을 포함한다.
 
-EXAMPLE: The file below forces NumPy to stay on the 1.7 series,
-which is any version that starts with 1.7, and forces SciPy to
-stay at exactly version 0.14.2::
+예시: 다음 파일은 넘파이(Numpy)를 1.7로 시작하는 모든 버전인 1.7 시리즈로 유지하고
+사이파이 버전을 0.14.2에 고정되도록 한다. ::
 
   numpy 1.7.*
   scipy ==0.14.2
 
-With this ``pinned`` file, ``conda update numpy`` keeps NumPy at
-1.7.1, and ``conda install scipy=0.15.0`` causes an error.
+이 ``pinned`` 파일이 있으면 ``conda update numpy`` 명령은 넘파이를 1.7.1 에 머무르게 하고
+``conda install scipy=0.15.0`` 명령은 에러가 나타난다.
 
-Use the ``--no-pin`` flag to override the update restriction on
-a package. In the Terminal or an Anaconda Prompt, run:
+``--no-pin`` 플래그를 사용하면 패키지의 업데이트 제한을 무시한다. 터미널이나 아나콘다 프롬프트에서 다음을 실행한다.
 
 .. code-block:: bash
 
    conda update numpy --no-pin
 
-Because the ``pinned`` specs are included with each conda
-install, subsequent ``conda update`` commands without
-``--no-pin`` will revert NumPy back to the 1.7 series.
+``pinned`` 사양이 각 콘다 설치에 포함되어 있기 때문에
+이후에 ``--no-pin`` 없이 ``conda update`` 명령을 실행하면 넘파이를 1.7 시리즈로 되돌린다.
 
 
-Removing packages
+패키지 삭제하기
 =================
 
-Use the Terminal or an Anaconda Prompt for the following steps.
+터미널이나 아나콘다 프롬프트에서 다음 단계를 따라 진행한다.
 
-To remove a package such as SciPy in an environment such as
-myenv:
+다음을 실행해 myenv 환경의 사이파이 패키지를 삭제한다.
 
 .. code-block:: bash
 
    conda remove -n myenv scipy
 
-To remove a package such as SciPy in the current environment:
+다음을 실행해 현재 환경의 사이파이 패키지를 삭제한다.
 
 .. code-block:: bash
 
    conda remove scipy
 
-To remove multiple packages at once, such as SciPy and cURL:
+다음을 실행해 복수의 패키지를 삭제한다. 여기에서는 사이파이와 씨유알엘을 삭제한다.
 
 .. code-block:: bash
 
    conda remove scipy curl
 
-To confirm that a package has been removed:
+다음을 실행해 패키지가 삭제되었는지 확인한다.
 
 .. code::
 
