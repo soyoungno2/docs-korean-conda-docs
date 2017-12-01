@@ -460,7 +460,7 @@ pip와 conda 모두 아나콘다/미니콘다에 포함되어 있다.
 추가 정보
 ================
 
-* 전체 문서---`<https://conda.io/docs/>`_.
+* 전체 문서---`<https://veranostech.github.io/docs-korean-conda-docs/docs/build/html/index_ko.html>`_.
 * 요약집---:doc:`cheatsheet`.
 * 자주 하는 질문---`<http://docs.continuum.io/anaconda/faq.html>`_.
 * 무료 커뮤니티 지원---`<https://groups.google.com/a/anaconda.com/forum/#!forum/anaconda>`_.
