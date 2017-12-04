@@ -6,3 +6,4 @@ __pycache__
 .idea  # Pycharm
 env
 *.pyc
+.DS_Store
