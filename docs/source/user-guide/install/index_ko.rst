@@ -88,8 +88,8 @@ PYTHONPATH 환경 변수를 설정하지 않아도 된다.
    :maxdepth: 1
    :hidden:
 
-   download
-   windows
-   macos
-   linux
-   test-installation
+   download_ko
+   windows_ko
+   macos_ko
+   linux_ko
+   test-installation_ko
