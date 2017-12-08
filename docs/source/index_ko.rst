@@ -41,7 +41,7 @@
    help-support
    release-notes
    commands
-   glossary
+   glossary_ko
    license
 
 .. |reg|    unicode:: U+000AE .. REGISTERED SIGN
