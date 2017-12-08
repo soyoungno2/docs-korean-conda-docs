@@ -126,4 +126,4 @@ GUI와 명령줄 인스톨러 모두 윈도우,맥OS,리눅스에서 사용할 �
 
            Start-PsFCIV -Path C:\path\to\file.ext -HashAlgorithm SHA256 -Online
 
-       주의: 위의 두 명령 모두 ``C:\path\to\file.ext``\ 를 파일의 실제 경로,파일명,확장자로 바꾼다.
+       주의: 위의 두 명령 모두 ``C:\path\to\file.ext``\ 를 파일의 실제 경로, 파일명, 확장자로 바꾼다.
