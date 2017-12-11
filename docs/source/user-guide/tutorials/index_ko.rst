@@ -1,20 +1,19 @@
 ===========
-Tutorials
+튜토리얼
 ===========
 
-Before you start the tutorials, you should already have
-installed :doc:`Miniconda <../install/index>` or Anaconda_.
+이 튜토리얼을 시작히기 전에 :doc:`미니콘다(Miniconda) <../install/index_ko>`\ 나 `아나콘다(Anaconda)`_\ 를 설치해야 한다.
 
-.. _Anaconda: https://docs.continuum.io/anaconda/install
+.. _아나콘다(Anaconda): https://docs.continuum.io/anaconda/install
 
-You also need to :ref:`install conda build <install-conda-build>`.
+:ref:`콘다 빌드(conda build) 설치 <install-conda-build>`\ 도 필요하다.
 
 .. toctree::
    :maxdepth: 1
 
-   build-pkgs-skeleton
-   build-pkgs
-   build-postgis
-   build-windows
-   build-apps
-   build-nltk
+   build-pkgs-skeleton_ko
+   build-pkgs_ko
+   build-postgis_ko
+   build-windows_ko
+   build-apps_ko
+   build-nltk_ko
