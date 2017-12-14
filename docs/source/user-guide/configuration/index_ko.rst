@@ -5,8 +5,8 @@ Configuration
 .. toctree::
    :maxdepth: 1
 
-   use-condarc
-   sample-condarc
-   admin-multi-user-install
-   enable-tab-completion
-   use-winxp-with-proxy
+   use-condarc_ko
+   sample-condarc_ko
+   admin-multi-user-install_ko
+   enable-tab-completion_ko
+   use-winxp-with-proxy_ko
