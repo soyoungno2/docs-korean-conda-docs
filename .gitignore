@@ -1,6 +1,6 @@
 *~
 build/
-docs/source/commands/
+docs/source/commands/*.rst
 *.swp
 __pycache__
 .idea  # Pycharm
