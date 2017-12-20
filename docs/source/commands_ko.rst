@@ -24,7 +24,19 @@
    :glob:
    :maxdepth: 2
 
-   commands_ko/*
+   commands/conda-clean_ko
+   commands/conda-config_ko
+   commands/conda-create_ko
+   commands/conda-help_ko
+   commands/conda-info_ko
+   commands/conda-install_ko
+   commands/conda-list_ko
+   commands/conda-package_ko
+   commands/conda-remove_ko
+   commands/conda-search_ko
+   commands/conda-uninstall_ko
+   commands/conda-update_ko
+   commands/conda-upgrade_ko
 
 콘다 빌드 명령
 ====================
@@ -36,7 +48,21 @@
    :glob:
    :maxdepth: 2
 
-   commands_ko/build/*
+   commands/build/conda-build_ko
+   commands/build/conda-convert_ko
+   commands/build/conda-develop_ko
+   commands/build/conda-index_ko
+   commands/build/conda-inspect_ko
+   commands/build/conda-inspect-channels_ko
+   commands/build/conda-inspect-linkages_ko
+   commands/build/conda-inspect-objects_ko
+   commands/build/conda-metapackage_ko
+   commands/build/conda-render_ko
+   commands/build/conda-skeleton_ko
+   commands/build/conda-skeleton-cpan_ko
+   commands/build/conda-skeleton-cran_ko
+   commands/build/conda-skeleton-luarocks_ko
+   commands/build/conda-skeleton-pypi_ko
 
 콘다 환경 명령
 ==========================
@@ -47,7 +73,14 @@
    :glob:
    :maxdepth: 2
 
-   commands_ko/env/*
+   commands/env/conda-env_ko
+   commands/env/conda-env-attach_ko
+   commands/env/conda-env-create_ko
+   commands/env/conda-env-export_ko
+   commands/env/conda-env-list_ko
+   commands/env/conda-env-remove_ko
+   commands/env/conda-env-update_ko
+   commands/env/conda-env-upload_ko
 
 Conda / pip / virtualenv 명령 비교
 =====================================
