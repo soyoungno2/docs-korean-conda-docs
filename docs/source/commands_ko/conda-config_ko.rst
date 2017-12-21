@@ -27,7 +27,8 @@ conda config
                  [KEY ...]] | <B>--append</B> KEY VALUE | <B>--prepend</B> KEY  VALUE  |  <B>--set</B>
                  KEY VALUE | <B>--remove</B> KEY VALUE | <B>--remove-key</B> KEY)
    
-          .condarc 파일의 설정 값을 변경한다.  이 명령은 git config 명령을 참고하여 만들어 졌다.
+          .condarc 파일의 설정 값을 변경한다.
+          이 명령은 git config 명령을 참고하여 만들어 졌다.
           기본으로 사용자의 .condarc 파일을 변경한다 (<I>user</I> <I>.condarc</I>  <I>path</I>)
 
    
@@ -49,13 +50,16 @@ conda config
                  시스템 .condarc 파일을 변경한다. (<I>system</I> <I>.condarc</I> <I>path</I>)
                  이 옵션이 없으면 사용자 설정 파일을 변경한다. (<I>user</I> <I>.condarc</I> <I>path</I>)
 
-          <B>--env</B>  활성화된 콘다 환경의 .condarc 파일을 변경한다. (<I>root</I> <I>pre-</I>
-                 <I>fix/envs/conda-docs</I>) 활성화된 환경이 없으면 사용자의 설정 파일을 변경한다.
+          <B>--env</B>  활성화된 콘다 환경의 .condarc 파일을 변경한다.
+                 (<I>root</I> <I>pre-</I> <I>fix/envs/conda-docs</I>)
+                 활성화된 환경이 없으면 사용자의 설정 파일을 변경한다.
                  (<I>user</I> <I>.condarc</I> <I>path</I>)
    
           <B>--file</B> FILE
-                 주어진 설정 파일을 변경한다. 이 옵션이 없으면 사용자의 설정 파일(<I>user</I> <I>.condarc</I> <I>path</I>)이나
-                 'CONDARC' 환경 변수에 설정된 경로의 파일을 변경한다. (기본: <I>user</I> <I>.condarc</I> <I>path</I>).
+                 주어진 설정 파일을 변경한다. 이 옵션이 없으면 사용자의
+                 설정 파일(<I>user</I> <I>.condarc</I> <I>path</I>)이나
+                 'CONDARC' 환경 변수에 설정된 경로의 파일을 변경한다.
+                 (기본: <I>user</I> <I>.condarc</I> <I>path</I>).
    
           <B>--show</B> 계산되고 컴파일된 모든 설정값이 나타난다.
 
@@ -91,7 +95,7 @@ conda config
 
    
    </PRE>
-   <H2>예시</H><PRE>
+   <H2>예시</H2><PRE>
           계산되고 컴파일된 모든 설정값을 본다.
 
                  conda config --show

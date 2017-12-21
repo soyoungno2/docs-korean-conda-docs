@@ -49,7 +49,7 @@ conda search
                  환경의 이름이다.(envs 디렉토리에서)
    
           <B>-p</B> PATH, <B>--prefix</B> PATH
-                 콘다 환경 접두어로의 전체 경로다.   (기본:   <I>root</I>  <I>pre-</I> <I>fix/envs/conda-docs</I>).
+                 콘다 환경 접두어로의 전체 경로다.  (기본: <I>root</I>  <I>prefix/envs/conda-docs</I>).
 
           <B>--canonical</B>
                  패키지의 정식 명칭만을 출력한다.
@@ -67,12 +67,14 @@ conda search
                  설치되었지만 만료된 패키지만을 표시한다.
 
           <B>--platform</B> {win-32,win-64,osx-64,linux-32,linux-64}
-                 주어진 플랫폼을 검색한다. 'osx-64', 'linux-32', 'win-64'와 같은 형식이어야 한다. 기본은 현재 플랫폼을 검색한다.
+                 주어진 플랫폼을 검색한다.
+                 'osx-64', 'linux-32', 'win-64'와 같은 형식이어야 한다. 기본은 현재 플랫폼을 검색한다.
 
           <B>--spec</B> (package_name[=version[=build]]) 대신 regex  인수를 패키지 사양으로 취급한다.
 
           <B>--reverse-dependency</B>
-                 반대 의존 요소 검색을 수행한다. 이 플래그를 사용할 때는 <B>--full-name</B> 플래그를 권장한다.
+                 반대 의존 요소 검색을 수행한다.
+                 이 플래그를 사용할 때는 <B>--full-name</B> 플래그를 권장한다.
                  'conda info package'를 사용해 패키지 의존 요소를 본다.
 
           <B>--offline</B>
@@ -80,14 +82,17 @@ conda search
    
           <B>-c</B> CHANNEL, <B>--channel</B> CHANNEL
                  패키지를 검색할 추가 채널이다. 이 URL들은 주어진 순서대로 검색된다.
-                 (로컬 디렉토리를 위한 file:// 형태의 URL 포함) 다음엔 디폴트와 .condarc 파일의 채널을 검색한다.
+                 (로컬 디렉토리를 위한 file:// 형태의 URL 포함)
+                 다음엔 디폴트와 .condarc 파일의 채널을 검색한다.
                  (<B>--override-channels</B> 가 주어지지 않았을 때)
-                 'defaults'를 사용해 콘다를 위한 기본 패키지를 얻거나 'system'을 사용해 시스템 패키지를 얻을 수 있다.
+                 'defaults'를 사용해 콘다를 위한 기본 패키지를 얻거나
+                 'system'을 사용해 시스템 패키지를 얻을 수 있다.
                  아무 이름이나 사용하면 .condarc의 channel_alias 값이 붙는다.
                  기본 channel_alias는 http://conda.anaconda.org/ 다.
    
           <B>--override-channels</B>
-                 default 나 .condarc 에 설정된 채널을 검색하진 않는다. <B>--channel</B> 옵션을 요구한다.
+                 default 나 .condarc 에 설정된 채널을 검색하진 않는다.
+                 <B>--channel</B> 옵션을 요구한다.
    
           <B>--json</B> 모든 출력을 json으로 보고한다. 콘다를 프로그래머식으로 사용할 때 적합하다.
 

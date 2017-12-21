@@ -39,7 +39,7 @@ conda package
                  환경의 이름. (envs 디렉토리 안에서)
    
           <B>-p</B> PATH, <B>--prefix</B> PATH
-                 환경 접두어의 전체 경로   (기본:   <I>root</I>   <I>pre-</I>   <I>fix/envs/conda-docs</I>).
+                 환경 접두어의 전체 경로  (기본: <I>root</I> <I>prefix/envs/conda-docs</I>).
 
           <B>-w</B> PATH [PATH ...], <B>--which</B> PATH [PATH ...]
                  콘다 패키지를 가져오는 경로 프린트가 주어진다.

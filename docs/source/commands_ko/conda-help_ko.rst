@@ -29,7 +29,8 @@ conda help
    <H2>옵션</H2><PRE>
       <B>위치</B> <B>인수:</B>
           COMMAND
-                 COMMAND에 입력된 명령의 도움말 정보를 출력한다. (동일한 명령: conda COMMAND <B>--help</B>).
+                 COMMAND에 입력된 명령의 도움말 정보를 출력한다.
+                 (동일한 명령: conda COMMAND <B>--help</B>).
    
       <B>선택</B> <B>인수:</B>
           <B>-h</B>, <B>--help</B>

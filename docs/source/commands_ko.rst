@@ -36,7 +36,7 @@
    :glob:
    :maxdepth: 2
 
-   commands_ko/build/*
+   commands/build/*
 
 콘다 환경 명령
 ==========================

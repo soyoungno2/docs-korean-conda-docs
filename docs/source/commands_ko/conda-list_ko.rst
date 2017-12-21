@@ -41,7 +41,7 @@ conda list
                  환경의 이름. (envs 디렉토리 안에서)
 
           <B>-p</B> PATH, <B>--prefix</B> PATH
-                 환경 접두어의 전체 경로   (기본:   <I>root</I>   <I>pre-</I>   <I>fix/envs/conda-docs</I>).
+                 환경 접두어의 전체 경로   (기본: <I>root</I> <I>prefix/envs/conda-docs</I>).
    
           <B>--json</B> 모든 출력을 json으로 보고한다. 콘다를 프로그래머식으로 사용할 때 적합하다.
 
@@ -64,12 +64,14 @@ conda list
                  전체 이름만을 검색한다. 예시: ^&lt;regex&gt;$.
    
           <B>--explicit</B>
-                 설치된 모든 콘다 패키지와 URL을 명시적으로 나열한다. (출력은 conda create <B>--file</B> 에 사용될 수 있다.)
+                 설치된 모든 콘다 패키지와 URL을 명시적으로 나열한다.
+                 (출력은 conda create <B>--file</B> 에 사용될 수 있다.)
 
           <B>--md5</B>  <B>--explicit</B> 을 사용할 때 MD5 해시합을 추가한다.
 
           <B>-e</B>, <B>--export</B>
-                 요구사항 문자열만을 출력한다. (출력은 conda create <B>--file</B> 에 사용될 수 있다.)
+                 요구사항 문자열만을 출력한다.
+                 (출력은 conda create <B>--file</B> 에 사용될 수 있다.)
    
           <B>-r</B>, <B>--revisions</B>
                  리비전 기록을 나열하고 종료한다.
