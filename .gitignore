@@ -1,11 +1,9 @@
 *~
 build/
-docs/source/commands/*.rst
+docs/source/commands/
 *.swp
 __pycache__
 .idea  # Pycharm
 env
 *.pyc
 
-# for translated command reference in docs-korean branch
-!docs/source/commands/*_ko.rst
