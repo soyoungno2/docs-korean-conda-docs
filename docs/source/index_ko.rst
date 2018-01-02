@@ -40,7 +40,7 @@
    user-guide/index_ko
    help-support
    release-notes
-   commands
+   commands_ko
    glossary_ko
    license
 
