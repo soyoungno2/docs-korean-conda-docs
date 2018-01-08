@@ -21,10 +21,22 @@
 다음 명령들이 콘다를 구성한다.
 
 .. toctree::
-   :glob:
    :maxdepth: 2
 
-   commands/*_ko.rst
+   commands/conda-clean_ko.rst
+   commands/conda-config_ko.rst
+   commands/conda-create_ko.rst
+   commands/conda-help_ko.rst
+   commands/conda-info_ko.rst
+   commands/conda-install_ko.rst
+   commands/conda-list_ko.rst
+   commands/conda-package_ko.rst
+   commands/conda-remove_ko.rst
+   commands/conda-search_ko.rst
+   commands/conda-uninstall_ko.rst
+   commands/conda-update_ko.rst
+   commands/conda-upgrade_ko.rst
+
 
 콘다 빌드 명령
 ====================
