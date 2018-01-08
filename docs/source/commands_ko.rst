@@ -24,7 +24,7 @@
    :glob:
    :maxdepth: 2
 
-   commands/*
+   commands/*_ko.rst
 
 콘다 빌드 명령
 ====================
