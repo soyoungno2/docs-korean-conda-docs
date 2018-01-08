@@ -24,7 +24,7 @@
    :glob:
    :maxdepth: 2
 
-   commands_ko/*
+   commands/*
 
 콘다 빌드 명령
 ====================
@@ -47,7 +47,7 @@
    :glob:
    :maxdepth: 2
 
-   commands_ko/env/*
+   commands/env/*
 
 Conda / pip / virtualenv 명령 비교
 =====================================
