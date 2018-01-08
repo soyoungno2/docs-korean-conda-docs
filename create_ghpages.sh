@@ -15,7 +15,6 @@ echo '!build/' >> .gitignore
 source activate conda-docs
 
 cd docs
-cp source/commands_ko/* source/commands/
 make html
 cd ..
 

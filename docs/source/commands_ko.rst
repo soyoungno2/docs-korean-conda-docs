@@ -23,19 +23,19 @@
 .. toctree::
    :maxdepth: 2
 
-   commands/conda-clean_ko.rst
-   commands/conda-config_ko.rst
-   commands/conda-create_ko.rst
-   commands/conda-help_ko.rst
-   commands/conda-info_ko.rst
-   commands/conda-install_ko.rst
-   commands/conda-list_ko.rst
-   commands/conda-package_ko.rst
-   commands/conda-remove_ko.rst
-   commands/conda-search_ko.rst
-   commands/conda-uninstall_ko.rst
-   commands/conda-update_ko.rst
-   commands/conda-upgrade_ko.rst
+   commands_ko/conda-clean_ko.rst
+   commands_ko/conda-config_ko.rst
+   commands_ko/conda-create_ko.rst
+   commands_ko/conda-help_ko.rst
+   commands_ko/conda-info_ko.rst
+   commands_ko/conda-install_ko.rst
+   commands_ko/conda-list_ko.rst
+   commands_ko/conda-package_ko.rst
+   commands_ko/conda-remove_ko.rst
+   commands_ko/conda-search_ko.rst
+   commands_ko/conda-uninstall_ko.rst
+   commands_ko/conda-update_ko.rst
+   commands_ko/conda-upgrade_ko.rst
 
 
 콘다 빌드 명령
