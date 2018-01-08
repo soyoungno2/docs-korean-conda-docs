@@ -11,11 +11,11 @@ git rebase docs-korean
 touch .nojekyll
 
 echo '!build/' >> .gitignore
-echo '!docs/source/commands/' >> .gitignore
 
 source activate conda-docs
 
 cd docs
+copy source/commands_ko/* source/commands/
 make html
 cd ..
 
