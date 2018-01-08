@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>윈도우에서 콘다 패키지 빌드 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../index.html"/>
+        <link rel="up" title="튜토리얼" href="index_ko.html"/>
+        <link rel="next" title="아나콘다 네비게이터 어플리케이션 빌드" href="build-apps_ko.html"/>
+        <link rel="prev" title="일반 코드 프로젝트를 위한 콘다 패키지 빌드" href="build-postgis_ko.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ko.html">사용자 가이드</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview_ko.html">개요</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts_ko.html">개념</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started_ko.html">시작 안내서</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/index_ko.html">설치</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/index_ko.html">설정</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index_ko.html">튜토리얼</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="build-pkgs-skeleton_ko.html">콘다 스켈레톤을 사용한 콘다 패키지 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-pkgs_ko.html">기초부터 패키지 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-postgis_ko.html">일반 코드 프로젝트를 위한 콘다 패키지 빌드</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">윈도우에서 콘다 패키지 빌드</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">시작에 앞서</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">도구</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">빌드 전략 세우기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">테스트 자동화</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">콘다와 파이썬2/파이썬3로 SEP 패키지 빌드하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id26">콘다와 파이썬2/파이썬3로 pySLALIB 패키지 빌드하기</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="build-apps_ko.html">아나콘다 네비게이터 어플리케이션 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-nltk_ko.html">NLTK를 위한 콘다 패키지 빌드</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tasks/index_ko.html">작업</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cheatsheet_ko.html">Cheat sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting_ko.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index_ko.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index_ko.html">사용자 가이드</a> &raquo;</li>
+        
+          <li><a href="index_ko.html">튜토리얼</a> &raquo;</li>
+        
+      <li>윈도우에서 콘다 패키지 빌드</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tutorials/build-windows_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>윈도우에서 콘다 패키지 빌드<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id6" id="id31">시작에 앞서</a></li>
+<li><a class="reference internal" href="#id7" id="id32">도구</a><ul>
+<li><a class="reference internal" href="#id8" id="id33">마이크로소프트 비주얼 스튜디오</a></li>
+<li><a class="reference internal" href="#id9" id="id34">비주얼 스튜디오 대안</a></li>
+<li><a class="reference internal" href="#id11" id="id35">윈도우 버전</a></li>
+<li><a class="reference internal" href="#id12" id="id36">다른 도구</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13" id="id37">빌드 전략 세우기</a></li>
+<li><a class="reference internal" href="#id14" id="id38">테스트 자동화</a></li>
+<li><a class="reference internal" href="#id17" id="id39">콘다와 파이썬2/파이썬3로 SEP 패키지 빌드하기</a><ul>
+<li><a class="reference internal" href="#id19" id="id40">비주얼 스튜디오 설치하기</a></li>
+<li><a class="reference internal" href="#id20" id="id41">스켈레톤 래시피 만들기</a></li>
+<li><a class="reference internal" href="#id21" id="id42">스켈레톤 파일 편집하기</a></li>
+<li><a class="reference internal" href="#id23" id="id43">테스트 파일 생성</a></li>
+<li><a class="reference internal" href="#id24" id="id44">패키지 빌드하기</a></li>
+<li><a class="reference internal" href="#id25" id="id45">출력 확인하기</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id26" id="id46">콘다와 파이썬2/파이썬3로 pySLALIB 패키지 빌드하기</a></li>
+</ul>
+</div>
+<p>이 튜토리얼은 윈도우에서 콘다 빌드(conda build)를 사용해 콘다 패키지를 생성하는 방법을 설명한다.
+예제로 SEP와 pySLALIB 패키지를 사용한다.</p>
+<p>이 튜토리얼에서 최종적으로 빌드된 패키지는 <a class="reference external" href="https://anaconda.org">아나콘다 클라우드</a>에 있다.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://anaconda.org/wwarner/sep/files">SEP</a>.</li>
+<li><a class="reference external" href="https://anaconda.org/wwarner/pyslalib/files">pySLALIB</a>.</li>
+</ul>
+<p>이 튜토리얼은 래시피를 작성하는 방법도 다룬다.
+최종 <a class="reference external" href="https://github.com/conda/conda-docs/tree/master/docs/source/user-guide/tutorials/sep">SEP 래시피</a>와
+<a class="reference external" href="https://github.com/conda/conda-docs/tree/master/docs/source/user-guide/tutorials/pyslalib">pySLALIB 래시피</a>를
+깃헙(Github)의 <a class="reference external" href="https://github.com/conda/conda-docs">콘다 문서 레포지토리</a>에서 볼 수 있다.</p>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id31">시작에 앞서</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>튜토리얼을 시작하기 전에 <a class="reference internal" href="index_ko.html"><span class="doc">요구 사항</span></a>을 확인한다.</p>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id32">도구</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id33">마이크로소프트 비주얼 스튜디오</a><a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>콘다 개발자 표준 예제에 각기 다른 버전의 파이썬을 위한 콘다 패키지가 빌드되어 있다.
+다음은 파이썬 버전에 대응하는 비주얼 스튜디오(Visual Studio) 버전이다.</p>
+<ul class="simple">
+<li>파이썬 2.7 패키지: 비주얼 스튜디오(VS) 2008</li>
+<li>파이썬 3.4 패키지: VS 2010</li>
+<li>파이썬 3.5 패키지: VS 2015</li>
+<li>파이썬 3.6 패키지: VS 2015</li>
+</ul>
+<p>위에 나열한 버전의 VS를 사용해 각 버전의 파이썬 패키지를 빌드하는 것은 python.org의 공식 파이썬 빌드에도 사용되는 방식이다.
+VS 2015는 마이크로소프트로부터 구매할 수 있고 VS 2008, VS 2010은 리셀러에게 구매해야 한다.</p>
+</div>
+<div class="section" id="id9">
+<h3><a class="toc-backref" href="#id34">비주얼 스튜디오 대안</a><a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>다음은 각 버전의 비쥬얼 스튜디오(VS) 컴파일러의 무료 대안이다.</p>
+<ul class="simple">
+<li>VS 2008 대신
+<a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=44266">파이썬2.7을 위한 무료 마이크로소프트 C++ 컴파일러</a>가 자주 사용된다.</li>
+<li>VS 2010 대신
+<a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=8279">윈도우7과 .Net Framework4를 위한 무료 마이크로소프트 윈도우 SDK</a>가 자주 사용된다.</li>
+<li><a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=23691">VS 2010 서비스팩 1 (SP1)</a>을 설치했는지 확인한다.</li>
+<li>VS 2010 SP1 인스톨러의 버그로 인해 설치 과정에서 컴파일러 도구가 삭제될 수 있다.
+<a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=4422">윈도우 SDK 7.1을 위한 마이크로소프트 비주얼 C++ 2010 SP1 컴파일러 업데이트</a>의 안내를 따르면 삭제된 컴파일러 도구를 복구할 수 있다.</li>
+<li>VS 2015는 학술적 목적, 오픈 소스 프로젝트, 이외에 특정 사용 사례을 위한
+<a class="reference external" href="https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx">모든 기능이 포함된 무료 커뮤니티 에디션</a>을 지원한다.</li>
+</ul>
+<p>파이썬2.7을 위한 마이크로소프트 비주얼 C++ 컴파일러와 윈도우7,.NET Framework4를 위한 마이크로 소프트 SDK는 모두 합리적인 테스트를 거쳤다.
+콘다 빌드는 이 설정을 지원하기 위해 세심하게 테스트되었지만 CMake 빌드 도구나 VS 2008, VS 2010의 무료 대안들과 관련된 알려진 문제들이 있다.
+이러한 문제가 발생했을 때 비주얼 스튜디오 솔루션 생성기 대신 “NMake Makefile” 생성기를 권장한다.</p>
+</div>
+<div class="section" id="id11">
+<h3><a class="toc-backref" href="#id35">윈도우 버전</a><a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>최근 버전의 윈도우는 모두 사용할 수 있다. 여기에서는 윈도우8.1을 사용한다.</p>
+</div>
+<div class="section" id="id12">
+<h3><a class="toc-backref" href="#id36">다른 도구</a><a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>어떤 환경에는 처음부터 bzip2나 깃(Git)과 같이 몇몇 빌드 작업 방식에 필요한 도구들이 없을 수 있다.</p>
+<p><code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">git</span></code> 명령으로 콘다를 통해 깃을 설치할 수 있다.</p>
+<p>bzip2도 같은 방식으로 얻을 수 있다. 콘다 bzip2 패키지는 bzip2 라이브러리만 포함하고 bzip2 실행 파일은 포함하지 않는다.
+bzip2 실행 파일은 <a class="reference external" href="http://gnuwin32.sourceforge.net/packages/bzip2.htm">http://gnuwin32.sourceforge.net/packages/bzip2.htm</a> 과 같은 다른 소스로부터 받아야 한다.
+실행 파일을 PATH 어딘가에 둔다. 미니콘다(Miniconda)/아나콘다(Anaconda) 설치 경로의 <code class="docutils literal"><span class="pre">Library/bin</span></code> 폴더에 두는 것이 좋다.</p>
+</div>
+</div>
+<div class="section" id="id13">
+<h2><a class="toc-backref" href="#id37">빌드 전략 세우기</a><a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<p>콘다 래시피(conda recipe)는 일반적으로 시행 착오를 거쳐 빌드된다.
+보통 패키지 빌드의 첫번째 시도는 의존 요소 손실로 인한 컴파일러,링크 에러로 실패한다.
+래시피를 작성하는 개발자는 발생한 에러를 살피고 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일을 수정해 손실된 의존 요소를 포함시킨다.
+다시 빌드를 시도한다. 이러한 시행 착오 과정을 거쳐 패키지를 성공적으로 빌드한다.</p>
+<p>미니콘다 설치의 다른 버전 파이썬으로 빌드하기
+Building with a Python version different from your Miniconda installation
+==========================================================================</p>
+<p>미니콘다2와 미니콘다3는 원하는 버전을 지정하면 파이썬2나 파이썬3를 위한 패키지를 간단히 빌드할 수 있다.
+미니콘다2는 파이썬2만을 포함하고 미니콘다3는 파이썬3만을 포함한다.</p>
+<p>하나의 미니콘다만을 설치하면 빌드 추적이 더 쉬워지지만 두개의 미니콘다를 하나의 시스템에 동시에 설치할 수도 있다.
+두개를 모두 설치했다면 <code class="docutils literal"><span class="pre">where</span></code> 명령으로 어떤 버전이 PATH에 먼저 설정되어 있는지 확인한다.
+이 버전이 사용자가 사용하게 될 파이썬 버전이다.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">where</span> <span class="n">python</span>
+</pre></div>
+</div>
+<p>미니콘다 설치와 다른 파이썬 버전을 위한 패키지를 빌드하려면 파이썬 버전을 위한 <code class="docutils literal"><span class="pre">conda-build</span></code> 명령에 <code class="docutils literal"><span class="pre">--python</span></code> 옵션을 추가한다.
+<code class="docutils literal"><span class="pre">conda-build</span></code> command.</p>
+<p>예시: 미니콘다2로 파이썬3.5 패키지를 빌드한다.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span><span class="o">-</span><span class="n">build</span> <span class="n">recipeDirectory</span> <span class="o">--</span><span class="n">python</span><span class="o">=</span><span class="mf">3.5</span>
+</pre></div>
+</div>
+<p>주의: (위 명령에서) <code class="docutils literal"><span class="pre">recipeDirectory</span></code>를 래시피 디릭토리의 이름과 경로로 바꾼다.</p>
+</div>
+<div class="section" id="id14">
+<h2><a class="toc-backref" href="#id38">테스트 자동화</a><a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<p>래시피 디렉토리가 테스트 파일 <a href="#id15"><span class="problematic" id="id16">``</span></a>run_test.bat``(윈도우),``run_test.sh``(맥OS,리눅스),``run_test.py``(모든 운영체제)를 포함하면
+빌드 후에 파일이 실행되어 패키지를 테스트하고 에러가 보고된다.</p>
+<p>주의: 테스트가 실행될 때 <a class="reference internal" href="../tasks/build-packages/define-metadata.html#meta-test"><span class="std std-ref">meta.yaml 파일의 테스트 섹션</span></a>을 사용해
+데이터 파일을 래시피 디렉토리에서 테스트 디렉토리로 옮긴다</p>
+</div>
+<div class="section" id="id17">
+<h2><a class="toc-backref" href="#id39">콘다와 파이썬2/파이썬3로 SEP 패키지 빌드하기</a><a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://sep.readthedocs.io">SEP 문서</a>에 따르면 SEP는 파이썬2와 파이썬3에서 작동하고 넘파이(NumPy)에만 의존한다.
+PyPI와 SEP를 검색해 보면 이미 <a class="reference external" href="https://pypi.python.org/pypi/sep">SEP를 위한 PyPI 패키지</a>가 있는 것을 알 수 있다.</p>
+<p>SEP를 위한 PyPI 패키지가 이미 있기 때문에 <code class="docutils literal"><span class="pre">conda</span> <span class="pre">skeleton</span></code> 명령으로 PyPI 패키지에 기반한 스켈레톤이나 콘다 래시피 개요를 만들 수 있다.
+래시피 개요를 수동으로 마무리하면 콘다는 완전한 래시피로부터 콘다 패키지를 빌드 할 수 있다.</p>
+<div class="section" id="id19">
+<h3><a class="toc-backref" href="#id40">비주얼 스튜디오 설치하기</a><a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<p>아직 비주얼 스튜디오가 없다면 적절한 버전의 비주얼 스튜디오를 설치한다.</p>
+<ul class="simple">
+<li>파이썬3: 비주얼 스튜디오 2015<ol class="arabic">
+<li>사용자 지정 설치를 선택한다.</li>
+<li>프로그램 언어에서 비주얼 C++를 선택해 설치한다.</li>
+</ol>
+</li>
+<li>파이썬2: 비주얼 스튜디오 2008<ol class="arabic">
+<li>사용자 지정 설치를 선택한다.</li>
+<li>X64 컴파일러와 도구를 선택해 설치한다. 서비스팩1을 설치한다.</li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="id20">
+<h3><a class="toc-backref" href="#id41">스켈레톤 래시피 만들기</a><a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">스켈레톤(skeleton) 명령을 실행한다.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">skeleton</span> <span class="n">pypi</span> <span class="n">sep</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">skeleton</span></code> 명령은 <code class="docutils literal"><span class="pre">sep</span></code>라는 이름으로 생성된 디렉토리에 파일을 설치한다.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">sep</span></code> 디렉토리로 가서 생성된 파일을 본다.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">sep</span>
+</pre></div>
+</div>
+<p>다음과 같이 세개의 스켈레톤 파일이 생성된다.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">bld.bat</span></code>: 윈도우를 위한 스켈레톤 파일이다.</li>
+<li><code class="docutils literal"><span class="pre">build.sh</span></code>: 맥OS,리눅스를 위한 스켈레톤 파일이다.</li>
+<li><code class="docutils literal"><span class="pre">meta.yaml</span></code>: 모든 플랫폼을 위한 스켈레톤 파일이다..</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="id21">
+<h3><a class="toc-backref" href="#id42">스켈레톤 파일 편집하기</a><a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<p>이 예제에서 빌드하는 패키지는 <code class="docutils literal"><span class="pre">bld.bat</span></code> 파일과 <code class="docutils literal"><span class="pre">build.sh</span></code> 파일은 수정하지 않아도 된다.
+<code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일을 수정해 의존 요소 넘파이를 추가하고 빌드한 패키지를 가져오는 방식의 선택적 테스트를 추가한다.</p>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일의 requirements 섹션에 넘파이를 패키지 빌드 요구 사항으로 하는 행을 추가한다.</li>
+<li>넘파이를 패키지 실행 요구 사항으로 하는 행을 추가한다.</li>
+</ol>
+<p>넘파이 버전은 문자 <code class="docutils literal"><span class="pre">x.x</span></code>로 설정한다.</p>
+<p>추가한 행이 바로 위에 <code class="docutils literal"><span class="pre">-</span> <span class="pre">python</span></code>과 정렬되었는지 확인한다.</p>
+<p>예시:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy     x.x</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy     x.x</span>
+</pre></div>
+</div>
+<p>주의: <code class="docutils literal"><span class="pre">1.11</span></code>과 같은 특정 버전 대신 <code class="docutils literal"><span class="pre">x.x</span></code>로 버전을 지정하면 넘파이 버전이 유동적으로 지정되어
+빌드 명령에서 실제 넘파이 버전을 가져오게 된다. 현재는 넘파이만 버전을 유동적으로 지정할 수 있다.
+SEP는 Cython을 통한 넘파이의 C API를 사용하기 때문에 버전 지정이 중요하다.
+C API는 넘파이 버전에 따라 달라지므로 실행 시에 빌드했을 때 사용한 것과 동일한 버전의 넘파이를 사용하는 것이 중요하다.</p>
+<div class="section" id="id22">
+<h4>선택—빌드된 패키지를 위한 테스트 추가하기<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
+<p>다음 선택 테스트를 추가하면 빌드 마지막에 파이썬 선언 <code class="docutils literal"><span class="pre">import</span> <span class="pre">sep</span></code>가 잘실행되는지 확인하는 방식으로 패키지를 테스트한다.</p>
+<ol class="arabic simple">
+<li>테스트 섹션에서 <code class="docutils literal"><span class="pre">test:</span></code>, <code class="docutils literal"><span class="pre">imports:</span></code> 행의 주석에 사용된 <code class="docutils literal"><span class="pre">#</span></code>을 제거한다.</li>
+<li><code class="docutils literal"><span class="pre">-</span> <span class="pre">sep</span></code>을 추가한다. 들여쓰기가 파일의 다른 코드와 일치하는지 확인한다.</li>
+</ol>
+<p>예시:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
+  <span class="c1"># Python imports</span>
+  <span class="l l-Scalar l-Scalar-Plain">imports</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sep</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id23">
+<h3><a class="toc-backref" href="#id43">테스트 파일 생성</a><a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">run_test.py</span></code>라는 이름으로 새 테스트 파일을 만들고
+<a class="reference external" href="https://sep.readthedocs.org/en/v0.5.x/detection.html">Background estimation and source detection</a>에서 가져온 코드를 입력해 <code class="docutils literal"><span class="pre">sep</span></code> 디렉토리에 저장한다.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sep</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">))</span>
+
+<span class="c1"># Measure a spatially variable background of some image data</span>
+<span class="c1"># (a numpy array)</span>
+<span class="n">bkg</span> <span class="o">=</span> <span class="n">sep</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># ... or with some optional parameters</span>
+<span class="c1"># bkg = sep.Background(data, mask=mask, bw=64, bh=64, fw=3, fh=3)</span>
+</pre></div>
+</div>
+<p>빌드 후에 새로 빌드된 패키지를 테스트 하기 위해 이 파일이 실행된다.</p>
+<p>이제 래시피 작성이 끝났다.</p>
+</div>
+<div class="section" id="id24">
+<h3><a class="toc-backref" href="#id44">패키지 빌드하기</a><a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<p>생성한 래피시로 패키지를 빌드한다.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span><span class="o">-</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">numpy</span><span class="o">=</span><span class="mf">1.11</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id25">
+<h3><a class="toc-backref" href="#id45">출력 확인하기</a><a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>빌드가 성공적으로 끝났는지 확인하기 위해 출력을 확인한다.
+출력에는 최종 패키지 파일의 위치와 아나콘다 클라우드(Anaconda Cloud)로 패키지를 업로드하는 명령이 나타난다.</li>
+<li>링크나 컴파일러 에러가 나타나면 래시피를 수정하고 다시 빌드한다.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id26">
+<h2><a class="toc-backref" href="#id46">콘다와 파이썬2/파이썬3로 pySLALIB 패키지 빌드하기</a><a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h2>
+<p>이 과정은 파이썬2나 파이썬3로 패키지를 빌드하는 방법을 설명한다.
+빌드하고자 하는 파이썬 버전에 맞는 설명을 따라 진행한다.</p>
+<p>pySLALIB는 포트란(Fortran)을 포함하므로 빌드를 위해 포트란 컴파일러가 필요하다.
+pySLALIB의 PyPI 패키지가 없기 때문에 <code class="docutils literal"><span class="pre">conda</span> <span class="pre">skeleton</span></code>로 생성되는 스켈레톤 래시피를 사용할 수 없다.
+래시피를 처음부터 만들어야 한다. pySLALIB를 빌드하는 과정은 SEP 빌드와 유사하지만
+포트란 컴파일러 설치, PyPI 대신 깃헙(GitHub)으로부터 가져오는 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일 작성, 포트란 코드에 맞는 패치 적용이 포함된다.</p>
+<p>다음 단계를 따라 pySLALIB을 빌드한다.</p>
+<ol class="arabic">
+<li><p class="first">비주얼 스튜디오를 설치한다.</p>
+<ul class="simple">
+<li>파이썬3: 비주얼 스튜디오 2015를 설치한다. 사용자 지정 설치의 프로그램 언어에서 비주얼 C++을 선택한다.</li>
+<li>파이썬2: 비주얼 스튜디오 2008을 설치한다. 사용자 지정 설치에서 X64 컴파일러와 도구를 선택한다. 비주얼 스튜디오 2008 서비스팩 1을 설치한다.</li>
+</ul>
+</li>
+<li><p class="first">Intel Parallel Studio Composer Edition을 설치한다.
+<a class="reference external" href="https://software.intel.com/en-us/fortran-compilers">인텔 포트란 컴파일러 페이지</a>에서
+Try &amp; Buy를 선택한다. Parallel Studio Composer Edition for Windows를 선택한다.
+포트란과 C++을 사용하는 버전 대신 포트란만 사용하는 버전을 선택할 수 있다.
+30일 무료 체험판을 사용할 수 있다. 이메일 주소를 포함한 양식을 작성하면 다운로드 링크를 받을 수 있다.</p>
+<ul class="simple">
+<li>파이썬3: Intel Parallel Studio XE Composer Edition for Fortran Windows를 받고 설치한다.</li>
+<li>파이썬3:  Intel Parallel Studio XE Composer Edition for Fortran Windows 다운로드 페이지를 연다.
+Additional downloads, latest updates and prior versions을 선택하고 version 2013 Update 6를 선택한다.
+Intel Visual Fortran Composer XE 2013 SP1 (compiler version 14.0)은 비주얼 스튜디오 2008과 함께 사용할 수 있는
+가장 최신 버전의 인텔 포트란 컴파일러다. Choose Download Now를 선택하고 이 버전을 설치한다.</li>
+</ul>
+</li>
+<li><p class="first">빌드를 위해 깃헙에서 pySLALIB 패키지 소스를 검색하기 때문에 반드시 깃이 있어야 한다. 깃을 설치한다.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">git</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">래시피를 만든다. 처음부터 래시피를 만들거나
+<a class="reference external" href="https://github.com/conda/conda-docs/tree/master/docs/source/user-guide/tutorials/pyslalib">우리가 작성한 래시피</a>를 사용한다. 이 래시피는 다음 파일을 포함한다.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일은 pySLALIB의 깃헙 경로와 시스템이 <code class="docutils literal"><span class="pre">intel_fortran_use.patch</span></code>를 적용하는 방식을 설정한다.</li>
+<li><code class="docutils literal"><span class="pre">bld.bat</span></code> 파일은 윈도우 배치 스크립트로 빌드와 실행 과정에서 알맞은 32비트, 64비트 라이브러리가 링크되도록 보장한다.</li>
+<li><code class="docutils literal"><span class="pre">run_test.py</span></code> 파일은 pySLALIB 깃헙 레포지토리에서 가져온 테스트로 빌드가 성공적으로 마무리되었는지 확인한다.</li>
+<li><code class="docutils literal"><span class="pre">intel_fortran_use.patch</span></code> 파일은 pySLALIB 포트란 코드가 인텔 포트란 컴파일러와 함께 작동하도록 하는 패치다.</li>
+</ul>
+</li>
+<li><p class="first">홈 디렉토리에서 <code class="docutils literal"><span class="pre">pyslalib</span></code>라는 이름으로 래시피 디렉토리를 만들고 위의 4개의 파일을 복사한다.</p>
+</li>
+<li><p class="first">패키지를 빌드한다.</p>
+<ul class="simple">
+<li>파이썬3: 인텔 패러랠 스튜디오 XE 2016의 <strong>Apps</strong> 메뉴에서
+Compiler 16.0 Update 3 for Intel 64ㅡVisual Studio 2015 environment command prompt를 연다.</li>
+<li>파이썬2: 인텔 패러랠 스튜디오 XE 2013의 <strong>Apps</strong> 메뉴에서
+Intel 64 Visual Studio 2008 mode command prompt를 연다.</li>
+</ul>
+</li>
+<li><p class="first"><a href="#id29"><span class="problematic" id="id30">``</span></a>conda-build``를 실행한다. 알맞은 사용자명과 래시피 디렉토리 경로를 사용한다.
+여기에서는 사용자명으로 “builder”를 사용했다.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span><span class="o">-</span><span class="n">build</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">builder</span>\<span class="n">pyslalib</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">빌드가 성공적으로 끝났는지 확인하기 위해 출력을 확인한다.
+출력은 최종 패키지 파일의 위치와 패키지를 클라우드에 업로드하는 명령을 포함한다.</p>
+</li>
+<li><p class="first">링크나 컴파일러 에러가 나타나면 래시피를 수정하고 다시 빌드한다.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build-apps_ko.html" class="btn btn-neutral float-right" title="아나콘다 네비게이터 어플리케이션 빌드" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="build-postgis_ko.html" class="btn btn-neutral" title="일반 코드 프로젝트를 위한 콘다 패키지 빌드" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

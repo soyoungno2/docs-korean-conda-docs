@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>커스텀 채널 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Conda   documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>커스텀 채널</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/custom-channels_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>커스텀 채널<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>채널은 콘다가 패키지를 보기 위해 선택하는 경로이며 커스텀 채널을 사용하고 관리하기 위한 가장 쉬운 방법은
+<a class="reference external" href="https://anaconda.org/">Anaconda.org</a> 의 사설 혹은 공용 저장소를 사용하는 것이다.
+<a class="reference external" href="https://anaconda.org/">Anaconda.org</a> 는 이전엔 Binstar.org 로 알려져 있었다.
+당신의 Anaconda.org 저장소를 사설로 지정했다면 당신의 저장소에는 당신과 당신이 허용한 사람만 접근할 수 있다.</p>
+<p>패키지를 인터넷에 업로드하고 싶지 않다면 웹서버를 통해 제공되거나 <code class="docutils literal"><span class="pre">file://</span></code> url 로 로컬에서 제공되는
+커스텀 저장소를 생성할 수 있다.</p>
+<div class="section" id="id3">
+<h2>커스텀 채널/ 사설 저장소 요약<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>플랫폼 하위 디렉토리에 패키지를 구성한다.</li>
+<li>각각의 플랫폼 하위 디렉토리에 콘다 인덱스를 실행한다.</li>
+<li>커스텀 채널을 테스트한다.</li>
+</ol>
+<div class="section" id="id4">
+<h3>1. 플랫폼 하위 디렉토리에 패키지를 구성한다.<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>커스텀 채널을 생성하기 위해 먼저 제공하고자 하는 플랫폼의 하위 디렉토리에 있는 모든 패키지를 구성한다.
+예시:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span> <span class="n">channel</span><span class="o">/</span>
+<span class="n">linux</span><span class="o">-</span><span class="mi">64</span><span class="o">/</span>
+   <span class="n">package</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="mf">0.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+<span class="n">linux</span><span class="o">-</span><span class="mi">32</span><span class="o">/</span>
+   <span class="n">package</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="mf">0.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+<span class="n">osx</span><span class="o">-</span><span class="mi">64</span><span class="o">/</span>
+   <span class="n">package</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="mf">0.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+<span class="n">win</span><span class="o">-</span><span class="mi">64</span><span class="o">/</span>
+   <span class="n">package</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="mf">0.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+<span class="n">win</span><span class="o">-</span><span class="mi">32</span><span class="o">/</span>
+   <span class="n">package</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="mf">0.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>2. 각각의 플랫폼 하위 디렉토리에 콘다 인덱스를 실행한다.<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>‘conda index’ 커맨드는 콘다 빌드 패키지의 일부이다.
+아직 콘다 빌드를 사용하지 않았다면 콘다 빌드를 설치하는 것에서 시작한다. :</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">conda</span><span class="o">-</span><span class="n">build</span>
+</pre></div>
+</div>
+<p>이제 아래와 같이 각각의 플랫폼 하위 디렉토리에 콘다 인덱스를 실행한다.</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">index</span> <span class="n">channel</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mi">64</span> <span class="n">channel</span><span class="o">/</span><span class="n">osx</span><span class="o">-</span><span class="mi">64</span>
+</pre></div>
+</div>
+<p>콘다 인덱스 커맨드는 <code class="docutils literal"><span class="pre">repodata.json</span></code> 파일을 생성하고 각각의 저장소 디렉토리에 저장한다.
+저장된 파일은 콘다가 채널의 패키지를 위한 메타 데이터를 얻을 때 사용한다.</p>
+<p>주의: 채널의 패키지를 추가하거나 수정할 때 마다 반드시 <code class="docutils literal"><span class="pre">conda</span> <span class="pre">index</span></code> 를 다시 실행해 업데이트를 확인해야 한다.</p>
+</div>
+<div class="section" id="id6">
+<h3>3. 커스텀 채널을 테스트한다.<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>이제 웹서버나 채널 디렉토리로의 <code class="docutils literal"><span class="pre">file://</span> <span class="pre">url</span></code> 을 사용해 커스텀 채널을 제공할 수 있다.
+커스텀 채널로의 검색 커맨드를 보내 테스트한다.</p>
+<p>예시: 만약 커스텀 채널 로케이션으로부터 얻고자 하는 파일이 <code class="docutils literal"><span class="pre">/opt/channel/linux-64/</span></code> 에 있다면</p>
+<p>그 로케이션의 파일은 아래와 같이 검색한다.:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">search</span> <span class="o">-</span><span class="n">c</span> <span class="n">file</span><span class="p">:</span><span class="o">//</span><span class="n">opt</span><span class="o">/</span><span class="n">channel</span><span class="o">/</span> <span class="o">--</span><span class="n">override</span><span class="o">-</span><span class="n">channels</span>
+</pre></div>
+</div>
+<p>주의: 콘다가 자동으로 플랫폼을 감지하고 추가하기 때문에 채널 url은 플랫폼을 포함하지 않는다.</p>
+<p>주의: –override-channels 커맨드는 콘다가 사용자가 지정한 채널 외에는 검색하지 않는다는 것을 확인하기 위함이다.
+디폴트 채널이나 <code class="docutils literal"><span class="pre">.condarc</span></code> 에 목록화 된 채널은 검색하지 않는다.</p>
+<p>사설 저장소를 잘 설정했다면 아래와 같이 나타난다.:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">Fetching</span> <span class="n">package</span> <span class="n">metadata</span><span class="p">:</span> <span class="o">.</span> <span class="o">.</span> <span class="o">.</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>이후에 확인된 콘다 패키지의 목록이 나올 것이다.
+이는 사용자의 사설 저장소가 성공적으로 생성되고 인덱싱 되었음을 보여준다.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

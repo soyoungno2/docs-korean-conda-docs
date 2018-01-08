@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Build scripts (build.sh, bld.bat) &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../../index.html"/>
+        <link rel="up" title="Building packages" href="index.html"/>
+        <link rel="next" title="Features" href="features.html"/>
+        <link rel="prev" title="Defining metadata (meta.yaml)" href="define-metadata.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_ko.html">사용자 가이드</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../overview_ko.html">개요</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts_ko.html">개념</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started_ko.html">시작 안내서</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install/index_ko.html">설치</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration/index_ko.html">설정</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/index_ko.html">튜토리얼</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_ko.html">작업</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../manage-conda_ko.html">콘다 관리</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manage-environments_ko.html">환경 관리</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manage-channels_ko.html">채널 관리</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../create-custom-channels.html">Creating custom channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manage-pkgs_ko.html">패키지 관리</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Building packages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="install-conda-build.html">Installing and updating conda build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package-spec.html">Conda package specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package-naming-conv.html">Package naming conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="recipe.html">Conda build recipes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="define-metadata.html">Defining metadata (meta.yaml)</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Build scripts (build.sh, bld.bat)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="environment-variables.html">Environment variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="make-relocatable.html">Making packages relocatable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="link-scripts.html">Adding pre-link, post-link and pre-unlink scripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variants.html">Build Variants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="use-shared-libraries.html">Using shared libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="compiler-tools.html">Anaconda compiler tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add-win-start-menu-items.html">Adding Windows Start menu items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sample-recipes.html">Sample recipes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build-without-recipe.html">Building a package without a recipe (bdist_conda)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wheel-files.html">Using wheel files with conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../manage-python_ko.html">파이썬 관리</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../use-r-with-conda.html">Using R with conda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../use-mro-with-conda.html">Using Microsoft R Open with conda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../use-conda-with-travis-ci.html">Using conda with Travis CI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../view-command-line-help_ko.html">명령줄 도움말 보기</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cheatsheet_ko.html">Cheat sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting_ko.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_ko.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index_ko.html">사용자 가이드</a> &raquo;</li>
+        
+          <li><a href="../index_ko.html">작업</a> &raquo;</li>
+        
+          <li><a href="index.html">Building packages</a> &raquo;</li>
+        
+      <li>Build scripts (build.sh, bld.bat)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tasks/build-packages/build-scripts.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="build-scripts-build-sh-bld-bat">
+<h1>Build scripts (build.sh, bld.bat)<a class="headerlink" href="#build-scripts-build-sh-bld-bat" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal"><span class="pre">build.sh</span></code> file is the build script for Linux and macOS and <code class="docutils literal"><span class="pre">bld.bat</span></code>
+is the build script for Windows. These scripts contain the logic that carries
+out your build steps. Traditionally it has also included install steps. With
+the traditional one-package-per-recipe way of doing things, anything that your
+build script copies into the <code class="docutils literal"><span class="pre">$PREFIX</span></code> or <code class="docutils literal"><span class="pre">%PREFIX%</span></code> folder will be
+included in your output package. For example, this <code class="docutils literal"><span class="pre">build.sh</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir -p <span class="nv">$PREFIX</span>/bin
+cp <span class="nv">$RECIPE_DIR</span>/my_script_with_recipe.sh <span class="nv">$PREFIX</span>/bin/super-cool-script.sh
+</pre></div>
+</div>
+<p>If you don’t care about deploying your package with pip on PyPI, this can save
+you a lot of time in figuring out the proper way to include additional files
+with setup.py.</p>
+<p>There are many environment variables defined for you to use in build.sh and
+bld.bat. Please see <a class="reference internal" href="environment-variables.html#env-vars"><span class="std std-ref">Environment variables</span></a> for more information.</p>
+<p>As of conda-build 2.1, you can also define multiple output packages. Each
+package has its own script or list of files to include. The rules for these
+outputs are documented at <a class="reference internal" href="define-metadata.html#package-outputs"><span class="std std-ref">Outputs section</span></a>. When any output is defined,
+this overrides the default behavior of bundling anything in <code class="docutils literal"><span class="pre">$PREFIX</span></code>. So
+to output multiple packages from a single recipe, remove any installation steps
+from <code class="docutils literal"><span class="pre">build.sh</span></code> or <code class="docutils literal"><span class="pre">bld.bat</span></code> and do them instead in your install script(s)
+for each output.</p>
+<p><code class="docutils literal"><span class="pre">build.sh</span></code> and <code class="docutils literal"><span class="pre">bld.bat</span></code> are optional. You can instead use the
+<code class="docutils literal"><span class="pre">build/script</span></code> key in your <code class="docutils literal"><span class="pre">meta.yaml</span></code>, with each value being either a
+string command or a list of string commands. Any commands you put there must be
+able to run on every platform for which you build. For example, you can’t use
+the <code class="docutils literal"><span class="pre">cp</span></code> command because cmd.exe won’t understand it in Windows.</p>
+<p><code class="docutils literal"><span class="pre">build.sh</span></code> is run with <code class="docutils literal"><span class="pre">bash</span></code> and <code class="docutils literal"><span class="pre">bld.bat</span></code> is run with <code class="docutils literal"><span class="pre">cmd.exe</span></code>.</p>
+<p>There is some development towards the ability to use bash scripts in Windows,
+but this is not currently supported.</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="features.html" class="btn btn-neutral float-right" title="Features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="define-metadata.html" class="btn btn-neutral" title="Defining metadata (meta.yaml)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

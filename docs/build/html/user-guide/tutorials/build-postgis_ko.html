@@ -1,0 +1,502 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>일반 코드 프로젝트를 위한 콘다 패키지 빌드 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../index.html"/>
+        <link rel="up" title="튜토리얼" href="index_ko.html"/>
+        <link rel="next" title="윈도우에서 콘다 패키지 빌드" href="build-windows_ko.html"/>
+        <link rel="prev" title="기초부터 패키지 빌드" href="build-pkgs_ko.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ko.html">사용자 가이드</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview_ko.html">개요</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts_ko.html">개념</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started_ko.html">시작 안내서</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/index_ko.html">설치</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/index_ko.html">설정</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index_ko.html">튜토리얼</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="build-pkgs-skeleton_ko.html">콘다 스켈레톤을 사용한 콘다 패키지 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-pkgs_ko.html">기초부터 패키지 빌드</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">일반 코드 프로젝트를 위한 콘다 패키지 빌드</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">튜토리얼 대상</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#before-you-start3">시작에 앞서</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#depends">의존 요소 나열하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conda-recipe">콘다 래시피 작성하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-script">빌드 스크립트 작성하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-postgis">패키지 빌드하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install">패키지 배포와 설치하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">추가 정보</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="build-windows_ko.html">윈도우에서 콘다 패키지 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-apps_ko.html">아나콘다 네비게이터 어플리케이션 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-nltk_ko.html">NLTK를 위한 콘다 패키지 빌드</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tasks/index_ko.html">작업</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cheatsheet_ko.html">Cheat sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting_ko.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index_ko.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index_ko.html">사용자 가이드</a> &raquo;</li>
+        
+          <li><a href="index_ko.html">튜토리얼</a> &raquo;</li>
+        
+      <li>일반 코드 프로젝트를 위한 콘다 패키지 빌드</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tutorials/build-postgis_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>일반 코드 프로젝트를 위한 콘다 패키지 빌드<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id11">튜토리얼 대상</a></li>
+<li><a class="reference internal" href="#before-you-start3" id="id12">시작에 앞서</a></li>
+<li><a class="reference internal" href="#depends" id="id13">의존 요소 나열하기</a></li>
+<li><a class="reference internal" href="#conda-recipe" id="id14">콘다 래시피 작성하기</a></li>
+<li><a class="reference internal" href="#build-script" id="id15">빌드 스크립트 작성하기</a></li>
+<li><a class="reference internal" href="#build-postgis" id="id16">패키지 빌드하기</a></li>
+<li><a class="reference internal" href="#install" id="id17">패키지 배포와 설치하기</a></li>
+<li><a class="reference internal" href="#id10" id="id18">추가 정보</a></li>
+</ul>
+</div>
+<p>어떤 언어로 작성된 프로젝트라도 콘다 패키지로 빌드할 수 있다.
+이 튜토리얼은 포스트지아이에스(postgis) 패키지를 위한 래시피를 작성하고 빌드한다.
+빌드한 패키지를 <a class="reference external" href="http://anaconda.org/">anaconda.org</a>에 업로드하고 콘다를 사용해 설치한다.</p>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id11">튜토리얼 대상</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>파이썬이 아닌 언어로 작업된 소스 코드 프로젝트로 콘다 패키지를 만들고자 하는 맥OS, 리눅스 사용자를 위한 튜토리얼이다.
+C/C++ 패키지를 설정, 컴파일, 설치하는 방법을 알고 있어야 한다.</p>
+</div>
+<div class="section" id="before-you-start3">
+<span id="id3"></span><h2><a class="toc-backref" href="#id12">시작에 앞서</a><a class="headerlink" href="#before-you-start3" title="Permalink to this headline">¶</a></h2>
+<p>튜토리얼을 시작하기 전에 <a class="reference internal" href="index_ko.html"><span class="doc">요구 사항</span></a>을 확인한다.</p>
+</div>
+<div class="section" id="depends">
+<span id="id4"></span><h2><a class="toc-backref" href="#id13">의존 요소 나열하기</a><a class="headerlink" href="#depends" title="Permalink to this headline">¶</a></h2>
+<p>콘다 래시피를 생성할 때 가장 중요한 것은 의존 요소를 알맞게 나열하는 것이다.</p>
+<p><a class="reference external" href="https://github.com/postgis/postgis/blob/2.2.2/README.postgis">README.postgis</a> 파일에서 최소 요구 버전에 필요한 패키지를 알 수 있다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>postgresql version <span class="m">9</span>.1
+proj4 version <span class="m">4</span>.0.6
+geos version <span class="m">3</span>.4
+libxml2 version <span class="m">2</span>.5
+json-c version <span class="m">0</span>.9
+gdal version <span class="m">1</span>.9
+</pre></div>
+</div>
+<p>콘다 빌드(conda build)는 포스트지아이에스를 위한 소스 코드로부터 개인 환경을 만들고
+이 환경에 콘다는 필요한 의존 요소를 모두 설치해야 한다.
+따라서 각 의존 요소는 <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span></code>로 설치할 수 있어야 한다.</p>
+<ol class="arabic">
+<li><p class="first"><code class="docutils literal"><span class="pre">conda</span> <span class="pre">search</span></code>를 사용해 의존 요소로 필요한 패키지들을 검색한다.</p>
+<p>기본 채널에서 설치할 수 없는 패키지는 json-c 하나다.</p>
+</li>
+<li><p class="first">json-c를 설치하기 위해 <code class="docutils literal"><span class="pre">conda</span> <span class="pre">config</span></code> 명령으로 <code class="docutils literal"><span class="pre">jlaura</span></code> 채널을 추가한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda config --add channels jlaura
+</pre></div>
+</div>
+</li>
+</ol>
+<p>모든 의존 요소 패키지가 설치 가능함을 확인했다. 다음 단계는 콘다 래피시(conda recipe) 작성이다.</p>
+</div>
+<div class="section" id="conda-recipe">
+<span id="id5"></span><h2><a class="toc-backref" href="#id14">콘다 래시피 작성하기</a><a class="headerlink" href="#conda-recipe" title="Permalink to this headline">¶</a></h2>
+<p>콘다 래시피는 세가지 주요 구성 요소를 갖는다.</p>
+<ul class="simple">
+<li>패키지 이름과 버전</li>
+<li>소스 코드 위치</li>
+<li>패키지 빌드와 실행을 위해 필요한 의존 패키지</li>
+</ul>
+<p>콘다 래시피에 소스 코드 위치를 지정하는 방법은 많다.
+여기에서는 깃헙(Github) 레포지토리와 원하는 리비전 태그로 경로를 지정한다.</p>
+<p>주의: 모든 깃헙 레포지토리가 리비전 태그를 사용하진 않는다. 가장 최근 커밋을 사용하는게 좋은 경우도 있다.</p>
+<ol class="arabic">
+<li><p class="first">콘다 래피시 파일을 저장할 디렉토리를 생성한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir postgis
+<span class="nb">cd</span> postgis
+</pre></div>
+</div>
+</li>
+<li><p class="first">텍스트 편집기를 열고 <code class="docutils literal"><span class="pre">postgis</span></code> 디렉토리에 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일을 생성한다. 생성된 파일에 다음 코드를 입력한다.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">postgis</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;2.2.2&quot;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">source</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">git_rev</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2.2.2</span>
+  <span class="l l-Scalar l-Scalar-Plain">git_url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/postgis/postgis.git</span>
+
+<span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">number</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gdal</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">geos</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">proj4</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">json-c</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">libxml2</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">postgresql &gt;=9.1</span>
+  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">gdal</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">geos</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">proj4</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">json-c</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">libxml2</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">postgresql &gt;=9.1</span>
+
+<span class="l l-Scalar l-Scalar-Plain">about</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">home</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">http://postgis.net</span>
+  <span class="l l-Scalar l-Scalar-Plain">license</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">GPL2</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>주의: 콘다 빌드는 빌드 의존 요소로 지정된 패키지로 격리된 환경을 만들고 그 환경에서 패키지를 생성한다.
+작업 중인 환경에 패키지를 설치해도 콘다 빌드에 영향을 주지 않는다.</p>
+</div>
+<div class="section" id="build-script">
+<span id="id6"></span><h2><a class="toc-backref" href="#id15">빌드 스크립트 작성하기</a><a class="headerlink" href="#build-script" title="Permalink to this headline">¶</a></h2>
+<p>콘다 래시피를 준비하는 마지막 단계는 빌드 스크립트를 작성하는 것이다.
+포스트지아이에스는 맥OS와 리눅스를 위해 빌드되었기 때문에 <code class="docutils literal"><span class="pre">postgis</span></code> 디렉토리에 <code class="docutils literal"><span class="pre">build.sh</span></code> 파일 하나만 있으면 된다.</p>
+<p>빌드 스크립트는 소스 프로젝트를 설정, 빌드, 설치하는데 필요한 모든 명령을 포함한다.
+이 스크립트는 반드시 사용자 간섭 없이 실행해야 한다.</p>
+<p><a class="reference external" href="http://postgis.net/docs/manual-2.2/postgis_installation.html#installation_configuration">포스트지아이에스 컴파일 문서</a>에서
+의존 패키지의 위치를 표시하기 위해 <code class="docutils literal"><span class="pre">configure</span></code> 명령에 반드시 추가해야 하는 플래그를 볼 수 있다.</p>
+<p><code class="docutils literal"><span class="pre">conda-build</span></code> 명령을 실행하는 동안 $PREFIX 환경 변수는 콘다 패키지 설치 경로를 나타내는데 사용된다.
+이 예제에서 <code class="docutils literal"><span class="pre">configure</span></code> 명령은 $PREFIX를 통해 콘다 래시피 requirements 섹션의 build와 run에 나열된 의존 패키지 위치를 알 수 있다.</p>
+<ol class="arabic">
+<li><p class="first">터미널에서 <code class="docutils literal"><span class="pre">postgis</span></code> 디렉토리로 간다.</p>
+</li>
+<li><p class="first">텍스트 편집기에서 <code class="docutils literal"><span class="pre">build.sh</span></code> 파일을 생성하고 다음 코드를 입력한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sh autogen.sh
+./configure <span class="se">\</span>
+  --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+  --with-pgconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/pg_config <span class="se">\</span>
+  --with-gdalconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/gdal-config <span class="se">\</span>
+  --with-xml2config<span class="o">=</span><span class="nv">$PREFIX</span>/bin/xml2-config <span class="se">\</span>
+  --with-geosconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/geos-config <span class="se">\</span>
+  --with-projdir<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+  --with-jsondir<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+  --without-raster <span class="se">\</span>
+  --without-topology
+
+make
+make install
+</pre></div>
+</div>
+<p>주의: $PREFIX 환경 변수로의 레퍼런스가 없으면 <code class="docutils literal"><span class="pre">configure</span></code> 명령은 기본 시스템 디렉토리에서 필요한 패키지를 찾는다.
+패키지가 잘빌드되었더라도 다른 사용자가 컴파일된 콘다 패키지를 제대로 설치할 수 있을거란 보장은 없다.</p>
+<p>주의: 이 래시피에서 콘다 빌드를 실행하려면 C/C++ 컴파일러인 autoconf와 automake를 설치해야 한다.
+이 패키지들은 콘다로 설치할 수 없고 시스템 레벨에서 설치해야 한다.</p>
+</li>
+<li><p class="first">파일을 <code class="docutils literal"><span class="pre">postgis</span></code> 디렉토리에 저장한다.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="build-postgis">
+<span id="id8"></span><h2><a class="toc-backref" href="#id16">패키지 빌드하기</a><a class="headerlink" href="#build-postgis" title="Permalink to this headline">¶</a></h2>
+<p>래시피을 완성했으면 이제 <code class="docutils literal"><span class="pre">postgis</span></code> 디렉토리에서 <code class="docutils literal"><span class="pre">conda-build</span></code> 명령을 실행해 콘다 패키지를 빌드한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda-build .
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">conda-build</span></code>의 출력은 다음과 같이 시작한다.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Removing old build environment
+Removing old work directory
+BUILD START: postgis-2.2.2-0
+Using Anaconda Cloud api site https://api.anaconda.org
+Fetching package metadata: ..........
+Solving package specifications: .........
+</pre></div>
+</div>
+<p>콘다 빌드가 의존 패키지를 성공적으로 설치하고 소스 코드를 컴파일하면 다음 메세지 중 하나가 나타나면서 종료된다.</p>
+<ul>
+<li><p class="first">맥OS:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>BUILD END: postgis-2.2.2-0
+Nothing to test for: postgis-2.2.2-0
+# If you want to upload this package to anaconda.org later, type:
+#
+# $ anaconda upload /Users/adefusco/Applications/anaconda3/conda-bld/osx-64/postgis-2.2.2-0.tar.bz2
+#
+# To have conda build upload to anaconda.org automatically, use
+# $ conda config --set anaconda_upload yes
+</pre></div>
+</div>
+</li>
+<li><p class="first">리눅스:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>BUILD END: postgis-2.2.2-0
+Nothing to test for: postgis-2.2.2-0
+# If you want to upload this package to anaconda.org later, type:
+#
+# $ anaconda upload /home/adefusco/anaconda3/conda-bld/linux-64/postgis-2.2.2-0.tar.bz2
+#
+# To have conda build upload to anaconda.org automatically, use
+# $ conda config --set anaconda_upload yes
+</pre></div>
+</div>
+</li>
+</ul>
+<p>주의: 경로는 아나콘다가 설치된 위치에 따라 달라진다.</p>
+<p>패키지는 동일한 아키텍처의 시스템에만 설치될 수 있다.
+각 아키텍처를 위한 패키지를 만들려면 맥OS나 리눅스에서 별도로 <code class="docutils literal"><span class="pre">conda-build</span></code> 명령을 실행해야 한다.</p>
+</div>
+<div class="section" id="install">
+<span id="id9"></span><h2><a class="toc-backref" href="#id17">패키지 배포와 설치하기</a><a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">다음 명령으로 로컬 컴퓨터에 패키지를 설치한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install postgis --use-local
+</pre></div>
+</div>
+<p>위 방법 대신 <code class="docutils literal"><span class="pre">conda-build</span></code> 출력 끝에 나오는 <code class="docutils literal"><span class="pre">anaconda-upload</span></code> 명령을 사용해
+사용자의 <a class="reference external" href="http://anaconda.org/">Anaconda.org</a> 에 패키지를 업로드할 수 있다.</p>
+</li>
+<li><p class="first">다음 명령으로 어떤 사용자도 패키지를 설치할 수 있다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install -c CHANNEL postgis
+</pre></div>
+</div>
+<p>주의: <code class="docutils literal"><span class="pre">CHANNEL</span></code>를 사용자의 <a class="reference external" href="http://anaconda.org/">Anaconda.org</a> 사용자명으로 바꾼다.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id18">추가 정보</a><a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<p>콘다 래시피 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일에 사용할 수 있는 추가 옵션은 <a class="reference internal" href="../tasks/build-packages/define-metadata.html"><span class="doc">Defining metadata (meta.yaml)</span></a>와
+<a class="reference internal" href="../tasks/build-packages/sample-recipes.html"><span class="doc">Sample recipes</span></a>에서 볼 수 있다.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build-windows_ko.html" class="btn btn-neutral float-right" title="윈도우에서 콘다 패키지 빌드" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="build-pkgs_ko.html" class="btn btn-neutral" title="기초부터 패키지 빌드" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

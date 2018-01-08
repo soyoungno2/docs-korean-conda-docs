@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>콘다 소개 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Conda   documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>콘다 소개</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/intro_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>콘다 소개<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><strong>패키지, 하위 요소, 환경 관리를 어떤 언어에서도:Python, R, Scala, Java, Javascript, C/ C++, FORTRAN</strong></p>
+<p><strong>콘다</strong> 패키지 관리자 어플리케이션으로 패키지와 그 하위 요소를 빠르게 설치, 실행, 업데이트 할 수 있다. <strong>콘다 커맨드</strong> 는 다양한 패키지의 설치 관리를 위한 기초 인터페이스이다. 패키지 인덱스와 현재 설치를 쿼리하고 검색하거나 새로운 환경 생성, 기존 환경으로의 패키지 설치와 업데이트를 할 수 있다.
+<a class="reference internal" href="using/index_ko.html"><span class="doc">콘다 사용</span></a> 섹션에서 상세 정보를 볼 수 있다.</p>
+<p>콘다는 환경 관리자 어플리케이션이기도 하다. <strong>콘다 환경</strong> 이란 이미 설치된 콘다 패키지의 특정한 모임이다. 예를 들어 Numpy 1.7과 그 하위 요소를 포함 하는 환경과 구 버전 테스트를 위한 Numpy 1.6 을 포함하는 환경이 있다고 하자. 이 때 환경을 전환해도 다른 환경은 영향을 받지 않는다. 환경들 간에 전환, 활성화, 비활성화를 간단히 할 수 있다. 환경의 카피를 생성해 사용자의 환경을 공유할 수 있다. 카피는 yaml 파일이다.</p>
+<p>참고: <a class="reference internal" href="using/envs_ko.html"><span class="doc">환경 관리</span></a>.</p>
+<p><strong>콘다 패키지</strong> 는 압축된 tarball 파일로 시스템 레벨 라이브러리, 파이썬, 기타 모듈, 실행 프로그램, 그 외 다른 요소들을 포함한다. 콘다는 패키지와 플랫폼 간의 하위 요소 추적을 지속한다.</p>
+<p>콘다 패키지는 이를 포함하는 디렉토리로의 URL인 리모트 채널로 다운로드 된다. 콘다 커맨드는 채널의 디폴트셋을 찾고 패키지는 <a class="reference external" href="http://repo.continuum.io/pkgs/">http://repo.continuum.io/pkgs/</a> 로부터 자동으로 다운로드, 업데이트 된다.</p>
+<p>참고: <a class="reference internal" href="using/pkgs_ko.html"><span class="doc">패키지 관리</span></a>.</p>
+<p>사용자는 어떤 리모트 채널이 자동으로 검색될지 설정할 수 있다. 예를 들어, 개인 채널이나 내부 채널을 만들고자 할 때. (Configuration 에서 세부 사항을 보자.)</p>
+<p><strong>conda build</strong> 커맨드는 새로운 패키지를 생성한다. 생성된 패키지는 선택시 PyPi, GitHub, Anaconda.org 로 업로드 된다.</p>
+<p>참고: <a class="reference internal" href="building/build_ko.html"><span class="doc">빌드</span></a>, <a class="reference internal" href="glossary_ko.html"><span class="doc">용어집</span></a>.</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

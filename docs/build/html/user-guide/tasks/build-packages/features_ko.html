@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>기능 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>기능</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tasks/build-packages/features_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>기능<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>기능(feature)으로 이름과 버전이 같은 두 패키지를 구별한다.
+예를 들어, 기능은 특화된 컴파일러 또는 런타임이나 패키지의 포크(fork)를 나타낼 수 있다.
+기능의 대표적인 예시는 아나콘다 엑셀러레이트(Anaconda Accerlerate)의 mkl 기능이다.
+넘파이(NumPy)와 같은 MKL로 컴파일된 패키지는 mkl 기능 모음을 갖는다.
+mkl 메타패키지는 mkl 기능 모음을 track_features에 가지고 있다.
+따라서 이러한 패키지를 설치하면 mkl 기능을 설치하게 된다.
+기능 이름은 패키지 이름과는 별개이며 mkl이 패키지 이름이면서 패키지가 추적하는 기능의 이름인 것은 우연일 뿐이다.</p>
+<p>기능은 패키지 자체가 아니라 패키지가 설치된 환경에 속하는 것으로 생각한다.
+기능이 설치되면 콘다는 자동으로 설치된 기능이 있는 패키지로 교체한다.
+예를 들어, mkl 기능이 설치되면 일반 넘파이는 삭제되고 mkl 기능이 있는 넘파이 패키지가 설치된다.
+기능을 활성한다고 해서 아직 설치되지 않은 어떤 패키지를 설치하는 것은 아니다.
+하지만 설치된 기능을 갖는 패키지를 이후에 설치한다면 기능과 같은 환경에 설치하는 것이 좋다.</p>
+<p>기능을 설치하려면 그 기능을 추적하는 패키지를 설치한다.
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">remove</span> <span class="pre">--features</span></code> 명령으로 기능을 삭제한다.</p>
+<p>track_features를 위한 메타패키지를 생성하는 것이 좋다.
+기능이 없는 버전이 있는 패키지에 track_features를 추가하면 기능이 없는 패키지는 절대 선택되지 않는다.
+패키지의 track_features 사양으로부터 기능을 설치하면 콘다는 항상 기능을 추가하기 때문이다.</p>
+<p>예시: 기능 디버그를 갖는 패키지를 생성하고 싶다면 다음 코드로 패키지를 생성한다.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">features</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">debug</span>
+</pre></div>
+</div>
+<p>위 코드를 사용하면 다음과 같은 특별한 메타패키지를 생성한다.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+  <span class="c1"># This name doesn&#39;t have to be the same as the feature, but can avoid confusion if it is</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">debug</span>
+  <span class="c1"># This need not relate to the version of any of the packages with the</span>
+  <span class="c1"># feature. It is just a version for this metapackage.</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">track_features</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">debug</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

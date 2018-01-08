@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>콘다 패키지 서명 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Conda   documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>콘다 패키지 서명</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/signed-packages_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>콘다 패키지 서명<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><strong>PREVIEW RELEASE</strong></p>
+<p>콘다는 콘다 패키지의 RSA 서명을 인증할 수 있다. conda-build 는 키 쌍의 생성, 콘다 패키지 서명, 콘다 저장소 인덱스에 요구되는 패키지 메타데이터 추가를 할 수 있다. 키 사이즈에는 제한이 없고 디폴트는 2048 bits 이다.</p>
+<p>주어진 공개/개인 키 쌍에 대해 개인 키를 사용하는 어떤 파일도 서명할 수 있고 이 파일을 받는 다른 사용자가 파일을 사용하려면 공용키에 서명을 인증해야 한다. 서명을 인증한 사용자는 서명 또한 개인 키에 의해 생성 됐음을 보장받는다.</p>
+<div class="section" id="id2">
+<h2>요구사항<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>콘다 빌드 설치</li>
+<li>루트 환경에 PyCrypto 설치</li>
+<li>콘다 패키지 빌드 경험</li>
+<li>“conda index” 커맨드를 사용해 직접 콘다 저장소를 설정해 본 경험</li>
+<li>공개/개인 키 암호화의 기초에 익숙함</li>
+<li>전자 서명의 개념에 대한 이해</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>패키지 요약 서명<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>서명된 콘다 패키지 빌드는 다음 단계로 진행된다.:</p>
+<ol class="arabic simple">
+<li>공개/개인 키 쌍 생성.</li>
+<li>“conda sign” 커맨드를 사용한 패키지 서명.</li>
+<li>서명의 유효성 검증.</li>
+<li>저장소 인덱싱.</li>
+<li>서명된 패키지 사용.</li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h2>1단계: 공개/개인 키 쌍 생성.<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>먼저 공개/개인 키 쌍을 생성한다. 각각의 키 쌍에 명칭을 지정한다. 지정된 명칭은 서명 파일에 저장되어 클라이언트로 하여금 어떤 공개 키가 서명을 인증하는지 알 수 있도록 한다. 이번 예시에서 공개 키는 MyKey 로 명명된다.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">sign</span> <span class="o">--</span><span class="n">keygen</span> <span class="n">MyKey</span>
+</pre></div>
+</div>
+<p>주의: “MyKey” 를 실제로 사용하고자 하는 키 쌍의 명칭으로 대체한다.</p>
+</div>
+<div class="section" id="id5">
+<h2>2 단계: 패키지 서명.<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>서명할 콘다 패키지를 “conda sign” 커맨드로 보냄으로써 손쉽게 패키지 서명을 할 수 있다. 예를 들어, Linux-64 디렉토리의 모든 패키지를 서명하고 싶다면:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">repository</span><span class="o">&gt;/</span><span class="n">linux</span><span class="o">-</span><span class="mi">64</span>
+<span class="n">conda</span> <span class="n">sign</span> <span class="o">*.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+</pre></div>
+</div>
+<p>모든 콘다 패키지 옆에 <cite>.sig</cite> 파일을 확인할 수 있을 것이다.</p>
+<p>주의: 모든 콘다 패키지에 서명할 필요는 없다.; 서명하고자 하는 패키지를 고르면 된다.</p>
+</div>
+<div class="section" id="id6">
+<h2>3 단계: 서명이 유효한지 확인한다.<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>서명이 유효한지 확인하기 위해 conda sign verify 커맨드를 실행한다.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">sign</span> <span class="o">--</span><span class="n">verify</span> <span class="o">*.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>4 단계: 저장소 인덱싱<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>이제 <cite>conda index</cite> 커맨드를 실행해 <cite>repodata.json</cite> 파일을 업데이트 (또는 생성) 한다.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">index</span>
+</pre></div>
+</div>
+<p>콘다 저장소의 서명이 끝났다.</p>
+</div>
+<div class="section" id="id8">
+<h2>5 단계: 서명된 패키지 사용<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>서명된 패키지를 사용하려면 패키지를 설치하기 전에 저장소에 접근해 공용 키 파일을 <cite>~/.conda/keys</cite> 디렉토리에 추가해야 한다. 예시:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">~/.</span><span class="n">conda</span><span class="o">/</span><span class="n">keys</span>
+<span class="n">cp</span> <span class="o">&lt;</span><span class="n">some</span> <span class="n">download</span> <span class="n">folder</span><span class="o">&gt;/</span><span class="n">foo</span><span class="o">.</span><span class="n">pub</span> <span class="o">~/.</span><span class="n">conda</span><span class="o">/</span><span class="n">keys</span>
+</pre></div>
+</div>
+<p><cite>conda</cite> 커맨드로 서명된 패키지를 설치하려 하면 콘다는 서명 인증을 시도할 것이다.</p>
+<ul class="simple">
+<li>콘다가 서명을 찾으면 설치를 허용한다.</li>
+<li>다음과 같은 경우에 콘다는 설치를 종료한다. (i) 서명이 유요하지 않은 경우. (ii) 서명을 발견할 수 없는 경우. (iii) 공용 키가 설치되지 않은 경우.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

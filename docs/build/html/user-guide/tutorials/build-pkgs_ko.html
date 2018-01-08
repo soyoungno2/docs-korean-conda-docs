@@ -1,0 +1,520 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>기초부터 패키지 빌드 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../index.html"/>
+        <link rel="up" title="튜토리얼" href="index_ko.html"/>
+        <link rel="next" title="일반 코드 프로젝트를 위한 콘다 패키지 빌드" href="build-postgis_ko.html"/>
+        <link rel="prev" title="콘다 스켈레톤을 사용한 콘다 패키지 빌드" href="build-pkgs-skeleton_ko.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ko.html">사용자 가이드</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview_ko.html">개요</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts_ko.html">개념</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started_ko.html">시작 안내서</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/index_ko.html">설치</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/index_ko.html">설정</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index_ko.html">튜토리얼</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="build-pkgs-skeleton_ko.html">콘다 스켈레톤을 사용한 콘다 패키지 빌드</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">기초부터 패키지 빌드</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">튜토리얼 대상</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#before-you-start2">시작에 앞서</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#meta-yaml">meta.yaml 파일 편집하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-sh-bld-bat">빌드 스크립트 파일 build.sh와 bld.bat 작성하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-and-install">빌드와 설치하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#convert">모든 플랫폼을 위해 패키지 변환하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypi">선택—깃헙 대신 PyPI를 소스로 사용하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#anaconda-org">선택—새 패키지를 Anaconda.org에 업로드하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#more-resources">추가 정보</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="build-postgis_ko.html">일반 코드 프로젝트를 위한 콘다 패키지 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-windows_ko.html">윈도우에서 콘다 패키지 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-apps_ko.html">아나콘다 네비게이터 어플리케이션 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-nltk_ko.html">NLTK를 위한 콘다 패키지 빌드</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tasks/index_ko.html">작업</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cheatsheet_ko.html">Cheat sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting_ko.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index_ko.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index_ko.html">사용자 가이드</a> &raquo;</li>
+        
+          <li><a href="index_ko.html">튜토리얼</a> &raquo;</li>
+        
+      <li>기초부터 패키지 빌드</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tutorials/build-pkgs_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>기초부터 패키지 빌드<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id13">튜토리얼 대상</a></li>
+<li><a class="reference internal" href="#before-you-start2" id="id14">시작에 앞서</a></li>
+<li><a class="reference internal" href="#meta-yaml" id="id15">meta.yaml 파일 편집하기</a></li>
+<li><a class="reference internal" href="#build-sh-bld-bat" id="id16">빌드 스크립트 파일 build.sh와 bld.bat 작성하기</a></li>
+<li><a class="reference internal" href="#build-and-install" id="id17">빌드와 설치하기</a></li>
+<li><a class="reference internal" href="#convert" id="id18">모든 플랫폼을 위해 패키지 변환하기</a></li>
+<li><a class="reference internal" href="#pypi" id="id19">선택—깃헙 대신 PyPI를 소스로 사용하기</a></li>
+<li><a class="reference internal" href="#anaconda-org" id="id20">선택—새 패키지를 Anaconda.org에 업로드하기</a></li>
+<li><a class="reference internal" href="#more-resources" id="id21">추가 정보</a></li>
+</ul>
+</div>
+<p>이 튜토리얼은 콘다 래시피(conda recipe)에 필요한 파일을 작성해 파이인스트루먼트(Pyinstrument)를 콘다 패키지로 빌드하는 방법을 설명한다.</p>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id13">튜토리얼 대상</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>필요한 파일을 작성해 콘다 패키지를 생성하고자 하는 윈도우,맥OS,리눅스 사용자를 위한 튜토리얼이다.
+콘다 빌드(conda build)와 콘다 래시피에 대한 선행 지식이 도움이 될 것이다.</p>
+</div>
+<div class="section" id="before-you-start2">
+<span id="id3"></span><h2><a class="toc-backref" href="#id14">시작에 앞서</a><a class="headerlink" href="#before-you-start2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="index_ko.html"><span class="doc">요구 사항</span></a>을 확인한다.</li>
+<li><a class="reference internal" href="build-pkgs-skeleton_ko.html"><span class="doc">콘다 스켈레톤을 사용한 콘다 패키지 빌드</span></a>를 미리 해봐야 한다.</li>
+</ul>
+</div>
+<div class="section" id="meta-yaml">
+<span id="edit-meta-yaml"></span><h2><a class="toc-backref" href="#id15">meta.yaml 파일 편집하기</a><a class="headerlink" href="#meta-yaml" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">이 튜토리얼을 위해 <code class="docutils literal"><span class="pre">pyinstrument</span></code>라는 이름으로 디렉토리를 만들고 그 디렉토리로 이동한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir pyinstrument
+<span class="nb">cd</span> pyinstrument
+</pre></div>
+</div>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일을 생성하기 위해 가장 잘사용하는 편집기를 연다.
+새 텍스트 파일을 생성하고 아래 정보를 입력한다.
+빈 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 샘플의 테이블을 따라가면 정보를 더 쉽게 입력할 수 있다.</p>
+<p>주의: 알맞은 분류와 비교를 위해 <code class="docutils literal"><span class="pre">version</span></code>을 문자열로 입력한다.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>name</td>
+<td>pyinstrument</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>“0.13.1” (or latest from
+<a class="reference external" href="https://github.com/joerick/pyinstrument/releases">https://github.com/joerick/pyinstrument/releases</a>)</td>
+</tr>
+<tr class="row-odd"><td>git_rev</td>
+<td>v0.13.1 (or latest from
+<a class="reference external" href="https://github.com/joerick/pyinstrument/releases">https://github.com/joerick/pyinstrument/releases</a>)</td>
+</tr>
+<tr class="row-even"><td>git_url</td>
+<td><a class="reference external" href="https://github.com/joerick/pyinstrument.git">https://github.com/joerick/pyinstrument.git</a></td>
+</tr>
+<tr class="row-odd"><td>imports</td>
+<td>pyinstrument</td>
+</tr>
+<tr class="row-even"><td>home</td>
+<td><a class="reference external" href="https://github.com/joerick/pyinstrument">https://github.com/joerick/pyinstrument</a></td>
+</tr>
+<tr class="row-odd"><td>license</td>
+<td>BSD</td>
+</tr>
+<tr class="row-even"><td>license_file</td>
+<td>LICENSE</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span>
+
+<span class="l l-Scalar l-Scalar-Plain">source</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">git_rev</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">git_url</span><span class="p p-Indicator">:</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">setuptools</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+
+<span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">imports</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span>
+
+<span class="l l-Scalar l-Scalar-Plain">about</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">home</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">license</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">license_file</span><span class="p p-Indicator">:</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">편집한 파일을 <code class="docutils literal"><span class="pre">pyinstrument</span></code> 디렉토리에 <code class="docutils literal"><span class="pre">meta.yaml</span></code>로 저정한다.
+<a class="reference download internal" href="../../_downloads/meta1.yaml" download=""><code class="xref download docutils literal"><span class="pre">이</span> <span class="pre">meta.yaml</span> <span class="pre">파일</span></code></a>과 일치해야 한다.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="build-sh-bld-bat">
+<span id="id4"></span><h2><a class="toc-backref" href="#id16">빌드 스크립트 파일 build.sh와 bld.bat 작성하기</a><a class="headerlink" href="#build-sh-bld-bat" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">meta.yaml</span></code> 외에도 빌드를 위한 파일이 2개 더 필요하다.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">build.sh</span></code>—맥OS와 리눅스를 위한 셸 스크립트</li>
+<li><code class="docutils literal"><span class="pre">bld.bat</span></code>—윈도우를 위한 배치 파일</li>
+</ul>
+<p>이 빌드 파일들을 32-bit나 64bit 아키텍처와 같은 ARCH 변수나 빌드 환경 접두어와 같은 PREFIX 변수 등 모든 변수를 포함한다.
+<code class="docutils literal"><span class="pre">build.sh</span></code>와 <code class="docutils literal"><span class="pre">bld.bat</span></code>는 반드시 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일과 동일한 디렉토리에 있어야 한다.</p>
+<p>이 튜토리얼은 <code class="docutils literal"><span class="pre">build.sh</span></code>와 <code class="docutils literal"><span class="pre">bld.bat</span></code>를 모두 만들어 다른 사용자가 각자의 아키텍처에 맞는 패키지를 빌드할 수 있게 하는 방법을 설명한다.</p>
+<ol class="arabic">
+<li><p class="first">텍스트 편집기를 열어 <code class="docutils literal"><span class="pre">bld.bat</span></code>라는 이름으로 파일을 생성하고 다음과 같이 입력한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="s2">&quot;%PYTHON%&quot;</span> setup.py install --single-version-externally-managed --record<span class="o">=</span>record.txt
+<span class="k">if</span> errorlevel <span class="m">1</span> <span class="nb">exit</span> <span class="m">1</span>
+</pre></div>
+</div>
+<p>주의: <code class="docutils literal"><span class="pre">bld.bat</span></code>의 모든 명령 뒤에 <code class="docutils literal"><span class="pre">if</span> <span class="pre">errorlevel</span> <span class="pre">1</span> <span class="pre">exit</span> <span class="pre">1</span></code>을 추가해 명령이 실패했을 때 빌드도 실패하게 하면 좋은 연습이 될 것이다.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">bld.bat</span></code> 파일을 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일과 같은 디렉토리에 저장다.</p>
+</li>
+<li><p class="first">텍스트 편집기를 열어 <code class="docutils literal"><span class="pre">build.sh</span></code>라는 이름으로 파일을 생성하고 다음과 같이 입력한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">$PYTHON</span> setup.py install --single-version-externally-managed --record<span class="o">=</span>record.txt  <span class="c1"># Python command to install the script.</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">build.sh</span></code> 파일을 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일과 같은 디렉토리에 저장한다.</p>
+</li>
+</ol>
+<p><code class="docutils literal"><span class="pre">build.sh</span></code> 파일은 <code class="docutils literal"><span class="pre">bash</span> <span class="pre">-x</span> <span class="pre">-e</span></code>로 실행할 수 있다.
+<code class="docutils literal"><span class="pre">-x</span></code>는 실행된 각 명령은 에코(echo)한다.
+<code class="docutils literal"><span class="pre">-e</span></code>는 스크립트의 명령이 0이 아닌 exit 상태를 반환하면 스크립트를 종료한다.
+스크립트에서 이를 되돌리려면 <code class="docutils literal"><span class="pre">build.sh</span></code>에 <code class="docutils literal"><span class="pre">set</span></code> 명령을 사용한다.</p>
+</div>
+<div class="section" id="build-and-install">
+<span id="id5"></span><h2><a class="toc-backref" href="#id17">빌드와 설치하기</a><a class="headerlink" href="#build-and-install" title="Permalink to this headline">¶</a></h2>
+<p>이제 준비된 3개의 빌드 파일과 콘다 빌드를 사용해 패키지를 생성하고 로컬 컴퓨터에 설치할 수 있다.</p>
+<ol class="arabic">
+<li><p class="first">콘다 빌드를 실행한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda-build pyinstrument
+</pre></div>
+</div>
+<p>콘다 빌드가 끝나면 패키지 파일명과 위치를 보여준다.</p>
+<p>이 예제에서는 다음과 같이 저장된다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>~/anaconda/conda-bld/linux-64/pyinstrument-0.13.1-py27_0.tar.bz2
+</pre></div>
+</div>
+<p>주의: 다음 작업을 위해 이 경로와 파일 정보를 저장해둔다.
+정확한 경로와 파일명은 운영체제와 미니콘다와 아나콘다 중 어느 것을 사용했는지에 따라 달라진다.
+<code class="docutils literal"><span class="pre">conda-build</span></code> 명령은 정확한 경로와 파일명을 알려준다.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">use-local</span></code> 플래그를 사용해 새로 빌드한 프로그램을 로컬 컴퓨터에 설치한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install --use-local pyinstrument
+</pre></div>
+</div>
+<p>에러메세지가 안나타나면 파이인스트루먼트가 성공적으로 설치된 것이다.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="convert">
+<span id="id6"></span><h2><a class="toc-backref" href="#id18">모든 플랫폼을 위해 패키지 변환하기</a><a class="headerlink" href="#convert" title="Permalink to this headline">¶</a></h2>
+<p>콘다 빌드로 현재 플랫폼을 위한 패키지를 빌드했다.
+<code class="docutils literal"><span class="pre">build.sh</span></code>와 <code class="docutils literal"><span class="pre">bld.bat</span></code>를 사용하면 이 패키지를 다른 플랫폼에서 사용할 수 있게 변환할 수 있다.</p>
+<p><code class="docutils literal"><span class="pre">conda</span> <span class="pre">convert</span></code> 명령에 플랫폼 지정자를 사용해 변환한다. 플랫폼 지정자는 다음과 같다.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">osx-64</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">linux-32</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">linux-64</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">win-32</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">win-64</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">all</span></code>.</li>
+</ul>
+<p>예시: 플랫폼 지정자 <code class="docutils literal"><span class="pre">all</span></code>을 사용한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda convert --platform all ~/anaconda/conda-bld/linux-64/pyinstrument-0.13.1-py27_0.tar.bz2 -o outputdir/
+</pre></div>
+</div>
+<p>주의: 경로와 파일명을 <a class="reference internal" href="#build-and-install"><span class="std std-ref">빌드와 설치하기</span></a>에서 저장한 것으로 바꾼다.</p>
+</div>
+<div class="section" id="pypi">
+<span id="pypi-source"></span><h2><a class="toc-backref" href="#id19">선택—깃헙 대신 PyPI를 소스로 사용하기</a><a class="headerlink" href="#pypi" title="Permalink to this headline">¶</a></h2>
+<p>깃헙(Github) 대신 PyPI나 다른 레포지토리를 사용할 수 있다.
+PyPI와 같은 레포지토리의 타르볼(tarball) 파일로 빌드하거나 깃(Git)으로부터 빌드해도 콘다 빌드에는 큰 차이가 없다.
+동일한 소스가 호스팅되기 때문에 깃헙 대신 PyPI에서도 쉽게 스크립트를 찾을 수 있다.</p>
+<p>위의 예제의 <code class="docutils literal"><span class="pre">source</span></code> 부분을</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git_rev: v0.13.1
+git_url: https://github.com/joerick/pyinstrument.git
+</pre></div>
+</div>
+<p>아래와 같이 바꾼다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>fn: pyinstrument-0.13.1.tar.gz
+md5: e347036acc50720c0903dc2221b2605d
+url: https://pypi.python.org/packages/source/p/pyinstrument/pyinstrument-0.13.1.tar.gz
+</pre></div>
+</div>
+<p>주의: <code class="docutils literal"><span class="pre">md5</span></code>는 <a class="reference external" href="https://pypi.python.org/pypi/pyinstrument">PyPI 파이인스트루먼트 페이지</a>에서 찾을 수 있다.</p>
+</div>
+<div class="section" id="anaconda-org">
+<span id="id8"></span><h2><a class="toc-backref" href="#id20">선택—새 패키지를 Anaconda.org에 업로드하기</a><a class="headerlink" href="#anaconda-org" title="Permalink to this headline">¶</a></h2>
+<p>다른 플랫폼에서 사용할 수 있게 패키지 변환을 하고 나면 이전엔 binstar.org였던 Anaconda.org에 파일을 업로드할지 결정할 수 있다.
+무료 Anaconda.org 계정이 있다면 몇 분 만에 할 수 있다.</p>
+<ol class="arabic">
+<li><p class="first">Anaconda.org 계정이 없다면 무료 계정을 만들고 사용자명과 암호를 기록해 둔다.</p>
+</li>
+<li><p class="first"><a href="#id9"><span class="problematic" id="id10">``</span></a>conda install anaconda-client``명령을 실행하고 앞서 만든 사용자명과 암호를 입력한다.</p>
+</li>
+<li><p class="first">다음 명령으로 <a class="reference external" href="http://anaconda.org">Anaconda.org</a> 계정에 로그인한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>anaconda login
+</pre></div>
+</div>
+</li>
+<li><p class="first">패키지를 Anaconda.org에 업로드한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>anaconda upload ~/miniconda/conda-bld/linux-64/pyinstrument-0.12-py27_0.tar.bz
+</pre></div>
+</div>
+<p>주의: 경로와 파일명을 <a class="reference internal" href="#build-and-install"><span class="std std-ref">빌드와 설치하기</span></a>에서 저장한 것으로 바꾼다.</p>
+<p>팁: <code class="docutils literal"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--set</span> <span class="pre">anaconda_upload</span> <span class="pre">yes</span></code>명령을 사용해
+콘다가 성공적으로 빌드된 패키지를 항상 Anaconda.org에 업로드하게 하면 시간을 절약할 수 있다.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="more-resources">
+<span id="id12"></span><h2><a class="toc-backref" href="#id21">추가 정보</a><a class="headerlink" href="#more-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">meta.yaml</span></code>에 사용할 수 있는 모든 값에 대한 정보는
+<a class="reference internal" href="../tasks/build-packages/define-metadata.html"><span class="doc">Defining metadata (meta.yaml)</span></a>에 있다.</li>
+<li><a class="reference internal" href="../../commands_ko.html"><span class="doc">명령 레퍼런스</span></a>.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build-postgis_ko.html" class="btn btn-neutral float-right" title="일반 코드 프로젝트를 위한 콘다 패키지 빌드" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="build-pkgs-skeleton_ko.html" class="btn btn-neutral" title="콘다 스켈레톤을 사용한 콘다 패키지 빌드" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building Anaconda Navigator applications &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>Building Anaconda Navigator applications</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tutorials/build-apps.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-anaconda-navigator-applications">
+<h1>Building Anaconda Navigator applications<a class="headerlink" href="#building-anaconda-navigator-applications" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#who-is-this-for" id="id1">Who is this for?</a></li>
+<li><a class="reference internal" href="#before-you-start" id="id2">Before you start</a></li>
+<li><a class="reference internal" href="#creating-a-skeleton-recipe" id="id3">Creating a skeleton recipe</a></li>
+<li><a class="reference internal" href="#modifying-requirements-in-meta-yaml" id="id4">Modifying requirements in meta.yaml</a></li>
+<li><a class="reference internal" href="#entering-the-app-in-meta-yaml" id="id5">Entering the app in meta.yaml</a></li>
+<li><a class="reference internal" href="#building" id="id6">Building</a></li>
+<li><a class="reference internal" href="#uploading-to-cloud" id="id7">Uploading to Cloud</a></li>
+<li><a class="reference internal" href="#configuring-navigator" id="id8">Configuring Navigator</a></li>
+<li><a class="reference internal" href="#troubleshooting" id="id9">Troubleshooting</a></li>
+<li><a class="reference internal" href="#more-information" id="id10">More information</a></li>
+</ul>
+</div>
+<p>This tutorial describes how to build an Anaconda Navigator app
+of the <a class="reference external" href="https://www.yhat.com/products/rodeo">Rodeo IDE</a>.</p>
+<p>The conda build recipe for Rodeo is generated by
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">skeleton</span></code>. Three modifications to the files in the build
+recipe are required to declare the package as an app. The package
+is built and uploaded to your Anaconda Cloud channel. After
+adding the channel in Navigator, the app appears on the <strong>Home</strong>
+tab.</p>
+<p>NOTE: Applications to be built for Navigator should have a
+graphical user interface (GUI). Not all conda packages have
+GUIs.</p>
+<div class="section" id="who-is-this-for">
+<h2><a class="toc-backref" href="#id1">Who is this for?</a><a class="headerlink" href="#who-is-this-for" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial is for Windows, macOS and Linux users who wish to
+generate a Navigator app conda package from a PyPI package.
+Prior knowledge of conda build or conda recipes is recommended.</p>
+</div>
+<div class="section" id="before-you-start">
+<h2><a class="toc-backref" href="#id2">Before you start</a><a class="headerlink" href="#before-you-start" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Check the <a class="reference internal" href="index.html"><span class="doc">prerequisites</span></a>.</li>
+<li>You need an account on <a class="reference external" href="https://anaconda.org">Anaconda Cloud</a>.
+Your user name is referred to as your “Anaconda Cloud channel.”</li>
+</ul>
+</div>
+<div class="section" id="creating-a-skeleton-recipe">
+<span id="skeleton"></span><h2><a class="toc-backref" href="#id3">Creating a skeleton recipe</a><a class="headerlink" href="#creating-a-skeleton-recipe" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">In your user home directory, run the <code class="docutils literal"><span class="pre">conda</span> <span class="pre">skeleton</span></code>
+command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>conda skeleton pypi rodeo
+</pre></div>
+</div>
+<p>This creates a directory named <code class="docutils literal"><span class="pre">rodeo</span></code> and creates 3
+skeleton files in that directory: <code class="docutils literal"><span class="pre">meta.yaml</span></code>, <code class="docutils literal"><span class="pre">build.sh</span></code>
+and <code class="docutils literal"><span class="pre">bld.bat</span></code>.</p>
+</li>
+<li><p class="first">Use the <code class="docutils literal"><span class="pre">ls</span></code> command on macOS or Linux or the <code class="docutils literal"><span class="pre">dir</span></code>
+command on Windows to verify that the skeleton files have been
+created.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="modifying-requirements-in-meta-yaml">
+<span id="requires"></span><h2><a class="toc-backref" href="#id4">Modifying requirements in meta.yaml</a><a class="headerlink" href="#modifying-requirements-in-meta-yaml" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Open the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file in a text editor.</li>
+<li>In the requirements section, change the <code class="docutils literal"><span class="pre">ipython</span></code> entries to
+<code class="docutils literal"><span class="pre">jupyter</span></code>.</li>
+</ol>
+<p>The full requirements section should look like this:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">setuptools</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">jupyter</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">flask &gt;=0.10.1</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">docopt</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pyzmq &gt;=13</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mistune</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">jupyter</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">flask &gt;=0.10.1</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">docopt</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pyzmq &gt;=13</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mistune</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="entering-the-app-in-meta-yaml">
+<span id="app-entry"></span><h2><a class="toc-backref" href="#id5">Entering the app in meta.yaml</a><a class="headerlink" href="#entering-the-app-in-meta-yaml" title="Permalink to this headline">¶</a></h2>
+<p>To declare a conda package as an app, you must add the app
+parameter to the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file. The app section contains
+four keys: entry, icon, summary and type.</p>
+<p>The entry tag defines how Navigator is to launch the package. For
+the Rodeo IDE, separate entry tags are required for Windows,
+macOS and Linux.</p>
+<ol class="arabic">
+<li><p class="first">Open the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file in a text editor.</p>
+</li>
+<li><p class="first">Add the following lines:</p>
+<ul>
+<li><p class="first">For Windows and Linux, add the entry tag:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">entry</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rodeo .                              [win]</span>
+  <span class="l l-Scalar l-Scalar-Plain">entry</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rodeo .                              [linux]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For macOS, you must provide a launch script:</p>
+<ol class="arabic">
+<li><p class="first">In a text editor,
+create a new file in the conda build recipe directory
+called <code class="docutils literal"><span class="pre">rodeo_mac.command</span></code>. Add the following code:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">DIR</span><span class="o">=</span><span class="k">$(</span>dirname <span class="nv">$0</span><span class="k">)</span>
+
+<span class="nv">$DIR</span>/rodeo <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To make sure that the file gets installed, add these
+lines to the <code class="docutils literal"><span class="pre">build.sh</span></code> script:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> <span class="sb">`</span>uname<span class="sb">`</span> <span class="o">==</span> Darwin <span class="o">]</span>
+<span class="k">then</span>
+    cp <span class="nv">$RECIPE_DIR</span>/rodeo_mac.command <span class="nv">$PREFIX</span>/bin
+<span class="k">fi</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add this line to the app section in <code class="docutils literal"><span class="pre">meta.yaml</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>entry: open ${PREFIX}/bin/rodeo_mac.command [osx]
+</pre></div>
+</div>
+</li>
+<li><p class="first">A logo PNG file to be displayed in Navigator is provided
+in the conda build recipe. Download the app.png file from
+<a class="reference external" href="https://github.com/yhat/rodeo/blob/master/resources/app.png">https://github.com/yhat/rodeo/blob/master/resources/app.png</a>
+directly from the Github repository to the directory that
+contains the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file.</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<p>The completed app section should look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>app:
+  entry: rodeo .                              [win]
+  entry: rodeo .                              [linux]
+  entry: open ${PREFIX}/bin/rodeo_mac.command [osx]
+  icon: app.png
+  summary: Rodeo Data Science IDE
+  type: web
+</pre></div>
+</div>
+<p>You can download full versions of the
+<a class="reference download internal" href="../../_downloads/meta.yaml" download=""><code class="xref download docutils literal"><span class="pre">meta.yaml</span></code></a> and
+<a class="reference download internal" href="../../_downloads/build.sh" download=""><code class="xref download docutils literal"><span class="pre">build.sh</span></code></a> files.</p>
+</div>
+<div class="section" id="building">
+<span id="build4"></span><h2><a class="toc-backref" href="#id6">Building</a><a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
+<p>To make the package available on all platforms, you need to
+build and upload the rodeo package separately on Windows, macOS
+and Linux machines.</p>
+<p>Use conda build to create the package:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda-build rodeo
+</pre></div>
+</div>
+<p>When conda build is finished, it displays the path and filename
+of the conda package.</p>
+<p>If the <code class="docutils literal"><span class="pre">conda-build</span></code> command fails, see <a class="reference internal" href="build-pkgs-skeleton_ko.html#troubleshooting"><span class="std std-ref">예시 문제를 위한 트러블슈팅</span></a>.</p>
+<p>Windows example file path:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>C:\Users\jsmith\Miniconda\conda-bld\win-64\rodeo-0.4.4-py35_0.tar.bz2
+</pre></div>
+</div>
+<p>macOS example file path:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>/Users/jsmith/miniconda/conda-bld/osx-64/rodeo-0.4.4-py35_0.tar.bz2
+</pre></div>
+</div>
+<p>Linux example file path:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>/home/jsmith/miniconda/conda-bld/linux-64/rodeo-0.4.4-py35_0.tar.bz2
+</pre></div>
+</div>
+<p>NOTE: Your path and filename vary depending on your installation
+and operating system. Save the path and filename information for
+the next task.</p>
+</div>
+<div class="section" id="uploading-to-cloud">
+<span id="upload"></span><h2><a class="toc-backref" href="#id7">Uploading to Cloud</a><a class="headerlink" href="#uploading-to-cloud" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">In a Terminal window or an Anaconda Prompt, navigate to your root conda environment.</p>
+</li>
+<li><p class="first">Log in to Cloud:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>anaconda login
+</pre></div>
+</div>
+</li>
+<li><p class="first">When prompted, enter your Cloud account name and password.</p>
+<p>If the login is successful, you see output similar to the
+following:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Using Anaconda Cloud api site https://api.anaconda.org
+Username: defusco
+defusco&#39;s Password:
+login successful
+</pre></div>
+</div>
+</li>
+<li><p class="first">Now that you are logged into your channel, upload the Rodeo
+conda package:</p>
+<ul>
+<li><p class="first">On Windows:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>anaconda upload C:\Users\jsmith\Miniconda\conda-bld\win-64\rodeo-0.4.4-py35_0.tar.bz2
+</pre></div>
+</div>
+</li>
+<li><p class="first">On macOS and Linux:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>anaconda upload /home/jsmith/miniconda/conda-bld/linux-64/rodeo-0.4.4-py35_0.tar.bz2
+</pre></div>
+</div>
+<p>NOTE: Change your path and filename to the exact path and
+filename you saved in <a class="reference internal" href="build-apps_ko.html#build4"><span class="std std-ref">빌드하기</span></a>. Your path and filename
+vary depending on your installation and operating system.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>For more information about Cloud, see the <a class="reference external" href="https://docs.continuum.io/anaconda-cloud/">Anaconda Cloud documentation</a>.</p>
+</div>
+<div class="section" id="configuring-navigator">
+<span id="navigator"></span><h2><a class="toc-backref" href="#id8">Configuring Navigator</a><a class="headerlink" href="#configuring-navigator" title="Permalink to this headline">¶</a></h2>
+<p>Now that you have uploaded the Rodeo package to your Cloud
+channel, you need to add the channel to Navigator.</p>
+<ol class="arabic">
+<li><p class="first">Launch Navigator:</p>
+<ul class="simple">
+<li>On Windows and Linux, use the <strong>Start</strong> menu.</li>
+<li>On macOS, you can launch it from the Desktop
+or through Spotlight.</li>
+</ul>
+</li>
+<li><p class="first">On the far left, open the <strong>Environments</strong> tab:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/conda_navigator-home.png"><img alt="../../_images/conda_navigator-home.png" src="../../_images/conda_navigator-home.png" style="width: 300.0px; height: 275.0px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">Add your channel:</p>
+<ol class="arabic">
+<li><p class="first">Click the Channel button.</p>
+</li>
+<li><p class="first">Click the Add button.</p>
+</li>
+<li><p class="first">Type the URL to your Cloud channel:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>https://conda.anaconda.org/CHANNEL
+</pre></div>
+</div>
+<p>NOTE: Replace <code class="docutils literal"><span class="pre">CHANNEL</span></code> with your Cloud user name.</p>
+</li>
+<li><p class="first">Click the Update Channels button:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/conda_navigator-channel.png"><img alt="../../_images/conda_navigator-channel.png" src="../../_images/conda_navigator-channel.png" style="width: 338.5px; height: 400.5px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Navigator closes and then restarts. The Rodeo app is
+displayed on the <strong>Home</strong> tab:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/conda_navigator-rodeo.png"><img alt="../../_images/conda_navigator-rodeo.png" src="../../_images/conda_navigator-rodeo.png" style="width: 273.0px; height: 310.0px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="troubleshooting">
+<span id="troubleshooting4"></span><h2><a class="toc-backref" href="#id9">Troubleshooting</a><a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="conda-build-fails">
+<h3>Conda build fails<a class="headerlink" href="#conda-build-fails" title="Permalink to this headline">¶</a></h3>
+<p>If the conda recipe fails to build, see <a class="reference internal" href="../troubleshooting.html"><span class="doc">Troubleshooting</span></a>.</p>
+</div>
+<div class="section" id="app-does-not-appear-on-the-home-pane">
+<h3>App does not appear on the home pane<a class="headerlink" href="#app-does-not-appear-on-the-home-pane" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Check that the conda package has been uploaded to your Cloud
+channel.</p>
+</li>
+<li><p class="first">Check that your channel has been added to the Channels list.</p>
+</li>
+<li><p class="first">You may have to remove your <code class="docutils literal"><span class="pre">.anaconda/navigator</span></code> directory
+and then restart Navigator.</p>
+<p>NOTE: On Windows, macOS and Linux, <code class="docutils literal"><span class="pre">.anaconda/navigator</span></code> is
+in your Home directory.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="app-does-not-launch">
+<h3>App does not launch<a class="headerlink" href="#app-does-not-launch" title="Permalink to this headline">¶</a></h3>
+<p>Check that the app works correctly from the command line:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>conda run rodeo
+</pre></div>
+</div>
+<p>If rodeo starts correctly, you may have to remove your
+<code class="docutils literal"><span class="pre">.anaconda/navigator</span></code> directory and restart Navigator.</p>
+<p>NOTE: On Windows, macOS and Linux, <code class="docutils literal"><span class="pre">.anaconda/navigator</span></code>
+is in your Home directory.</p>
+</div>
+</div>
+<div class="section" id="more-information">
+<span id="help4"></span><h2><a class="toc-backref" href="#id10">More information</a><a class="headerlink" href="#more-information" title="Permalink to this headline">¶</a></h2>
+<p>See <cite>../../commands/build/conda-skeleton-pypi</cite> for more options.</p>
+<p>For more information about adding <strong>Start</strong> menu items in
+Windows, see the <a class="reference external" href="https://github.com/ContinuumIO/menuinst/wiki">menuinst</a> documentation.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

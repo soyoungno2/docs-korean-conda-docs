@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>탭 자동 완성 활성화 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../index.html"/>
+        <link rel="up" title="설정" href="index_ko.html"/>
+        <link rel="next" title="튜토리얼" href="../tutorials/index_ko.html"/>
+        <link rel="prev" title="다중 사용자 콘다 설치 관리" href="admin-multi-user-install_ko.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ko.html">사용자 가이드</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview_ko.html">개요</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts_ko.html">개념</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started_ko.html">시작 안내서</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/index_ko.html">설치</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index_ko.html">설정</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="use-condarc_ko.html">.condarc 콘다 설정 파일 사용</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample-condarc_ko.html">.condarc 파일 예시</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin-multi-user-install_ko.html">다중 사용자 콘다 설치 관리</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">탭 자동 완성 활성화</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/index_ko.html">튜토리얼</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tasks/index_ko.html">작업</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cheatsheet_ko.html">Cheat sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting_ko.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index_ko.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index_ko.html">사용자 가이드</a> &raquo;</li>
+        
+          <li><a href="index_ko.html">설정</a> &raquo;</li>
+        
+      <li>탭 자동 완성 활성화</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/configuration/enable-tab-completion_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>탭 자동 완성 활성화<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>콘다는 argcomplete 패키지를 통해 배쉬(bash) 셸에서 탭 자동완성을 지원한다.</p>
+<p>탭 자동 완성을 활성화한다.</p>
+<ol class="arabic">
+<li><p class="first">argcomplete가 설치되었는지 확인한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install argcomplete
+</pre></div>
+</div>
+</li>
+<li><p class="first">배쉬 프로파일에 다음 코드를 추가한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>register-python-argcomplete conda<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">테스트한다.</p>
+<ol class="arabic">
+<li><p class="first">터미널이나 아나콘다 프롬프트를 새로 연다.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">conda</span> <span class="pre">ins</span></code>를 입력하고 탭 키를 누른다.</p>
+<p>다음과 같이 나타난다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+<p>zsh에서 탭 자동 완성을 사용하려면 <a class="reference external" href="https://github.com/esc/conda-zsh-completion">콘다 zsh 자동 완성</a>을 본다.</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tutorials/index_ko.html" class="btn btn-neutral float-right" title="튜토리얼" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="admin-multi-user-install_ko.html" class="btn btn-neutral" title="다중 사용자 콘다 설치 관리" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

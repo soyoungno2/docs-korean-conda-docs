@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>콘다 채널 관리 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Conda   documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>콘다 채널 관리</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/channels_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>콘다 채널 관리<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>여러개의 채널이 동일한 패키지를 갖는 것이 가능하기 때문에 콘다는 반드시 여러개의 채널이 충돌하지 않게끔 관리해야 한다.
+디폴트 채널만을 사용하거나 다른 채널과 중복되지 않는 패키지만 포함하는 채널을 사용할 경우 채널간의 충돌은 없다.
+콘다가 채널간의 충돌을 해결하는 방법은 여러개의 채널을 동일한 패키지를 호스팅하는 채널 리스트에 가지고 있을 때만 유효하다.</p>
+<div class="section" id="id2">
+<h2>콘다 4.1.0 이전<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>2016년 6월 14일에 배포된 4.1.0 버전 이전의 콘다는 두개의 채널이 동일한 이름의 패키지를 호스팅할 때
+버전 번호가 가장 높은 패키지를 설치했다. 두 패키지가 동일한 버전 번호를 갖는다면 콘다는 빌드 번호가 높은 쪽을 설치했다.
+버전 번호와 빌드 번호가 동일할 때만 채널의 순서가 설치될 채널을 결정했다. 이 방식은 세가지 문제가 있다.</p>
+<p>1. <em>다른 채널의 빌드 번호와 비교할 수 없다.</em> 채널 A 는 일간으로 빌드되고 채널 B 는 주간으로 빌드 되었다고 하자.
+이 때 채널 B 의 빌드 2는 채널 A 의 빌드 4 보다 최신 버전이다.</p>
+<ol class="arabic simple" start="2">
+<li><em>사용자가 선호하는 채널을 지정할 수 없다.</em> 채널 A 보다 채널 B 를 신뢰해 채널 B 의 패키지가 더
+오래된 버전일지라도 채널 B 를 통해 패키지를 받고자 할 수 있다.
+4.1.0 버전 이전에는 선호하는 채널을 고를 방법이 없었다. 오로지 버전과 빌드 번호에 따라 패키지가 설치 된다.</li>
+<li><em>빌드 번호 충동.</em> 이 문제는 앞서 다룬 두 문제로 인해 발생한다.
+채널 A 로부터 패키지 알파, 채널 B 로부터 패키지 베타를 사용하고 있다고 하자.
+채널 B 의 공급자가 알파 버전의 패키지를 아주 높은 빌드 번호로 채널 B 에 추가하면
+사용자가 원치 않더라도 채널 B 로부터 알파를 설치한다.
+이 경우에 의도치 않은 문제와 고의적인 공격의 위험이 있다.</li>
+</ol>
+</div>
+<div class="section" id="id3">
+<h2>콘다 4.1.0 이후<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>이제 콘다는 우선 순위가 높은 채널의 패키지를 선호하는 것이 디폴트이다.
+따라서 채널을 채널 목록 하단에 두면 디폴트 채널에 없는 패키지를 안전하게 다운로드할 수 있다.
+채널 목록 하단에 있는 채널은 핵심 패키지셋을 건드리지 않는다.</p>
+<p>디폴트에 의해 콘다는 채널 목록의 모든 채널로부터 동일한 명칭의 패키지를 모두 가져오고
+이를 채널 우선순위가 높은 순서로 분류한다. 분류된 채널을 버전 번호, 빌드 번호에 따라 다시 분류하고
+설치 사양을 만족하는 첫번째 패키지를 설치한다.</p>
+<p>콘다가 이전 방식대로 채널 목록으로부터 가장 최신 버전의 패키지를 설치하게 하려면 .condarc 파일에
+<code class="docutils literal"><span class="pre">channel_priority:</span> <span class="pre">false</span></code> 를 추가한다. (<code class="docutils literal"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--set</span> <span class="pre">channel_priority</span> <span class="pre">false</span></code>
+커맨드를 사용하는 것과 동일하다.) 이제 콘다는 패키지 목록을 버전 번호가 높은 순서로 분류한다.
+분류된 채널들을 채널 우선순위, 빌드 번호에 따라 다시 분류한다.
+다른 채널로부터 가져온 빌드 번호는 비교가 불가능하므로 채널 우선순위 다음으로 빌드번호를 분류한다.</p>
+<p><code class="docutils literal"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--add</span> <span class="pre">channels</span> <span class="pre">new_channel</span></code> 커맨드는 채널 리스트 상단에 새로운 채널을 추가해
+높은 우선수위를 부여한다. <code class="docutils literal"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--prepend</span> <span class="pre">channels</span> <span class="pre">new_channel</span></code> 커맨드와 동일하다.
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--append</span> <span class="pre">channels</span> <span class="pre">new_channel</span></code> 커맨드는 채널 리스트 하단에 새로운 채널을 추가해
+낮은 우선순위를 부여한다.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

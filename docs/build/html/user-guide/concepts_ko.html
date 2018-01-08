@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>개념 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../index.html"/>
+        <link rel="up" title="사용자 가이드" href="index_ko.html"/>
+        <link rel="next" title="시작 안내서" href="getting-started_ko.html"/>
+        <link rel="prev" title="개요" href="overview_ko.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index_ko.html">사용자 가이드</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview_ko.html">개요</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">개념</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">콘다 디렉토리 구조</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concept-conda-env">콘다 환경</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concept-conda-package">콘다 패키지</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started_ko.html">시작 안내서</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install/index_ko.html">설치</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration/index_ko.html">설정</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/index_ko.html">튜토리얼</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks/index_ko.html">작업</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cheatsheet_ko.html">Cheat sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting_ko.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_ko.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index_ko.html">사용자 가이드</a> &raquo;</li>
+        
+      <li>개념</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/concepts_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>개념<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id5">콘다 디렉토리 구조</a></li>
+<li><a class="reference internal" href="#concept-conda-env" id="id6">콘다 환경</a></li>
+<li><a class="reference internal" href="#concept-conda-package" id="id7">콘다 패키지</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id5">콘다 디렉토리 구조</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>이 절은 콘다 시스템의 디렉토리 구조에 대해 설명한다.</p>
+<p><strong>ROOT_DIR</strong></p>
+<p>아나콘다(Anaconda)나 미니콘다(Miniconda)가 설치되는 디렉토리다.</p>
+<p>예:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>/opt/Anaconda
+C:\Anaconda
+</pre></div>
+</div>
+<p><em>/pkgs</em></p>
+<p>PKGS_DIR라고도 한다.
+이 디렉토리에는 콘다 환경에 연결할 수 있는 패키지가 압축 해제되어 있다.
+각 패키지는 패키지의 표준 이름(canonical name)과 같은 이름의 하위 디렉토리에 있다.</p>
+<p><em>/envs</em></p>
+<p>추가로 생성한 콘다 환경이 만들어지는 시스템 디렉토리다.</p>
+<p>아나콘다 환경은 기본적으로 다음과 같은 하위 디렉토리로 구성된다.</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal"><span class="pre">/bin</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">/include</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">/lib</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">/share</span></code></div>
+<div class="line"><br /></div>
+</div>
+<p>다른 콘다 환경도 보통 이와 같은 하위 디렉토리를 가진다.</p>
+</div>
+<div class="section" id="concept-conda-env">
+<span id="id3"></span><h2><a class="toc-backref" href="#id6">콘다 환경</a><a class="headerlink" href="#concept-conda-env" title="Permalink to this headline">¶</a></h2>
+<p>콘다 환경(conda environment)은 사용자가 지정한 특정 패키지 모음을 가지는 디렉토리다.
+예를 들어, Numpy 1.7과 그 의존 요소를 포함하는 환경과 레거시 테스트를 위해 Numpy1.6을 포함하는 환경이 있다고 하자.
+하나의 환경을 수정해도 다른 환경은 영향을 받지 않는다.
+환경을 활성화(activate)하거나 비활성화(deactivate)함으로써 쉽게 환경을 바꿀 수 있다.
+<code class="docutils literal"><span class="pre">environment.yaml</span></code> 파일의 복사본을 사용하여 다른 사용자와 환경을 쉽게 공유할 수도 있다.
+보다 자세한 정보는 <a class="reference internal" href="tasks/manage-environments_ko.html"><span class="doc">환경 관리</span></a>에 있다.</p>
+</div>
+<div class="section" id="concept-conda-package">
+<span id="id4"></span><h2><a class="toc-backref" href="#id7">콘다 패키지</a><a class="headerlink" href="#concept-conda-package" title="Permalink to this headline">¶</a></h2>
+<p>콘다 패키지는 시스템 레벨 라이브러리, 파이썬이나 그 외 모듈, 실행 가능한 프로그램과 기타 구성 요소가 포함된 타르볼(tarball) 압축파일이다.
+콘다는 패키지와 플랫폼 간의 의존 요소를 추적한다.</p>
+<p>콘다 패키지는 해당 패키지를 포함하는 디렉토리 URL인 원격 채널(remote channel)에서 내려받는다.
+<code class="docutils literal"><span class="pre">conda</span></code> 명령어는 디폴트 채널 집합을 검색한다.
+패키지는 <a class="reference external" href="http://repo.continuum.io/pkgs/">http://repo.continuum.io/pkgs/</a> 로부터 자동으로 내려닫거나 업데이트한다.
+패키지를 검색할 원격 채널을 변경할 수도 있다.
+이런 방식으로 개인(private) 채널이나 내부(internal) 채널을 관리하는 것도 가능하다.
+자세한 정보는 <a class="reference internal" href="configuration/use-condarc_ko.html#config-channels"><span class="std std-ref">채널 경로 (channels)</span></a>과 <a class="reference internal" href="tasks/manage-pkgs_ko.html"><span class="doc">패키지 관리</span></a>를 참고한다.</p>
+<p>콘다 패키지의 형식은 모든 플랫폼과 운영체제에서 동일하다.</p>
+<p>터미널이나 아나콘다 프롬프트에서 다음을 실행해 콘다 패키지를 설치한다.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="p">[</span><span class="n">packagename</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>주의: (위 명령에서)&nbsp;<code class="docutils literal"><span class="pre">[packagename]</span></code>를 설치하고자 하는 패키지 이름으로 바꾼다.</p>
+<p>콘다 패키지에는 “.tar.bz2” 확장자로 가지는 bzip 압축 타르(tar) 저장소(archive) 파일에 대한 링크가 포함된다.
+저장소 파일에는 <code class="docutils literal"><span class="pre">info/</span></code> 디렉토리에 복사되는 메타데이터와 <code class="docutils literal"><span class="pre">install</span></code> 접두어(prefix)로 지정한 디렉토리에 설치될 파일들을 포함된다.</p>
+<p>설치 과정에서 압축해제된 파일들은 <code class="docutils literal"><span class="pre">info/</span></code> 디렉토리로 복사되거나 <code class="docutils literal"><span class="pre">install</span></code> 접두어로 지정한 디렉토리에 복사된다.
+콘다 패키지 파일을 콘다 환경에 설치하는 것은 해당 환경에 대한 디렉토리로 이동해 zip 파일과 의존 요소를 다운로드하고 압축을 푸는 것으로 생각할 수 있다.
+이 과정이 <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">[packagename]</span></code> 명령어 하나로 실행된다.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="getting-started_ko.html" class="btn btn-neutral float-right" title="시작 안내서" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview_ko.html" class="btn btn-neutral" title="개요" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

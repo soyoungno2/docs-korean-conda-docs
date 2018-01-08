@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>콘다 빌드 래시피 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>콘다 빌드 래시피</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tasks/build-packages/recipe_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>콘다 빌드 래시피<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="install-conda-build_ko.html"><span class="doc">콘다와 콘다 빌드(conda build)를 설치하고 업데이트</span></a>해야 콘파 패키지를 빌드할 수 있다.</p>
+<p>콘다 패키지를 빌드하려면 래시피가 있어야 한다. 콘다 빌드 래시피는 다음 파일을 포함하는 단층 디렉토리다.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">meta.yaml</span></code>—래시피의 모든 메타데이터를 포함하는 파일이다.
+<code class="docutils literal"><span class="pre">package/name</span></code>과 <code class="docutils literal"><span class="pre">package/version</span></code>만이 필수 사항이다.</li>
+<li><code class="docutils literal"><span class="pre">build.sh</span></code>—맥OS와 리눅스에 패키지 파일을 설치하는 빌드 스크립트다. <code class="docutils literal"><span class="pre">bash</span></code> 명령으로 실행된다.</li>
+<li><code class="docutils literal"><span class="pre">bld.bat</span></code>—윈도우에 패키지 파일을 설치하는 빌드 스크립트다. <code class="docutils literal"><span class="pre">cmd</span></code>로 실행된다.</li>
+<li><code class="docutils literal"><span class="pre">run_test.[py,pl,sh,bat]</span></code>—파이썬 테스트 파일로 선택 사항이다. 래시피에 들어가 있으면 자동으로 실행된다.</li>
+<li>소스에 적용되는 선택적 패치 파일.</li>
+<li>소스에 포함되지 않으면서 빌드 스크립트로 생성할 수 없는 다른 리소스. 예시로는 아이콘 파일, 리드미(readme) 파일, 빌드 노트가 있다.</li>
+</ul>
+<p>팁: <cite>conda skeleton &lt;skeleton_ref&gt;</cite> 명령을 사용하면 <code class="docutils literal"><span class="pre">meta.yaml</span></code>, <code class="docutils literal"><span class="pre">build.sh</span></code>, <code class="docutils literal"><span class="pre">bld.bat</span></code> 파일이 자동으로 생성된다.</p>
+<div class="section" id="id2">
+<h2>콘다 빌드 과정<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">conda-build</span></code> 명령은 다음 단계를 수행한다.</p>
+<ol class="arabic simple">
+<li>메타데이터를 읽는다.</li>
+<li>캐시에 소스를 다운로드한다.</li>
+<li>소스 디렉토리로 소스를 추출한다.</li>
+<li>패치가 있다면 적용한다.</li>
+<li>메타데이터 값을 채우기 위해 소스가 필요하면 메타데이터를 다시 검사한다.</li>
+<li>빌드 환경을 생성하고 그 환경에 빌드 의존 요소를 설치한다.</li>
+<li>빌드 스크립트를 실행한다. 현재 작업 디렉토리가 환경 변수 모음을 포함하는 소스 디렉토리가 된다. 빌드 스크립트는 빌드 환경에 설치한다.</li>
+<li>shebang과 rpath와 같은 필요한 작업 후 단계를 진행한다.</li>
+<li>필수 콘다 패키지 메타데이터와 5단계에서 빌드 환경에 설치된 모든 파일을 포함한 콘다 패키지를 생성한다.</li>
+<li>래시피에 테스트 스크립트가 포함되어 있으면 콘다 패키지를 테스트한다.<ol class="arabic">
+<li>빌드 환경을 삭제한다.</li>
+<li>패키지와 의존 요소를 포함하는 테스트 환경을 생성한다.</li>
+<li>테스트 스크립트를 실행한다.</li>
+</ol>
+</li>
+</ol>
+<p><a class="reference external" href="https://github.com/continuumio/conda-recipes">콘다 래시피</a> 레포지토리에 여러 콘다 패키지의 래시피 예시가 있다.</p>
+<p>경고: <code class="docutils literal"><span class="pre">meta.yaml</span></code>과 빌드 스크립트를 포함한 모든 래시피 파일은 사용자에게 배포될 최종 패키지 저장소(archive)에 포함되어야 한다.
+공개될 수 있는 위치에 암호와 같은 민감한 정보를 넣지 않도록 주의한다.</p>
+<p><cite>conda skeleton &lt;skeleton_ref&gt;</cite> 명령은 <a class="reference external" href="https://pypi.python.org/pypi">PyPI</a>와 같이
+일반적으로 사용되는 레포지토리를 위한 래시피를 만드는데 도움이 될 수 있다.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

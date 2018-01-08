@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Concepts &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>Concepts</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/concepts.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="concepts">
+<h1>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#conda-directory-structure" id="id1">Conda directory structure</a></li>
+<li><a class="reference internal" href="#conda-environments" id="id2">Conda environments</a></li>
+<li><a class="reference internal" href="#conda-packages" id="id3">Conda packages</a></li>
+</ul>
+</div>
+<div class="section" id="conda-directory-structure">
+<h2><a class="toc-backref" href="#id1">Conda directory structure</a><a class="headerlink" href="#conda-directory-structure" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the conda system directory structure.</p>
+<p><strong>ROOT_DIR</strong></p>
+<p>The directory that Anaconda or Miniconda was installed into.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>/opt/Anaconda
+C:\Anaconda
+</pre></div>
+</div>
+<p><em>/pkgs</em></p>
+<p>Also referred to as PKGS_DIR. This directory contains
+decompressed packages, ready to be linked in conda environments.
+Each package resides in a subdirectory corresponding to its
+canonical name.</p>
+<p><em>/envs</em></p>
+<p>The system location for additional conda environments to be
+created.</p>
+<p>The following subdirectories comprise the default Anaconda
+environment:</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal"><span class="pre">/bin</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">/include</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">/lib</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">/share</span></code></div>
+<div class="line"><br /></div>
+</div>
+<p>Other conda environments usually contain the same subdirectories
+as the default environment.</p>
+</div>
+<div class="section" id="conda-environments">
+<span id="concept-conda-env"></span><h2><a class="toc-backref" href="#id2">Conda environments</a><a class="headerlink" href="#conda-environments" title="Permalink to this headline">¶</a></h2>
+<p>A conda environment is a directory that contains a specific
+collection of conda packages that you have installed. For
+example, you may have one environment with NumPy 1.7 and its
+dependencies, and another environment with NumPy 1.6 for legacy
+testing. If you change one environment, your other environments
+are not affected. You can easily activate or deactivate
+environments, which is how you switch between them. You can also
+share your environment with someone by giving them a copy of your
+<code class="docutils literal"><span class="pre">environment.yaml</span></code> file. For more information, see
+<a class="reference internal" href="tasks/manage-environments.html"><span class="doc">Managing environments</span></a>.</p>
+</div>
+<div class="section" id="conda-packages">
+<span id="concept-conda-package"></span><h2><a class="toc-backref" href="#id3">Conda packages</a><a class="headerlink" href="#conda-packages" title="Permalink to this headline">¶</a></h2>
+<p>A conda package is a compressed tarball file that contains
+system-level libraries, Python or other modules, executable
+programs and other components. Conda keeps track of the
+dependencies between packages and platforms.</p>
+<p>Conda packages are downloaded from remote channels, which are
+URLs to directories containing conda packages. The <code class="docutils literal"><span class="pre">conda</span></code>
+command searches a default set of channels, and packages are
+automatically downloaded and updated from
+<a class="reference external" href="http://repo.continuum.io/pkgs/">http://repo.continuum.io/pkgs/</a>. You can modify what remote
+channels are automatically searched. You might want to do this to
+maintain a private or internal channel. For details, see
+<a class="reference internal" href="configuration/use-condarc_ko.html#config-channels"><span class="std std-ref">채널 경로 (channels)</span></a>. See also <a class="reference internal" href="tasks/manage-pkgs.html"><span class="doc">Managing packages</span></a>.</p>
+<p>The conda package format is identical across platforms and
+operating systems.</p>
+<p>To install conda packages, in the Terminal or an Anaconda Prompt, run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="p">[</span><span class="n">packagename</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>NOTE: Replace <code class="docutils literal"><span class="pre">[packagename]</span></code> with the desired package name.</p>
+<p>A conda package includes a link to a tarball or bzipped tar
+archive, with the extension “.tar.bz2”, which contains metadata
+under the <code class="docutils literal"><span class="pre">info/</span></code> directory and a collection of files that are
+installed directly into an <code class="docutils literal"><span class="pre">install</span></code> prefix.</p>
+<p>During the install process, files are extracted into the
+<code class="docutils literal"><span class="pre">install</span></code> prefix, except for files in the <code class="docutils literal"><span class="pre">info/</span></code>
+directory. Installing the files of a conda package into an
+environment can be thought of as changing the directory to an
+environment, and then downloading and extracting the .zip file
+and its dependencies—all with the single
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">[packagename]</span></code> command.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

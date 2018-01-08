@@ -1,0 +1,637 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building conda packages on Windows &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>Building conda packages on Windows</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tutorials/build-windows.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-conda-packages-on-windows">
+<h1>Building conda packages on Windows<a class="headerlink" href="#building-conda-packages-on-windows" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#before-you-start" id="id1">Before you start</a></li>
+<li><a class="reference internal" href="#toolkit" id="id2">Toolkit</a><ul>
+<li><a class="reference internal" href="#microsoft-visual-studio" id="id3">Microsoft Visual Studio</a></li>
+<li><a class="reference internal" href="#alternatives-to-microsoft-visual-studio" id="id4">Alternatives to Microsoft Visual Studio</a></li>
+<li><a class="reference internal" href="#windows-versions" id="id5">Windows versions</a></li>
+<li><a class="reference internal" href="#other-tools" id="id6">Other tools</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#developing-a-build-strategy" id="id7">Developing a build strategy</a></li>
+<li><a class="reference internal" href="#building-with-a-python-version-different-from-your-miniconda-installation" id="id8">Building with a Python version different from your Miniconda installation</a></li>
+<li><a class="reference internal" href="#automated-testing" id="id9">Automated testing</a></li>
+<li><a class="reference internal" href="#building-a-sep-package-with-conda-and-python-2-or-3" id="id10">Building a SEP package with conda and Python 2 or 3</a><ul>
+<li><a class="reference internal" href="#install-visual-studio" id="id11">Install Visual Studio</a></li>
+<li><a class="reference internal" href="#make-a-conda-skeleton-recipe" id="id12">Make a conda skeleton recipe</a></li>
+<li><a class="reference internal" href="#edit-the-skeleton-files" id="id13">Edit the skeleton files</a></li>
+<li><a class="reference internal" href="#create-a-test-file" id="id14">Create a test file</a></li>
+<li><a class="reference internal" href="#build-the-package" id="id15">Build the package</a></li>
+<li><a class="reference internal" href="#check-the-output" id="id16">Check the output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#building-a-pyslalib-package-with-conda-and-python-2-or-3" id="id17">Building a pySLALIB package with conda and Python 2 or 3</a></li>
+</ul>
+</div>
+<p>This tutorial describes how to use conda build to create conda
+packages on the Windows operating system, using the examples of
+SEP and pySLALIB.</p>
+<p>The final built packages from this tutorial are available on
+<a class="reference external" href="https://anaconda.org">Anaconda Cloud</a>:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://anaconda.org/wwarner/sep/files">SEP</a>.</li>
+<li><a class="reference external" href="https://anaconda.org/wwarner/pyslalib/files">pySLALIB</a>.</li>
+</ul>
+<p>This tutorial also describes writing recipes. You can see the
+final <a class="reference external" href="https://github.com/conda/conda-docs/tree/master/docs/source/user-guide/tutorials/sep">SEP recipe</a>
+and the <a class="reference external" href="https://github.com/conda/conda-docs/tree/master/docs/source/user-guide/tutorials/pyslalib">pySLALIB recipe</a>
+on GitHub in the <a class="reference external" href="https://github.com/conda/conda-docs">conda documentation repository</a>.</p>
+<div class="section" id="before-you-start">
+<h2><a class="toc-backref" href="#id1">Before you start</a><a class="headerlink" href="#before-you-start" title="Permalink to this headline">¶</a></h2>
+<p>Before you start, check the <a class="reference internal" href="index.html"><span class="doc">prerequisites</span></a>.</p>
+</div>
+<div class="section" id="toolkit">
+<h2><a class="toc-backref" href="#id2">Toolkit</a><a class="headerlink" href="#toolkit" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="microsoft-visual-studio">
+<h3><a class="toc-backref" href="#id3">Microsoft Visual Studio</a><a class="headerlink" href="#microsoft-visual-studio" title="Permalink to this headline">¶</a></h3>
+<p>In the standard practices of the conda developers, conda packages
+for different versions of Python are each built with their own
+version of Visual Studio (VS):</p>
+<ul class="simple">
+<li>Python 2.7 packages with Visual Studio 2008</li>
+<li>Python 3.4 packages with VS 2010</li>
+<li>Python 3.5 packages with VS 2015</li>
+<li>Python 3.6 packages with VS 2015</li>
+</ul>
+<p>Using these versions of VS to build packages for each of these
+versions of Python is also the practice used for the official
+python.org builds of Python. Currently VS 2008 and VS 2010 are
+available only through resellers, while VS 2015 can be purchased
+online from Microsoft.</p>
+</div>
+<div class="section" id="alternatives-to-microsoft-visual-studio">
+<h3><a class="toc-backref" href="#id4">Alternatives to Microsoft Visual Studio</a><a class="headerlink" href="#alternatives-to-microsoft-visual-studio" title="Permalink to this headline">¶</a></h3>
+<p>There are free alternatives available for each version of the VS
+compilers:</p>
+<ul class="simple">
+<li>Instead of VS 2008, it is often possible to substitute the
+<a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=44266">free Microsoft Visual C++ Compiler for Python 2.7</a>.</li>
+<li>Instead of VS 2010, it is often possible to substitute the
+<a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=8279">free Microsoft Windows SDK for Windows 7 and .NET Framework 4</a>.</li>
+<li>Make sure that you also install <a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=23691">VS 2010 Service Pack 1 (SP1)</a>.</li>
+<li>Due to a bug in the VS 2010 SP1 installer, the compiler tools
+may be removed during installation of VS 2010 SP1. They can be
+restored as described in <a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=4422">Microsoft Visual C++ 2010 Service
+Pack 1 Compiler Update for the Windows SDK 7.1</a>.</li>
+<li>Visual Studio 2015 has a <a class="reference external" href="https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx">full featured free Community edition</a>
+for academic research, open source projects and certain other
+use cases.</li>
+</ul>
+<p>The MS Visual C++ Compiler for Python 2.7 and the Microsoft
+Windows SDK for Windows 7 and .NET Framework 4 are both
+reasonably well tested. Conda build is carefully tested to
+support these configurations, but there are known issues with the
+CMake build tool and these free VS 2008 and 2010 alternatives.
+In these cases, you should prefer the “NMake Makefile” generator,
+rather than a Visual Studio solution generator.</p>
+</div>
+<div class="section" id="windows-versions">
+<h3><a class="toc-backref" href="#id5">Windows versions</a><a class="headerlink" href="#windows-versions" title="Permalink to this headline">¶</a></h3>
+<p>You can use any recent version of Windows. These examples were
+built on Windows 8.1.</p>
+</div>
+<div class="section" id="other-tools">
+<h3><a class="toc-backref" href="#id6">Other tools</a><a class="headerlink" href="#other-tools" title="Permalink to this headline">¶</a></h3>
+<p>Some environments initially lack tools such as bzip2 or Git
+that may be needed for some build workflows.</p>
+<p>Git is available through conda: <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">git</span></code></p>
+<p>You can obtain bzip2 the same way. The conda bzip2 package
+includes only the bzip2 library and not the bzip2 executable, so
+some users may need to install the bzip2 executable from another
+source such as <a class="reference external" href="http://gnuwin32.sourceforge.net/packages/bzip2.htm">http://gnuwin32.sourceforge.net/packages/bzip2.htm</a>.
+Place this executable somewhere on PATH. One good option is to
+place it in your Miniconda/Anaconda install path, in the
+<code class="docutils literal"><span class="pre">Library/bin</span></code> folder.</p>
+</div>
+</div>
+<div class="section" id="developing-a-build-strategy">
+<h2><a class="toc-backref" href="#id7">Developing a build strategy</a><a class="headerlink" href="#developing-a-build-strategy" title="Permalink to this headline">¶</a></h2>
+<p>Conda recipes are typically built with a trial-and-error method.
+Often the first attempt to build a package fails with compiler
+or linker errors, often caused by missing dependencies. The person
+writing the recipe then examines these errors and modifies the
+recipe to include the missing dependencies, usually as part of the
+<code class="docutils literal"><span class="pre">meta.yaml</span></code> file. Then the recipe writer attempts the build
+again, and after a few of these cycles of trial and error, the
+package builds successfully.</p>
+</div>
+<div class="section" id="building-with-a-python-version-different-from-your-miniconda-installation">
+<h2><a class="toc-backref" href="#id8">Building with a Python version different from your Miniconda installation</a><a class="headerlink" href="#building-with-a-python-version-different-from-your-miniconda-installation" title="Permalink to this headline">¶</a></h2>
+<p>Miniconda2 and Miniconda3 can each build packages for either
+Python 2 or Python 3 simply by specifying the version you want.
+Miniconda2 includes only Python 2, and Miniconda3 includes only
+Python 3.</p>
+<p>Installing only one makes it easier to keep track of
+the builds, but it is possible to have both installed on the same
+system at the same time. If you have both installed, use the
+<code class="docutils literal"><span class="pre">where</span></code> command to see which version comes first on PATH since
+this is the one you will be using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">where</span> <span class="n">python</span>
+</pre></div>
+</div>
+<p>To build a package for a Python version other than the one in
+your Miniconda installation, use the <code class="docutils literal"><span class="pre">--python</span></code> option in the
+<code class="docutils literal"><span class="pre">conda-build</span></code> command.</p>
+<p>EXAMPLE: To build a Python 3.5 package with Miniconda2:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span><span class="o">-</span><span class="n">build</span> <span class="n">recipeDirectory</span> <span class="o">--</span><span class="n">python</span><span class="o">=</span><span class="mf">3.5</span>
+</pre></div>
+</div>
+<p>NOTE: Replace <code class="docutils literal"><span class="pre">recipeDirectory</span></code> with the name and path of your
+recipe directory.</p>
+</div>
+<div class="section" id="automated-testing">
+<h2><a class="toc-backref" href="#id9">Automated testing</a><a class="headerlink" href="#automated-testing" title="Permalink to this headline">¶</a></h2>
+<p>After the build, if the recipe directory contains a test file
+named <code class="docutils literal"><span class="pre">run_test.bat</span></code> on Windows, or <code class="docutils literal"><span class="pre">run_test.sh</span></code> on macOS or Linux,
+or <code class="docutils literal"><span class="pre">run_test.py</span></code> on any platform, the file runs to test the package,
+and any errors are reported.</p>
+<p>NOTE: Use the <a class="reference internal" href="../tasks/build-packages/define-metadata.html#meta-test"><span class="std std-ref">Test section of the meta.yaml file</span></a> to move data files from the recipe directory to the
+test directory when the test is run.</p>
+</div>
+<div class="section" id="building-a-sep-package-with-conda-and-python-2-or-3">
+<h2><a class="toc-backref" href="#id10">Building a SEP package with conda and Python 2 or 3</a><a class="headerlink" href="#building-a-sep-package-with-conda-and-python-2-or-3" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://sep.readthedocs.io">SEP documentation</a> states
+that SEP runs on Python 2 and 3, and it depends only on NumPy.
+Searching for SEP and PyPI shows that there is already <a class="reference external" href="https://pypi.python.org/pypi/sep">a PyPI
+package for SEP</a>.</p>
+<p>Because a PyPI package for SEP already exists, the
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">skeleton</span></code> command can make a skeleton or outline of a
+conda recipe based on the PyPI package. Then the recipe outline
+can be completed manually, and conda can build a conda package
+from the completed recipe.</p>
+<div class="section" id="install-visual-studio">
+<h3><a class="toc-backref" href="#id11">Install Visual Studio</a><a class="headerlink" href="#install-visual-studio" title="Permalink to this headline">¶</a></h3>
+<p>If you have not already done so, install the appropriate version
+of Visual Studio:</p>
+<ul class="simple">
+<li>For Python 3—Visual Studio 2015:<ol class="arabic">
+<li>Choose Custom install.</li>
+<li>Under Programming Languages, choose to install Visual C++ .</li>
+</ol>
+</li>
+<li>For Python 2—Visual Studio 2008:<ol class="arabic">
+<li>Choose Custom install.</li>
+<li>Choose to install X64 Compilers and Tools. Install Service
+Pack 1.</li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="make-a-conda-skeleton-recipe">
+<h3><a class="toc-backref" href="#id12">Make a conda skeleton recipe</a><a class="headerlink" href="#make-a-conda-skeleton-recipe" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Run the skeleton command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">skeleton</span> <span class="n">pypi</span> <span class="n">sep</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">skeleton</span></code> command installs into a newly created
+directory called <code class="docutils literal"><span class="pre">sep</span></code>.</p>
+</li>
+<li><p class="first">Go to the <code class="docutils literal"><span class="pre">sep</span></code> directory to view the files:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">sep</span>
+</pre></div>
+</div>
+<p>Three skeleton files have been created:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">bld.bat</span></code> for Windows.</li>
+<li><code class="docutils literal"><span class="pre">build.sh</span></code> for macOS/Linux.</li>
+<li><code class="docutils literal"><span class="pre">meta.yaml</span></code> for all platforms.</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="edit-the-skeleton-files">
+<h3><a class="toc-backref" href="#id13">Edit the skeleton files</a><a class="headerlink" href="#edit-the-skeleton-files" title="Permalink to this headline">¶</a></h3>
+<p>For this package, <code class="docutils literal"><span class="pre">bld.bat</span></code> and <code class="docutils literal"><span class="pre">build.sh</span></code> need no changes.
+You need to edit the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file to add the dependency on
+NumPy and add an optional test for the built package by importing
+it.</p>
+<ol class="arabic simple">
+<li>In the requirements section of the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file, add a
+line that adds NumPy as a requirement to build the package.</li>
+<li>Add a second line to list NumPy as a requirement to run the
+package.</li>
+</ol>
+<p>Set the NumPy version to the letters <code class="docutils literal"><span class="pre">x.x</span></code>.</p>
+<p>Make sure the new line is aligned with <code class="docutils literal"><span class="pre">-</span> <span class="pre">python</span></code> on the
+line above it.</p>
+<p>EXAMPLE:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy     x.x</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy     x.x</span>
+</pre></div>
+</div>
+<p>NOTE: Using the letters <code class="docutils literal"><span class="pre">x.x</span></code> instead of a specific version
+such as <code class="docutils literal"><span class="pre">1.11</span></code> pins NumPy dynamically, so that the actual
+version of NumPy is taken from the build command. Currently NumPy
+is the only package that can be pinned dynamically. Pinning is
+important for SEP because this package uses NumPy’s C API through
+Cython. That API changes between NumPy versions, so it is
+important to use the same NumPy version at runtime that was used
+at build time.</p>
+<div class="section" id="optional-add-a-test-for-the-built-package">
+<h4>Optional—Add a test for the built package<a class="headerlink" href="#optional-add-a-test-for-the-built-package" title="Permalink to this headline">¶</a></h4>
+<p>Adding this optional test will test the package at the end of the
+build by making sure that the Python statement <code class="docutils literal"><span class="pre">import</span> <span class="pre">sep</span></code>
+runs successfully:</p>
+<ol class="arabic simple">
+<li>In the test section, remove the <code class="docutils literal"><span class="pre">#</span></code> used to comment out the
+lines <code class="docutils literal"><span class="pre">test:</span></code> and <code class="docutils literal"><span class="pre">imports:</span></code>.</li>
+<li>Add <code class="docutils literal"><span class="pre">-</span> <span class="pre">sep</span></code>, checking to be sure that the indentation is
+consistent with the rest of the file.</li>
+</ol>
+<p>EXAMPLE:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
+  <span class="c1"># Python imports</span>
+  <span class="l l-Scalar l-Scalar-Plain">imports</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sep</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="create-a-test-file">
+<h3><a class="toc-backref" href="#id14">Create a test file</a><a class="headerlink" href="#create-a-test-file" title="Permalink to this headline">¶</a></h3>
+<p>Make a new test file called <code class="docutils literal"><span class="pre">run_test.py</span></code> containing the
+following code adapted from <a class="reference external" href="https://sep.readthedocs.org/en/v0.5.x/detection.html">Background estimation and source
+detection</a>,
+and save it to the <code class="docutils literal"><span class="pre">sep</span></code> directory:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sep</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">))</span>
+
+<span class="c1"># Measure a spatially variable background of some image data</span>
+<span class="c1"># (a numpy array)</span>
+<span class="n">bkg</span> <span class="o">=</span> <span class="n">sep</span><span class="o">.</span><span class="n">Background</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># ... or with some optional parameters</span>
+<span class="c1"># bkg = sep.Background(data, mask=mask, bw=64, bh=64, fw=3, fh=3)</span>
+</pre></div>
+</div>
+<p>After the build, this file is run to test the newly built package.</p>
+<p>Now the recipe is complete.</p>
+</div>
+<div class="section" id="build-the-package">
+<h3><a class="toc-backref" href="#id15">Build the package</a><a class="headerlink" href="#build-the-package" title="Permalink to this headline">¶</a></h3>
+<p>Build the package using the recipe you just created:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span><span class="o">-</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">numpy</span><span class="o">=</span><span class="mf">1.11</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-the-output">
+<h3><a class="toc-backref" href="#id16">Check the output</a><a class="headerlink" href="#check-the-output" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Check the output to make sure that the build completed
+successfully. The output contains the location of the final
+package file and a command to upload the package to Anaconda
+Cloud.</li>
+<li>If there are any linker or compiler errors, modify the recipe
+and build again.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="building-a-pyslalib-package-with-conda-and-python-2-or-3">
+<h2><a class="toc-backref" href="#id17">Building a pySLALIB package with conda and Python 2 or 3</a><a class="headerlink" href="#building-a-pyslalib-package-with-conda-and-python-2-or-3" title="Permalink to this headline">¶</a></h2>
+<p>This procedure describes how to build a package with Python 2 or
+Python 3. Follow the instructions for the version that you want
+to build with.</p>
+<p>Because pySLALIB includes Fortran, building it requires a Fortran
+compiler. Because there is no PyPI package for pySLALIB, you
+cannot use a skeleton recipe generated by using
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">skeleton</span></code>. You must create the recipe from scratch. The
+steps to build pySLALIB are similar to the steps to build SEP,
+but they also include installing the Fortran compiler, writing
+<code class="docutils literal"><span class="pre">meta.yaml</span></code> to fetch the package from GitHub instead of PyPI
+and applying the correct patches to the Fortran code.</p>
+<p>To build a pySLALIB package:</p>
+<ol class="arabic">
+<li><p class="first">Install Visual Studio:</p>
+<ul class="simple">
+<li>For Python 3, install Visual Studio 2015. Choose Custom
+install. Under Programming Languages, choose to install
+Visual C++.</li>
+<li>For Python 2, install Visual Studio 2008. Choose Custom
+install. Choose to install X64 Compilers and Tools. Install
+Visual Studio 2008 Service Pack 1.</li>
+</ul>
+</li>
+<li><p class="first">Install Intel Parallel Studio Composer Edition. Go to <a class="reference external" href="https://software.intel.com/en-us/fortran-compilers">the
+Intel Fortran Compilers page</a>. Choose
+Try &amp; Buy. Choose Parallel Studio Composer Edition for
+Windows. You may choose the version with Fortran only
+instead of the version with Fortran and C++. There is a free
+30-day trial available. Fill out the form, including your
+email address. Intel will email you a download link.</p>
+<ul class="simple">
+<li>For Python 3, download and install Intel Parallel Studio XE
+Composer Edition for Fortran Windows.</li>
+<li>For Python 2, open the download page for Intel Parallel
+Studio XE Composer Edition for Fortran Windows. Select
+Additional downloads, latest updates and prior versions.
+Select version 2013 Update 6. This is Intel Visual Fortran
+Composer XE 2013 SP1 (compiler version 14.0), the most
+recent Intel Fortran compiler that works with Visual Studio
+2008. Choose Download Now and install this version.</li>
+</ul>
+</li>
+<li><p class="first">Install Git. Because the pySLALIB package sources are
+retrieved from GitHub for the build, you must install Git:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">git</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make a recipe. You can write a recipe from scratch, or use
+the <a class="reference external" href="https://github.com/conda/conda-docs/tree/master/docs/source/user-guide/tutorials/pyslalib">recipe we wrote</a>.
+This recipe contains 4 files:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">meta.yaml</span></code> sets the GitHub location of the pySLALIB files
+and how the system will apply the
+<code class="docutils literal"><span class="pre">intel_fortran_use.patch</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">bld.bat</span></code> is a Windows batch script that ensures that the
+correct 32-bit or 64-bit libraries are linked during the
+build and runs the build.</li>
+<li><code class="docutils literal"><span class="pre">run_test.py</span></code> is a test adapted from the one in the
+pySLALIB GitHub repository to check that the build completed
+successfully.</li>
+<li><code class="docutils literal"><span class="pre">intel_fortran_use.patch</span></code> is a patch to the pySLALIB
+Fortran code so that it works with the Intel Fortran
+compiler.</li>
+</ul>
+</li>
+<li><p class="first">In your home directory, create a recipe directory named
+<code class="docutils literal"><span class="pre">pyslalib</span></code> and copy in the 4 files mentioned in the previous
+step.</p>
+</li>
+<li><p class="first">Build the package.</p>
+<ul class="simple">
+<li>For Python 3, in the <strong>Apps</strong> menu, under Intel Parallel
+Studio XE 2016, open the Compiler 16.0 Update 3 for Intel 64
+Visual Studio 2015 environment command prompt.</li>
+<li>For Python 2, in the <strong>Apps</strong> menu, under Intel Parallel
+Studio XE 2013, open the Intel 64 Visual Studio 2008 mode command prompt.</li>
+</ul>
+</li>
+<li><p class="first">Run <code class="docutils literal"><span class="pre">conda-build</span></code>, using the correct path name of the recipe
+directory, including your correct user name. In this example,
+the user name is “builder”:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span><span class="o">-</span><span class="n">build</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">builder</span>\<span class="n">pyslalib</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Check the output to make sure the build completed
+successfully. The output also contains the location of the
+final package file and a command to upload the package to
+Cloud.</p>
+</li>
+<li><p class="first">In case of any linker or compiler errors, modify the recipe
+and run it again.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>콘다와 R 사용하기 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Conda   documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>콘다와 R 사용하기</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/r-with-conda_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="r">
+<h1>콘다와 R 사용하기<a class="headerlink" href="#r" title="Permalink to this headline">¶</a></h1>
+<p>리눅스, OS X, 윈도우를 위함.</p>
+<p>콘다가 설치 되었다면 R 프로그래밍 언어와 80여개의 사용 빈도가 높은 R 패키지를 손쉽게 설치할 수 있다.
+이 패키지들은 하나의 커맨드로 설치되며 데이터 사이언스를 위한 패키지들이다.
+콘다는 사용자의 패키지와 하위 요소들이 최신 버전이 되도록 돕는다.
+사용자만의 R 패키지를 손쉽게 생성하고 공유할 수 있다.</p>
+<p>R-Essentials 는 아나콘다와 매우 유사하게 작동한다.:</p>
+<ul class="simple">
+<li>하나의 커맨드로 많이 사용되는 패키지와 그 하위 요소를 모두 설치한다.: <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">r-essentials</span></code></li>
+<li>하나의 커맨드로 모든 패키지와 그 하위 요소를 업데이트 한다.: <code class="docutils literal"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">r-essentials</span></code></li>
+<li>커맨드로 R-Essentials 의 단일 패키지를 업데이트 한다. (R 채널에서 신규 버전의 패키지가 사용 가능한 경우): <code class="docutils literal"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">r-XXXX</span></code></li>
+</ul>
+<div class="section" id="r-essentials">
+<h2>“R Essentials” 설치<a class="headerlink" href="#r-essentials" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://www.continuum.io/downloads">아나콘다를 다운받고 설치한다.</a></li>
+<li>현재 환경에 R Essentials 패키지를 설치한다.: <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">r-essentials</span></code></li>
+</ol>
+</div>
+<div class="section" id="id2">
+<h2>사용자만의 R 번들을 생성하고 공유<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>사용자만의 R 번들을 생성하고 공유하는 것은 콘다 패키지를 생성 공유하는 것과 유사하다.</p>
+<p>예를 들어 간단한 커스텀 R 번들 메타 패키지를 생성하고 “Custom-R-Bundle” 로 이름 짓는다.
+이 번들은 몇개의 일반적인 프로그램과 그 하위 요소를 포함한다. 아래 커맨드를 사용:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">metapackage</span> <span class="n">custom</span><span class="o">-</span><span class="n">r</span><span class="o">-</span><span class="n">bundle</span> <span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span> <span class="o">--</span><span class="n">dependencies</span> <span class="n">r</span><span class="o">-</span><span class="n">irkernel</span> <span class="n">jupyter</span> <span class="n">r</span><span class="o">-</span><span class="n">ggplot2</span> <span class="n">r</span><span class="o">-</span><span class="n">dplyr</span> <span class="o">--</span><span class="n">summary</span> <span class="s2">&quot;My custom R bundle&quot;</span>
+</pre></div>
+</div>
+<p>이제 사용자는 손쉽게 새로운 메타 패키지를 친구나 동료와 공유할 수 있다.
+사용자의 채널을 <a class="reference external" href="https://anaconda.org">Anaconda Cloud</a> 에 업로드 한다.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">anaconda</span><span class="o">-</span><span class="n">client</span>
+<span class="n">anaconda</span> <span class="n">login</span>
+<span class="n">anaconda</span> <span class="n">upload</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">custom</span><span class="o">-</span><span class="n">r</span><span class="o">-</span><span class="n">bundle</span><span class="o">-</span><span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mf">0.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+</pre></div>
+</div>
+<p>이제 사용자의 친구와 동료는 아래 커맨드로 어떤 컴퓨터에서든 사용자의 커스텀 R 번들에 접근할 수 있다.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">your</span> <span class="n">anaconda</span><span class="o">.</span><span class="n">org</span> <span class="n">username</span><span class="o">&gt;</span> <span class="n">custom</span><span class="o">-</span><span class="n">r</span><span class="o">-</span><span class="n">bundle</span>
+</pre></div>
+</div>
+<p>더 많은 정보가 필요하다면 Christine Doig의 블로그 포스트를 보자. <a class="reference external" href="https://www.continuum.io/blog/developer/jupyter-and-conda-r">Jupyter and conda for R language</a>.</p>
+<p>다음은 <a class="reference internal" href="mro_ko.html"><span class="doc">Microsoft R Open 사용</span></a> 를 보자..</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

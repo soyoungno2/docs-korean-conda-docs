@@ -1,0 +1,893 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Troubleshooting &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../index.html"/>
+        <link rel="up" title="사용자 가이드" href="index_ko.html"/>
+        <link rel="next" title="Help and support" href="../help-support.html"/>
+        <link rel="prev" title="Cheat sheet" href="cheatsheet_ko.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index_ko.html">사용자 가이드</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview_ko.html">개요</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts_ko.html">개념</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started_ko.html">시작 안내서</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install/index_ko.html">설치</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration/index_ko.html">설정</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/index_ko.html">튜토리얼</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks/index_ko.html">작업</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cheatsheet_ko.html">Cheat sheet</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#permission-denied-errors-during-installation">Permission denied errors during installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cause">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solution">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#permission-denied-errors-after-using-sudo-conda-command">Permission denied errors after using sudo conda command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#already-installed-error-message">Already installed error message</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conda-reports-that-a-package-is-installed-but-it-appears-not-to-be">Conda reports that a package is installed, but it appears not to be</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pkg-resources-distributionnotfound-conda-3-6-1-6-gb31b0d4-dirty">pkg_resources.DistributionNotFound: conda==3.6.1-6-gb31b0d4-dirty</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#macos-error-valueerror-unknown-locale-utf-8">macOS error “ValueError unknown locale: UTF-8”</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#attributeerror-or-missing-getproxies">AttributeError or missing getproxies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id18">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#shell-commands-open-from-the-wrong-location">Shell commands open from the wrong location</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id20">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#programs-fail-due-to-invoking-conda-python-instead-of-system-python">Programs fail due to invoking conda Python instead of system Python</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id22">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#unsatisfiablespecifications-error">UnsatisfiableSpecifications error</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id24">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#package-installation-fails-from-a-specific-channel">Package installation fails from a specific channel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id26">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conda-automatically-upgrades-to-unwanted-version">Conda automatically upgrades to unwanted version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id28">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">Solution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#validationerror-invalid-value-for-timestamp">ValidationError: Invalid value for timestamp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id30">Cause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">Solution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_ko.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index_ko.html">사용자 가이드</a> &raquo;</li>
+        
+      <li>Troubleshooting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/troubleshooting_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#permission-denied-errors-during-installation" id="id32">Permission denied errors during installation</a></li>
+<li><a class="reference internal" href="#permission-denied-errors-after-using-sudo-conda-command" id="id33">Permission denied errors after using sudo conda command</a></li>
+<li><a class="reference internal" href="#already-installed-error-message" id="id34">Already installed error message</a></li>
+<li><a class="reference internal" href="#conda-reports-that-a-package-is-installed-but-it-appears-not-to-be" id="id35">Conda reports that a package is installed, but it appears not to be</a></li>
+<li><a class="reference internal" href="#pkg-resources-distributionnotfound-conda-3-6-1-6-gb31b0d4-dirty" id="id36">pkg_resources.DistributionNotFound: conda==3.6.1-6-gb31b0d4-dirty</a></li>
+<li><a class="reference internal" href="#macos-error-valueerror-unknown-locale-utf-8" id="id37">macOS error “ValueError unknown locale: UTF-8”</a></li>
+<li><a class="reference internal" href="#attributeerror-or-missing-getproxies" id="id38">AttributeError or missing getproxies</a></li>
+<li><a class="reference internal" href="#shell-commands-open-from-the-wrong-location" id="id39">Shell commands open from the wrong location</a></li>
+<li><a class="reference internal" href="#programs-fail-due-to-invoking-conda-python-instead-of-system-python" id="id40">Programs fail due to invoking conda Python instead of system Python</a></li>
+<li><a class="reference internal" href="#unsatisfiablespecifications-error" id="id41">UnsatisfiableSpecifications error</a></li>
+<li><a class="reference internal" href="#package-installation-fails-from-a-specific-channel" id="id42">Package installation fails from a specific channel</a></li>
+<li><a class="reference internal" href="#conda-automatically-upgrades-to-unwanted-version" id="id43">Conda automatically upgrades to unwanted version</a></li>
+<li><a class="reference internal" href="#validationerror-invalid-value-for-timestamp" id="id44">ValidationError: Invalid value for timestamp</a></li>
+</ul>
+</div>
+<div class="section" id="permission-denied-errors-during-installation">
+<span id="permission-denied"></span><h2><a class="toc-backref" href="#id32">Permission denied errors during installation</a><a class="headerlink" href="#permission-denied-errors-during-installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cause">
+<h3>Cause<a class="headerlink" href="#cause" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">umask</span></code> command  determines the mask settings that control
+how file permissions are set for newly created files. If you
+have a very restrictive <code class="docutils literal"><span class="pre">umask</span></code>, such as <code class="docutils literal"><span class="pre">077</span></code>, you get
+“permission denied” errors.</p>
+</div>
+<div class="section" id="solution">
+<h3>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h3>
+<p>Set a less restrictive <code class="docutils literal"><span class="pre">umask</span></code> before calling conda commands.
+Conda was intended as a user space tool, but often users need to
+use it in a global environment. One place this can go awry is
+with restrictive file permissions.  Conda creates links when you
+install files that have to be read by others on the system.</p>
+<p>To give yourself full permissions for files and directories, but
+prevent the group and other users from having access:</p>
+<ol class="arabic">
+<li><p class="first">Before installing, set the <code class="docutils literal"><span class="pre">umask</span></code> to <code class="docutils literal"><span class="pre">007</span></code>.</p>
+</li>
+<li><p class="first">Install conda.</p>
+</li>
+<li><p class="first">Return the <code class="docutils literal"><span class="pre">umask</span></code> to the original setting:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">umask</span> <span class="m">007</span>
+conda install
+<span class="nb">umask</span> <span class="m">077</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>For more information on <code class="docutils literal"><span class="pre">umask</span></code>, see
+<a class="reference external" href="http://en.wikipedia.org/wiki/Umask">http://en.wikipedia.org/wiki/Umask</a>.</p>
+</div>
+</div>
+<div class="section" id="permission-denied-errors-after-using-sudo-conda-command">
+<span id="permission-denied-sudo"></span><h2><a class="toc-backref" href="#id33">Permission denied errors after using sudo conda command</a><a class="headerlink" href="#permission-denied-errors-after-using-sudo-conda-command" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Solution<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Once you run conda with sudo, you must use sudo forever. We recommend that you NEVER run conda with sudo.</p>
+</div>
+</div>
+<div class="section" id="already-installed-error-message">
+<span id="fix-broken-conda"></span><h2><a class="toc-backref" href="#id34">Already installed error message</a><a class="headerlink" href="#already-installed-error-message" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Cause<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>If you are trying to fix conda problems without removing the
+current installation and you try to reinstall Miniconda or
+Anaconda to fix it, you get an error message that Miniconda
+or Anaconda is already installed, and you cannot continue.</p>
+</div>
+<div class="section" id="id3">
+<h3>Solution<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Install using the –force option.</p>
+<p>Download and install the appropriate Miniconda
+for your operating system from the <a class="reference external" href="https://conda.io/miniconda.html">Miniconda download page</a> using the force option
+<code class="docutils literal"><span class="pre">--force</span></code> or <code class="docutils literal"><span class="pre">-f</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>bash Miniconda3-latest-MacOSX-x86_64.sh -f
+</pre></div>
+</div>
+<p>NOTE: Substitute the appropriate filename and version for your
+operating system.</p>
+<p>NOTE: Be sure that you install to the same install location as
+your existing install so it overwrites the core conda files and
+does not install a duplicate in a new folder.</p>
+</div>
+</div>
+<div class="section" id="conda-reports-that-a-package-is-installed-but-it-appears-not-to-be">
+<span id="conda-claims-installed"></span><h2><a class="toc-backref" href="#id35">Conda reports that a package is installed, but it appears not to be</a><a class="headerlink" href="#conda-reports-that-a-package-is-installed-but-it-appears-not-to-be" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes conda claims that a package is already installed, but
+it does not appear to be, for example, a Python package that
+gives ImportError.</p>
+<p>There are several possible causes for this problem, each with its
+own solution.</p>
+<div class="section" id="id4">
+<h3>Cause<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>You are not in the same conda environment as your package.</p>
+</div>
+<div class="section" id="id5">
+<h3>Solution<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Make sure that you are in the same conda environment as your
+package. The <code class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span></code> command tells you what environment
+is currently active—under <code class="docutils literal"><span class="pre">default</span> <span class="pre">environment</span></code>.</p>
+</li>
+<li><p class="first">Verify that you are using the Python from the correct
+environment by running:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="id6">
+<h3>Cause<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>For Python packages, you have set the PYTHONPATH or PYTHONHOME
+variable. These environment variables cause Python to load files
+from locations other than the standard ones. Conda works best
+when these environment variables are not set, as their typical
+use cases are obviated by conda environments and a common issue
+is that they cause Python to pick up the wrong versions or broken
+versions of a library.</p>
+</div>
+<div class="section" id="id7">
+<h3>Solution<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>For Python packages, make sure you have not set the PYTHONPATH
+or PYTHONHOME variables. The command <code class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span> <span class="pre">-a</span></code> displays
+the values of these environment variables.</p>
+<ul class="simple">
+<li>To unset these environment variables temporarily for the
+current Terminal session, run <code class="docutils literal"><span class="pre">unset</span> <span class="pre">PYTHONPATH</span></code>.</li>
+<li>To unset them permanently, check for lines in the files:<ul>
+<li>If you use bash—<code class="docutils literal"><span class="pre">~/.bashrc</span></code>, <code class="docutils literal"><span class="pre">~/.bash_profile</span></code>,
+<code class="docutils literal"><span class="pre">~/.profile</span></code>.</li>
+<li>If you use zsh—<cite>~/.zshrc`</cite>.</li>
+<li>If you use PowerShell on Windows, the file output by
+<code class="docutils literal"><span class="pre">$PROFILE</span></code> .</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>Cause<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>You have site-specific directories or, for Python, you have
+so-called site-specific files. These are typically located in
+<code class="docutils literal"><span class="pre">~/.local</span></code> on Linux and macOS. For a full description of the locations of
+site-specific packages, see <a class="reference external" href="http://legacy.python.org/dev/peps/pep-0370/">PEP 370</a>.  As with
+PYTHONPATH, Python may try importing packages from this
+directory, which can cause issues.</p>
+</div>
+<div class="section" id="id9">
+<h3>Solution<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>For Python packages, remove site-specific directories and
+site-specific files.</p>
+</div>
+<div class="section" id="id10">
+<h3>Cause<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>For C libraries, the following environment variables have been
+set:</p>
+<ul class="simple">
+<li>macOS—DYLD_LIBRARY_PATH.</li>
+<li>Linux—LD_LIBRARY_PATH.</li>
+</ul>
+<p>These act similarly to <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> for Python. If they are
+set, they can cause libraries to be loaded from locations other
+than the conda environment. Conda environments obviate most use
+cases for these variables. The command <code class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span> <span class="pre">-a</span></code> shows
+what these are set to.</p>
+</div>
+<div class="section" id="id11">
+<h3>Solution<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>Unset DYLD_LIBRARY_PATH or LD_LIBRARY_PATH.</p>
+</div>
+<div class="section" id="id12">
+<h3>Cause<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>Occasionally, an installed package becomes corrupted. Conda works
+by unpacking the packages in the <code class="docutils literal"><span class="pre">pkgs</span></code> directory and then
+hard-linking them to the environment. Sometimes these get
+corrupted, breaking all environments that use them, and also any
+additional environments, since the same files are hard-linked
+each time.</p>
+</div>
+<div class="section" id="id13">
+<h3>Solution<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>Run the command <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-f</span></code> to unarchive the package
+again and relink it. It also does an md5 verification on the
+package. Usually if this is different, it is because your
+channels have changed and there is a different package with the
+same name, version, and build number.</p>
+<p>NOTE: This breaks the links to any other environments that
+already had this package installed, so you have to reinstall it
+there, too. It also means that running <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-f</span></code> a lot
+can use up a lot of disk space if you have a lot of environments.</p>
+<p>NOTE: The <code class="docutils literal"><span class="pre">-f</span></code> flag to <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span></code> (<code class="docutils literal"><span class="pre">--force</span></code>) implies
+<code class="docutils literal"><span class="pre">--no-deps</span></code>, so <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-f</span> <span class="pre">package</span></code> does not reinstall
+any of the dependencies of <code class="docutils literal"><span class="pre">package</span></code>.</p>
+</div>
+</div>
+<div class="section" id="pkg-resources-distributionnotfound-conda-3-6-1-6-gb31b0d4-dirty">
+<span id="distributionnotfound"></span><h2><a class="toc-backref" href="#id36">pkg_resources.DistributionNotFound: conda==3.6.1-6-gb31b0d4-dirty</a><a class="headerlink" href="#pkg-resources-distributionnotfound-conda-3-6-1-6-gb31b0d4-dirty" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id14">
+<h3>Cause<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<p>The local version of conda needs updating.</p>
+</div>
+<div class="section" id="id15">
+<h3>Solution<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<p>Force reinstall conda. A useful way to work off the development
+version of conda is to run <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">develop</span></code> on a
+checkout of the <a class="reference external" href="https://github.com/conda/conda">conda git repository</a>. However, if you are not
+regularly running <code class="docutils literal"><span class="pre">git</span> <span class="pre">pull</span></code>, it is a good idea to un-develop,
+as you will otherwise not get any regular updates to conda. The
+normal way to do this is to run <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">develop</span> <span class="pre">-u</span></code>.</p>
+<p>However, this command does not replace the <code class="docutils literal"><span class="pre">conda</span></code> script
+itself. With other packages, this is not an issue, as you can
+just reinstall them with <code class="docutils literal"><span class="pre">conda</span></code>, but conda cannot be used if
+conda is installed.</p>
+<p>The fix is to use the <code class="docutils literal"><span class="pre">./bin/conda</span></code> executable in the conda
+git repository to force reinstall conda, that is, run
+<code class="docutils literal"><span class="pre">./bin/conda</span> <span class="pre">install</span> <span class="pre">-f</span> <span class="pre">conda</span></code>.  You can then verify with
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span></code> that you have the latest version of conda, and not
+a git checkout—the version should not include any hashes.</p>
+</div>
+</div>
+<div class="section" id="macos-error-valueerror-unknown-locale-utf-8">
+<span id="unknown-locale"></span><h2><a class="toc-backref" href="#id37">macOS error “ValueError unknown locale: UTF-8”</a><a class="headerlink" href="#macos-error-valueerror-unknown-locale-utf-8" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id16">
+<h3>Cause<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<p>This is a bug in the macOS Terminal app that shows up only in
+certain locales. Locales are country-language combinations.</p>
+</div>
+<div class="section" id="id17">
+<h3>Solution<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Open Terminal in <code class="docutils literal"><span class="pre">/Applications/Utilities</span></code></p>
+</li>
+<li><p class="first">Clear the Set locale environment variables on startup checkbox.</p>
+<div class="figure">
+<img alt="../_images/conda_locale.jpg" src="../_images/conda_locale.jpg" />
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+</ol>
+<p>This sets your LANG environment variable to be empty. This may
+cause Terminal use to incorrect settings for your locale. The
+<code class="docutils literal"><span class="pre">locale</span></code> command in Terminal tells you what settings are used.</p>
+<p>To use the correct language, add a line to your bash profile,
+which is typically <code class="docutils literal"><span class="pre">~/.profile</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>your-lang
+</pre></div>
+</div>
+<p>NOTE: Replace <code class="docutils literal"><span class="pre">your-lang</span></code> with the correct locale specifier for
+your language.</p>
+<p>The command <code class="docutils literal"><span class="pre">locale</span> <span class="pre">-a</span></code> displays all the specifiers. For
+example, the language code for US English is <code class="docutils literal"><span class="pre">en_US.UTF-8</span></code>. The
+locale affects what translations are used when they are available
+and also how dates, currencies and decimals are formatted.</p>
+</div>
+</div>
+<div class="section" id="attributeerror-or-missing-getproxies">
+<span id="attributeerror-getproxies"></span><h2><a class="toc-backref" href="#id38">AttributeError or missing getproxies</a><a class="headerlink" href="#attributeerror-or-missing-getproxies" title="Permalink to this headline">¶</a></h2>
+<p>When running a command such as <code class="docutils literal"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">ipython</span></code>, you may
+get an <code class="docutils literal"><span class="pre">AttributeError:</span> <span class="pre">'module'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span>
+<span class="pre">'getproxies'</span></code>.</p>
+<div class="section" id="id18">
+<h3>Cause<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<p>This can be caused by an old version of <code class="docutils literal"><span class="pre">requests</span></code> or by having
+the <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> environment variable set.</p>
+</div>
+<div class="section" id="id19">
+<h3>Solution<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<p>Update <code class="docutils literal"><span class="pre">requests</span></code> and be sure <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> is not set:</p>
+<ol class="arabic simple">
+<li>Run <code class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span> <span class="pre">-a</span></code> to show the <code class="docutils literal"><span class="pre">requests</span></code> version and
+various environment variables such as <code class="docutils literal"><span class="pre">PYTHONPATH</span></code>.</li>
+<li>Update the <code class="docutils literal"><span class="pre">requests</span></code> version with
+<code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span> <span class="pre">requests</span></code>.</li>
+<li>Clear <code class="docutils literal"><span class="pre">PYTHONPATH</span></code>:<ul>
+<li>On Windows, clear it the environment variable settings.</li>
+<li>On macOS and Linux, clear it by removing it from the bash
+profile and restarting the shell.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="shell-commands-open-from-the-wrong-location">
+<span id="shell-command-location"></span><h2><a class="toc-backref" href="#id39">Shell commands open from the wrong location</a><a class="headerlink" href="#shell-commands-open-from-the-wrong-location" title="Permalink to this headline">¶</a></h2>
+<p>When you run a command within a conda environment, conda does not
+access the correct package executable.</p>
+<div class="section" id="id20">
+<h3>Cause<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<p>In both bash and zsh, when you enter a command, the shell
+searches the paths in PATH one by one until it finds the command.
+The shell then caches the location, which is called hashing in
+shell terminology. When you run command again, the shell does not
+have to search the PATH again.</p>
+<p>The problem is that before you installed the program, you ran a command which
+loaded and hashed another version of that program in some other location on
+the PATH, such as <code class="docutils literal"><span class="pre">/usr/bin</span></code>. Then you installed the program
+using <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span></code>, but the shell still had the old instance
+hashed.</p>
+</div>
+<div class="section" id="id21">
+<h3>Solution<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<p>Reactivate the environment or run <code class="docutils literal"><span class="pre">hash</span> <span class="pre">-r</span></code> (in bash) or
+<code class="docutils literal"><span class="pre">rehash</span></code> (in zsh).</p>
+<p>When you run <code class="docutils literal"><span class="pre">source</span> <span class="pre">activate</span></code>, conda automatically runs
+<code class="docutils literal"><span class="pre">hash</span> <span class="pre">-r</span></code> in bash and <code class="docutils literal"><span class="pre">rehash</span></code> in zsh to clear the hashed
+commands, so conda finds things in the new path on the PATH. But
+there is no way to do this when <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span></code> is run because
+the command must be run inside the shell itself, meaning either
+you have to run the command yourself or use source a file that
+contains the command.</p>
+<p>This is a relatively rare problem, since this happens only in the
+following circumstances:</p>
+<ol class="arabic simple">
+<li>You activate an environment or use the root environment, and
+then run a command from somewhere else.</li>
+<li>Then you conda install a program, and then try to run the
+program again without running <code class="docutils literal"><span class="pre">activate</span></code> or
+<code class="docutils literal"><span class="pre">deactivate</span></code>.</li>
+</ol>
+<p>The command <code class="docutils literal"><span class="pre">type</span> <span class="pre">command_name</span></code> always tells you exactly what
+is being run. This is better than <code class="docutils literal"><span class="pre">which</span> <span class="pre">command_name</span></code>, which
+ignores hashed commands and searches the PATH directly.
+The hash is reset by <code class="docutils literal"><span class="pre">source</span> <span class="pre">activate</span></code>, or by <code class="docutils literal"><span class="pre">hash</span> <span class="pre">-r</span></code> in bash or
+<code class="docutils literal"><span class="pre">rehash</span></code> in zsh.</p>
+</div>
+</div>
+<div class="section" id="programs-fail-due-to-invoking-conda-python-instead-of-system-python">
+<span id="wrong-python"></span><h2><a class="toc-backref" href="#id40">Programs fail due to invoking conda Python instead of system Python</a><a class="headerlink" href="#programs-fail-due-to-invoking-conda-python-instead-of-system-python" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id22">
+<h3>Cause<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<p>After installing Anaconda or Miniconda, programs that run
+<code class="docutils literal"><span class="pre">python</span></code> switch from invoking the system Python to invoking the
+Python in the root conda environment. If these programs rely on
+the system Python to have certain configurations or dependencies
+that are not in the root conda environment Python, the programs
+may crash. For example, some users of the Cinnamon desktop
+environment on Linux Mint have reported these crashes.</p>
+</div>
+<div class="section" id="id23">
+<h3>Solution<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<p>Edit your <code class="docutils literal"><span class="pre">.bash_profile</span></code> and <code class="docutils literal"><span class="pre">.bashrc</span></code> files so that the
+conda binary directory, such as <code class="docutils literal"><span class="pre">~/miniconda3/bin</span></code>, is no
+longer added to the PATH environment variable. You can still run
+<code class="docutils literal"><span class="pre">conda</span></code> <code class="docutils literal"><span class="pre">activate</span></code> and <code class="docutils literal"><span class="pre">deactivate</span></code> by using their full
+path names, such as <code class="docutils literal"><span class="pre">~/miniconda3/bin/conda</span></code>.</p>
+<p>You may also create a folder with symbolic links to <code class="docutils literal"><span class="pre">conda</span></code>,
+<code class="docutils literal"><span class="pre">activate</span></code> and <code class="docutils literal"><span class="pre">deactivate</span></code>, and then edit your
+<code class="docutils literal"><span class="pre">.bash_profile</span></code> or <code class="docutils literal"><span class="pre">.bashrc</span></code> file to add this folder to your
+PATH. If you do this, running <code class="docutils literal"><span class="pre">python</span></code> will invoke the system
+Python, but running <code class="docutils literal"><span class="pre">conda</span></code> commands, <code class="docutils literal"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">MyEnv</span></code>,
+<code class="docutils literal"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">root</span></code>, or <code class="docutils literal"><span class="pre">source</span> <span class="pre">deactivate</span></code> will work
+normally.</p>
+<p>After running <code class="docutils literal"><span class="pre">source</span> <span class="pre">activate</span></code> to activate any environment,
+including after running <code class="docutils literal"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">root</span></code>, running
+<code class="docutils literal"><span class="pre">python</span></code> will invoke the Python in the active conda environment.</p>
+</div>
+</div>
+<div class="section" id="unsatisfiablespecifications-error">
+<span id="unsatisfiable"></span><h2><a class="toc-backref" href="#id41">UnsatisfiableSpecifications error</a><a class="headerlink" href="#unsatisfiablespecifications-error" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id24">
+<h3>Cause<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<p>Some conda package installation specifications are impossible to
+satisfy. For example, <code class="docutils literal"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">-n</span> <span class="pre">tmp</span> <span class="pre">python=3</span> <span class="pre">wxpython=3</span></code>
+produces an “Unsatisfiable Specifications” error because wxPython
+3 depends on Python 2.7, so the specification to install Python 3
+conflicts with the specification to install wxPython 3.</p>
+<p>When an unsatisfiable request is made to conda, conda shows a
+message such as this one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">following</span> <span class="n">specifications</span> <span class="n">were</span> <span class="n">found</span> <span class="n">to</span> <span class="n">be</span> <span class="ow">in</span> <span class="n">conflict</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">python</span> <span class="mi">3</span><span class="o">*</span>
+<span class="o">-</span> <span class="n">wxpython</span> <span class="mi">3</span><span class="o">*</span> <span class="o">-&gt;</span> <span class="n">python</span> <span class="mf">2.7</span><span class="o">*</span>
+<span class="n">Use</span> <span class="s2">&quot;conda info &lt;package&gt;&quot;</span> <span class="n">to</span> <span class="n">see</span> <span class="n">the</span> <span class="n">dependencies</span> <span class="k">for</span> <span class="n">each</span> <span class="n">package</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>This indicates that the specification to install wxpython 3
+depends on installing Python 2.7, which conflicts with the
+specification to install python 3.</p>
+</div>
+<div class="section" id="id25">
+<h3>Solution<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<p>Use “conda info wxpython” or “conda info wxpython=3” to show
+information about this package and its dependencies:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">wxpython</span> <span class="mf">3.0</span> <span class="n">py27_0</span>
+<span class="o">-------------------</span>
+<span class="n">file</span> <span class="n">name</span>   <span class="p">:</span> <span class="n">wxpython</span><span class="o">-</span><span class="mf">3.0</span><span class="o">-</span><span class="n">py27_0</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+<span class="n">name</span>        <span class="p">:</span> <span class="n">wxpython</span>
+<span class="n">version</span>     <span class="p">:</span> <span class="mf">3.0</span>
+<span class="n">build</span> <span class="n">number</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">build</span> <span class="n">string</span><span class="p">:</span> <span class="n">py27_0</span>
+<span class="n">channel</span>     <span class="p">:</span> <span class="n">defaults</span>
+<span class="n">size</span>        <span class="p">:</span> <span class="mf">34.1</span> <span class="n">MB</span>
+<span class="n">date</span>        <span class="p">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">10</span>
+<span class="n">fn</span>          <span class="p">:</span> <span class="n">wxpython</span><span class="o">-</span><span class="mf">3.0</span><span class="o">-</span><span class="n">py27_0</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+<span class="n">license_family</span><span class="p">:</span> <span class="n">Other</span>
+<span class="n">md5</span>         <span class="p">:</span> <span class="n">adc6285edfd29a28224c410a39d4bdad</span>
+<span class="n">priority</span>    <span class="p">:</span> <span class="mi">2</span>
+<span class="n">schannel</span>    <span class="p">:</span> <span class="n">defaults</span>
+<span class="n">url</span>         <span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">repo</span><span class="o">.</span><span class="n">continuum</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">pkgs</span><span class="o">/</span><span class="n">free</span><span class="o">/</span><span class="n">osx</span><span class="o">-</span><span class="mi">64</span><span class="o">/</span><span class="n">wxpython</span><span class="o">-</span><span class="mf">3.0</span><span class="o">-</span><span class="n">py27_0</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+<span class="n">dependencies</span><span class="p">:</span>
+    <span class="n">python</span> <span class="mf">2.7</span><span class="o">*</span>
+    <span class="n">python</span><span class="o">.</span><span class="n">app</span>
+</pre></div>
+</div>
+<p>By examining the dependencies of each package, you should be able
+to determine why the installation request produced a conflict and
+modify the request so it can be satisfied without conflicts. In
+this example, you could install wxPython with Python 2.7:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">tmp</span> <span class="n">python</span><span class="o">=</span><span class="mf">2.7</span> <span class="n">wxpython</span><span class="o">=</span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="package-installation-fails-from-a-specific-channel">
+<span id="version-from-channel"></span><h2><a class="toc-backref" href="#id42">Package installation fails from a specific channel</a><a class="headerlink" href="#package-installation-fails-from-a-specific-channel" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id26">
+<h3>Cause<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes it is necessary to install a specific version from a
+specific channel because that version is not available from the
+default channel.</p>
+</div>
+<div class="section" id="id27">
+<h3>Solution<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
+<p>The following example describes the problem in detail and its
+solution.</p>
+<p>Suppose you have a specific need to install the Python
+<code class="docutils literal"><span class="pre">cx_freeze</span></code> module with Python 3.4. A first step is to create a
+Python 3.4 environment:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda create -n py34 <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.4
+</pre></div>
+</div>
+<p>Using this environment you should first attempt:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install -n py34 cx_freeze
+</pre></div>
+</div>
+<p>However, when you do this you get the following error:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Using</span> <span class="n">Anaconda</span> <span class="n">Cloud</span> <span class="n">api</span> <span class="n">site</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">api</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">org</span>
+<span class="n">Fetching</span> <span class="n">package</span> <span class="n">metadata</span> <span class="o">.........</span>
+<span class="n">Solving</span> <span class="n">package</span> <span class="n">specifications</span><span class="p">:</span> <span class="o">.</span>
+<span class="n">Error</span><span class="p">:</span> <span class="n">Package</span> <span class="n">missing</span> <span class="ow">in</span> <span class="n">current</span> <span class="n">osx</span><span class="o">-</span><span class="mi">64</span> <span class="n">channels</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">cx_freeze</span>
+
+<span class="n">You</span> <span class="n">can</span> <span class="n">search</span> <span class="k">for</span> <span class="n">packages</span> <span class="n">on</span> <span class="n">anaconda</span><span class="o">.</span><span class="n">org</span> <span class="k">with</span>
+
+  <span class="n">anaconda</span> <span class="n">search</span> <span class="o">-</span><span class="n">t</span> <span class="n">conda</span> <span class="n">cx_freeze</span>
+</pre></div>
+</div>
+<p>The message indicates that <code class="docutils literal"><span class="pre">cx_freeze</span></code> cannot be found in the
+default package channels. However, there may be a
+community-created version available and you can search for it by
+running the following command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ anaconda search -t conda cx_freeze
+Using Anaconda Cloud api site https://api.anaconda.org
+Run <span class="s1">&#39;anaconda show &lt;USER/PACKAGE&gt;&#39;</span> to get more details:
+Packages:
+     Name                      <span class="p">|</span>  Version <span class="p">|</span> Package Types   <span class="p">|</span> Platforms
+     ------------------------- <span class="p">|</span>   ------ <span class="p">|</span> --------------- <span class="p">|</span> ---------------
+     inso/cx_freeze            <span class="p">|</span>    <span class="m">4</span>.3.3 <span class="p">|</span> conda           <span class="p">|</span> linux-64
+     pyzo/cx_freeze            <span class="p">|</span>    <span class="m">4</span>.3.3 <span class="p">|</span> conda           <span class="p">|</span> linux-64, win-32, win-64, linux-32, osx-64
+                                          : http://cx-freeze.sourceforge.net/
+     silg2/cx_freeze           <span class="p">|</span>    <span class="m">4</span>.3.4 <span class="p">|</span> conda           <span class="p">|</span> linux-64
+                                          : create standalone executables from Python scripts
+     takluyver/cx_freeze       <span class="p">|</span>    <span class="m">4</span>.3.3 <span class="p">|</span> conda           <span class="p">|</span> linux-64
+Found <span class="m">4</span> packages
+</pre></div>
+</div>
+<p>In this example, there are 4 different places that you could try
+to get the package. None of them are officially supported or
+endorsed by Anaconda, but members of the conda community have
+provided many valuable packages. If you want to go with public
+opinion, then <a class="reference external" href="https://anaconda.org/search?q=cx_freeze">the web interface</a> provides more
+information:</p>
+<div class="figure">
+<img alt="cx_freeze packages on anaconda.org" src="../_images/conda_package-popularity.png" />
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Notice that the <code class="docutils literal"><span class="pre">pyzo</span></code> organization has by far the most
+downloads, so you might choose to use their package. If so, you
+can add their organization’s channel by specifying it on the
+command line:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ conda create -c pyzo -n cxfreeze_py34 cx_freeze <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.4
+Using Anaconda Cloud api site https://api.anaconda.org
+Fetching package metadata: ..........
+Solving package specifications: .........
+
+Package plan <span class="k">for</span> installation in environment /Users/ijstokes/anaconda/envs/cxfreeze_py34:
+
+The following packages will be downloaded:
+
+    package                    <span class="p">|</span>            build
+    ---------------------------<span class="p">|</span>-----------------
+    cx_freeze-4.3.3            <span class="p">|</span>           py34_4         <span class="m">1</span>.8 MB
+    setuptools-20.7.0          <span class="p">|</span>           py34_0         <span class="m">459</span> KB
+    ------------------------------------------------------------
+                                           Total:         <span class="m">2</span>.3 MB
+
+The following NEW packages will be INSTALLED:
+
+    cx_freeze:  <span class="m">4</span>.3.3-py34_4
+    openssl:    <span class="m">1</span>.0.2h-0
+    pip:        <span class="m">8</span>.1.1-py34_1
+    python:     <span class="m">3</span>.4.4-0
+    readline:   <span class="m">6</span>.2-2
+    setuptools: <span class="m">20</span>.7.0-py34_0
+    sqlite:     <span class="m">3</span>.9.2-0
+    tk:         <span class="m">8</span>.5.18-0
+    wheel:      <span class="m">0</span>.29.0-py34_0
+    xz:         <span class="m">5</span>.0.5-1
+    zlib:       <span class="m">1</span>.2.8-0
+</pre></div>
+</div>
+<p>Now you have a software environment sandbox created with Python
+3.4 and <code class="docutils literal"><span class="pre">cx_freeze</span></code>.</p>
+</div>
+</div>
+<div class="section" id="conda-automatically-upgrades-to-unwanted-version">
+<span id="auto-upgrade"></span><h2><a class="toc-backref" href="#id43">Conda automatically upgrades to unwanted version</a><a class="headerlink" href="#conda-automatically-upgrades-to-unwanted-version" title="Permalink to this headline">¶</a></h2>
+<p>When making a python package for an app, you create an
+environment for the app from a file <code class="docutils literal"><span class="pre">req.txt</span></code> that sets a
+certain version, such as <code class="docutils literal"><span class="pre">python=2.7.9</span></code>. However, when you
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span></code> your package, it automatically upgrades to a
+later version, such as <code class="docutils literal"><span class="pre">2.7.10</span></code>.</p>
+<div class="section" id="id28">
+<h3>Cause<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+<p>If you make a conda package for the app using conda build, you
+can set dependencies with specific version numbers. In <a class="reference internal" href="tasks/build-packages/define-metadata.html"><span class="doc">this
+example</span></a>, the
+requirements lines that say <code class="docutils literal"><span class="pre">-</span> <span class="pre">python</span></code> could be
+<code class="docutils literal"><span class="pre">-</span> <span class="pre">python</span> <span class="pre">==2.7.9</span></code> instead. It is important to have 1 space
+before the == operator and no space after.</p>
+</div>
+<div class="section" id="id29">
+<h3>Solution<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<p>Exercise caution when coding version requirements.</p>
+</div>
+</div>
+<div class="section" id="validationerror-invalid-value-for-timestamp">
+<h2><a class="toc-backref" href="#id44">ValidationError: Invalid value for timestamp</a><a class="headerlink" href="#validationerror-invalid-value-for-timestamp" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id30">
+<h3>Cause<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
+<p>This happens when certain packages are installed with conda 4.3.28, and then
+conda is downgraded to 4.3.27 or earlier.</p>
+</div>
+<div class="section" id="id31">
+<h3>Solution<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference external" href="https://github.com/conda/conda/issues/6096">https://github.com/conda/conda/issues/6096</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../help-support.html" class="btn btn-neutral float-right" title="Help and support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cheatsheet_ko.html" class="btn btn-neutral" title="Cheat sheet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

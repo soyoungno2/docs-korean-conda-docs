@@ -1,0 +1,568 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>아나콘다 네비게이터 어플리케이션 빌드 &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../index.html"/>
+        <link rel="up" title="튜토리얼" href="index_ko.html"/>
+        <link rel="next" title="NLTK를 위한 콘다 패키지 빌드" href="build-nltk_ko.html"/>
+        <link rel="prev" title="윈도우에서 콘다 패키지 빌드" href="build-windows_ko.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ko.html">사용자 가이드</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview_ko.html">개요</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts_ko.html">개념</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started_ko.html">시작 안내서</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/index_ko.html">설치</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/index_ko.html">설정</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index_ko.html">튜토리얼</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="build-pkgs-skeleton_ko.html">콘다 스켈레톤을 사용한 콘다 패키지 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-pkgs_ko.html">기초부터 패키지 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-postgis_ko.html">일반 코드 프로젝트를 위한 콘다 패키지 빌드</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-windows_ko.html">윈도우에서 콘다 패키지 빌드</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">아나콘다 네비게이터 어플리케이션 빌드</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">튜토리얼 대상</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">시작에 앞서</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#skeleton">스켈레톤 래시피 생성하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#meta-yaml-requirements">meta.yaml의 requirements 변경하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#meta-yaml-app">meta.yaml에 app 입력하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build4">빌드하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upload">클라우드에 업로드하기</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#navigator">네비게이터 설정</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting4">트러블슈팅</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#help4">추가 정보</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="build-nltk_ko.html">NLTK를 위한 콘다 패키지 빌드</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tasks/index_ko.html">작업</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cheatsheet_ko.html">Cheat sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting_ko.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index_ko.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index_ko.html">사용자 가이드</a> &raquo;</li>
+        
+          <li><a href="index_ko.html">튜토리얼</a> &raquo;</li>
+        
+      <li>아나콘다 네비게이터 어플리케이션 빌드</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tutorials/build-apps_ko.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>아나콘다 네비게이터 어플리케이션 빌드<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id14">튜토리얼 대상</a></li>
+<li><a class="reference internal" href="#id3" id="id15">시작에 앞서</a></li>
+<li><a class="reference internal" href="#skeleton" id="id16">스켈레톤 래시피 생성하기</a></li>
+<li><a class="reference internal" href="#meta-yaml-requirements" id="id17">meta.yaml의 requirements 변경하기</a></li>
+<li><a class="reference internal" href="#meta-yaml-app" id="id18">meta.yaml에 app 입력하기</a></li>
+<li><a class="reference internal" href="#build4" id="id19">빌드하기</a></li>
+<li><a class="reference internal" href="#upload" id="id20">클라우드에 업로드하기</a></li>
+<li><a class="reference internal" href="#navigator" id="id21">네비게이터 설정</a></li>
+<li><a class="reference internal" href="#troubleshooting4" id="id22">트러블슈팅</a></li>
+<li><a class="reference internal" href="#help4" id="id23">추가 정보</a></li>
+</ul>
+</div>
+<p>이 튜토리얼은 <a class="reference external" href="https://www.yhat.com/products/rodeo">로데오(Rodeo) IDE</a>를
+아나콘다 네비게이터(Anaconda Navigator) 어플리케이션으로 빌드하는 방법을 설명한다.</p>
+<p>로데오의 콘다 빌드 래시피(conda build recipe)는 <code class="docutils literal"><span class="pre">conda</span> <span class="pre">skeleton</span></code>으로 생성된다.
+패키지를 어플리케이션으로 선언하려면 빌드 래시피 파일에 세가지 수정을 해주어야 한다.
+빌드한 패키지는 아나콘다 클라우드 채널에 업로드 된다.
+네비게이터에 채널을 추가하고 나면 어플리케이션이 <strong>Home</strong> 탭에 나타난다.</p>
+<p>주의: 네비게이터를 위해 빌드한 어플리케이션은 GUI를 가지고 있어야 한다. 모든 콘다 패키지가 GUI를 갖는 것은 아니다.</p>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id14">튜토리얼 대상</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>PyPI 패키지로 네비게이터 어플리케이션 콘다 패키지를 만들고자 하는 윈도우,맥OS,리눅스 사용자를 위한 튜토리얼이다.
+콘다 빌드나 콘다 래시피에 대한 사전 지식을 권장한다.</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id15">시작에 앞서</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="index_ko.html"><span class="doc">요구 사항</span></a>을 확인한다.</li>
+<li><a class="reference external" href="https://anaconda.org">아나콘다 클라우드</a> 계정이 있어야 한다.
+사용자명이 “Anaconda Cloud channel.”이 된다.</li>
+</ul>
+</div>
+<div class="section" id="skeleton">
+<span id="id5"></span><h2><a class="toc-backref" href="#id16">스켈레톤 래시피 생성하기</a><a class="headerlink" href="#skeleton" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">사용자의 홈 디렉토리에서 <code class="docutils literal"><span class="pre">conda</span> <span class="pre">skeleton</span></code> 명령을 실행한다.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>conda skeleton pypi rodeo
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">rodeo</span></code>라는 이름의 디렉토리와 그 안에 3개의 스켈레톤 파일 <code class="docutils literal"><span class="pre">meta.yaml</span></code>, <code class="docutils literal"><span class="pre">build.sh</span></code>, <code class="docutils literal"><span class="pre">bld.bat</span></code>가 생성된다..</p>
+</li>
+<li><p class="first">맥OS, 리눅스의 <code class="docutils literal"><span class="pre">ls</span></code> 명령이나 윈도우의 <code class="docutils literal"><span class="pre">dir</span></code> 명령을 사용해 스켈레톤 파일이 생성되었는지 확인한다.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="meta-yaml-requirements">
+<span id="requires"></span><h2><a class="toc-backref" href="#id17">meta.yaml의 requirements 변경하기</a><a class="headerlink" href="#meta-yaml-requirements" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일을 텍스트 편집기에서 연다.</li>
+<li>requirements에서 <code class="docutils literal"><span class="pre">ipython</span></code> 항목을 <code class="docutils literal"><span class="pre">jupyter</span></code>로 바꾼다.</li>
+</ol>
+<p>전체 requirements는 다음과 같이 보여야 한다.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">setuptools</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">jupyter</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">flask &gt;=0.10.1</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">docopt</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pyzmq &gt;=13</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mistune</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">jupyter</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">flask &gt;=0.10.1</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">docopt</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pyzmq &gt;=13</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mistune</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="meta-yaml-app">
+<span id="app-entry"></span><h2><a class="toc-backref" href="#id18">meta.yaml에 app 입력하기</a><a class="headerlink" href="#meta-yaml-app" title="Permalink to this headline">¶</a></h2>
+<p>콘다 패키지를 어플리케이션으로 선언하려면 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일에 app 매개 변수를 추가해야 한다.
+app 섹션은 4개의 키 entry,icon,summary,type을 갖는다.</p>
+<p>entry 태그는 네비게이터가 패키지를 실행하는 방법을 정한다.
+로데오 IDE는 맥OS, 리눅스, 윈도우를 위한 entry 태그를 개별적으로 설정해야 한다.</p>
+<ol class="arabic">
+<li><p class="first">텍스트 편집기에서 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일을 연다.</p>
+</li>
+<li><p class="first">다음과 같은 행을 추가한다.</p>
+<ul>
+<li><p class="first">윈도우, 리눅스: entry 태그를 추가한다.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">entry</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rodeo .                              [win]</span>
+  <span class="l l-Scalar l-Scalar-Plain">entry</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rodeo .                              [linux]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">맥OS: 실행 스크립트를 넣어야 한다.</p>
+<ol class="arabic">
+<li><p class="first">텍스트 편집기를 사용해 콘다 빌드 래시피 디렉토리 <code class="docutils literal"><span class="pre">rodeo_mac.command</span></code>에 파일을 생성한다.
+이 파일에 다음 코드를 추가한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">DIR</span><span class="o">=</span><span class="k">$(</span>dirname <span class="nv">$0</span><span class="k">)</span>
+
+<span class="nv">$DIR</span>/rodeo <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">이전 단계에서 생성한 파일이 설치되는지 확인하기 위해 <code class="docutils literal"><span class="pre">build.sh</span></code> 스크립트에 다음 행을 추가한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> <span class="sb">`</span>uname<span class="sb">`</span> <span class="o">==</span> Darwin <span class="o">]</span>
+<span class="k">then</span>
+    cp <span class="nv">$RECIPE_DIR</span>/rodeo_mac.command <span class="nv">$PREFIX</span>/bin
+<span class="k">fi</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일의 app 섹션에 다음 행을 추가한다.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>entry: open ${PREFIX}/bin/rodeo_mac.command [osx]
+</pre></div>
+</div>
+</li>
+<li><p class="first">네비게이터에 나타날 로고 PNG 파일은 콘다 빌드 래시피에 주어진다.
+깃헙 레포지토리 <a class="reference external" href="https://github.com/yhat/rodeo/blob/master/resources/app.png">https://github.com/yhat/rodeo/blob/master/resources/app.png</a> 에서
+바로 app.png 파일을 받아 <code class="docutils literal"><span class="pre">meta.yaml</span></code> 파일이 속한 디렉토리에 둔다.</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<p>완성된 app 섹션은 다음과 같이 보여야 한다.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>app:
+  entry: rodeo .                              [win]
+  entry: rodeo .                              [linux]
+  entry: open ${PREFIX}/bin/rodeo_mac.command [osx]
+  icon: app.png
+  summary: Rodeo Data Science IDE
+  type: web
+</pre></div>
+</div>
+<p>완전한 <a class="reference download internal" href="../../_downloads/meta.yaml" download=""><code class="xref download docutils literal"><span class="pre">meta.yaml</span></code></a>파일과 <a class="reference download internal" href="../../_downloads/build.sh" download=""><code class="xref download docutils literal"><span class="pre">build.sh</span></code></a> 파일을 받을 수 있다.</p>
+</div>
+<div class="section" id="build4">
+<span id="id6"></span><h2><a class="toc-backref" href="#id19">빌드하기</a><a class="headerlink" href="#build4" title="Permalink to this headline">¶</a></h2>
+<p>패키지를 모든 플랫폼에서 사용할 수 있게 하려면 로데오 패키지를 윈도우, 맥OS, 리눅스 기기에서 개별적으로 빌드하고 업로드해야 한다.</p>
+<p>콘다 빌드로 패키지를 생성한다.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda-build rodeo
+</pre></div>
+</div>
+<p>콘다 빌드가 끝나면 콘다 패키지의 경로와 파일명이 나타난다.</p>
+<p><code class="docutils literal"><span class="pre">conda-build</span></code> 명령이 실패하면 <a class="reference internal" href="build-pkgs-skeleton_ko.html#troubleshooting"><span class="std std-ref">예시 문제를 위한 트러블슈팅</span></a>을 보자.</p>
+<p>윈도우 파일 경로 예시:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>C:\Users\jsmith\Miniconda\conda-bld\win-64\rodeo-0.4.4-py35_0.tar.bz2
+</pre></div>
+</div>
+<p>맥OS 파일 경로 예시:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>/Users/jsmith/miniconda/conda-bld/osx-64/rodeo-0.4.4-py35_0.tar.bz2
+</pre></div>
+</div>
+<p>리눅스 파일 경로 예시:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>/home/jsmith/miniconda/conda-bld/linux-64/rodeo-0.4.4-py35_0.tar.bz2
+</pre></div>
+</div>
+<p>주의: 경로와 파일명은 사용자의 설치와 운영체제에 따라 달라질 수 있다. 다음 작업을 위해 경로와 파일명을 저장한다.</p>
+</div>
+<div class="section" id="upload">
+<span id="id7"></span><h2><a class="toc-backref" href="#id20">클라우드에 업로드하기</a><a class="headerlink" href="#upload" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">터미널이나 아나콘다 프롬프트에서 루트 콘다 환경으로 간다.</p>
+</li>
+<li><p class="first">클라우드에 로그인한다.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>anaconda login
+</pre></div>
+</div>
+</li>
+<li><p class="first">클라우드 계정 이름과 암호를 요구하면 입력한다.</p>
+<p>로그인에 성공하면 다음과 유사한 출력이 나타난다.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Using Anaconda Cloud api site https://api.anaconda.org
+Username: defusco
+defusco&#39;s Password:
+login successful
+</pre></div>
+</div>
+</li>
+<li><p class="first">사용자의 채널에 로그인했다. 이제 로데오 콘다 패키지를 업로드한다.</p>
+<ul>
+<li><p class="first">윈도우:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>anaconda upload C:\Users\jsmith\Miniconda\conda-bld\win-64\rodeo-0.4.4-py35_0.tar.bz2
+</pre></div>
+</div>
+</li>
+<li><p class="first">맥OS, 리눅스:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>anaconda upload /home/jsmith/miniconda/conda-bld/linux-64/rodeo-0.4.4-py35_0.tar.bz2
+</pre></div>
+</div>
+<p>주의: 경로와 파일명을 <a class="reference internal" href="#build4"><span class="std std-ref">빌드하기</span></a>에서 저장한 것으로 바꾼다.
+경로와 파일명은 사용자의 설치와 운영체제에 따라 달라질 수 있다.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>클라우드에 대한 더 많은 정보는 <a class="reference external" href="https://docs.continuum.io/anaconda-cloud/">아나콘다 클라우드 문서</a>에 있다.</p>
+</div>
+<div class="section" id="navigator">
+<span id="id9"></span><h2><a class="toc-backref" href="#id21">네비게이터 설정</a><a class="headerlink" href="#navigator" title="Permalink to this headline">¶</a></h2>
+<p>클라우드 채널에 로데오를 업로드했다. 이제 네비게이터에 채널을 추가해야 한다.</p>
+<ol class="arabic">
+<li><p class="first">네비게이터를 실행한다.</p>
+<ul class="simple">
+<li>윈도우, 리눅스: <strong>시작</strong> 메뉴를 사용한다.</li>
+<li>맥OS: 데스크탑이나 스포트라이트로 실행할 수 있다.</li>
+</ul>
+</li>
+<li><p class="first">왼쪽의 <strong>Environments</strong> 탭을 연다.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/conda_navigator-home.png"><img alt="../../_images/conda_navigator-home.png" src="../../_images/conda_navigator-home.png" style="width: 300.0px; height: 275.0px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+<li><p class="first">사용자의 채널을 추가한다.</p>
+<ol class="arabic">
+<li><p class="first">Channel 버튼을 클릭한다.</p>
+</li>
+<li><p class="first">Add 버튼을 클릭한다.</p>
+</li>
+<li><p class="first">사용자의 클라우드 채널 URL을 입력한다.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>https://conda.anaconda.org/CHANNEL
+</pre></div>
+</div>
+<p>주의: <code class="docutils literal"><span class="pre">CHANNEL</span></code>을 사용자의 클라우드 사용자명으로 바꾼다.</p>
+</li>
+<li><p class="first">Update Channels 버튼을 클릭한다.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/conda_navigator-channel.png"><img alt="../../_images/conda_navigator-channel.png" src="../../_images/conda_navigator-channel.png" style="width: 338.5px; height: 400.5px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>네비게이터를 종료하고 다시 연다. 로데오 어플리케이션이 <strong>Home</strong> 탭에 나타난다.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/conda_navigator-rodeo.png"><img alt="../../_images/conda_navigator-rodeo.png" src="../../_images/conda_navigator-rodeo.png" style="width: 273.0px; height: 310.0px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="troubleshooting4">
+<span id="id10"></span><h2><a class="toc-backref" href="#id22">트러블슈팅</a><a class="headerlink" href="#troubleshooting4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h3>콘다 빌드 실패<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>콘다 래시피 빌드에 실패하면 <a class="reference internal" href="../troubleshooting_ko.html"><span class="doc">Troubleshooting</span></a>을 본다.</p>
+</div>
+<div class="section" id="home">
+<h3>어플리케이션이 home 창에 나타나지 않을 때<a class="headerlink" href="#home" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">콘다 패키지가 사용자의 클라우드 채널에 업데이트되었는지 확인한다.</p>
+</li>
+<li><p class="first">사용자의 채널이 채널 목록에 추가되었는지 확인한다.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">.anaconda/navigator</span></code>디렉토리를 삭제하고 네비게이터를 다시 실행해야 할 수도 있다.</p>
+<p>주의: 윈도우,맥OS,리눅스에서 <code class="docutils literal"><span class="pre">.anaconda/navigator</span></code>는 사용자의 홈 디렉토리에 있다.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h3>어플리케이션이 실행되지 않을 때<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>어플리케이션이 다음 명령으로 잘작동하는지 확인한다.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>conda run rodeo
+</pre></div>
+</div>
+<p>로데오가 잘실행되면 <code class="docutils literal"><span class="pre">.anaconda/navigator</span></code>디렉토리를 삭제하고 네비게이터를 다시 실행해야 할 수도 있다.</p>
+<p>주의: 윈도우, 맥OS, 리눅스에서 <code class="docutils literal"><span class="pre">.anaconda/navigator</span></code>는 사용자의 홈 디렉토리에 있다.</p>
+</div>
+</div>
+<div class="section" id="help4">
+<span id="id13"></span><h2><a class="toc-backref" href="#id23">추가 정보</a><a class="headerlink" href="#help4" title="Permalink to this headline">¶</a></h2>
+<p><cite>../../commands/build/conda-skeleton-pypi</cite>에서 더 많은 옵션을 볼 수 있다.</p>
+<p>윈도우의 <strong>시작</strong> 메뉴 항목을 추가하는 방법은 <a class="reference external" href="https://github.com/ContinuumIO/menuinst/wiki">menuinst</a> 문서를 본다.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build-nltk_ko.html" class="btn btn-neutral float-right" title="NLTK를 위한 콘다 패키지 빌드" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="build-windows_ko.html" class="btn btn-neutral" title="윈도우에서 콘다 패키지 빌드" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

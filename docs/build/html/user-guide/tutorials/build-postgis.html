@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building conda packages for general code projects &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>Building conda packages for general code projects</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tutorials/build-postgis.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-conda-packages-for-general-code-projects">
+<h1>Building conda packages for general code projects<a class="headerlink" href="#building-conda-packages-for-general-code-projects" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#who-is-this-for" id="id1">Who is this for?</a></li>
+<li><a class="reference internal" href="#before-you-start" id="id2">Before you start</a></li>
+<li><a class="reference internal" href="#listing-dependencies" id="id3">Listing dependencies</a></li>
+<li><a class="reference internal" href="#writing-a-conda-recipe" id="id4">Writing a conda recipe</a></li>
+<li><a class="reference internal" href="#writing-a-build-script" id="id5">Writing a build script</a></li>
+<li><a class="reference internal" href="#building-the-package" id="id6">Building the package</a></li>
+<li><a class="reference internal" href="#distributing-and-installing-the-package" id="id7">Distributing and installing the package</a></li>
+<li><a class="reference internal" href="#more-information" id="id8">More information</a></li>
+</ul>
+</div>
+<p>You can build conda packages from projects written in any
+language. This tutorial describes how to write a recipe for the
+postgis package, build a package, upload it to <a class="reference external" href="http://anaconda.org/">anaconda.org</a> and install the package through conda.</p>
+<div class="section" id="who-is-this-for">
+<h2><a class="toc-backref" href="#id1">Who is this for?</a><a class="headerlink" href="#who-is-this-for" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial is for macOS and Linux users who wish to make
+conda packages for source code projects in languages other than
+Python. You need to know how to configure, compile and install
+C/C++ packages.</p>
+</div>
+<div class="section" id="before-you-start">
+<span id="before-you-start3"></span><h2><a class="toc-backref" href="#id2">Before you start</a><a class="headerlink" href="#before-you-start" title="Permalink to this headline">¶</a></h2>
+<p>Before you start, check the <a class="reference internal" href="index.html"><span class="doc">prerequisites</span></a>.</p>
+</div>
+<div class="section" id="listing-dependencies">
+<span id="depends"></span><h2><a class="toc-backref" href="#id3">Listing dependencies</a><a class="headerlink" href="#listing-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>When creating conda recipes, the most important aspect is to
+correctly list the dependencies.</p>
+<p>The <a class="reference external" href="https://github.com/postgis/postgis/blob/2.2.2/README.postgis">README.postgis</a> file states that the following packages are
+required along with the minimum required version:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>postgresql version <span class="m">9</span>.1
+proj4 version <span class="m">4</span>.0.6
+geos version <span class="m">3</span>.4
+libxml2 version <span class="m">2</span>.5
+json-c version <span class="m">0</span>.9
+gdal version <span class="m">1</span>.9
+</pre></div>
+</div>
+<p>For each of these dependencies you need a conda package that is
+available for install using <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span></code>, because conda
+build creates a private environment from which the source code
+for postgis is installed and conda must install all required
+dependencies into that environment.</p>
+<ol class="arabic">
+<li><p class="first">Search for each of these packages using <code class="docutils literal"><span class="pre">conda</span> <span class="pre">search</span></code>.</p>
+<p>The only package that cannot
+be found in the default channel is json-c.</p>
+</li>
+<li><p class="first">To install json-c, add the
+<code class="docutils literal"><span class="pre">jlaura</span></code> channel using the <code class="docutils literal"><span class="pre">conda</span> <span class="pre">config</span></code> command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda config --add channels jlaura
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Now that you have identified that all of the dependent packages
+can be installed, the next step is to write the conda recipe.</p>
+</div>
+<div class="section" id="writing-a-conda-recipe">
+<span id="conda-recipe"></span><h2><a class="toc-backref" href="#id4">Writing a conda recipe</a><a class="headerlink" href="#writing-a-conda-recipe" title="Permalink to this headline">¶</a></h2>
+<p>A conda recipe has 3 main components:</p>
+<ul class="simple">
+<li>The package name and version.</li>
+<li>The location of the source code.</li>
+<li>The dependent packages that are required to build and run the
+package being built.</li>
+</ul>
+<p>There are a number of ways to specify the location of the source
+code in a conda recipe. In this case, you provide the path to
+the Github repository and the desired revision tag.</p>
+<p>NOTE: Not all Github repositories make use of revision tags. In
+some cases the most recent commit is suitable.</p>
+<ol class="arabic">
+<li><p class="first">Create a directory to store the conda recipe files:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir postgis
+<span class="nb">cd</span> postgis
+</pre></div>
+</div>
+</li>
+<li><p class="first">Open a text editor, and then write the following code to a
+file called <code class="docutils literal"><span class="pre">meta.yaml</span></code> inside the <code class="docutils literal"><span class="pre">postgis</span></code> directory:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">postgis</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;2.2.2&quot;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">source</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">git_rev</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2.2.2</span>
+  <span class="l l-Scalar l-Scalar-Plain">git_url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/postgis/postgis.git</span>
+
+<span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">number</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gdal</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">geos</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">proj4</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">json-c</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">libxml2</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">postgresql &gt;=9.1</span>
+  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">gdal</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">geos</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">proj4</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">json-c</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">libxml2</span>
+    <span class="p p-Indicator">-</span>  <span class="l l-Scalar l-Scalar-Plain">postgresql &gt;=9.1</span>
+
+<span class="l l-Scalar l-Scalar-Plain">about</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">home</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">http://postgis.net</span>
+  <span class="l l-Scalar l-Scalar-Plain">license</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">GPL2</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>NOTE: Conda build creates the package in an isolated environment,
+which is created from the packages specified as build
+dependencies. Installing the packages into your own working
+environment does not affect conda build.</p>
+</div>
+<div class="section" id="writing-a-build-script">
+<span id="build-script"></span><h2><a class="toc-backref" href="#id5">Writing a build script</a><a class="headerlink" href="#writing-a-build-script" title="Permalink to this headline">¶</a></h2>
+<p>The final step in preparing the conda build recipe is to write
+the build script. Since postgis is being built for both macOS and
+Linux, you need only a single build script file, called
+<code class="docutils literal"><span class="pre">build.sh</span></code>, in the <code class="docutils literal"><span class="pre">postgis</span></code> directory.</p>
+<p>The build script file contains all of the commands required to
+configure, build and install the source project. This script must
+run without user intervention.</p>
+<p>The <a class="reference external" href="http://postgis.net/docs/manual-2.2/postgis_installation.html#installation_configuration">postgis compilation documentation</a>
+states that several flags must be provided to the <code class="docutils literal"><span class="pre">configure</span></code>
+command to indicate the location of the dependent packages.</p>
+<p>During execution of the <code class="docutils literal"><span class="pre">conda-build</span></code> command, the $PREFIX
+environment variable is used to refer to the install path
+of conda packages.  In this case, use $PREFIX to inform the
+<code class="docutils literal"><span class="pre">configure</span></code> command of the location of the dependent packages
+listed in the build and run requirements of the conda recipe.</p>
+<ol class="arabic">
+<li><p class="first">In a terminal window, navigate to the <code class="docutils literal"><span class="pre">postgis</span></code> directory.</p>
+</li>
+<li><p class="first">In a text editor, create a new file called <code class="docutils literal"><span class="pre">build.sh</span></code>
+with the following content:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sh autogen.sh
+./configure <span class="se">\</span>
+  --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+  --with-pgconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/pg_config <span class="se">\</span>
+  --with-gdalconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/gdal-config <span class="se">\</span>
+  --with-xml2config<span class="o">=</span><span class="nv">$PREFIX</span>/bin/xml2-config <span class="se">\</span>
+  --with-geosconfig<span class="o">=</span><span class="nv">$PREFIX</span>/bin/geos-config <span class="se">\</span>
+  --with-projdir<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+  --with-jsondir<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+  --without-raster <span class="se">\</span>
+  --without-topology
+
+make
+make install
+</pre></div>
+</div>
+<p>NOTE: Without references to the $PREFIX environment variable,
+the <code class="docutils literal"><span class="pre">configure</span></code> command would look in the default system
+directories for required packages. Even if the package were
+to build correctly, there is no guarantee that other users
+could install the compiled conda package correctly.</p>
+<p>NOTE: To run conda build on this recipe, you need to install
+a C/C++ compiler, autoconf and automake. These packages must
+be installed at the system level and not through conda.</p>
+</li>
+<li><p class="first">Save the file to the <code class="docutils literal"><span class="pre">postgis</span></code> directory.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="building-the-package">
+<span id="build-postgis"></span><h2><a class="toc-backref" href="#id6">Building the package</a><a class="headerlink" href="#building-the-package" title="Permalink to this headline">¶</a></h2>
+<p>Now that the recipe is complete, build the conda package
+with the <code class="docutils literal"><span class="pre">conda-build</span></code> command from within the <code class="docutils literal"><span class="pre">postgis</span></code>
+directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda-build .
+</pre></div>
+</div>
+<p>The start of the <code class="docutils literal"><span class="pre">conda-build</span></code> output should read:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Removing old build environment
+Removing old work directory
+BUILD START: postgis-2.2.2-0
+Using Anaconda Cloud api site https://api.anaconda.org
+Fetching package metadata: ..........
+Solving package specifications: .........
+</pre></div>
+</div>
+<p>If conda build successfully installed the dependent packages and
+compiled the source code, it terminates with one of the
+following messages:</p>
+<ul>
+<li><p class="first">macOS:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>BUILD END: postgis-2.2.2-0
+Nothing to test for: postgis-2.2.2-0
+# If you want to upload this package to anaconda.org later, type:
+#
+# $ anaconda upload /Users/adefusco/Applications/anaconda3/conda-bld/osx-64/postgis-2.2.2-0.tar.bz2
+#
+# To have conda build upload to anaconda.org automatically, use
+# $ conda config --set anaconda_upload yes
+</pre></div>
+</div>
+</li>
+<li><p class="first">Linux:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>BUILD END: postgis-2.2.2-0
+Nothing to test for: postgis-2.2.2-0
+# If you want to upload this package to anaconda.org later, type:
+#
+# $ anaconda upload /home/adefusco/anaconda3/conda-bld/linux-64/postgis-2.2.2-0.tar.bz2
+#
+# To have conda build upload to anaconda.org automatically, use
+# $ conda config --set anaconda_upload yes
+</pre></div>
+</div>
+</li>
+</ul>
+<p>NOTE: Your path may be different depending on the install
+location of Anaconda.</p>
+<p>Packages can be installed only on systems of the same
+architecture. You need to run the <code class="docutils literal"><span class="pre">conda-build</span></code> command
+separately on macOS and Linux systems to make packages for both
+architectures.</p>
+</div>
+<div class="section" id="distributing-and-installing-the-package">
+<span id="install"></span><h2><a class="toc-backref" href="#id7">Distributing and installing the package</a><a class="headerlink" href="#distributing-and-installing-the-package" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Install the package on your local machine by running:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install postgis --use-local
+</pre></div>
+</div>
+<p>Alternatively, you can upload the package to your
+<a class="reference external" href="http://anaconda.org/">Anaconda.org</a> channel with the <code class="docutils literal"><span class="pre">anaconda-upload</span></code> command,
+which is displayed at the end of the <code class="docutils literal"><span class="pre">conda-build</span></code> output.</p>
+</li>
+<li><p class="first">Make the package available to install by any user with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install -c CHANNEL postgis
+</pre></div>
+</div>
+<p>NOTE: Replace <code class="docutils literal"><span class="pre">CHANNEL</span></code> with your <a class="reference external" href="http://anaconda.org/">Anaconda.org</a> user name.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="more-information">
+<h2><a class="toc-backref" href="#id8">More information</a><a class="headerlink" href="#more-information" title="Permalink to this headline">¶</a></h2>
+<p>For more options that are available in the conda recipe
+<code class="docutils literal"><span class="pre">meta.yaml</span></code> file, see
+<a class="reference internal" href="../tasks/build-packages/define-metadata.html"><span class="doc">Defining metadata (meta.yaml)</span></a> and
+<a class="reference internal" href="../tasks/build-packages/sample-recipes.html"><span class="doc">Sample recipes</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

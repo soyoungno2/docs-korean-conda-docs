@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Environment variables &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../../index.html"/>
+        <link rel="up" title="Building packages" href="index.html"/>
+        <link rel="next" title="Making packages relocatable" href="make-relocatable.html"/>
+        <link rel="prev" title="Features" href="features.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_ko.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index_ko.html">사용자 가이드</a> &raquo;</li>
+        
+          <li><a href="../index_ko.html">작업</a> &raquo;</li>
+        
+          <li><a href="index.html">Building packages</a> &raquo;</li>
+        
+      <li>Environment variables</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tasks/build-packages/environment-variables.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="environment-variables">
+<span id="env-vars"></span><h1>Environment variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#dynamic-behavior-based-on-state-of-build-process" id="id1">Dynamic behavior based on state of build process</a></li>
+<li><a class="reference internal" href="#environment-variables-set-during-the-build-process" id="id2">Environment variables set during the build process</a></li>
+<li><a class="reference internal" href="#git-environment-variables" id="id3">Git environment variables</a></li>
+<li><a class="reference internal" href="#mercurial-environment-variables" id="id4">Mercurial environment variables</a></li>
+<li><a class="reference internal" href="#inherited-environment-variables" id="id5">Inherited environment variables</a></li>
+<li><a class="reference internal" href="#environment-variables-that-affect-the-build-process" id="id6">Environment variables that affect the build process</a></li>
+<li><a class="reference internal" href="#environment-variables-to-set-build-features" id="id7">Environment variables to set build features</a></li>
+<li><a class="reference internal" href="#environment-variables-that-affect-the-test-process" id="id8">Environment variables that affect the test process</a></li>
+</ul>
+</div>
+<div class="section" id="dynamic-behavior-based-on-state-of-build-process">
+<span id="build-state"></span><h2><a class="toc-backref" href="#id1">Dynamic behavior based on state of build process</a><a class="headerlink" href="#dynamic-behavior-based-on-state-of-build-process" title="Permalink to this headline">¶</a></h2>
+<p>There are times when you may want to process a single file in
+different ways at more than one step in the render-build-test
+flow of conda build. Conda build sets the CONDA_BUILD_STATE
+environment variable during each of these phases. The possible
+values are:</p>
+<ul class="simple">
+<li>RENDER—Set during evaluation of the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file.</li>
+<li>BUILD—Set during processing of the <code class="docutils literal"><span class="pre">bld.bat</span></code> or
+<code class="docutils literal"><span class="pre">build.sh</span></code> script files.</li>
+<li>TEST—Set during the running of any <code class="docutils literal"><span class="pre">run_test</span></code> scripts,
+which also includes any commands defined in <code class="docutils literal"><span class="pre">meta.yaml</span></code> in
+the <code class="docutils literal"><span class="pre">test/commands</span></code> section.</li>
+</ul>
+<p>The CONDA_BUILD_STATE variable is undefined outside
+of these locations.</p>
+</div>
+<div class="section" id="environment-variables-set-during-the-build-process">
+<h2><a class="toc-backref" href="#id2">Environment variables set during the build process</a><a class="headerlink" href="#environment-variables-set-during-the-build-process" title="Permalink to this headline">¶</a></h2>
+<p>During the build process, the following environment variables
+are set, on Windows with <code class="docutils literal"><span class="pre">bld.bat</span></code> and on macOS and Linux with
+<code class="docutils literal"><span class="pre">build.sh</span></code>. By default, these are the only variables available
+to your build script. Unless otherwise noted, no variables are
+inherited from the shell environment in which you invoke
+<code class="docutils literal"><span class="pre">conda-build</span></code>. To override this behavior, see
+<a class="reference internal" href="#inherited-env-vars"><span class="std std-ref">Inherited environment variables</span></a>.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>ARCH</td>
+<td>Either <code class="docutils literal"><span class="pre">32</span></code> or <code class="docutils literal"><span class="pre">64</span></code>, to specify whether the build is
+32-bit or 64-bit.  The value depends on the ARCH
+environment variable and  defaults to the architecture the
+interpreter running conda was
+compiled with.</td>
+</tr>
+<tr class="row-even"><td>CMAKE_GENERATOR</td>
+<td>The CMake generator string for the current build
+environment. On Linux systems, this is always
+<code class="docutils literal"><span class="pre">Unix</span> <span class="pre">Makefiles</span></code>. On Windows, it is generated according
+to the Visual Studio version activated at build time, for
+example, <code class="docutils literal"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">9</span> <span class="pre">2008</span> <span class="pre">Win64</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>CONDA_BUILD=1</td>
+<td>Always set.</td>
+</tr>
+<tr class="row-even"><td>CPU_COUNT</td>
+<td>The number of CPUs on the system, as reported by
+<code class="docutils literal"><span class="pre">multiprocessing.cpu_count()</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>SHLIB_EXT</td>
+<td>The shared library extension.</td>
+</tr>
+<tr class="row-even"><td>DIRTY</td>
+<td>Set to 1 if the <code class="docutils literal"><span class="pre">--dirty</span></code> flag is passed to the
+<code class="docutils literal"><span class="pre">conda-build</span></code> command. May be used to  skip parts of a
+build script conditionally for faster iteration time when
+developing recipes. For example, downloads, extraction and
+other things that need not be repeated.</td>
+</tr>
+<tr class="row-odd"><td>HTTP_PROXY</td>
+<td>Inherited from your shell environment.</td>
+</tr>
+<tr class="row-even"><td>HTTPS_PROXY</td>
+<td>Inherited from your shell environment.</td>
+</tr>
+<tr class="row-odd"><td>LANG</td>
+<td>Inherited from your shell environment.</td>
+</tr>
+<tr class="row-even"><td>MAKEFLAGS</td>
+<td>Inherited from your shell environment. May be used to set
+additional arguments to make, such as <code class="docutils literal"><span class="pre">-j2</span></code>, which uses
+2 CPU cores to build your recipe.</td>
+</tr>
+<tr class="row-odd"><td>PY_VER</td>
+<td>Python version building against. Set with the <code class="docutils literal"><span class="pre">--python</span></code> argument
+or with the CONDA_PY environment variable.</td>
+</tr>
+<tr class="row-even"><td>NPY_VER</td>
+<td>NumPy version to build against. Set with the <code class="docutils literal"><span class="pre">--numpy</span></code>
+argument or with the CONDA_NPY environment variable.</td>
+</tr>
+<tr class="row-odd"><td>PATH</td>
+<td>Inherited from your shell environment and augmented with
+<code class="docutils literal"><span class="pre">$PREFIX/bin</span></code>.</td>
+</tr>
+<tr class="row-even"><td>PREFIX</td>
+<td>Build prefix to which the build script should install.</td>
+</tr>
+<tr class="row-odd"><td>PKG_BUILDNUM</td>
+<td>Build number of the package being built.</td>
+</tr>
+<tr class="row-even"><td>PKG_NAME</td>
+<td>Name of the package being built.</td>
+</tr>
+<tr class="row-odd"><td>PKG_VERSION</td>
+<td>Version of the package being built.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">PKG_BUILD_STRING</span></code></td>
+<td>Complete build string of the package being built, including hash.
+EXAMPLE: py27h21422ab_0 . Conda-build 3.0+.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">PKG_HASH</span></code></td>
+<td>Hash of the package being built, without leading h. EXAMPLE: 21422ab .
+Conda-build 3.0+.</td>
+</tr>
+<tr class="row-even"><td>PYTHON</td>
+<td>Path to the Python executable in the build prefix. Python
+is installed only in the build prefix when it is listed as
+a build requirement.</td>
+</tr>
+<tr class="row-odd"><td>PY3K</td>
+<td><code class="docutils literal"><span class="pre">1</span></code> when Python 3 is installed in the build prefix,
+otherwise <code class="docutils literal"><span class="pre">0</span></code>.</td>
+</tr>
+<tr class="row-even"><td>R</td>
+<td>Path to the R executable in the build prefix. R is only
+installed in the build prefix when it is listed as a build
+requirement.</td>
+</tr>
+<tr class="row-odd"><td>RECIPE_DIR</td>
+<td>Directory of the recipe.</td>
+</tr>
+<tr class="row-even"><td>SP_DIR</td>
+<td>Python’s site-packages location.</td>
+</tr>
+<tr class="row-odd"><td>SRC_DIR</td>
+<td>Path to where source is unpacked or cloned. If the source
+file is not a recognized file type—zip, tar, tar.bz2, or
+tar.xz—this is a directory containing a copy of the
+source file.</td>
+</tr>
+<tr class="row-even"><td>STDLIB_DI</td>
+<td>Python standard library location.</td>
+</tr>
+</tbody>
+</table>
+<p>Unix-style packages on Windows, which are usually statically
+linked to executables, are built in a special <code class="docutils literal"><span class="pre">Library</span></code>
+directory under the build prefix. The environment variables
+listed in the following table are defined only on Windows.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>CYGWIN_PREFIX</td>
+<td>Same as PREFIX, but as a Unix-style path, such as
+<code class="docutils literal"><span class="pre">/cygdrive/c/path/to/prefix</span></code>.</td>
+</tr>
+<tr class="row-even"><td>LIBRARY_BIN</td>
+<td><code class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;\Library\bin</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>LIBRARY_INC</td>
+<td><code class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;\Library\include</span></code>.</td>
+</tr>
+<tr class="row-even"><td>LIBRARY_LIB</td>
+<td><code class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;\Library\lib</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>LIBRARY_PREFIX</td>
+<td><code class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;\Library</span></code>.</td>
+</tr>
+<tr class="row-even"><td>SCRIPTS</td>
+<td><code class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;\Scripts</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>VS_MAJOR</td>
+<td>The major version number of the Visual Studio version
+activated within the build, such as <code class="docutils literal"><span class="pre">9</span></code>.</td>
+</tr>
+<tr class="row-even"><td>VS_VERSION</td>
+<td>The version number of the Visual Studio version activated
+within the build, such as <code class="docutils literal"><span class="pre">9.0</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>VS_YEAR</td>
+<td>The release year of the Visual Studio version activated
+within the build, such as <code class="docutils literal"><span class="pre">2008</span></code>.</td>
+</tr>
+</tbody>
+</table>
+<p>The environment variables listed in the following table are
+defined only on macOS and Linux.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>HOME</td>
+<td>Standard $HOME environment variable.</td>
+</tr>
+<tr class="row-even"><td>PKG_CONFIG_PATH</td>
+<td>Path to <code class="docutils literal"><span class="pre">pkgconfig</span></code> directory.</td>
+</tr>
+</tbody>
+</table>
+<p>The environment variables listed in the following table are
+defined only on macOS.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>CFLAGS</td>
+<td><code class="docutils literal"><span class="pre">-arch</span></code> flag.</td>
+</tr>
+<tr class="row-even"><td>CXXFLAGS</td>
+<td>Same as CFLAGS.</td>
+</tr>
+<tr class="row-odd"><td>LDFLAGS</td>
+<td>Same as CFLAGS.</td>
+</tr>
+<tr class="row-even"><td>MACOSX_DEPLOYMENT_TARGET</td>
+<td>Same as the Anaconda Python macOS deployment target. Currently <code class="docutils literal"><span class="pre">10.6</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>OSX_ARCH</td>
+<td><code class="docutils literal"><span class="pre">i386</span></code> or <code class="docutils literal"><span class="pre">x86_64</span></code>, depending on Python build.</td>
+</tr>
+</tbody>
+</table>
+<p>The environment variable listed in the following table is
+defined only on Linux.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>LD_RUN_PATH</td>
+<td><code class="docutils literal"><span class="pre">&lt;build</span> <span class="pre">prefix&gt;/lib</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="git-environment-variables">
+<span id="git-env"></span><h2><a class="toc-backref" href="#id3">Git environment variables</a><a class="headerlink" href="#git-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>The environment variables listed in the following table are
+defined when the source is a git repository, specifying the
+source either with git_url or path.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>GIT_BUILD_STR</td>
+<td>String that joins GIT_DESCRIBE_NUMBER and
+GIT_DESCRIBE_HASH by an underscore.</td>
+</tr>
+<tr class="row-even"><td>GIT_DESCRIBE_HASH</td>
+<td>The current commit short-hash as displayed from
+<code class="docutils literal"><span class="pre">git</span> <span class="pre">describe</span> <span class="pre">--tags</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>GIT_DESCRIBE_NUMBER</td>
+<td>String denoting the number of commits since the most
+recent tag.</td>
+</tr>
+<tr class="row-even"><td>GIT_DESCRIBE_TAG</td>
+<td>String denoting the most recent tag from the current
+commit, based on the output of <code class="docutils literal"><span class="pre">git</span> <span class="pre">describe</span> <span class="pre">--tags</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>GIT_FULL_HASH</td>
+<td>String with the full SHA1 of the current HEAD.</td>
+</tr>
+</tbody>
+</table>
+<p>These can be used in conjunction with templated <code class="docutils literal"><span class="pre">meta.yaml</span></code>
+files to set things—such as the build string—based on the
+state of the git repository.</p>
+</div>
+<div class="section" id="mercurial-environment-variables">
+<span id="mercurial-env-vars"></span><h2><a class="toc-backref" href="#id4">Mercurial environment variables</a><a class="headerlink" href="#mercurial-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>The environment variables listed in the following table are
+defined when the source is a mercurial repository.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>HG_BRANCH</td>
+<td>String denoting the presently active branch.</td>
+</tr>
+<tr class="row-even"><td>HG_BUILD_STR</td>
+<td>String that joins HG_NUM_ID and HG_SHORT_ID by an
+underscore.</td>
+</tr>
+<tr class="row-odd"><td>HG_LATEST_TAG</td>
+<td>String denoting the most recent tag from the current
+commit.</td>
+</tr>
+<tr class="row-even"><td>HG_LATEST_TAG_DISTANCE</td>
+<td>String denoting number of commits since the most recent
+tag.</td>
+</tr>
+<tr class="row-odd"><td>HG_NUM_ID</td>
+<td>String denoting the revision number.</td>
+</tr>
+<tr class="row-even"><td>HG_SHORT_ID</td>
+<td>String denoting the hash of the commit.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="inherited-environment-variables">
+<span id="inherited-env-vars"></span><h2><a class="toc-backref" href="#id5">Inherited environment variables</a><a class="headerlink" href="#inherited-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>Other than those mentioned above, no variables are inherited from
+the environment in which you invoke conda build. You can choose
+to inherit additional environment variables by adding them to
+<code class="docutils literal"><span class="pre">meta.yaml</span></code>:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">script_env</span><span class="p p-Indicator">:</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">TMPDIR</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">LD_LIBRARY_PATH</span> <span class="c1"># [linux]</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">DYLD_LIBRARY_PATH</span> <span class="c1"># [osx]</span>
+</pre></div>
+</div>
+<p>If an inherited variable is missing from your shell environment,
+it remains unassigned, but a warning is issued noting that it has
+no value assigned.</p>
+<p>NOTE: Inheriting environment variables can make it difficult for
+others to reproduce binaries from source with your recipe. Use
+this feature with caution or avoid it.</p>
+<p>NOTE: If you split your build and test phases with <code class="docutils literal"><span class="pre">--no-test</span></code> and <code class="docutils literal"><span class="pre">--test</span></code>,
+you need to ensure that the environment variables present at build time and test
+time match. If you do not, the package hashes may use different values, and your
+package may not be testable, because the hashes will differ.</p>
+</div>
+<div class="section" id="environment-variables-that-affect-the-build-process">
+<span id="build-envs"></span><h2><a class="toc-backref" href="#id6">Environment variables that affect the build process</a><a class="headerlink" href="#environment-variables-that-affect-the-build-process" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>CONDA_PY</td>
+<td>The Python version used to build the package. Should
+be <code class="docutils literal"><span class="pre">27</span></code>, <code class="docutils literal"><span class="pre">34</span></code>, <code class="docutils literal"><span class="pre">35</span></code> or <code class="docutils literal"><span class="pre">36</span></code>.</td>
+</tr>
+<tr class="row-even"><td>CONDA_NPY</td>
+<td>The NumPy version used to build the package, such as
+<code class="docutils literal"><span class="pre">19</span></code>, <code class="docutils literal"><span class="pre">110</span></code> or <code class="docutils literal"><span class="pre">111</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>CONDA_PREFIX</td>
+<td>The path to the conda environment used to build the
+package, such as <code class="docutils literal"><span class="pre">/path/to/conda/env</span></code>. Useful to pass as
+the environment prefix parameter to various conda tools,
+usually labeled <code class="docutils literal"><span class="pre">-p</span></code> or <code class="docutils literal"><span class="pre">--prefix</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="environment-variables-to-set-build-features">
+<span id="build-features"></span><h2><a class="toc-backref" href="#id7">Environment variables to set build features</a><a class="headerlink" href="#environment-variables-to-set-build-features" title="Permalink to this headline">¶</a></h2>
+<p>The environment variables listed in the following table are
+inherited from the process running conda build. These variables
+control <a class="reference internal" href="features.html"><span class="doc">Features</span></a>.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="15%" />
+<col width="43%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>FEATURE_NOMKL</td>
+<td>Adds the <code class="docutils literal"><span class="pre">nomkl</span></code> feature to the built package.</td>
+<td>Accepts <code class="docutils literal"><span class="pre">0</span></code> for off and <code class="docutils literal"><span class="pre">1</span></code> for on.</td>
+</tr>
+<tr class="row-even"><td>FEATURE_DEBUG</td>
+<td>Adds the <code class="docutils literal"><span class="pre">debug</span></code> feature to the built package.</td>
+<td>Accepts <code class="docutils literal"><span class="pre">0</span></code> for off and <code class="docutils literal"><span class="pre">1</span></code> for on.</td>
+</tr>
+<tr class="row-odd"><td>FEATURE_OPT</td>
+<td>Adds the <code class="docutils literal"><span class="pre">opt</span></code> feature to the built package.</td>
+<td>Accepts <code class="docutils literal"><span class="pre">0</span></code> for off and <code class="docutils literal"><span class="pre">1</span></code> for on.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="environment-variables-that-affect-the-test-process">
+<span id="test-envs"></span><h2><a class="toc-backref" href="#id8">Environment variables that affect the test process</a><a class="headerlink" href="#environment-variables-that-affect-the-test-process" title="Permalink to this headline">¶</a></h2>
+<p>All of the above environment variables are also set during the
+test process, using the test prefix instead of the build
+prefix.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="make-relocatable.html" class="btn btn-neutral float-right" title="Making packages relocatable" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="features.html" class="btn btn-neutral" title="Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

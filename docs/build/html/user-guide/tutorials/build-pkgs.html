@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building conda packages from scratch &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index_ko.html">Docs</a> &raquo;</li>
+        
+      <li>Building conda packages from scratch</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tutorials/build-pkgs.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-conda-packages-from-scratch">
+<h1>Building conda packages from scratch<a class="headerlink" href="#building-conda-packages-from-scratch" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#who-is-this-for" id="id2">Who is this for?</a></li>
+<li><a class="reference internal" href="#before-you-start" id="id3">Before you start</a></li>
+<li><a class="reference internal" href="#editing-the-meta-yaml-file" id="id4">Editing the meta.yaml file</a></li>
+<li><a class="reference internal" href="#writing-the-build-script-files-build-sh-and-bld-bat" id="id5">Writing the build script files build.sh and bld.bat</a></li>
+<li><a class="reference internal" href="#building-and-installing" id="id6">Building and installing</a></li>
+<li><a class="reference internal" href="#converting-a-package-for-use-on-all-platforms" id="id7">Converting a package for use on all platforms</a></li>
+<li><a class="reference internal" href="#optional-using-pypi-as-the-source-instead-of-github" id="id8">Optional—Using PyPI as the source instead of GitHub</a></li>
+<li><a class="reference internal" href="#optional-uploading-new-packages-to-anaconda-org" id="id9">Optional—Uploading new packages to Anaconda.org</a></li>
+<li><a class="reference internal" href="#more-information" id="id10">More information</a></li>
+</ul>
+</div>
+<p>This tutorial describes how to build a conda package for
+Pyinstrument by writing the required
+files in the conda build recipe.</p>
+<div class="section" id="who-is-this-for">
+<h2><a class="toc-backref" href="#id2">Who is this for?</a><a class="headerlink" href="#who-is-this-for" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial is for Windows, macOS and Linux users who wish to
+generate a conda package by writing the necessary files.
+Prior knowledge of conda build and conda recipes is helpful.</p>
+</div>
+<div class="section" id="before-you-start">
+<span id="before-you-start2"></span><h2><a class="toc-backref" href="#id3">Before you start</a><a class="headerlink" href="#before-you-start" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Check the <a class="reference internal" href="index.html"><span class="doc">prerequisites</span></a>.</li>
+<li>You should have already completed <a class="reference internal" href="build-pkgs-skeleton.html"><span class="doc">Building conda packages with conda skeleton</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="editing-the-meta-yaml-file">
+<span id="edit-meta-yaml"></span><h2><a class="toc-backref" href="#id4">Editing the meta.yaml file</a><a class="headerlink" href="#editing-the-meta-yaml-file" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Make a new directory for this tutorial named <code class="docutils literal"><span class="pre">pyinstrument</span></code>,
+and then change to the new directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir pyinstrument
+<span class="nb">cd</span> pyinstrument
+</pre></div>
+</div>
+</li>
+<li><p class="first">To create a new <code class="docutils literal"><span class="pre">meta.yaml</span></code> file, open your favorite editor.
+Create a new text file and insert the information shown below.
+A blank sample <code class="docutils literal"><span class="pre">meta.yaml</span></code> follows the table to make it
+easier to match up the information.</p>
+<p>NOTE: To allow correct sorting and comparison, specify
+<code class="docutils literal"><span class="pre">version</span></code> as a string.</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>name</td>
+<td>pyinstrument</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>“0.13.1” (or latest from
+<a class="reference external" href="https://github.com/joerick/pyinstrument/releases">https://github.com/joerick/pyinstrument/releases</a>)</td>
+</tr>
+<tr class="row-odd"><td>git_rev</td>
+<td>v0.13.1 (or latest from
+<a class="reference external" href="https://github.com/joerick/pyinstrument/releases">https://github.com/joerick/pyinstrument/releases</a>)</td>
+</tr>
+<tr class="row-even"><td>git_url</td>
+<td><a class="reference external" href="https://github.com/joerick/pyinstrument.git">https://github.com/joerick/pyinstrument.git</a></td>
+</tr>
+<tr class="row-odd"><td>imports</td>
+<td>pyinstrument</td>
+</tr>
+<tr class="row-even"><td>home</td>
+<td><a class="reference external" href="https://github.com/joerick/pyinstrument">https://github.com/joerick/pyinstrument</a></td>
+</tr>
+<tr class="row-odd"><td>license</td>
+<td>BSD</td>
+</tr>
+<tr class="row-even"><td>license_file</td>
+<td>LICENSE</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span>
+
+<span class="l l-Scalar l-Scalar-Plain">source</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">git_rev</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">git_url</span><span class="p p-Indicator">:</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">setuptools</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+
+<span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">imports</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span>
+
+<span class="l l-Scalar l-Scalar-Plain">about</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">home</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">license</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">license_file</span><span class="p p-Indicator">:</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Save the file in the same <code class="docutils literal"><span class="pre">pyinstrument</span></code>
+directory as <code class="docutils literal"><span class="pre">meta.yaml</span></code>. It should match <a class="reference download internal" href="../../_downloads/meta1.yaml" download=""><code class="xref download docutils literal"><span class="pre">this</span>
+<span class="pre">meta.yaml</span> <span class="pre">file</span></code></a>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="writing-the-build-script-files-build-sh-and-bld-bat">
+<span id="build-sh-bld-bat"></span><h2><a class="toc-backref" href="#id5">Writing the build script files build.sh and bld.bat</a><a class="headerlink" href="#writing-the-build-script-files-build-sh-and-bld-bat" title="Permalink to this headline">¶</a></h2>
+<p>Besides <code class="docutils literal"><span class="pre">meta.yaml</span></code>, 2 files are required for a build:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">build.sh</span></code>—Shell script for macOS and Linux.</li>
+<li><code class="docutils literal"><span class="pre">bld.bat</span></code>—Batch file for Windows.</li>
+</ul>
+<p>These 2 build files contain all the variables, such as for 32-bit
+or 64-bit architecture—the ARCH variable—and the build
+environment prefix—PREFIX. The 2 files <code class="docutils literal"><span class="pre">build.sh</span></code> and
+<code class="docutils literal"><span class="pre">bld.bat</span></code> must be in the same directory as your <code class="docutils literal"><span class="pre">meta.yaml</span></code>
+file.</p>
+<p>This tutorial describes how to make both <code class="docutils literal"><span class="pre">build.sh</span></code> and
+<code class="docutils literal"><span class="pre">bld.bat</span></code> so that other users can build the appropriate package
+for their architecture.</p>
+<ol class="arabic">
+<li><p class="first">Open a text editor and create a new file named <code class="docutils literal"><span class="pre">bld.bat</span></code>.
+Type the text exactly as shown:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="s2">&quot;%PYTHON%&quot;</span> setup.py install --single-version-externally-managed --record<span class="o">=</span>record.txt
+<span class="k">if</span> errorlevel <span class="m">1</span> <span class="nb">exit</span> <span class="m">1</span>
+</pre></div>
+</div>
+<p>NOTE: In <code class="docutils literal"><span class="pre">bld.bat</span></code>, the best practice is to to add
+<code class="docutils literal"><span class="pre">if</span> <span class="pre">errorlevel</span> <span class="pre">1</span> <span class="pre">exit</span> <span class="pre">1</span></code> after every command so that if the
+command fails, the build fails.</p>
+</li>
+<li><p class="first">Save this new file <code class="docutils literal"><span class="pre">bld.bat</span></code> to the same directory where
+you put your <code class="docutils literal"><span class="pre">meta.yaml</span></code> file.</p>
+</li>
+<li><p class="first">Open a text editor and create a new file named <code class="docutils literal"><span class="pre">build.sh</span></code>.
+Enter the text exactly as shown:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">$PYTHON</span> setup.py install --single-version-externally-managed --record<span class="o">=</span>record.txt  <span class="c1"># Python command to install the script.</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Save your new <code class="docutils literal"><span class="pre">build.sh</span></code> file to the same directory where you
+put the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file.</p>
+</li>
+</ol>
+<p>You can run <code class="docutils literal"><span class="pre">build.sh</span></code> with <code class="docutils literal"><span class="pre">bash</span> <span class="pre">-x</span> <span class="pre">-e</span></code>. The <code class="docutils literal"><span class="pre">-x</span></code> makes it
+echo each command that is run, and the <code class="docutils literal"><span class="pre">-e</span></code> makes it exit
+whenever a command in the script returns nonzero exit status. If
+you need to revert this in the script, use the <code class="docutils literal"><span class="pre">set</span></code> command
+in <code class="docutils literal"><span class="pre">build.sh</span></code>.</p>
+</div>
+<div class="section" id="building-and-installing">
+<span id="build-and-install"></span><h2><a class="toc-backref" href="#id6">Building and installing</a><a class="headerlink" href="#building-and-installing" title="Permalink to this headline">¶</a></h2>
+<p>Now that you have your 3 new build files ready, you are ready to
+create your new package with conda build and install the package
+on your local computer.</p>
+<ol class="arabic">
+<li><p class="first">Run conda build:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda-build pyinstrument
+</pre></div>
+</div>
+<p>When conda build is finished, it displays the package filename
+and location.</p>
+<p>In this case the file is saved to:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>~/anaconda/conda-bld/linux-64/pyinstrument-0.13.1-py27_0.tar.bz2
+</pre></div>
+</div>
+<p>NOTE: Save this path and file information for the next task.
+The exact path and filename varies depending on your operating
+system and whether you are using Anaconda or Miniconda.
+The <code class="docutils literal"><span class="pre">conda-build</span></code> command tells you the exact path and
+filename.</p>
+</li>
+<li><p class="first">Install your newly built program on your local computer
+by using the <code class="docutils literal"><span class="pre">use-local</span></code> flag:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install --use-local pyinstrument
+</pre></div>
+</div>
+<p>If there are no error messages, Pyinstrument installed
+successfully.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="converting-a-package-for-use-on-all-platforms">
+<span id="convert"></span><h2><a class="toc-backref" href="#id7">Converting a package for use on all platforms</a><a class="headerlink" href="#converting-a-package-for-use-on-all-platforms" title="Permalink to this headline">¶</a></h2>
+<p>Now that you have built a package for your current platform with
+conda build, you can convert it for use on other platforms by
+using the 2 build files, <code class="docutils literal"><span class="pre">build.sh</span></code> and <code class="docutils literal"><span class="pre">bld.bat</span></code>.</p>
+<p>Use the <code class="docutils literal"><span class="pre">conda</span> <span class="pre">convert</span></code> command with a platform specifier from
+the list:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">osx-64</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">linux-32</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">linux-64</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">win-32</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">win-64</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">all</span></code>.</li>
+</ul>
+<p>EXAMPLE: Using the platform specifier <code class="docutils literal"><span class="pre">all</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda convert --platform all ~/anaconda/conda-bld/linux-64/pyinstrument-0.13.1-py27_0.tar.bz2 -o outputdir/
+</pre></div>
+</div>
+<p>NOTE: Change your path and filename to the path and
+filename you saved in <a class="reference internal" href="build-pkgs_ko.html#build-and-install"><span class="std std-ref">빌드와 설치하기</span></a>.</p>
+</div>
+<div class="section" id="optional-using-pypi-as-the-source-instead-of-github">
+<span id="pypi-source"></span><h2><a class="toc-backref" href="#id8">Optional—Using PyPI as the source instead of GitHub</a><a class="headerlink" href="#optional-using-pypi-as-the-source-instead-of-github" title="Permalink to this headline">¶</a></h2>
+<p>You can use PyPI or another repository instead of GitHub. There
+is little difference to conda build between building from Git
+versus building from a tarball on a repository like PyPI. Because
+the same source is hosted on PyPI and GitHub, you can easily find
+a script on PyPI instead of GitHub.</p>
+<p>Replace this <code class="docutils literal"><span class="pre">source</span></code> section:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git_rev: v0.13.1
+git_url: https://github.com/joerick/pyinstrument.git
+</pre></div>
+</div>
+<p>With the following:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>fn: pyinstrument-0.13.1.tar.gz
+md5: e347036acc50720c0903dc2221b2605d
+url: https://pypi.python.org/packages/source/p/pyinstrument/pyinstrument-0.13.1.tar.gz
+</pre></div>
+</div>
+<p>NOTE: The <code class="docutils literal"><span class="pre">md5</span></code> is found on the <a class="reference external" href="https://pypi.python.org/pypi/pyinstrument">PyPI Pyinstrument page</a>.</p>
+</div>
+<div class="section" id="optional-uploading-new-packages-to-anaconda-org">
+<span id="anaconda-org"></span><h2><a class="toc-backref" href="#id9">Optional—Uploading new packages to Anaconda.org</a><a class="headerlink" href="#optional-uploading-new-packages-to-anaconda-org" title="Permalink to this headline">¶</a></h2>
+<p>After converting your files for use on other platforms, you may
+choose to upload your files to Anaconda.org, formerly known as binstar.org.
+It only takes a minute to do if you have a free Anaconda.org account.</p>
+<ol class="arabic">
+<li><p class="first">If you have not done so already, open a free Anaconda.org account
+and record your new user name and password.</p>
+</li>
+<li><p class="first">Run the command <code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">anaconda-client</span></code>, and then
+enter your Anaconda.org username and password.</p>
+</li>
+<li><p class="first">Log into your <a class="reference external" href="http://anaconda.org">Anaconda.org</a> account
+with the command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>anaconda login
+</pre></div>
+</div>
+</li>
+<li><p class="first">Upload your package to Anaconda.org:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>anaconda upload ~/miniconda/conda-bld/linux-64/pyinstrument-0.12-py27_0.tar.bz
+</pre></div>
+</div>
+<p>NOTE: Change your path and filename to the path and
+filename you saved in <a class="reference internal" href="build-pkgs_ko.html#build-and-install"><span class="std std-ref">빌드와 설치하기</span></a>.</p>
+<p>TIP: To save time, you can set conda to always
+upload a successful build to Anaconda.org
+with the command: <code class="docutils literal"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--set</span> <span class="pre">anaconda_upload</span> <span class="pre">yes</span></code>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="more-information">
+<span id="more-resources"></span><h2><a class="toc-backref" href="#id10">More information</a><a class="headerlink" href="#more-information" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>For more information about all the possible values that can go
+into the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file, see
+<a class="reference internal" href="../tasks/build-packages/define-metadata.html"><span class="doc">Defining metadata (meta.yaml)</span></a>.</li>
+<li><a class="reference internal" href="../../commands.html"><span class="doc">Command reference</span></a>.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>

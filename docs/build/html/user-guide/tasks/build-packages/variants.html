@@ -1,0 +1,1247 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Build Variants &mdash; Conda   documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Conda   documentation" href="../../../index.html"/>
+        <link rel="up" title="Building packages" href="index.html"/>
+        <link rel="next" title="Using shared libraries" href="use-shared-libraries.html"/>
+        <link rel="prev" title="Adding pre-link, post-link and pre-unlink scripts" href="link-scripts.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_ko.html" class="icon icon-home"> Conda
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                 
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_ko.html">사용자 가이드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../help-support.html">Help and support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../commands_ko.html">명령 레퍼런스</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary_ko.html">용어집</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">Conda license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_ko.html">Conda</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_ko.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index_ko.html">사용자 가이드</a> &raquo;</li>
+        
+          <li><a href="../index_ko.html">작업</a> &raquo;</li>
+        
+          <li><a href="index.html">Building packages</a> &raquo;</li>
+        
+      <li>Build Variants</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/VeranosTech/docs-korean-conda/blob/docs-korean/docs/source/user-guide/tasks/build-packages/variants.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="build-variants">
+<h1>Build Variants<a class="headerlink" href="#build-variants" title="Permalink to this headline">¶</a></h1>
+<p>The nature of binary compatibility (and incompatibility) means that we
+sometimes need to build binary packages (and any package containing binaries)
+with several variants to support different usage environments. For
+example, using Numpy’s C API means that a package must be used with the same
+version of Numpy at runtime that was used at build time.</p>
+<p>There has been limited support for this for a long time. Including Python in
+both build and run requirements resulted in a package with Python pinned to the
+version of Python used at build time, and a corresponding addition to the
+filename such as “py27”. Similar support existed for numpy with the addition of
+an <code class="docutils literal"><span class="pre">x.x</span></code> pin in the recipe after <a class="reference external" href="https://github.com/conda/conda-build/pull/573">Conda-build PR
+573</a> was merged. Before
+conda-build version 3.0 there were also many longstanding proposals for general
+support (<a class="reference external" href="https://github.com/conda/conda-build/issues/1142">Conda-build issue
+1142</a>).</p>
+<p>As of conda-build 3.0, a new configuration scheme has been added, dubbed
+“variants.” Conceptually, this decouples pinning values from recipes, replacing
+them with Jinja2 template variables. It adds support for the notion of
+“compatible” pinnings to be integrated with ABI compatibility databases, such as
+<a class="reference external" href="https://abi-laboratory.pro/">ABI Laboratory</a>. Note that the concept of
+“compatible” pinnings is currently still under heavy development.</p>
+<p>Variant input is ultimately a dictionary. These dictionaries are mostly very
+flat. Keys are made directly available in Jinja2 templates. As a result, keys
+in the dictionary (and in files read into dictionaries) must be valid jinja2
+variable names (no <code class="docutils literal"><span class="pre">-</span></code> characters allowed). This example builds python 2.7
+and 3.5 packages in one build command:</p>
+<p>conda_build_config.yaml like:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">2.7</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">3.5</span>
+</pre></div>
+</div>
+<p>meta.yaml contents like:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">compiled-code</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python {{ python }}</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+</pre></div>
+</div>
+<p>The command to build recipes is unchanged relative to earlier conda-build
+versions. For example, with our shell in the same folder as meta.yaml and
+conda_build_config.yaml, we just call the <code class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span> <span class="pre">.</span></code> command.</p>
+<div class="section" id="general-pinning-examples">
+<h2>General pinning examples<a class="headerlink" href="#general-pinning-examples" title="Permalink to this headline">¶</a></h2>
+<p>There are a few characteristic use cases for pinning.  Please consider this a
+map for the content below.</p>
+<ol class="arabic">
+<li><p class="first">Shared library providing a binary interface. All uses of this library use
+the binary interface. It is convenient to apply the same pin to all of your
+builds. Example: boost</p>
+<p>conda_build_config.yaml in your HOME folder:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">boost</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">1.61</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">1.63</span>
+<span class="l l-Scalar l-Scalar-Plain">pin_run_as_build</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">boost</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">x.x</span>
+</pre></div>
+</div>
+<p>meta.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">compiled-code</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">boost  {{ boost }}</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">boost</span>
+</pre></div>
+</div>
+<p>This example demonstrates several features:</p>
+<ul class="simple">
+<li>user-wide configuration with a specifically named config file
+(conda_build_config.yaml in your home folder). More options below in
+<a class="reference internal" href="#creating-conda-build-variant-config-files">Creating conda-build variant config files</a>.</li>
+<li>building against multiple versions of a single library (set versions
+installed at build time)</li>
+<li>pinning runtime requirements to the version used at build time. More
+information below at <a class="reference internal" href="#pinning-at-the-variant-level">Pinning at the variant level</a>.</li>
+<li>specify granularity of pinning. <code class="docutils literal"><span class="pre">x.x</span></code> pins major and minor version. More
+information at <a class="reference internal" href="#id1">Pinning expressions</a>.</li>
+</ul>
+</li>
+<li><p class="first">Python package with externally accessible binary component. Not all uses of
+this library use the binary interface (some only use pure Python). Example:
+numpy</p>
+<p>conda_build_config.yaml in your recipe folder (alongside meta.yaml):</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">numpy</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">1.11</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">1.12</span>
+</pre></div>
+</div>
+<p>meta.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">numpy_using_pythonAPI_thing</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
+</pre></div>
+</div>
+<p>This example demonstrates a particular feature: reduction of builds when pins
+are unnecessary. Since the example recipe above only requires the Python API
+to numpy, we will only build the package once and the version of numpy will
+not be pinned at runtime to match the compile-time version.  There’s more
+information at <a class="reference internal" href="#avoiding-unnecessary-builds">Avoiding unnecessary builds</a>.</p>
+<p>For a different package that makes use of the numpy C API, we will need to
+actually pin numpy in this recipe (and only in this recipe, so that other
+recipes don’t unnecessarily build lots of variants).  To pin numpy, you can
+use the variant key directly in meta.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">numpy_using_cAPI_thing</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy  {{ numpy }}</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy  {{ numpy }}</span>
+</pre></div>
+</div>
+<p>For legacy compatibility, python is pinned implicitly without specifying
+<code class="docutils literal"><span class="pre">{{</span> <span class="pre">python</span> <span class="pre">}}</span></code> in your recipe. This is generally intractable to extend to
+all package names, so in general, try to get in the habit of always using
+the jinja2 variable substitution for pinning using versions from your
+conda_build_config.yaml file.</p>
+<p>There are also more flexible ways to pin, using the <a class="reference internal" href="#id1">Pinning expressions</a>.
+See <a class="reference internal" href="#pinning-at-the-recipe-level">Pinning at the recipe level</a> for examples.</p>
+</li>
+<li><p class="first">One recipe splits into multiple packages, and package dependencies need to be
+dynamically pinned among one another. Example:
+GCC/libgcc/libstdc++/gfortran/etc.</p>
+<p>The dynamic pinning is the tricky part. Conda-build provides new ways to
+refer to other subpackages within a single recipe.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">dynamic_supackage</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_subpackage(&#39;my_awesome_subpackage&#39;)</span> <span class="p p-Indicator">}}</span>
+
+<span class="l l-Scalar l-Scalar-Plain">outputs</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">my_awesome_subpackage</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2.0</span>
+</pre></div>
+</div>
+<p>By referring to subpackages this way, you don’t need to worry about what the
+end version of my_awesome_subpackage will be. Update it independently and
+just let conda build figure it out and keep things consistent. There’s more
+information below in the <a class="reference internal" href="#id3">Referencing subpackages</a> section.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="transition-guide">
+<h2>Transition guide<a class="headerlink" href="#transition-guide" title="Permalink to this headline">¶</a></h2>
+<p>Let’s say we have a set of recipes that currently builds a C library, as well as
+python and R bindings to that C library. xgboost, a recent machine learning
+library, is one such example. Under conda-build 2.0 and earlier, you needed to
+have three recipes - one for each component. Let’s go over some simplified
+meta.yaml files.  First, the C library:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">libxgboost</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+</pre></div>
+</div>
+<p>Next, the python bindings:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">py-xgboost</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libxgboost</span>  <span class="c1"># you probably want to pin the version here, but there&#39;s no dynamic way to do it</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libxgboost</span>  <span class="c1"># you probably want to pin the version here, but there&#39;s no dynamic way to do it</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+</pre></div>
+</div>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">r-xgboost</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libxgboost</span>  <span class="c1"># you probably want to pin the version here, but there&#39;s no dynamic way to do it</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">r-base</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libxgboost</span>  <span class="c1"># you probably want to pin the version here, but there&#39;s no dynamic way to do it</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">r-base</span>
+</pre></div>
+</div>
+<p>To build these, you’d need several conda-build commands, or a tool like
+conda-build-all to build out the various python versions. With conda-build 3.0
+and split packages from conda-build 2.1, we can simplify this to one coherent
+recipe that also includes the matrix of all desired python and R builds.</p>
+<p>First, the meta.yaml file:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">xgboost</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">outputs</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">libxgboost</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">py-xgboost</span>
+      <span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+          <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_subpackage(&#39;libxgboost&#39;</span><span class="p p-Indicator">,</span> <span class="nv">exact=True)</span> <span class="p p-Indicator">}}</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python  {{ python }}</span>
+
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">r-xgboost</span>
+      <span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+          <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_subpackage(&#39;libxgboost&#39;</span><span class="p p-Indicator">,</span> <span class="nv">exact=True)</span>
+          <span class="nv">- r-base</span>  <span class="p p-Indicator">{{</span> <span class="nv">r_base</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<p>Next, the conda_build_config.yaml file, specifying our build matrix:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">2.7</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">3.5</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">3.6</span>
+<span class="l l-Scalar l-Scalar-Plain">r_base</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">3.3.2</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">3.4.0</span>
+</pre></div>
+</div>
+<p>With this updated method, you get a complete build matrix: 6 builds total. One
+libxgboost library, 3 python versions, and 2 R versions. Additionally, the
+python and R packages will have exact pins to the libxgboost package that was
+built by this recipe.</p>
+</div>
+<div class="section" id="creating-conda-build-variant-config-files">
+<span id="conda-build-variant-config-files"></span><h2>Creating conda-build variant config files<a class="headerlink" href="#creating-conda-build-variant-config-files" title="Permalink to this headline">¶</a></h2>
+<p>Variant input files are yaml files.  Search order for these files is the following:</p>
+<ol class="arabic simple">
+<li>a file named <code class="docutils literal"><span class="pre">conda_build_config.yaml</span></code> in the user’s HOME folder</li>
+<li>an arbitrarily named file specified as the value for the
+<code class="docutils literal"><span class="pre">conda_build_config</span></code> key in your .condarc file</li>
+<li>a file named <code class="docutils literal"><span class="pre">conda_build_config.yaml</span></code> in the same folder as <code class="docutils literal"><span class="pre">meta.yaml</span></code>
+with your recipe</li>
+<li>Any additional files specified on the command line with the
+<code class="docutils literal"><span class="pre">--variant-config-files</span></code> or <code class="docutils literal"><span class="pre">-m</span></code> command line flags, which can be passed
+multiple times for multiple files. The <code class="docutils literal"><span class="pre">conda</span> <span class="pre">build</span></code> and <code class="docutils literal"><span class="pre">conda</span> <span class="pre">render</span></code>
+commands accept these arguments.</li>
+</ol>
+<p>Values in files found later in this search order will overwrite and replace the
+values from earlier files.</p>
+</div>
+<div class="section" id="using-variants-with-the-conda-build-api">
+<h2>Using variants with the conda-build API<a class="headerlink" href="#using-variants-with-the-conda-build-api" title="Permalink to this headline">¶</a></h2>
+<p>Ultimately, a variant is just a dictionary. This dictionary is provided directly
+to Jinja2, and you can use any declared key from your variant configuration in
+your Jinja2 templates. There are two ways that you can feed this information
+into the API:</p>
+<ol class="arabic simple">
+<li>Pass the <code class="docutils literal"><span class="pre">variants</span></code> keyword argument to API functions. Currently, the
+<code class="docutils literal"><span class="pre">build</span></code>, <code class="docutils literal"><span class="pre">render</span></code>, <code class="docutils literal"><span class="pre">get_output_file_path</span></code>, and <code class="docutils literal"><span class="pre">check</span></code> functions
+accept this argument. <code class="docutils literal"><span class="pre">variants</span></code> should be a dictionary where each value
+is a list of versions to iterate over. These are aggregated as detailed in
+the <a class="reference internal" href="#aggregation-of-multiple-variants">Aggregation of multiple variants</a> section below.</li>
+<li>Set the <code class="docutils literal"><span class="pre">variant</span></code> member of a Config object. This is just a dictionary. The
+values for fields should be strings or lists of strings, except “extended
+keys”, which are documented in the <a class="reference internal" href="#extended-keys">Extended keys</a> section below.</li>
+</ol>
+<p>Again, with meta.yaml contents like:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">compiled-code</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python {{ python }}</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python {{ python }}</span>
+</pre></div>
+</div>
+<p>You could supply a variant to build this recipe like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variants</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2.7&#39;</span><span class="p">,</span> <span class="s1">&#39;3.5&#39;</span><span class="p">]}</span>
+<span class="n">api</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">path_to_recipe</span><span class="p">,</span> <span class="n">variants</span><span class="o">=</span><span class="n">variants</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that these Jinja2 variable substitutions are not limited to version
+numbers. You can use them anywhere, for any string value. For example, to build
+against different MPI implementations:</p>
+<p>With meta.yaml contents like:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">compiled-code</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<p>You could supply a variant to build this recipe like this (conda_build_config.yaml):</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">mpi</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openmpi</span>  <span class="c1"># version spec here is totally valid, and will apply in the recipe</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mpich</span>  <span class="c1"># version spec here is totally valid, and will apply in the recipe</span>
+</pre></div>
+</div>
+<p>Selectors are valid in conda_build_config.yaml, so you can have one
+conda_build_config.yaml for multiple platforms:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">mpi</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openmpi</span>  <span class="c1"># [osx]</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mpich</span>    <span class="c1"># [linux]</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">msmpi</span>    <span class="c1"># [win]</span>
+</pre></div>
+</div>
+<p>Jinja is not allowed in conda_build_config.yaml, though. It is the source of
+information to feed into other jinja templates, and the buck has to stop
+somewhere.</p>
+</div>
+<div class="section" id="about-reproducibility">
+<h2>About reproducibility<a class="headerlink" href="#about-reproducibility" title="Permalink to this headline">¶</a></h2>
+<p>A critical part of any build system is ensuring that you can reproduce the same
+output at some future point in time. This is often essential for troubleshooting
+bugs. For example, if a package contains only binaries, it is helpful to
+understand what source code created those binaries, and thus what bugs might be
+present.</p>
+<p>Since conda-build 2.0, conda-build has recorded its rendered meta.yaml files
+into the <code class="docutils literal"><span class="pre">info/recipe</span></code> folder of each package it builds. Conda-build 3.0 is no
+different in this regard, but the meta.yaml that is recorded is a frozen set of
+the variables that make up the variant for that build.</p>
+<p>Note that package builders may disable including the recipe with the
+<code class="docutils literal"><span class="pre">build/include_recipe</span></code> key in meta.yaml. If the recipe is omitted from the
+package, then the package is not reproducible without the source recipe.</p>
+</div>
+<div class="section" id="special-variant-keys">
+<h2>Special variant keys<a class="headerlink" href="#special-variant-keys" title="Permalink to this headline">¶</a></h2>
+<p>There are some special keys that behave differently and can be more nested:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">zip_keys</span></code>: a list of strings or a list of lists of strings. Strings are
+keys in variant. These couple groups of keys, so that particular keys are
+paired, rather than forming a matrix. This is useful, for example, to couple
+vc version to python version on Windows. More info below in the <a class="reference internal" href="#coupling-keys">Coupling
+keys</a> section.</li>
+<li><code class="docutils literal"><span class="pre">pin_run_as_build</span></code>: should be a dictionary. Keys are package names. Values
+are “pinning expressions” - explained in more detail in <a class="reference internal" href="#customizing-compatibility">Customizing
+compatibility</a>. This is a generalization of the <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">x.x</span></code> spec, so that
+you can pin your packages dynamically based on the versions used at build
+time.</li>
+<li><code class="docutils literal"><span class="pre">extend_keys</span></code>: specifies keys that should be aggregated, and not replaced,
+by later variants. These are detailed below in the <a class="reference internal" href="#extended-keys">Extended keys</a>
+section.</li>
+<li><code class="docutils literal"><span class="pre">ignore_version</span></code>: list of package names whose versions should be excluded
+from meta.yaml’s requirements/build when computing hash. Described further in
+<a class="reference internal" href="#avoiding-unnecessary-builds">Avoiding unnecessary builds</a>.</li>
+</ul>
+</div>
+<div class="section" id="coupling-keys">
+<h2>Coupling keys<a class="headerlink" href="#coupling-keys" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes particular versions need to be tied to other versions. For example, on
+Windows, we generally follow the upstream Python.org association of Visual
+Studio compiler version with Python version. Python 2.7 is always compiled with
+Visual Studio 2008 (also known as MSVC 9). We don’t want a
+conda_build_config.yaml like the following to create a matrix of python/MSVC
+versions:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">2.7</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">3.5</span>
+<span class="l l-Scalar l-Scalar-Plain">vc</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">9</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">14</span>
+</pre></div>
+</div>
+<p>Instead, we want 2.7 to be associated with 9, and 3.5 to be associated with 14.
+The <code class="docutils literal"><span class="pre">zip_keys</span></code> key in conda_build_config.yaml is the way to achieve this:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">2.7</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">3.5</span>
+<span class="l l-Scalar l-Scalar-Plain">vc</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">9</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">14</span>
+<span class="l l-Scalar l-Scalar-Plain">zip_keys</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc</span>
+</pre></div>
+</div>
+<p>You can also have nested lists to achieve multiple groups of <code class="docutils literal"><span class="pre">zip_keys</span></code>:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">zip_keys</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc</span>
+  <span class="p p-Indicator">-</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">blas</span>
+</pre></div>
+</div>
+<p>The rules for <code class="docutils literal"><span class="pre">zip_keys</span></code> are:</p>
+<ol class="arabic">
+<li><p class="first">Every list in a group must be the same length. This is because without
+equal length, there is no way to associate earlier elements from the
+shorter list with later elements in the longer list. For example, this is
+invalid, and will raise an error:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">2.7</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">3.5</span>
+<span class="l l-Scalar l-Scalar-Plain">vc</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">9</span>
+<span class="l l-Scalar l-Scalar-Plain">zip_keys</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">zip_keys</span></code> must be either a list of strings, or a list of lists of
+strings. You can’t mix them.  For example, this is an error:</p>
+</li>
+</ol>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">zip_keys</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">blas</span>
+</pre></div>
+</div>
+<p>Rule #1 raises an interesting use case: How does one combine CLI flags
+like –python with <code class="docutils literal"><span class="pre">zip_keys</span></code>? Such a CLI flag will change the variant so that
+it has only a single entry, but it will not change the <code class="docutils literal"><span class="pre">vc</span></code> entry in the
+variant configuration. We’ll end up with mismatched list lengths, and an error.
+To overcome this, you should instead write a very simple YAML file with
+all involved keys. Let’s call it <code class="docutils literal"><span class="pre">python27.yaml</span></code>, to reflect its intent:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">2.7</span>
+<span class="l l-Scalar l-Scalar-Plain">vc</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">9</span>
+</pre></div>
+</div>
+<p>Provide this file as a command-line argument:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>conda build recipe -m python27.yaml
+</pre></div>
+</div>
+<p>You can also specify variants in JSON notation from the CLI as detailed in the
+<a class="reference internal" href="#cli-vars"><span class="std std-ref">CONDA_* variables and command line arguments to conda-build</span></a> section. For example:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>conda build recipe --variants <span class="s2">&quot;{&#39;python&#39;: [&#39;2.7&#39;, &#39;3.5&#39;], &#39;vc&#39;: [&#39;9&#39;, &#39;14&#39;]}&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="avoiding-unnecessary-builds">
+<h2>Avoiding unnecessary builds<a class="headerlink" href="#avoiding-unnecessary-builds" title="Permalink to this headline">¶</a></h2>
+<p>To avoid building variants of packages where pinning does not require having
+different builds, you can use the <code class="docutils literal"><span class="pre">ignore_version</span></code> key in your variant. Then
+all variants are evaluated, but if any hashes are the same, then they are
+considered duplicates, and are deduplicated. By omitting some packages from the
+build dependencies, we can avoid creating unnecessarily specific hashes, and
+allow this deduplication.</p>
+<p>For example, let’s consider a package that uses numpy in both run and build
+requirements, and a variant that includes two numpy versions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variants</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;1.10&#39;</span><span class="p">,</span> <span class="s1">&#39;1.11&#39;</span><span class="p">],</span> <span class="s1">&#39;ignore_version&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;numpy&#39;</span><span class="p">]}]</span>
+</pre></div>
+</div>
+<p>meta.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy {{ numpy }}</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
+</pre></div>
+</div>
+<p>Here, the variant says that we’ll have two builds - one for each numpy version.
+However, since this recipe does not pin numpy’s run requirement (because it
+doesn’t utilize numpy’s C API), it is unnecessary to build it against both numpy
+1.10 and 1.11.</p>
+<p>The rendered form of this recipe, with conda-build ignoring numpy’s value in the
+recipe, is going to be just one build, that looks like:</p>
+<p>meta.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">ignore_version</span></code> is an empty list by default. The actual build performed is
+probably done with the last ‘numpy’ list element in the variant, but that’s
+an implementation detail that you should not depend on. The order is
+considered unspecified behavior, because the output should be independent of the
+input versions. If the output is not independent of input versions, don’t use
+this key!</p>
+<p>Any pinning done in the run requirements will affect the hash, and thus builds
+will be done for each variant in the matrix. Any package that sometimes is used
+for its compiled interface and sometimes used for only its python interface may
+benefit from careful use of <code class="docutils literal"><span class="pre">ignore_version</span></code> in the latter case.</p>
+<p>Note: <code class="docutils literal"><span class="pre">pin_run_as_build</span></code> is kind of the opposite of <code class="docutils literal"><span class="pre">ignore_version</span></code>. Where
+they conflict, <code class="docutils literal"><span class="pre">pin_run_as_build</span></code> takes priority.</p>
+</div>
+<div class="section" id="conda-variables-and-command-line-arguments-to-conda-build">
+<span id="cli-vars"></span><h2>CONDA_* variables and command line arguments to conda-build<a class="headerlink" href="#conda-variables-and-command-line-arguments-to-conda-build" title="Permalink to this headline">¶</a></h2>
+<p>To ensure consistency with existing users of conda-build, environment variables
+such as CONDA_PY behave as they always have, and they overwrite all variants set
+in files or passed to the API.</p>
+<p>The full list of respected environment variables are:</p>
+<ul class="simple">
+<li>CONDA_PY</li>
+<li>CONDA_NPY</li>
+<li>CONDA_R</li>
+<li>CONDA_PERL</li>
+<li>CONDA_LUA</li>
+</ul>
+<p>CLI flags are also still available. These are sticking around for their
+usefulness in one-off jobs.</p>
+<ul class="simple">
+<li>–python</li>
+<li>–numpy</li>
+<li>–R</li>
+<li>–perl</li>
+<li>–lua</li>
+</ul>
+<p>In addition to these traditional options, there’s one new flag to specify
+variants: <code class="docutils literal"><span class="pre">--variants</span></code>. This flag accepts a string of JSON-formatted text. For
+example:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>conda build recipe --variants <span class="s2">&quot;{python: [2.7, 3.5], vc: [9, 14]}&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="aggregation-of-multiple-variants">
+<h2>Aggregation of multiple variants<a class="headerlink" href="#aggregation-of-multiple-variants" title="Permalink to this headline">¶</a></h2>
+<p>The matrix of all variants is first consolidated from several dicts of lists
+into a single dict of lists, and then transformed in a list of dicts (using the
+Cartesian product of lists), where each value is a single string from the list
+of potential values.</p>
+<p>For example, general input for <code class="docutils literal"><span class="pre">variants</span></code> could be something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2.7&#39;</span><span class="p">,</span> <span class="s1">&#39;3.5&#39;</span><span class="p">],</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;1.10&#39;</span><span class="p">,</span> <span class="s1">&#39;1.11&#39;</span><span class="p">]}</span>
+<span class="c1"># values can be strings or lists.  Strings are converted to one-element lists internally.</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;3.4&#39;</span><span class="p">,</span> <span class="s1">&#39;3.5&#39;</span><span class="p">],</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.11&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, let’s say <code class="docutils literal"><span class="pre">b</span></code> is found after <code class="docutils literal"><span class="pre">a</span></code>, and thus has priority over <code class="docutils literal"><span class="pre">a</span></code>. Merging these
+two variants yields:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">merged</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;3.4&#39;</span><span class="p">,</span> <span class="s1">&#39;3.5&#39;</span><span class="p">],</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;1.11&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">b</span></code>’s values for <code class="docutils literal"><span class="pre">python</span></code> have overwritten <code class="docutils literal"><span class="pre">a</span></code>’s. From here, we compute the
+Cartesian product of all input variables. The end result is a collection of
+dicts, each with a string for each value. Output would be something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variants</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="s1">&#39;3.4&#39;</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.11&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="s1">&#39;3.5&#39;</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.11&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<p>conda-build would loop over these variants where appropriate, such as when
+building, outputting package output names, and so on.</p>
+<p>If <code class="docutils literal"><span class="pre">numpy</span></code> had had two values instead of one, we’d end up with <em>four</em> output
+variants: 2 variants for <code class="docutils literal"><span class="pre">python</span></code>, <em>times</em> two variants for <code class="docutils literal"><span class="pre">numpy</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variants</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="s1">&#39;3.4&#39;</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.11&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="s1">&#39;3.5&#39;</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.11&#39;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="s1">&#39;3.4&#39;</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.10&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="s1">&#39;3.5&#39;</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.10&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bootstrapping-pins-based-on-an-existing-environment">
+<h2>Bootstrapping pins based on an existing environment<a class="headerlink" href="#bootstrapping-pins-based-on-an-existing-environment" title="Permalink to this headline">¶</a></h2>
+<p>To establish your initial variant, you may point at an existing conda
+environment. Conda-build will examine the contents of that environment and pin
+to the exact requirements that make up that environment.</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>conda build --bootstrap name_of_env
+</pre></div>
+</div>
+<p>You may specify either environment name or filesystem path to the environment.
+Note that specifying environment name does mean depending on conda’s
+environment lookup.</p>
+</div>
+<div class="section" id="extended-keys">
+<h2>Extended keys<a class="headerlink" href="#extended-keys" title="Permalink to this headline">¶</a></h2>
+<p>These are not looped over to establish the build matrix. Rather, they are
+aggregated from all input variants, and each derived variant shares the whole
+set. These are used internally for tracking which requirements should be pinned,
+for example, with the <code class="docutils literal"><span class="pre">pin_run_as_build</span></code> key. You can add your own extended
+keys by passing in values for the <code class="docutils literal"><span class="pre">extend_keys</span></code> key for any variant.</p>
+<p>For example, if you wanted to collect some aggregate trait from multiple
+conda_build_config.yaml files, you could do something like this:</p>
+<p>HOME/conda_build_config.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">some_trait</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dog</span>
+<span class="l l-Scalar l-Scalar-Plain">extend_keys</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">some_trait</span>
+</pre></div>
+</div>
+<p>recipe/conda_build_config.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">some_trait</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pony</span>
+<span class="l l-Scalar l-Scalar-Plain">extend_keys</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">some_trait</span>
+</pre></div>
+</div>
+<p>Note that <em>both</em> of the conda_build_config.yaml files need to list the trait as
+an <code class="docutils literal"><span class="pre">extend_keys</span></code> entry.  If you list it in only one of them, an error will be
+raised, to avoid confusion with one conda_build_config.yaml file that would add
+entries to the build matrix, and another which would not. For example, this
+should raise an error:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">some_trait</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dog</span>
+</pre></div>
+</div>
+<p>recipe/conda_build_config.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">some_trait</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pony</span>
+<span class="l l-Scalar l-Scalar-Plain">extend_keys</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">some_trait</span>
+</pre></div>
+</div>
+<p>When our two proper yaml config files are combined, ordinarily the recipe-local
+variant would overwrite the user-wide variant, yielding <code class="docutils literal"><span class="pre">{'some_trait':</span>
+<span class="pre">'pony'}</span></code>. However, with the extend_keys entry, we end up with what we’ve always
+wanted: a dog <em>and</em> pony show: <code class="docutils literal"><span class="pre">{'some_trait':</span> <span class="pre">['dog',</span> <span class="pre">'pony'])}</span></code></p>
+<p>Again, mostly an internal implementation detail - unless you find a use for it.
+Internally, it is used to aggregate the <code class="docutils literal"><span class="pre">pin_run_as_build</span></code> and
+<code class="docutils literal"><span class="pre">ignore_version</span></code> entries from any of your conda_build_config.yaml
+files.</p>
+</div>
+<div class="section" id="customizing-compatibility">
+<h2>Customizing compatibility<a class="headerlink" href="#customizing-compatibility" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pinning-expressions">
+<span id="id1"></span><h3>Pinning expressions<a class="headerlink" href="#pinning-expressions" title="Permalink to this headline">¶</a></h3>
+<p>Pinning expressions are the syntax used to specify how many parts of the version
+to pin. They are by convention strings containing <code class="docutils literal"><span class="pre">x</span></code> characters separated by
+<code class="docutils literal"><span class="pre">.</span></code>. The number of version parts to pin is simply the number of things that
+are separated by <code class="docutils literal"><span class="pre">.</span></code>. For example, <code class="docutils literal"><span class="pre">&quot;x.x&quot;</span></code> pins major and minor version.
+<code class="docutils literal"><span class="pre">&quot;x&quot;</span></code> pins only major version.</p>
+<p>Wherever pinning expressions are accepted, you can customize both lower and
+upper bounds.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># produces pins like &gt;=1.11.2,&lt;1.12</span>
+<span class="n">variants</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.11&#39;</span><span class="p">,</span> <span class="s1">&#39;pin_run_as_build&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;max_pin&#39;</span><span class="p">:</span> <span class="s1">&#39;x.x&#39;</span><span class="p">}}}]</span>
+</pre></div>
+</div>
+<p>Note that the final pin may be more specific than your initial spec. Here, the
+spec is 1.11, but the produced pin could be 1.11.2, the exact version of numpy
+that was used at build time.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># produces pins like &gt;=1.11,&lt;2</span>
+<span class="n">variants</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.11&#39;</span><span class="p">,</span> <span class="s1">&#39;pin_run_as_build&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;min_pin&#39;</span><span class="p">:</span> <span class="s1">&#39;x.x&#39;</span><span class="p">,</span> <span class="s1">&#39;max_pin&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">}}}]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pinning-at-the-variant-level">
+<h3>Pinning at the variant level<a class="headerlink" href="#pinning-at-the-variant-level" title="Permalink to this headline">¶</a></h3>
+<p>Some packages, such as boost, <em>always</em> need to be pinned at runtime to the
+version that was present at build time. For these cases where the need for
+pinning is consistent, pinning at the variant level is a good option.
+Conda-build will automatically pin run requirements to the versions present in
+the build environment when the following conditions are met:</p>
+<ol class="arabic simple">
+<li>The dependency is listed in the requirements/build section. It can be pinned,
+but does not need to be.</li>
+<li>The dependency is listed by name (no pinning) in the requirements/run section.</li>
+<li>The <code class="docutils literal"><span class="pre">pin_run_as_build</span></code> key in the variant has a value that is a dictionary,
+containing a key that matches the dependency name listed in the run
+requirements. The value should be a dictionary with up to 4 keys:
+<code class="docutils literal"><span class="pre">min_pin</span></code>, <code class="docutils literal"><span class="pre">max_pin</span></code>, <code class="docutils literal"><span class="pre">lower_bound</span></code>, <code class="docutils literal"><span class="pre">upper_bound</span></code>. The first two are
+pinning expressions. The latter two are version numbers, overriding detection
+of current version.</li>
+</ol>
+<p>An example variant/recipe is shown here:</p>
+<p>conda_build_config.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">boost</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.63</span>
+<span class="l l-Scalar l-Scalar-Plain">pin_run_as_build</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">boost</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">max_pin</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">x.x</span>
+</pre></div>
+</div>
+<p>meta.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">boost {{ boost }}</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">boost</span>
+</pre></div>
+</div>
+<p>The result here is that the runtime boost dependency will be pinned to
+<code class="docutils literal"><span class="pre">&gt;=(current</span> <span class="pre">boost</span> <span class="pre">1.63.x</span> <span class="pre">version),&lt;1.64</span></code>.</p>
+<p>More details on the <code class="docutils literal"><span class="pre">pin_run_as_build</span></code> function is below in the
+<a class="reference internal" href="#extra-jinja2"><span class="std std-ref">Extra Jinja2 functions</span></a> section.</p>
+<p>Note that there are some packages that you should not use <code class="docutils literal"><span class="pre">pin_run_as_build</span></code>
+for. Packages that don’t <em>always</em> need to be pinned should be pinned on a
+per-recipe basis (described in the next section). Numpy is an interesting
+example here. It actually would not make a good case for pinning at the variant
+level. Because you only need this kind of pinning for recipes that use Numpy’s C
+API, it would actually be better not to pin numpy with <code class="docutils literal"><span class="pre">pin_run_as_build</span></code>.
+Pinning it is over-constraining your requirements unnecessarily when you are not
+using Numpy’s C API. Instead, we should customize it for each recipe that uses
+numpy.  See also the <a class="reference internal" href="#avoiding-unnecessary-builds">Avoiding unnecessary builds</a> section above.</p>
+</div>
+<div class="section" id="pinning-at-the-recipe-level">
+<h3>Pinning at the recipe level<a class="headerlink" href="#pinning-at-the-recipe-level" title="Permalink to this headline">¶</a></h3>
+<p>Pinning at the recipe level overrides pinning at the variant level, because run
+dependencies that have pinning values in meta.yaml (even as jinja variables) are
+ignored by the logic handling <code class="docutils literal"><span class="pre">pin_run_as_build</span></code>. We expect that pinning at
+the recipe level will be used when some recipe’s pinning is unusually stringent
+(or loose) relative to some standard pinning from the variant level.</p>
+<p>By default, with the <code class="docutils literal"><span class="pre">pin_compatible('package_name')</span></code> function, conda-build pins to your
+current version and less than the next major version. For projects that don’t
+follow the philosophy of semantic versioning, you might want to restrict things
+more tightly. To do so, you can pass one of two arguments to the pin_compatible
+function.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variants</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.11&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<p>meta.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy {{ numpy }}</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_compatible(&#39;numpy&#39;</span><span class="p p-Indicator">,</span> <span class="nv">max_pin=&#39;x.x&#39;)</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<p>This would yield a pinning of <code class="docutils literal"><span class="pre">&gt;=1.11.2,&lt;1.12</span></code></p>
+<p>The syntax for the <code class="docutils literal"><span class="pre">min_pin</span></code> and <code class="docutils literal"><span class="pre">max_pin</span></code> is a string pinning expression.
+Each can be passed independently of the other. An example of specifying both:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variants</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.11&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<p>meta.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy {{ numpy }}</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_compatible(&#39;numpy&#39;</span><span class="p p-Indicator">,</span> <span class="nv">min_pin=&#39;x.x&#39;</span><span class="p p-Indicator">,</span> <span class="nv">max_pin=&#39;x.x&#39;)</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<p>This would yield a pinning of <code class="docutils literal"><span class="pre">&gt;=1.11,&lt;1.12</span></code></p>
+<p>You can also pass the minimum or maximum version directly. These arguments supersede the
+<code class="docutils literal"><span class="pre">min_pin</span></code> and <code class="docutils literal"><span class="pre">max_pin</span></code> arguments and are thus mutually exclusive.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variants</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;numpy&#39;</span><span class="p">:</span> <span class="s1">&#39;1.11&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<p>meta.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy {{ numpy }}</span>
+    <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_compatible(&#39;numpy&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lower_bound=&#39;1.10&#39;</span><span class="p p-Indicator">,</span> <span class="nv">upper_bound=&#39;3.0&#39;)</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<p>This would yield a pinning of <code class="docutils literal"><span class="pre">&gt;=1.10,&lt;3.0</span></code></p>
+</div>
+</div>
+<div class="section" id="appending-to-recipes">
+<h2>Appending to recipes<a class="headerlink" href="#appending-to-recipes" title="Permalink to this headline">¶</a></h2>
+<p>As of conda-build 3.0, you can add a file named <code class="docutils literal"><span class="pre">recipe_append.yaml</span></code> in the
+same folder as your <code class="docutils literal"><span class="pre">meta.yaml</span></code> file. This file is considered to follow the
+same rules as meta.yaml, except that selectors and Jinja2 templates are not
+evaluated. Evaluation of selectors and Jinja2 templates will likely be added
+in future development.</p>
+<p>Any contents in <code class="docutils literal"><span class="pre">recipe_append.yaml</span></code> will add to the contents of meta.yaml.
+List values will be extended, and string values will be concatenated. The
+proposed use case for this is to tweak/extend central recipes, such as those
+from conda-forge, with additional requirements while minimizing the actual
+changes to recipe files, so as to avoid merge conflicts and source code
+divergence.</p>
+</div>
+<div class="section" id="partially-clobbering-recipes">
+<h2>Partially clobbering recipes<a class="headerlink" href="#partially-clobbering-recipes" title="Permalink to this headline">¶</a></h2>
+<p>As of conda-build 3.0, you can add a file named <code class="docutils literal"><span class="pre">recipe_clobber.yaml</span></code> in the
+same folder as your <code class="docutils literal"><span class="pre">meta.yaml</span></code> file. This file is considered to follow the
+same rules as meta.yaml, except that selectors and Jinja2 templates are not
+evaluated. Evaluation of selectors and Jinja2 templates will likely be added
+in future development.</p>
+<p>Any contents in <code class="docutils literal"><span class="pre">recipe_clobber.yaml</span></code> will replace the contents of meta.yaml.
+This can be useful, for example, for replacing the source URL without copying
+the rest of the recipe into a fork.</p>
+</div>
+<div class="section" id="differentiating-packages-built-with-different-variants">
+<h2>Differentiating packages built with different variants<a class="headerlink" href="#differentiating-packages-built-with-different-variants" title="Permalink to this headline">¶</a></h2>
+<p>With only a few things supported, we could just add things to the filename, such
+as py27 for python, or np111 for numpy. Variants are meant to support the
+general case, and in the general case this is no longer an option. Instead,
+part of the recipe is hashed using the sha1 algorithm, and that hash is a
+unique identifier. The information that went into the hash is stored with the
+package, in a file at <code class="docutils literal"><span class="pre">info/hash_input.json</span></code>. Currently, only the first 7
+characters of the hash are stored. Output package names will keep the pyXY and
+npXYY for now, but have added the 7-character hash. Your package names will
+look like:</p>
+<p><code class="docutils literal"><span class="pre">my-package-1.0-py27h3142afe_0.tar.bz2</span></code></p>
+<p>Since conflicts only need to be prevented within one version of a package, we
+think this will be adequate. If you run into hash collisions with this limited
+subspace, please file an issue on the <a class="reference external" href="https://github.com/conda/conda-build/issues">conda-build issue tracker</a>.</p>
+<p>The information that goes into this hash is currently defined in conda-build’s
+metadata.py module, in the _get_hash_contents member function. This function
+captures the following information:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">source</span></code> section</li>
+<li><code class="docutils literal"><span class="pre">requirements</span></code> section</li>
+<li><code class="docutils literal"><span class="pre">build</span></code> section, except:
+* <code class="docutils literal"><span class="pre">number</span></code>
+* <code class="docutils literal"><span class="pre">string</span></code></li>
+<li>any other recipe files in the folder with meta.yaml, such as bld.bat,
+build.sh, etc. Every file other than meta.yaml is part of the hash.</li>
+</ul>
+<p>All “falsey” values such as empty list values are removed.</p>
+<p>There is a CLI tool that just pretty-prints this json file for easy viewing:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>conda inspect hash-inputs &lt;package path&gt;
+</pre></div>
+</div>
+<p>This produces output such as:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="o">{</span><span class="s1">&#39;test_rm_rf_does_not_follow_links-1.0-h7330_0&#39;</span>: <span class="o">{</span>u<span class="s1">&#39;build&#39;</span>: <span class="o">{</span>u<span class="s1">&#39;script&#39;</span>: u<span class="s1">&#39;python setup.py install --single-version-externally-managed --record=record.txt&#39;</span><span class="o">}</span>,
+                                               u<span class="s1">&#39;requirements&#39;</span>: <span class="o">{</span>u<span class="s1">&#39;build&#39;</span>: <span class="o">[</span>u<span class="s1">&#39;openssl 1.0.2k 0&#39;</span>,
+                                                                            u<span class="s1">&#39;pip 9.0.1 py27_1&#39;</span>,
+                                                                            u<span class="s1">&#39;python 2.7.13 0&#39;</span>,
+                                                                            u<span class="s1">&#39;readline 6.2 2&#39;</span>,
+                                                                            u<span class="s1">&#39;setuptools 27.2.0 py27_0&#39;</span>,
+                                                                            u<span class="s1">&#39;sqlite 3.13.0 1&#39;</span>,
+                                                                            u<span class="s1">&#39;tk 8.5.18 0&#39;</span>,
+                                                                            u<span class="s1">&#39;wheel 0.29.0 py27_0&#39;</span>,
+                                                                            u<span class="s1">&#39;zlib 1.2.8 3&#39;</span><span class="o">]}</span>,
+                                               u<span class="s1">&#39;source&#39;</span>: <span class="o">{</span>u<span class="s1">&#39;path&#39;</span>: u<span class="s1">&#39;/Users/msarahan/code/conda-build/tests/test-recipes/split-packages/_rm_rf_stays_within_prefix&#39;</span><span class="o">}}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extra-jinja2-functions">
+<span id="extra-jinja2"></span><h2>Extra Jinja2 functions<a class="headerlink" href="#extra-jinja2-functions" title="Permalink to this headline">¶</a></h2>
+<p>Two especially common operations when dealing with these API and ABI
+incompatibilities are ways of specifying such compatibility, and of explicitly
+expressing the compiler to be used. Three new Jinja2 functions are available when
+evaluating <code class="docutils literal"><span class="pre">meta.yaml</span></code> templates:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">pin_compatible('package_name',</span> <span class="pre">min_pin='x.x.x.x.x.x',</span> <span class="pre">max_pin='x',</span>
+<span class="pre">lower_bound=None,</span> <span class="pre">upper_bound=None)</span></code>: To be used as pin in run and/or test
+requirements. Takes package name argument. Looks up compatibility of named
+package installed in the build environment, and writes compatible range pin
+for run and/or test requirements. Defaults to a semver-based assumption:
+<code class="docutils literal"><span class="pre">package_name</span> <span class="pre">&gt;=(current</span> <span class="pre">version),&lt;(next</span> <span class="pre">major</span> <span class="pre">version)</span></code>. Pass <code class="docutils literal"><span class="pre">min_pin</span></code>
+or <code class="docutils literal"><span class="pre">max_pin</span></code> a <a class="reference internal" href="#id1">Pinning expressions</a> . This will be enhanced as time goes
+on with information from <a class="reference external" href="https://abi-laboratory.pro/">ABI Laboratory</a>.</li>
+<li><code class="docutils literal"><span class="pre">pin_subpackage('package_name',</span> <span class="pre">min_pin='x.x.x.x.x.x',</span> <span class="pre">max_pin='x',</span>
+<span class="pre">exact=False)</span></code>: To be used as pin in run and/or test requirements. Takes
+package name argument. Used to refer to particular versions of subpackages
+built by parent recipe as dependencies elsewhere in that recipe. Can use
+either pinning expressions, or exact (including build string).</li>
+<li><code class="docutils literal"><span class="pre">compiler('language')</span></code>: To be used in build requirements most commonly.
+Run or test as necessary. Takes language name argument. This is shorthand to
+facilitate cross compiler usage. This Jinja2 function ties together two
+variant variables, <code class="docutils literal"><span class="pre">{language}_compiler</span></code> and <code class="docutils literal"><span class="pre">target_platform</span></code>, and
+outputs a single compiler package name. For example, this could be used to
+compile outputs targeting x86_64 and arm in one recipe, with a variant.</li>
+</ul>
+<p>There are default “native” compilers that are used when no compiler is specified
+in any variant. These are defined in <a class="reference external" href="https://github.com/conda/conda-build/blob/master/conda_build/jinja_context.py">conda-build’s jinja_context.py file</a>.
+Most of the time, users will not need to provide compilers in their variants -
+just leave them empty, and conda-build will use the defaults appropriate for
+your system.</p>
+</div>
+<div class="section" id="referencing-subpackages">
+<span id="id3"></span><h2>Referencing subpackages<a class="headerlink" href="#referencing-subpackages" title="Permalink to this headline">¶</a></h2>
+<p>Conda-build 2.1 brought in the ability to build multiple output packages from a
+single recipe. This is useful in cases where you have a big build that outputs a
+lot of things at once, but those things really belong in their own packages. For
+example, building gcc outputs not only gcc, but also gfortran, g++, and runtime
+libraries for gcc, gfotran and g++. Each of those should be their own package to
+make things as clean as possible. Unfortunately, if there are separate recipes
+to repack the different pieces from a larger whole package, it can be hard to
+keep them in sync. That’s where variants come in. Variants, and more
+specifically the <code class="docutils literal"><span class="pre">pin_subpackage(name)</span></code> function, give you a way to refer to
+the subpackage with control over how tightly the subpackage version relationship
+should be in relation to other subpackages or the parent package.</p>
+<p>meta.yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">subpackage_demo</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_subpackage(&#39;subpackage_1&#39;)</span> <span class="p p-Indicator">}}</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_subpackage(&#39;subpackage_2&#39;</span><span class="p p-Indicator">,</span> <span class="nv">max_pin=&#39;x.x&#39;)</span> <span class="p p-Indicator">}}</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_subpackage(&#39;subpackage_3&#39;</span><span class="p p-Indicator">,</span> <span class="nv">min_pin=&#39;x.x&#39;</span><span class="p p-Indicator">,</span> <span class="nv">max_pin=&#39;x.x&#39;)</span> <span class="p p-Indicator">}}</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_subpackage(&#39;subpackage_4&#39;</span><span class="p p-Indicator">,</span> <span class="nv">exact=True)</span> <span class="p p-Indicator">}}</span>
+
+
+<span class="l l-Scalar l-Scalar-Plain">outputs</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">subpackage_1</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0.0</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">subpackage_2</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2.0.0</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">subpackage_3</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3.0.0</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">subpackage_4</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4.0.0</span>
+</pre></div>
+</div>
+<p>Here, the parent package will have the following different runtime dependencies:</p>
+<ul class="simple">
+<li>subpackage_1 &gt;=1.0.0,&lt;2 (default uses <code class="docutils literal"><span class="pre">min_pin='x.x.x.x.x.x</span></code>,
+<code class="docutils literal"><span class="pre">max_pin='x'</span></code>, pins to major version with default &gt;= current version lower
+bound)</li>
+<li>subpackage_2 &gt;=2.0.0,&lt;2.1 (more stringent upper bound)</li>
+<li>subpackage_3 &gt;=3.0,&lt;3.1 (less stringent lower bound, more stringent upper bound)</li>
+<li>subpackage_4 4.0.0 h81241af (exact pinning - version plus build string)</li>
+</ul>
+</div>
+<div class="section" id="compiler-packages">
+<h2>Compiler packages<a class="headerlink" href="#compiler-packages" title="Permalink to this headline">¶</a></h2>
+<p>On Mac and Linux, we can and do ship gcc packages.  These will become even more
+powerful with variants, since you can specify versions of your compiler much
+more explicitly, and build against different versions, or with different flags
+set in the compiler package’s activate.d scripts. On Windows, rather than
+providing the actual compilers in packages, we still use the compilers that
+are installed on the system. The analogous compiler packages on Windows run
+any compiler activation scripts and set compiler flags instead of actually
+installing anything.</p>
+<p>Over time, conda-build will require that all packages explicitly list their
+compiler requirements this way. This is to both simplify conda-build and improve
+the tracking of metadata associated with compilers - localize it to compiler
+packages, even if those packages are doing nothing more than activating an
+already-installed compiler, such as Visual Studio.</p>
+<p>Note also the <code class="docutils literal"><span class="pre">run_exports</span></code> key in meta.yaml. This is useful for compiler
+recipes to impose runtime constraints based on the versions of subpackages
+created by the compiler recipe. For more information, see the <a class="reference internal" href="define-metadata.html#run-exports"><span class="std std-ref">Pin downstream</span></a>
+section of the meta.yaml docs. Compiler packages provided by Anaconda use the
+run_exports key extensively. For example, recipes that include the
+<code class="docutils literal"><span class="pre">gcc_linux-cos5-x86_64</span></code> package as a build time dependency (either directly,
+or through a <code class="docutils literal"><span class="pre">{{</span> <span class="pre">compilers('c')</span> <span class="pre">}}</span></code> jinja2 function) will automatically have a
+compatible libgcc runtime dependency added.</p>
+</div>
+<div class="section" id="cross-compiling">
+<h2>Cross-compiling<a class="headerlink" href="#cross-compiling" title="Permalink to this headline">¶</a></h2>
+<p>The compiler jinja2 function is written to support cross-compilers. This depends
+on setting at least two variant keys: <code class="docutils literal"><span class="pre">(language)_compiler</span></code> and
+<code class="docutils literal"><span class="pre">target_platform</span></code>. The target platform is appended to the value of
+<code class="docutils literal"><span class="pre">(language)_compiler</span></code> with the <code class="docutils literal"><span class="pre">_</span></code> character. This leads to package names
+like <code class="docutils literal"><span class="pre">g++_linux-aarch64</span></code>. We recommend a convention for naming your
+compiler packages as: <code class="docutils literal"><span class="pre">&lt;compiler</span> <span class="pre">name&gt;_&lt;target_platform&gt;</span></code></p>
+<p>Using a cross-compiler in a recipe would look like the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variants</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cxx_compiler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;g++&#39;</span><span class="p">],</span> <span class="s1">&#39;target_platform&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;linux-cos5-x86_64&#39;</span><span class="p">,</span> <span class="s1">&#39;linux-aarch64&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>and a meta.yaml file:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">compiled-code</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<p>This assumes that you have created two compiler packages named
+<code class="docutils literal"><span class="pre">g++_linux-cos5-x86_64</span></code> and <code class="docutils literal"><span class="pre">g++_linux-aarch64</span></code> - all conda-build
+is providing you with is a way to loop over appropriately named cross-compiler
+toolchains.</p>
+</div>
+<div class="section" id="self-consistent-package-ecosystems">
+<h2>Self-consistent package ecosystems<a class="headerlink" href="#self-consistent-package-ecosystems" title="Permalink to this headline">¶</a></h2>
+<p>The compiler function is also how you could support a non-standard Visual Studio
+version, such as using VS 2015 to compile Python 2.7 and packages for Python
+2.7. To accomplish this, you need to add the <code class="docutils literal"><span class="pre">{{</span> <span class="pre">compiler('&lt;language&gt;')</span> <span class="pre">}}</span></code> to
+each recipe that will make up the system.  Environment consistency is maintained
+through dependencies - thus it is useful to have the runtime be a versioned
+package, with only one version being able to be installed at a time. For
+example, the <code class="docutils literal"><span class="pre">vc</span></code> package, originally created by Conda-Forge, is a versioned
+package (only one version can be installed at a time), and it installs the
+correct runtime package. When the compiler package imposes such a runtime
+dependency, then the resultant ecosystem is self-consistent.</p>
+<p>Given these guidelines, consider a system of recipes using a variant like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">variants</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cxx_compiler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;vs2015&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>The recipes include a compiler meta.yaml like this:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">vs2015</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">14.0</span>
+<span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">run_exports</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc 14</span>
+</pre></div>
+</div>
+<p>They also include some compiler-using meta.yaml contents like this:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">compiled-code</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+        <span class="c1"># these are the same (and thus redundant) on windows, but different elsewhere</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;c&#39;)</span> <span class="p p-Indicator">}}</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<p>These recipes will create a system of packages that are all built with the
+VS 2015 compiler, and which have the vc package matched at version 14, rather
+than whatever default is associated with the python version.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="use-shared-libraries.html" class="btn btn-neutral float-right" title="Using shared libraries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="link-scripts.html" class="btn btn-neutral" title="Adding pre-link, post-link and pre-unlink scripts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Anaconda, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:' ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27761864-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
